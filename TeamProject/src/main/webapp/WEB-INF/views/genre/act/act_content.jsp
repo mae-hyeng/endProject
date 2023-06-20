@@ -6,6 +6,8 @@
 if (session.getAttribute("username") == null) {
 	response.sendRedirect("/sessionover");
 }
+
+String s1 = "testetstet";
 %>
 
 <head>

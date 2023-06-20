@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/resources/include/h2.jsp"%>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -385,3 +386,6 @@ String s1 = "testetstet";
 			</main>
 			<%@ include file="/resources/include/footer.jsp"%>
 </body>
+=======
+ 
+>>>>>>> refs/remotes/origin/main

@@ -6,7 +6,7 @@
 
 <style>
 .board-table {
-	font-size: 13px;
+	font-size: 10px;
 	width: 100%;
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;

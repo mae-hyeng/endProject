@@ -23,7 +23,7 @@ public class FirebaseInitialize {
       } catch (Exception e) {
           e.printStackTrace();
       }	             
-	}
+}
 	
 
 

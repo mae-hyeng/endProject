@@ -6,7 +6,6 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.tp.entity.UserEntity;
 import com.tp.service.UserService;
 
 public class UserController {

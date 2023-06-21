@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.tp.entity.UserEntity;
 import com.tp.service.UserService;
 
 public class UserController {
@@ -14,7 +15,7 @@ public class UserController {
 
     @GetMapping("/users")
     public ResponseEntity<Object>  getUsers() throws ExecutionException, InterruptedException {
-        List<User> list = userService.getUsers();
+        List<User> list = userService.getByCredentials();
         return ResponseEntity.ok().body(list);
 
     }

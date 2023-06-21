@@ -26,7 +26,7 @@ public class FirebaseService {
         user.setAddress("서울");
         user.setEmail("test@com");
         user.setPassword("1234");
-        user.setPhone("111121111");
+        user.setPhone("1111211112");
         user.setUsername("테스트");
         ApiFuture<WriteResult> apiFuture = db.collection(COLLECTION_NAME).document("Users").set(user);
 

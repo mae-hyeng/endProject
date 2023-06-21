@@ -17,27 +17,26 @@ public class FirebaseService {
 
     public static final String COLLECTION_NAME = "user";
 
-    public void insertUser()  {
+    public void insertUser(String id, String name, String address, String email, String password, String phone, String username )  {
 
         Firestore db = FirestoreClient.getFirestore();
         UserDTO user = new UserDTO();
-        user.setId("1111");
-        user.setName("1111");
-        user.setAddress("서울");
-        user.setEmail("test@com");
-        user.setPassword("1234");
-        user.setPhone("1111211112");
-        user.setUsername("테스트");
-        ApiFuture<WriteResult> apiFuture = db.collection(COLLECTION_NAME).document("Users").set(user);
+        user.setId(id);
+        user.setName(name);
+        user.setAddress(address);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPhone(phone);
+        user.setUsername(username);
+        ApiFuture<WriteResult> apiFuture = db.collection(COLLECTION_NAME).document().set(user);
 
     }
 
 
     public void selectUser() throws Exception {
-
         Firestore db = FirestoreClient.getFirestore();
         UserDTO user = null;
-        ApiFuture<DocumentSnapshot> apiFuture = db.collection(COLLECTION_NAME).document("user_4").get();
+        ApiFuture<DocumentSnapshot> apiFuture = db.collection(COLLECTION_NAME).document("Users").get();
         DocumentSnapshot documentSnapshot = apiFuture.get();
         if(documentSnapshot.exists()) {
             user = documentSnapshot.toObject(UserDTO.class);

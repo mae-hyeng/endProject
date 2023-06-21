@@ -40,8 +40,6 @@ public class UserController {
 	
 	@GetMapping("/join")
 	public String join() {
-		
-		firebaseService.insertUser();
 	      
 	return "user/join";
 	}
@@ -58,16 +56,18 @@ public class UserController {
 	@PostMapping("/join")
 	public String joinUser(UserDTO userDTO, RedirectAttributes rttr){
 
-		UserEntity user = UserEntity.builder().username(userDTO.getUsername()).name(userDTO.getName()).password(userDTO.getPassword()).phone(userDTO.getPhone()).email(userDTO.getEmail()).address(userDTO.getAddress()).build();
-		final String username = userDTO.getUsername();
-		if(userService.idCheck(username)==0) {
-			userService.save(user);
-			rttr.addFlashAttribute("result", "OK");
+//		UserEntity user = UserEntity.builder().username(userDTO.getUsername()).name(userDTO.getName()).password(userDTO.getPassword()).phone(userDTO.getPhone()).email(userDTO.getEmail()).address(userDTO.getAddress()).build();
+		
+		firebaseService.insertUser(userDTO.getId() ,userDTO.getName(), userDTO.getAddress(), userDTO.getEmail(),userDTO.getPassword(), userDTO.getPhone(), userDTO.getUsername());
+//		final String username = userDTO.getUsername();
+//		if(userService.idCheck(username)==0) {
+//			userService.save(user);
+//			rttr.addFlashAttribute("result", "OK");
 			return "redirect:/joinresult";
-		}else {
-			rttr.addFlashAttribute("result", "idExist!");
-			return "redirect:/joinresult";
-		}
+//		}else {
+//			rttr.addFlashAttribute("result", "idExist!");
+//			return "redirect:/joinresult";
+//		}
 		
 	}
 	

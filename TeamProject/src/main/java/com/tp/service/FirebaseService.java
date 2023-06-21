@@ -21,8 +21,8 @@ public class FirebaseService {
 
         Firestore db = FirestoreClient.getFirestore();
         UserDTO user = new UserDTO();
-        user.setId("4444");
-        user.setName("4444");
+        user.setId("1111");
+        user.setName("1111");
         user.setAddress("서울");
         user.setEmail("test@com");
         user.setPassword("1234");

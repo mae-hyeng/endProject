@@ -33,6 +33,10 @@ dependencies {
 	implementation "javax.servlet:jstl"
 	
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+	
+	// 파이어베이스	
+	implementation group: 'com.google.firebase', name: 'firebase-admin', version: '8.1.0'
+	
 }
 
 tasks.named('test') {

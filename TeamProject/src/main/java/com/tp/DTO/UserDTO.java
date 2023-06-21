@@ -19,7 +19,7 @@ public class UserDTO {
     private String phone;
     private String email;
     private String address;
-    private String token;
+//    private String token;
 	
 
 }

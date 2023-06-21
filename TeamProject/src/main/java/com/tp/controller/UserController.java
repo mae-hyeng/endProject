@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tp.entity.UserEntity;
 import com.tp.DTO.UserDTO;
+import com.tp.service.FirebaseService;
 import com.tp.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,9 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	FirebaseService firebaseService;
 	
 	
 	@GetMapping("/login")
@@ -36,6 +40,8 @@ public class UserController {
 	
 	@GetMapping("/join")
 	public String join() {
+		
+		firebaseService.insertUser();
 	      
 	return "user/join";
 	}

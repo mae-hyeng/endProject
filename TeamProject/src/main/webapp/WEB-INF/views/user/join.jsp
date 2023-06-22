@@ -3,6 +3,15 @@
 <%@include file ="/resources/include/header.jsp" %>
 <div class="login-box">
   <h2>Join</h2>
+  <form name="mailForm" action="mailcheck" method="post">
+  <input type="text" name="email" required="true">
+      <label>이메일을 입력하세요</label>
+	<input type="button" value="메일발송" class="btn first" onclick=mailCheck()>
+     <input type="text" name="email_check_number" maxlength="6" required="true">
+      <label>메일로 발송된 인증번호 6자리를 입력해주세요</label>
+  </form>
+  
+  
   <form name="regForm" action="join" method="post">
     <div class="user-box">
       <input type="text" name="username"  required="true">
@@ -21,19 +30,18 @@
       <input type="text" name="name" required="true">
       <label>이름을 입력하세요</label>
     </div>
-	
     <div class="user-box">
       <input type="tel" name="phone" required="true">
       <label>전화번호는 '-'를 빼고 입력하세요</label>
-    </div>
+    </div>	
     <div class="user-box">
-      <input type="text" name="email" required="true">
-      <label>이메일을 입력하세요</label>
+      <input type="text" name="email2" required="true">
+      <label>이메일을</label>
     </div>
      <div class="user-box">
       <input type="text" name="address" required="true">
       <label>주소를 입력하세요</label>
-    </div>		
+    </div>
 <div>
 <input type="button" value="회원가입" class="btn first" onclick=check() style="margin-left: 55px">
 <input type="button" value="로그인" class="btn second" onclick="location.href='login'">
@@ -86,20 +94,29 @@
 			}else if(regForm.phone.value.search("-") != -1){
 				alert("전화번호에 '-'는 사용불가합니다.")
 				return;
-			}else if(regForm.email.value ==''){
-				alert("이메일을 입력하세요.")
-				return;
-			}else if(regForm.email.value.search("@") == -1 || regForm.email.value.search(".") == -1){
-				alert("이메일 형식 오류입니다.")
-				return;
 			}else if(regForm.address.value ==''){
 				alert("주소를 입력하세요.")
 				return;
 			}else if(confirm("회원 가입을 하시겠습니까?")){
-				regForm.submit(); //자바스크립트의 submit()는 form태그 submit기능
+				document.regForm.submit(); //자바스크립트의 submit()는 form태그 submit기능
 				
 			}
 		}
 		
+	</script>
+	
+	<script>
+	function mailCheck(){
+		if(mailForm.email.value ==''){
+			alert("이메일을 입력하세요.")
+			return;
+		}else if(mailForm.email.value.search("@") == -1 || mailForm.email.value.search(".") == -1){
+			alert("이메일 형식 오류입니다.")
+			return;
+		}else{
+		  	mailForm.submit();
+	        alert("ㄹㅇㅋㅋ");
+		}
+	}
 	</script>
 	<%@include file="/resources/include/footer.jsp" %>

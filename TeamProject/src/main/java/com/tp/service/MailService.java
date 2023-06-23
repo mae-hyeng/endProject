@@ -64,7 +64,6 @@ public class MailService {
         msg += "</td></tr></tbody></table></div>";
         message.setText(msg, "utf-8", "html"); //내용, charset타입, subtype
        
-        
       
         return message;
     }
@@ -76,8 +75,6 @@ public class MailService {
         MimeMessage emailForm = createEmailForm(email);
         //실제 메일 전송
         emailSender.send(emailForm);
-        session.setAttribute("authNum", authNum);
-       System.out.println(authNum);
         return authNum; //인증 코드 반환
     }
     

@@ -20,14 +20,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
-@NoArgsConstructor // ±âº»»ı¼ºÀÚ
+@NoArgsConstructor // ê¸°ë³¸ìƒì„±ì
 @AllArgsConstructor
-@Data // °ÔÅÍ¼¼ÅÍÅõ½ºÆ®¸µ
+@Data // ê²Œí„°ì„¸í„°íˆ¬ìŠ¤íŠ¸ë§
 @Entity(name = "orders")
 public class OrderEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment·Î ÁöÁ¤
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incrementë¡œ ì§€ì •
 	private Long id;
 	
 	@ManyToOne
@@ -48,8 +48,6 @@ public class OrderEntity {
 	@ManyToOne
 	@JoinColumn(name = "cart_id")
 	private CartEntity cart;
-	
-	@Column
-	private String test;
+
 	
 }

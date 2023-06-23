@@ -8,17 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tp.entity.UserEntity;
-import com.tp.firebase.Firebase;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseToken;
 import com.tp.DTO.UserDTO;
 import com.tp.service.FirebaseService;
 import com.tp.service.MailService;
@@ -230,6 +225,19 @@ public class UserController {
 	public String sessionover(HttpSession session) {
 		session.setAttribute("nosession", "NO");
 		return "user/sessionover";
+	}
+	
+	@GetMapping("/IdPwFind")
+	public String IdPwFind() {
+		
+		return "user/IdPwFind";
+	}
+	
+	@PostMapping("/IdPwFind")
+	public String idFind(@RequestParam("username") String username) {
+		userService.UserInfo(username);
+		System.out.println(userService.UserInfo(username));
+		return "";
 	}
 
 }

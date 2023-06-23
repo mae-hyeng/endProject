@@ -29,8 +29,11 @@
       <label>이메일을 입력하세요</label>
       </div>
 	<input type="button" value="메일발송" class="btn first" onclick=mailcheck()>
+	<input type="button" value="인증" class="btn first" onclick="injeong()">
+
+	
 	<div class="user-box">
-     <input type="text" name="email_check_number" maxlength="6" required="true">
+     <input type="text" name="email_check_number" maxlength="10" required="true">
       <label>메일로 발송된 인증번호 6자리를 입력해주세요</label>
     </div>	
      <div class="user-box">
@@ -43,6 +46,12 @@
 </div>
   </form>
 </div>
+
+<%
+String code = (String) session.getAttribute("code");
+%>
+
+
 	<script>
       function check(){
          let reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
@@ -88,8 +97,8 @@
          }else if(regForm.phone.value.search("-") != -1){
             alert("전화번호에 '-'는 사용불가합니다.")
             return;
-         }else if(regForm.email_check_number.value != "${sessionScope.code}"){
-             alert("이메일 인증번호를 확인하세요.")
+         }else if(regForm.email_check_number.value != sessionCode){
+             alert("이메일 인증번호를 확인하세요.)
              return;
          }else if(regForm.address.value ==''){
             alert("주소를 입력하세요.")
@@ -101,36 +110,50 @@
       }
       
    </script>
-	
-	<script>
+
+<script>
     function mailcheck() {
-    	if(regForm.email.value ==''){
-			alert("이메일을 입력하세요.")
-			return;
-		}else if(regForm.email.value.search("@") == -1 || regForm.email.value.search(".") == -1){
-			alert("이메일 형식 오류입니다.")
-			return;
-		}else{
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/mailcheck", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        
-        // 요청 파라미터 설정
-        var email = "email=" + encodeURIComponent(regForm.email.value);
-        
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                // 요청이 성공적으로 처리되었을 때 실행할 로직
-                alert("메일이 발송되었습니다.")
-                var response = xhr.responseText;
-                // 결과를 업데이트하는 로직 구현
-                
-            }
-        };
-        
-        xhr.send(email);
-		}
+        if (regForm.email.value == '') {
+            alert("이메일을 입력하세요.");
+            return;
+        } else if (regForm.email.value.search("@") == -1 || regForm.email.value.search(".") == -1) {
+            alert("이메일 형식 오류입니다.");
+            return;
+        } else {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/mailcheck", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // 요청 파라미터 설정
+            var email = "email=" + encodeURIComponent(regForm.email.value);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    // 요청이 성공적으로 처리되었을 때 실행할 로직
+                    alert("메일이 발송되었습니다.");
+                    var response = xhr.responseText;
+                    // 결과를 업데이트하는 로직 구현
+
+                    // 새로운 인증번호를 세션에 저장
+                    sessionCode = response;
+                }
+            };
+
+            xhr.send(email);
+        }
     }
 </script>
 
-	<%@include file="/resources/include/footer.jsp" %>
+<script>
+    function injeong() {
+        if (regForm.email_check_number.value == sessionCode) {
+            alert("인증 성공");
+            // 인증 성공한 경우 처리할 로직 추가
+            // 회원가입 진행 등
+        } else {
+            alert("인증 실패");
+        }
+    }
+</script>
+
+<%@include file="/resources/include/footer.jsp" %>

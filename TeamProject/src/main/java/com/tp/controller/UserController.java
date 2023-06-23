@@ -70,11 +70,12 @@ public class UserController {
 			String code = mailService.sendEmail(email);
 			System.out.println(code);
 			session.setAttribute("code", code);
+			return code;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "Fail";
 		}
 		
-		return "Success";
 	}
 	
 	@PostMapping("/join")
@@ -129,23 +130,6 @@ public class UserController {
 			return "redirect:/loginresult";
 		
 	}
-	
-//	@PostMapping("/login")
-//    public String login(@RequestBody String idToken, RedirectAttributes rttr) {
-//		Firebase firebase = new Firebase();
-//		firebase.init();
-//        try {
-//            FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(idToken);
-//            String uid = decodedToken.getUid();
-//            // 로그인 성공
-//            rttr.addFlashAttribute("result", "OK");
-//            return "redirect:/loginresult";
-//        } catch (FirebaseAuthException e) {
-//            // 로그인 실패
-//        	rttr.addFlashAttribute("result", "FAIL");
-//        	return "redirect:/loginresult";
-//        }
-//    }
 	
 	@GetMapping("/update")
 	

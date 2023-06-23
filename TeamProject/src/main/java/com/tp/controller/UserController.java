@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tp.entity.UserEntity;
@@ -63,13 +63,18 @@ public class UserController {
 	
 	
 	@PostMapping("/mailcheck")
-	public void mailcheck(@RequestParam("email") String email) {
+	@ResponseBody
+	public String mailcheck(@RequestParam("email") String email, HttpSession session) {
 		
 		try {
-			mailService.sendEmail(email);
+			String code = mailService.sendEmail(email);
+			System.out.println(code);
+			session.setAttribute("code", code);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return "Success";
 	}
 	
 	@PostMapping("/join")

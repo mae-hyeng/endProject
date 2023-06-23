@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tp.DTO.CommentDTO;
 import com.tp.entity.Board;
+import com.tp.entity.DrinkEntity;
 import com.tp.service.BoardService;
 import com.tp.service.CommentService;
 
@@ -44,6 +45,7 @@ public class GenreController {
 			String keyword) {
 		if(genre.equals(genre)) {
 			Page<Board> list = null;
+			List<DrinkEntity> drink = null;
 			
 			if(keyword == null) {
 				if(genre.equals("ro")) {
@@ -81,6 +83,7 @@ public class GenreController {
 			int startPage = Math.max(nowPage - 4, 1);
 			int endPage = Math.min(nowPage + 5, list.getTotalPages());
 			
+			model.addAttribute("drink", drink);
 			model.addAttribute("list", list);
 			model.addAttribute("nowPage", nowPage);
 			model.addAttribute("startPage", startPage);

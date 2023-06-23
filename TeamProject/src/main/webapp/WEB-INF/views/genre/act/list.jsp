@@ -172,66 +172,32 @@
 						</div>
 					</div>
 				</div>
-				<div class="card mb-4">
-					<div class="card-header">
-						<i class="fas fa-table me-1"></i>
-					</div>
-					<div id="board-list">
+				<div style=" float: left; width: 20%; margin-bottom:10%">
+					<img alt="ada" src="resources/img/wick.jpg">
+					<p><a>dfdf</a>
+				</div>
+				<div id="board-list">
 						<div class="container">
 							<br> <br>
 							<table class="board-table">
 								<thead>
 									<tr>
-										<th scope="col" class="th-num">No.</th>
-										<th scope="col" class="th-title">제목</th>
-										<th scope="col" class="th-date">작성자</th>
-										<th scope="col" class="th-date">작성시간</th>
-										<th scope="col" class="th-num">조회수</th>
+										<th scope="col" class="th-title">이름</th>
+										<th scope="col" class="th-date">가격</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="vo" items="${list.content }">
-										<tr>
-											<td>${vo.num}</td>
-											<td><a href="act_contents?num=${vo.num }&page=${nowPage-1}">${vo.title}</a></td>
-											<td>${vo.writer}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.regdate}" /></td>
-											<td>${vo.hit}</td>
+									<c:forEach var="vo" items="${drink }">
+										<tr>										
+											<td>${vo.name}</td>
+											<td>${vo.price}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-							<br>
-							<nav aria-label="Page navigation example">
-								<ul class="pagination pagination-sm">
-									<li class="page-item"><c:if test="${param.page >= startPage }">
-											<li><a class="page-link" href="${route}?page=${param.page - 1 }"> <span aria-hidden="true">&laquo;</span>
-											</a></li>
-										</c:if> <c:forEach var="pagenum" begin="${startPage }" end="${endPage }">
-											<li class="${nowPage == pagenum ? 'active':'' }"><a href="${route}?page=${pagenum-1 }" class="page-link">${pagenum }</a></li>
-										</c:forEach> <c:if test="${param.page < endPage - 1}">
-											<li><a class="page-link" href="${route}?page=${param.page + 1}"> <span aria-hidden="true">&raquo;</span>
-											</a></li>
-										</c:if></li>
-								</ul>
-							</nav>
+							
 						</div>
 					</div>
-
-				</div>
-
-			</div>
-			<div id="board-search">
-				<div class="container">
-					<div class="search-window" style="float: right;">
-						<form action="${route}?page=${param.page }&keyword=${param.keyword }">
-							<div class="search-wrap">
-								<label for="search" class="blind"></label> <input type="text" name="keyword" placeholder="제목검색">
-								<button type="submit" value="검색" class="btn btn-dark">검색</button>
-							</div>
-						</form>
-					</div>
-				</div>
 			</div>
 
 <%@ include file="/resources/include/footer.jsp"%>

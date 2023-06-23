@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tp.entity.UserEntity;
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import com.tp.DTO.UserDTO;
 import com.tp.service.FirebaseService;
+import com.tp.service.MailService;
 import com.tp.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +35,9 @@ public class UserController {
 	
 	@Autowired
 	FirebaseService firebaseService;
+	
+	@Autowired
+	MailService mailService;
 	
 	
 	@GetMapping("/login")
@@ -57,6 +62,15 @@ public class UserController {
 	}
 	
 	
+	@PostMapping("/mailcheck")
+	public void mailcheck(@RequestParam("email") String email) {
+		
+		try {
+			mailService.sendEmail(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@PostMapping("/join")
 	public String joinUser(UserDTO userDTO, RedirectAttributes rttr){
@@ -108,8 +122,6 @@ public class UserController {
 		}else if(userService.loginChek(username, password)==2)
 			rttr.addFlashAttribute("result", "NONE_ID");
 			return "redirect:/loginresult";
-
-		
 		
 	}
 	
@@ -166,6 +178,8 @@ public class UserController {
 		}
 		 return "redirect:/sessionover";
 	}
+	
+	
 	
 	@PostMapping("/pwupdate")
 	public String pwupdate(HttpSession session, @RequestParam("password") final String password) {

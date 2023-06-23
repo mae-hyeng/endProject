@@ -132,9 +132,8 @@ String code = (String) session.getAttribute("code");
                     // 요청이 성공적으로 처리되었을 때 실행할 로직
                     alert("메일이 발송되었습니다.");
                     var response = xhr.responseText;
-                    // 결과를 업데이트하는 로직 구현
 
-                    // 새로운 인증번호를 세션에 저장
+                    // 새로운 인증번호 세션에 저장
                     sessionCode = response;
                 }
             };

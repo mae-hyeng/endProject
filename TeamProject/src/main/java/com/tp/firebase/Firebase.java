@@ -13,17 +13,19 @@ import com.google.firebase.FirebaseOptions;
 @Configuration
 public class Firebase {
 
-    @PostConstruct
-    public void init(){
-        try{
-        	FileInputStream serviceAccount = new FileInputStream("src/main/resources/endprojectkey.json");
-       			FirebaseOptions options = new FirebaseOptions.Builder()
-      			  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-       			  .build();
+	@PostConstruct
+	public void init() {
+	    try {
+	        if (FirebaseApp.getApps().isEmpty()) {
+	            FileInputStream serviceAccount = new FileInputStream("src/main/resources/endprojectkey.json");
+	            FirebaseOptions options = new FirebaseOptions.Builder()
+	                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+	                    .build();
+	            FirebaseApp.initializeApp(options);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 
-       			FirebaseApp.initializeApp(options);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }

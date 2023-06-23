@@ -33,10 +33,10 @@ public class FirebaseService {
     }
 
 
-    public void selectUser() throws Exception {
+    public void selectUser(String username) throws Exception {
         Firestore db = FirestoreClient.getFirestore();
         UserDTO user = null;
-        ApiFuture<DocumentSnapshot> apiFuture = db.collection(COLLECTION_NAME).document("Users").get();
+        ApiFuture<DocumentSnapshot> apiFuture = db.collection(COLLECTION_NAME).document().get();
         DocumentSnapshot documentSnapshot = apiFuture.get();
         if(documentSnapshot.exists()) {
             user = documentSnapshot.toObject(UserDTO.class);

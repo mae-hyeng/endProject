@@ -8,11 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tp.entity.UserEntity;
+import com.tp.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseToken;
 import com.tp.DTO.UserDTO;
 import com.tp.service.FirebaseService;
 import com.tp.service.UserService;
@@ -56,18 +61,18 @@ public class UserController {
 	@PostMapping("/join")
 	public String joinUser(UserDTO userDTO, RedirectAttributes rttr){
 
-//		UserEntity user = UserEntity.builder().username(userDTO.getUsername()).name(userDTO.getName()).password(userDTO.getPassword()).phone(userDTO.getPhone()).email(userDTO.getEmail()).address(userDTO.getAddress()).build();
+		UserEntity user = UserEntity.builder().username(userDTO.getUsername()).name(userDTO.getName()).password(userDTO.getPassword()).phone(userDTO.getPhone()).email(userDTO.getEmail()).address(userDTO.getAddress()).build();
 		
-		firebaseService.insertUser(userDTO.getId() ,userDTO.getName(), userDTO.getAddress(), userDTO.getEmail(),userDTO.getPassword(), userDTO.getPhone(), userDTO.getUsername());
-//		final String username = userDTO.getUsername();
-//		if(userService.idCheck(username)==0) {
-//			userService.save(user);
-//			rttr.addFlashAttribute("result", "OK");
+//		firebaseService.insertUser(userDTO.getId() ,userDTO.getName(), userDTO.getAddress(), userDTO.getEmail(),userDTO.getPassword(), userDTO.getPhone(), userDTO.getUsername());
+		final String username = userDTO.getUsername();
+		if(userService.idCheck(username)==0) {
+			userService.save(user);
+			rttr.addFlashAttribute("result", "OK");
 			return "redirect:/joinresult";
-//		}else {
-//			rttr.addFlashAttribute("result", "idExist!");
-//			return "redirect:/joinresult";
-//		}
+		}else {
+			rttr.addFlashAttribute("result", "idExist!");
+			return "redirect:/joinresult";
+		}
 		
 	}
 	
@@ -107,6 +112,24 @@ public class UserController {
 		
 		
 	}
+	
+//	@PostMapping("/login")
+//    public String login(@RequestBody String idToken, RedirectAttributes rttr) {
+//		Firebase firebase = new Firebase();
+//		firebase.init();
+//        try {
+//            FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(idToken);
+//            String uid = decodedToken.getUid();
+//            // 로그인 성공
+//            rttr.addFlashAttribute("result", "OK");
+//            return "redirect:/loginresult";
+//        } catch (FirebaseAuthException e) {
+//            // 로그인 실패
+//        	rttr.addFlashAttribute("result", "FAIL");
+//        	return "redirect:/loginresult";
+//        }
+//    }
+	
 	@GetMapping("/update")
 	
 	public String update(HttpSession session) {

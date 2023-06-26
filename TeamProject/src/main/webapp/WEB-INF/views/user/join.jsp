@@ -29,7 +29,6 @@
       <label>이메일을 입력하세요</label>
       </div>
 	<input type="button" value="메일발송" class="btn first" onclick=mailcheck()>
-	<input type="button" value="인증" class="btn first" onclick=injeong()>
 
 	
 	<div class="user-box">
@@ -46,11 +45,6 @@
 </div>
   </form>
 </div>
-
-<%
-String code = (String) session.getAttribute("code");
-%>
-
 
 <script>
      function check(){
@@ -98,7 +92,10 @@ String code = (String) session.getAttribute("code");
            alert("전화번호에 '-'는 사용불가합니다.")
            return;
         
-        }else if(regForm.address.value ==''){
+        }else if(regForm.email_check_number.value != sessionCode){
+        	 alert("인증번호 오류! 인증번호를 확인해 주세요.");
+            return;
+         }else if(regForm.address.value ==''){
            alert("주소를 입력하세요.")
            return;
         }else if(confirm("회원 가입을 하시겠습니까?")){
@@ -111,6 +108,11 @@ String code = (String) session.getAttribute("code");
 
 <script>
     function mailcheck() {
+    	let reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        let pnum = /^[0-9]+$/;   
+        let regExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
+        //form은 document.태그이름.태그이름으로 하위태그에 접근이 가능함...(dom접근)
+        //console.log(documnet.regform.id.value); 공백이 출력됨
         if (regForm.email.value == '') {
             alert("이메일을 입력하세요.");
             return;

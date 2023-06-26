@@ -5,7 +5,7 @@
 
 <div class="login-box">
   <h2>비밀번호 수정</h2>
-  <form name="regForm" action="pwupdate" method="post">
+  <form name="regForm" action="pwupdate2" method="post">
     <div class="user-box">
       <input type="password" name="password"  required="true">
       <label>8자 이상, 영문 대/소문자</label>

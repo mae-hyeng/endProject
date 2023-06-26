@@ -60,6 +60,7 @@ public class UserService {
 	
 	
 	
+	
 	// 로그인체크 기능
 	public int loginChek(final String username, final String password) {
 		int result = 1;

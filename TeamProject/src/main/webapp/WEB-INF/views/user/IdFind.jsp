@@ -3,15 +3,15 @@
 <%@include file ="/resources/include/header.jsp" %>
 
 <div class="login-box">
-  <h2>아이디/비밀번호 찾기</h2>
+  <h2>아이디</h2>
   <form name="regForm" action="login" method="post">
     <div class="user-box">
-      <input type="text" name="username"  required="true">
-      <label>이름</label>
+      <input type="email" name="username"  required="true">
+      <label>가입할때 입력한 이메일로 아이디를 발송해드립니다. </label>
  	 </div>
      <div class="user-box">
       <input type="text" name="phone" required="true">
-      <label>핸드폰 번호</label>
+      <label></label>
     </div>
 	<div>
 		<input type="button" value ="검색" class="btn first" onclick=check()>

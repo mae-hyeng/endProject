@@ -19,7 +19,6 @@ public class MailService {
 
 	//의존성 주입을 통해서 필요한 객체를 가져온다.
     private final JavaMailSender emailSender;
-    // 타임리프를사용하기 위한 객체를 의존성 주입으로 가져온다
     private String authNum; //랜덤 인증 코드
     HttpSession session;
 
@@ -50,7 +49,7 @@ public class MailService {
     	
         createCode(); //인증 코드 생성
         String setFrom = "dabi9365@gmail.com"; //email-config에 설정한 자신의 이메일 주소(보내는 사람)
-        String title = "tpcafe 회원가입 인증 번호"; //제목
+        String title = "tpcafe 인증 번호"; //제목
 
         MimeMessage message = emailSender.createMimeMessage();
         message.addRecipients(MimeMessage.RecipientType.TO, email); //보낼 이메일 설정
@@ -58,7 +57,7 @@ public class MailService {
         message.setFrom(setFrom); //보내는 이메일
         String msg="";
         msg += "<h1 style=\"font-size: 30px; padding-right: 30px; padding-left: 30px;\">이메일 주소 확인</h1>";
-        msg += "<p style=\"font-size: 17px; padding-right: 30px; padding-left: 30px;\">아래 확인 코드를 회원가입 화면에서 입력해주세요.</p>";
+        msg += "<p style=\"font-size: 17px; padding-right: 30px; padding-left: 30px;\">아래 확인 코드를 화면에서 인증란에 입력해주세요.</p>";
         msg += "<div style=\"padding-right: 30px; padding-left: 30px; margin: 32px 0 40px;\"><table style=\"border-collapse: collapse; border: 0; background-color: #F4F4F4; height: 70px; table-layout: fixed; word-wrap: break-word; border-radius: 6px;\"><tbody><tr><td style=\"text-align: center; vertical-align: middle; font-size: 30px;\">";
         msg += authNum;
         msg += "</td></tr></tbody></table></div>";

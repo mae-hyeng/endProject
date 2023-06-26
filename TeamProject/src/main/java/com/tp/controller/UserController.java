@@ -59,12 +59,10 @@ public class UserController {
 	
 	@PostMapping("/mailcheck")
 	@ResponseBody
-	public String mailcheck(@RequestParam("email") String email, HttpSession session) {
+	public String mailcheck(@RequestParam("email") String email) {
 		
 		try {
 			String code = mailService.sendEmail(email);
-			System.out.println(code);
-			session.setAttribute("code", code);
 			return code;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -102,6 +100,10 @@ public class UserController {
 		
 		return "user/loginresult";
 				
+	}
+	@RequestMapping("/findresult")
+	public String findresult() {
+		return "user/findresult";
 	}
 	
 	@PostMapping("/login")
@@ -175,6 +177,20 @@ public class UserController {
 		return "/user/mypage";
 	}
 	
+	   @PostMapping("pwupdate2")
+	   public String lostPwChange(@RequestParam("username") String username,@RequestParam("password") final String password, RedirectAttributes rttr) {
+		  UserEntity user = userService.UserInfo(username);
+			if(userService.idCheck(username)==0) {
+				rttr.addFlashAttribute("result", "OK");
+				return "redirect:/findresult";
+			}else {
+				user.setPassword(password);
+				userService.save(user);
+				rttr.addFlashAttribute("result", "idExist!");
+				return "redirect:/findresult";
+			}
+	   }
+	
 	
 	@GetMapping("/delete")
 	   public String delete(HttpSession session) {
@@ -227,17 +243,41 @@ public class UserController {
 		return "user/sessionover";
 	}
 	
-	@GetMapping("/IdPwFind")
-	public String IdPwFind() {
+	@GetMapping("/IdFind")
+	public String IdFind() {
 		
-		return "user/IdPwFind";
+		return "user/IdFind";
 	}
 	
-	@PostMapping("/IdPwFind")
+	
+	@PostMapping("/IdFind")
 	public String idFind(@RequestParam("username") String username) {
 		userService.UserInfo(username);
 		System.out.println(userService.UserInfo(username));
 		return "";
 	}
+	
+	@GetMapping("/PwFind")
+	public String PwFind() {
+		
+		return "user/PwFind";
+	}
+	
+	@PostMapping("/PwFind")
+	@ResponseBody
+	public String PwFind(@RequestParam("username") String username, @RequestParam("email") String email,
+	         UserEntity userEntity) {
+		UserEntity user= userService.UserInfo(username);
+		   try {
+		        String code =  mailService.sendEmail(email);
+		        System.out.println(code);
+		         return code;   
+		         
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		         return "Fail";
+		      }		      
+		      
+		   }
 
 }

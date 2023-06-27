@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,24 +22,34 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor // 기본생성자
 @AllArgsConstructor
-@Data
-@Entity(name="cart")
-public class Cart {
+@Data // 게터세터투스트링
+@Entity
+public class MenuOrder {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment로 지정
 	private Long id;
-
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "drinkId")
-	private List<Drink> drink;
 	
-//	@ManyToMany(mappedBy = "cart")
-//	private List<OrderEntity> orders;
+	@Column
+	private Long quantity;
 	
-	@OneToOne(fetch = FetchType.LAZY)	
-	@JoinColumn(name = "userName")
+	@CreationTimestamp
+	@Column
+	private Timestamp orderDate;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private UserEntity user;
+	
+	@ManyToOne
+	@JoinColumn(name = "drink_id")
+	private Drink drink;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cart_id")
+	private Cart cart;
+
+	
 }

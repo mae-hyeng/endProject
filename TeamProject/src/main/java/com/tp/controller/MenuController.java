@@ -2,6 +2,8 @@ package com.tp.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +32,7 @@ public class MenuController {
 	private final MenuService drinkservice;
 	private final OrderService orderService;
 	private final CartService cartService;
+	private final UserService userService;
 	
 	@RequestMapping("/drink")
 	public String main(Menu menu, Model model
@@ -65,10 +68,12 @@ public class MenuController {
   public String drinkOrderG(@RequestParam("id") Long id,
 		  Model model,
 		  MenuOrder order, 
-		  UserEntity user) {
+		  UserEntity user,
+		  HttpSession session) {
 	  
-	  orderService.createOrder(user);
-	  order.setUser(user);
+	  String username = (String)session.getAttribute("username");
+	  
+	  user = userService.UserInfo(username);
 	  
 	  System.out.println("user : " + user);
 	  orderService.orderSave(order);

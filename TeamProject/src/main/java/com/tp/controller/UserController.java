@@ -67,6 +67,7 @@ public class UserController {
 		
 	}
 	
+	
 	@PostMapping("/join")
 	public String joinUser(UserDTO userDTO, RedirectAttributes rttr){
 
@@ -74,14 +75,19 @@ public class UserController {
 		
 //		firebaseService.insertUser(userDTO.getId() ,userDTO.getName(), userDTO.getAddress(), userDTO.getEmail(),userDTO.getPassword(), userDTO.getPhone(), userDTO.getUsername());
 		final String username = userDTO.getUsername();
+		final String email = userDTO.getEmail();
 		if(userService.idCheck(username)==0) {
-			userService.save(user);
-			rttr.addFlashAttribute("result", "OK");
-			return "redirect:/joinresult";
-		}else {
-			rttr.addFlashAttribute("result", "idExist!");
-			return "redirect:/joinresult";
+			if(userService.emailExists(email)==0) {
+				userService.save(user);
+				rttr.addFlashAttribute("result", "OK");
+				return "redirect:/joinresult";	
+			}else if(userService.emailExists(email)==1) {
+				rttr.addFlashAttribute("result", "emailExist!");
+				return "redirect:/joinresult";
+			}
 		}
+		rttr.addFlashAttribute("result", "idExist!");
+		return "redirect:/joinresult";
 		
 	}
 	
@@ -97,9 +103,14 @@ public class UserController {
 		return "user/loginresult";
 				
 	}
-	@RequestMapping("/findresult")
-	public String findresult() {
-		return "user/findresult";
+	@RequestMapping("/pwfindresult")
+	public String pwfindresult() {
+		return "user/pwfindresult";
+	}
+	
+	@RequestMapping("/idfindresult")
+	public String idfindresult() {
+		return "user/idfindresult";
 	}
 	
 	@PostMapping("/login")
@@ -173,17 +184,18 @@ public class UserController {
 		return "/user/mypage";
 	}
 	
+	// 비밀번호 찾기 
 	   @PostMapping("pwupdate2")
 	   public String lostPwChange(@RequestParam("username") String username,@RequestParam("password") final String password, RedirectAttributes rttr) {
 		  UserEntity user = userService.UserInfo(username);
 			if(userService.idCheck(username)==0) {
 				rttr.addFlashAttribute("result", "OK");
-				return "redirect:/findresult";
+				return "redirect:/pwfindresult";
 			}else {
 				user.setPassword(password);
 				userService.save(user);
 				rttr.addFlashAttribute("result", "idExist!");
-				return "redirect:/findresult";
+				return "redirect:/pwfindresult";
 			}
 	   }
 	
@@ -245,13 +257,24 @@ public class UserController {
 		return "user/IdFind";
 	}
 	
-	
 	@PostMapping("/IdFind")
-	public String idFind(@RequestParam("username") String username) {
-		userService.UserInfo(username);
-		System.out.println(userService.UserInfo(username));
-		return "";
+	public String IdFind(@RequestParam("name") final String name, @RequestParam("email") final String email, RedirectAttributes rttr) {
+		if(userService.emailExists(email)==1) {
+			UserEntity user = userService.infoToEmail(email);
+			if(user.getName().equals(name)) {
+				try {
+					mailService.idDeliver(user.getUsername());
+					mailService.sendIdEmail(email);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}rttr.addFlashAttribute("result", "OK");
+				return "redirect:/idfindresult";
+			}
+		}
+		rttr.addFlashAttribute("result", "NO");
+		return "redirect:/idfindresult";
 	}
+	
 	
 	@GetMapping("/PwFind")
 	public String PwFind() {
@@ -261,7 +284,7 @@ public class UserController {
 	
 	@PostMapping("/PwFind")
 	@ResponseBody
-	public String PwFind(@RequestParam("username") String username, @RequestParam("email") String email,
+	public String PwFind(@RequestParam("username") final String username, @RequestParam("email") final String email,
 	         UserEntity userEntity) {
 		UserEntity user= userService.UserInfo(username);
 		   try {
@@ -274,6 +297,11 @@ public class UserController {
 		         return "Fail";
 		      }		      
 		      
-		   }
-
+	}
+	
 }
+
+	
+
+
+

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -20,36 +21,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
-@NoArgsConstructor // �⺻������
+@NoArgsConstructor
 @AllArgsConstructor
-@Data // ���ͼ�������Ʈ��
-@Entity(name = "orders")
-public class OrderEntity {
+@Data
+@Entity(name="cart")
+public class Cart {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment�� ����
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private UserEntity user;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "drink_id")
-	private DrinkEntity drink;
-	
-	@Column
-	private Long quantity;
-	
-	@CreationTimestamp
-	@Column
-	private Timestamp orderDate;
-	
-	@ManyToOne
-	@JoinColumn(name = "cart_id")
-	private CartEntity cart;
-	
-	@Column
-	private String test;
-	
+	private Menu menu; 
+
+	@ManyToMany(mappedBy = "cart")
+	private List<MenuOrder> orders;
 }

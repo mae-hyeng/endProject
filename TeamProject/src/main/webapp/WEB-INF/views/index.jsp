@@ -119,11 +119,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/ro">로맨스</a>
-                                    <a class="nav-link" href="/fa">판타지</a>
-                                    <a class="nav-link" href="/co">코미디</a>
-                                    <a class="nav-link" href="/act">액션</a>
-                                    <a class="nav-link" href="/horror">공포공포</a>
+                                    <a class="nav-link" href="/drink">음료</a>
+                                    <a class="nav-link" href="/order">이벤트</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading"> <c:choose>
@@ -199,7 +196,7 @@
          </div>
          <div class="video_modal_popup-closer">
            <div class="video_modal_popup">
-         </div>
+         </div> 
          </div>
          <div class="popupModalVideo" style=" float: left; width: 20%; margin-bottom:10%">
            <a data-video="ik_Sptvs80Y" style="cursor: pointer;"><img src="resources/img/ren.jpg" alt="렌필드" /><p style="color:#FFFFFF">렌필드 <br>예매율:7.9%%</p></a>
@@ -321,11 +318,7 @@
                     <div class="container-fluid px-4" >
                         <div class="d-flex align-items-center justify-content-between small" >
                             <div class="text-muted" >2023.04.19 </div>
-                            <div>
-                              
-                               <div class="text-muted" >Team By 더 이상의 유기는 없다</div>
-                          
-                        </div>
+                            
                     </div>
                 </footer>
             </div>

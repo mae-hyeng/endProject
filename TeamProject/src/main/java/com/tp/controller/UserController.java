@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tp.entity.UserEntity;
 import com.tp.DTO.UserDTO;
-import com.tp.service.FirebaseService;
 import com.tp.service.MailService;
 import com.tp.service.UserService;
 
@@ -27,9 +26,6 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
-	
-	@Autowired
-	FirebaseService firebaseService;
 	
 	@Autowired
 	MailService mailService;

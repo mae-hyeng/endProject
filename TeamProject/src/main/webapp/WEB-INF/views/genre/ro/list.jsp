@@ -125,111 +125,26 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid px-4">
-				<h2 class="mt-4">로맨스</h2>
-				<div class="row">
-					<div class="col-xl-3 col-md-6">
-						<div class="card bg-secondary text-white mb-4">
-							<div class="card-body">전체</div>
-							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="ro_board"></a>
-								<div class="small text-white">
-									<i class="fas fa-angle-right"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-3 col-md-6">
-						<div class="card bg-secondary text-white mb-4">
-							<div class="card-body">리뷰</div>
-							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="ro_review"></a>
-								<div class="small text-white">
-									<i class="fas fa-angle-right"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-3 col-md-6">
-						<div class="card bg-secondary text-white mb-4">
-							<div class="card-body">추천</div>
-							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="ro_recom"></a>
-								<div class="small text-white">
-									<i class="fas fa-angle-right"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-3 col-md-6">
-						<div class="card bg-secondary text-white mb-4">
-							<div class="card-body">정보</div>
-							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="ro_info"></a>
-								<div class="small text-white">
-									<i class="fas fa-angle-right"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="card mb-4">
-					<div class="card-header">
-						<i class="fas fa-table me-1"></i>
-					</div>
+				<h2 class="mt-4">음료</h2>
+				
+				<div>
 					<div id="board-list">
 						<div class="container">
-							<br> <br>
-							<table class="board-table">
-								<thead>
-									<tr>
-										<th scope="col" class="th-num">No.</th>
-										<th scope="col" class="th-title">제목</th>
-										<th scope="col" class="th-date">작성자</th>
-										<th scope="col" class="th-date">작성시간</th>
-										<th scope="col" class="th-num">조회수</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="vo" items="${list.content }">
-										<tr>
-											<td>${vo.num}</td>
-											<td><a href="ro_contents?num=${vo.num }&page=${nowPage-1}">${vo.title}</a></td>
-											<td>${vo.writer}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.regdate}" /></td>
-											<td>${vo.hit}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
+							<br> 
 							<br>
-							<nav aria-label="Page navigation example">
-								<ul class="pagination pagination-sm">
-									<li class="page-item"><c:if test="${param.page >= startPage }">
-											<li><a class="page-link" href="${route}?page=${param.page - 1 }"> <span aria-hidden="true">&laquo;</span>
-											</a></li>
-										</c:if> <c:forEach var="pagenum" begin="${startPage }" end="${endPage }">
-											<li class="${nowPage == pagenum ? 'active':'' }"><a href="${route}?page=${pagenum-1 }" class="page-link">${pagenum }</a></li>
-										</c:forEach> <c:if test="${param.page < endPage - 1}">
-											<li><a class="page-link" href="${route}?page=${param.page + 1}"> <span aria-hidden="true">&raquo;</span>
-											</a></li>
-										</c:if></li>
-								</ul>
-							</nav>
+								<c:forEach var="drink" items="${list}">
+									<tr>
+										<c:if test="${not empty drink.filename }">
+											<a href="drinkOrder?id=${drink.id }"><img style="width: 200px; height: auto;" src="/resources/files/${drink.filename }" ></a>
+											<br>
+												<td>${drink.name}</td>
+												<td>${drink.price}</td>
+											<br>
+										</c:if>
+									</tr>
+								</c:forEach>
+							<br>
 						</div>
-					</div>
-
-				</div>
-
-			</div>
-			<div id="board-search">
-				<div class="container">
-					<div class="search-window" style="float: right;">
-						<form action="${route}?page=${param.page }&keyword=${param.keyword }">
-							<div class="search-wrap">
-								<label for="search" class="blind"></label> <input type="text" name="keyword" placeholder="제목검색">
-								<button type="submit" value="검색" class="btn btn-dark">검색</button>
-							</div>
-						</form>
 					</div>
 				</div>
 			</div>

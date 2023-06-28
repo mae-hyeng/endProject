@@ -231,14 +231,13 @@ if (session.getAttribute("username") == null) {
 		<div id="layoutSidenav_content" style="bottom: 56px;">
 
 			<main class="min-width">
-				<a>${one.genre}/${one.category }</a>
 				<h2 class="mt-6" style="text-align: left;">게시판 글 내용 보기</h2>
 				<div class="row">
 					<div class="row-col-xl-1">
 						<div class="card mb-4">
 							<div class="card-header">
 								<div style="padding: 5px" class="writer_info">
-									<h2>${one.title }</h2>
+									<h2>${orderList.name }</h2>
 								</div>
 								<img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77" alt="프로필 사진" width="36" height="36"><span class="blind"></span>&nbsp; <span style="font-size: 1.2em" class="writer_info">${one.writer }</span> <span style="font-size: 0.7em" class="writer_info">${one.regdate }</span>
 								<h3 class="left-box"></h3>
@@ -247,16 +246,18 @@ if (session.getAttribute("username") == null) {
 							<form>
 								<div class="card-body">
 									<br>
-									<c:if test="${not empty one.filename }">
-										<img style="width: 300px; height: auto;" src="/resources/files/${one.filename }">
-										<br>
-									</c:if>
-									<br>
-									<div class="text_box">
-										<pre>${one.content }</pre>
-										<div class="count"></div>
-										<br>
-									</div>
+									<c:forEach var="drink" items="${orderList}">
+									<tr>
+										<c:if test="${not empty drink.filename }">
+											<img style="width: 200px; height: auto;" src="/resources/files/${drink.filename }">
+											<br>
+												<td>${drink.name}</td>
+												<td>${drink.price}</td>
+												<a href="/order">주문하기</a>
+											<br>
+										</c:if>
+									</tr>
+								</c:forEach>
 
 								</div>
 

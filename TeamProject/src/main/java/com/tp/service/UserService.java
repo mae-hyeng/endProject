@@ -58,7 +58,7 @@ public class UserService {
 		
 	}
 	
-	
+//	public user
 	
 	
 	// 로그인체크 기능
@@ -74,6 +74,10 @@ public class UserService {
 		}
 		return result;
 	}
+	
+	
+	
+	
 
 
 	

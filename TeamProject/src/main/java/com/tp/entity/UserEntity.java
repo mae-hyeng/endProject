@@ -1,7 +1,5 @@
 package com.tp.entity;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
@@ -18,15 +15,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
-@NoArgsConstructor // 기본생성자
+@NoArgsConstructor
 @AllArgsConstructor
-@Data // 게터세터투스트링
+@Data
 @Entity(name = "user")
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
 public class UserEntity extends BaseTimeEntity{
 	
 	
-	 @Id // 기본키(Primary key)
+	 @Id
 	 @GeneratedValue(generator = "system-uuid")
 	 @GenericGenerator(name="system-uuid", strategy = "uuid")
 	 private String id;
@@ -42,6 +39,10 @@ public class UserEntity extends BaseTimeEntity{
 	 private String email;
 	 @Column(length = 30, nullable=false)
 	 private String address;
+	 
+//	 @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//	 private List<Cart> cart;
+	 
 
 
 }

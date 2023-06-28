@@ -21,11 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tp.DTO.CommentDTO;
 import com.tp.entity.Board;
 //import com.tp.entity.BoardVO;
 import com.tp.service.BoardService;
-import com.tp.service.CommentService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,7 +32,6 @@ import lombok.RequiredArgsConstructor;
 public class BoardController {
 
    private final BoardService boardservice;
-   private final CommentService commentService;
    
    // 페이징, 게시물 검색, 게시물 목록 보기
    @RequestMapping("/board")
@@ -71,45 +68,42 @@ public class BoardController {
       return "board/register";
    }
    
-   //게시물 저장(GET)
-   @GetMapping("/save")
-   public String saveForm() {
-      
-      return "board/list";
-   }
-   
-   //게시물 저장(POST)
-   @PostMapping("/save")
-   public String postsave(Board board, 
-         MultipartFile file) throws Exception {
-      
-      boardservice.save(board, file);
-      
-      return "redirect:/board";
-      
-   }
+//   //게시물 저장(GET)
+//   @GetMapping("/save")
+//   public String saveForm() {
+//      
+//      return "board/list";
+//   }
+//   
+//   //게시물 저장(POST)
+//   @PostMapping("/save")
+//   public String postsave(Board board,
+//         MultipartFile file) throws Exception {
+//      
+//      boardservice.save(board, file);
+//      
+//      return "redirect:/board";
+//      
+//   }
 
    
    //게시물 상세보기
-   @RequestMapping("/content")
-   public String content(@RequestParam("num") Long num,
-         Model model,
-         HttpServletRequest req, 
-         HttpServletResponse res, HttpSession session) {
-      
-      List<CommentDTO> commentDTOList = commentService.findAll(num);
-      model.addAttribute("commentList", commentDTOList);
-      
-      viewCountUp(num, req, res);
-      model.addAttribute("one", boardservice.selectOne(num));
-      if(session.getAttribute("listnum_mo") != null) {
-            session.setAttribute("listnum", 3);
-         session.removeAttribute("listnum_mo");
-      }else {
-         session.setAttribute("listnum", 1);
-      }
-      return "board/content";
-   }
+//   @RequestMapping("/content")
+//   public String content(@RequestParam("num") Long num,
+//         Model model,
+//         HttpServletRequest req, 
+//         HttpServletResponse res, HttpSession session) {
+//      
+//      viewCountUp(num, req, res);
+//      model.addAttribute("one", boardservice.selectOne(num));
+//      if(session.getAttribute("listnum_mo") != null) {
+//            session.setAttribute("listnum", 3);
+//         session.removeAttribute("listnum_mo");
+//      }else {
+//         session.setAttribute("listnum", 1);
+//      }
+//      return "board/content";
+//   }
 
    // 게시물 삭제
    @GetMapping("delete_content")
@@ -175,33 +169,4 @@ public class BoardController {
             res.addCookie(newCookie);
         }
     }
-    
-    @GetMapping("/commMo")
-    public String commentModify(@RequestParam Long id,
-          @RequestParam Long num,
-          Model model) {
-       model.addAttribute("one", boardservice.selectOne(num));
-       model.addAttribute("comOne", commentService.selectComment(id));
-       
-       return "comment/modify";
-    }
-    
-    
-    @PostMapping("/commMo")
-    public String commentModifyAfter(@RequestParam Long id,
-          @RequestParam Long num,
-          @ModelAttribute CommentDTO commentDTO) {
-       
-       commentDTO.setBoardNum(num);
-       Timestamp now = new Timestamp(System.currentTimeMillis());
-       commentDTO.setCommentCreatedTime(now);
-       
-       commentService.save(commentDTO);   
-       return "redirect:/content?num=" + num;
-    }
-
-
-   
-
-
 }

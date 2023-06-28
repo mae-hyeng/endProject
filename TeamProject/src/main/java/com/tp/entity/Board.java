@@ -67,11 +67,6 @@ public class Board {
 	public void viewCountUp(Board board) {
         board.hit++;
     }
-	
-	@OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
-	private List<Comment> commentList = new ArrayList<>();
-	
-
 }
 
 

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디/비밀번호찾기 확인</title>
+<title>아이디찾기 결과</title>
 </head>
 <body>
 		<script>

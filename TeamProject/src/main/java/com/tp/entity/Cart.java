@@ -1,6 +1,7 @@
 package com.tp.entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -38,7 +39,7 @@ public class Cart {
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "menuId")
-	private Menu menu;
+	private List<Menu> menu = new ArrayList<Menu>();
 	
 	
 //	@ManyToMany(mappedBy = "cart")

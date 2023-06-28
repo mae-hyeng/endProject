@@ -1,5 +1,8 @@
 package com.tp.entity;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,14 +12,19 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Entity
+@Builder
 @Getter
 @Setter
-@Service
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 @Table(name  = "menu")
 public class Menu {
 	
@@ -29,4 +37,18 @@ public class Menu {
 	
 	@Column
 	private int price;
+	
+	@Column(length=150)
+	private String filename;
+	
+	@Column(length=300)
+	private String filepath;
+	
+	@Column
+	private String type;
+	
+	@Column
+	private String content;
+	
+	
 }

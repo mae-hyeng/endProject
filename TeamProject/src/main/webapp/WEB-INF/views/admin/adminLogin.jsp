@@ -4,18 +4,17 @@
 
 <div class="login-box">
   <h2>Login</h2>
-  <form name="regForm" action="login" method="post">
+  <form name="regForm" action="/adminLogin" method="post">
     <div class="user-box">
       <input type="text" name="username"  required="true">
-      <label>Username</label>
+      <label>AdminUser</label>
  	 </div>
      <div class="user-box">
       <input type="password" name="password" required="true">
       <label>Password</label>
     </div>
 	<div>
-		<input type="button" value ="로그인" class="btn first" onclick=check() style="margin-left: 70px">
-		<input type="button" value ="회원가입" class="btn second" onclick="location.href='join'">
+		<input type="button" value ="로그인" class="btn first" onclick=check() style="margin-left: 150px">
 	</div>
   </form>
 </div>
@@ -36,4 +35,4 @@
 		}
 		
 	</script>
-<%@include file ="/resources/include/footer.jsp" %>
+	<%@include file ="/resources/include/footer.jsp" %>

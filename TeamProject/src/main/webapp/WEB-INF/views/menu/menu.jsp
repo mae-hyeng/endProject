@@ -68,32 +68,22 @@
 					<a class="nav-link" href="/menu">
 						<div class="sb-nav-link-icon">
 							<i class="fas fa-tachometer-alt"></i>
-						</div> 전체 게시판
+						</div> 전체 메뉴
 					</a>
 					<div class="sb-sidenav-menu-heading">WRITE</div>
-					<a class="nav-link" href="/register">
+					<a class="nav-link" href="/menuRegister">
 						<div class="sb-nav-link-icon">
 							<i class="fas fa-tachometer-alt"></i>
-						</div> 게시글 작성
+						</div> 메뉴 등록
 					</a>
-					<div class="sb-sidenav-menu-heading">Genre</div>
-					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-						<div class="sb-nav-link-icon">
-							<i class="fas fa-columns"></i>
-						</div> 장르
 						<div class="sb-sidenav-collapse-arrow">
 							<i class="fas fa-angle-down"></i>
 						</div>
 					</a>
-					<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-						<nav class="sb-sidenav-menu-nested nav">
-							<a class="nav-link" href="/ro">로맨스</a> <a class="nav-link" href="/fa">판타지</a> <a class="nav-link" href="/co">코미디</a> <a class="nav-link" href="/act">액션</a> <a class="nav-link" href="/horror">공포</a>
-						</nav>
-					</div>
 					<div class="sb-sidenav-menu-heading">
 						<c:choose>
 							<c:when test="${sessionScope.username!=null}">
-								<span style="color: white; font-size: 15px;">${sessionScope.username } [ ${sessionScope.name } ]</span>
+								<span style="color: white; font-size: 15px;">${sessionScope.username }</span>
 							</c:when>
 						</c:choose>
 					</div>
@@ -110,7 +100,7 @@
 							<nav class="sb-sidenav-menu-nested nav">
 								<c:choose>
 									<c:when test="${sessionScope.username==null}">
-										<a class="nav-link" href="login">로그인</a>
+										<a class="nav-link" href="adminLogin">로그인</a>
 									</c:when>
 								</c:choose>
 								<a class="nav-link" href="mypage">마이페이지 이동</a> <a class="nav-link" href="update">내 정보변경</a> <a class="nav-link" href="pwupdate">비밀번호 변경</a> <a class="nav-link" href="logout">로그아웃</a>
@@ -171,11 +161,18 @@
 							</div>
 						</div>
 					</div>
-					<figure>
-						<img src="resources/img/tea.jpg"
-						style="width:250px; height:250px;" />
-						<figcaption>자몽티</figcaption>
-					</figure>
-
+					
+					<c:forEach var="vo" items="${list}">
+						<c:if test="${not empty vo.filename }">
+							<a href="menuContent?id=${vo.id }">
+								<img style=
+								"width: 300px; height: auto;" src="/resources/files/${vo.filename }" />
+							</a>
+							<br>
+						</c:if>
+						<c:out value="${vo.name }" />
+						<c:out value="${vo.price }" />
+					</c:forEach>
+					
 
 <%@ include file="/resources/include/footer.jsp"%>

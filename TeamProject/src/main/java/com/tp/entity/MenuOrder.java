@@ -1,6 +1,8 @@
 package com.tp.entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -41,9 +44,9 @@ public class MenuOrder {
 	private Menu menu;
 	
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userName")
-	private UserEntity user;
+	private List<UserEntity> user = new ArrayList<UserEntity>();
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cartId")

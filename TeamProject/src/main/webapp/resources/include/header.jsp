@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>영화 카페</title>
+        <title>서영이 카페</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="resources/css/styles.css" rel="stylesheet" />
         <link href="/resources/css/login.css" rel="stylesheet">
@@ -139,7 +139,7 @@ $(".video_modal_popup-closer").click(function() {
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="/">Movie Commu</a>
+            <a class="navbar-brand ps-3" href="/">Seoyoung's cafe</a>
         
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -150,7 +150,7 @@ $(".video_modal_popup-closer").click(function() {
                     <span style="color: white; font-size: 22px;" >로그인을 해주세요.</span>
                    </c:when>
                    <c:when test="${sessionScope.username!=null}">
-                    <span style="color: white; font-size: 22px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
+                    <span style="color: white; font-size: 22px;" >${sessionScope.username }</span>
                    </c:when>
                    </c:choose>
                 <li class="nav-item dropdown">
@@ -160,6 +160,7 @@ $(".video_modal_popup-closer").click(function() {
                      <c:when test="${sessionScope.username==null}">
                         <li><a class="dropdown-item" href="/login">Login</a></li>
                         <li><a class="dropdown-item" href="/join">Join</a></li>
+                        <li><a class="dropdown-item" href="/adminLogin">Admin</a></li>
                         </c:when>
 					<c:otherwise>
 						<li><a class="dropdown-item" href="/mypage">Mypage</a></li>
@@ -183,28 +184,13 @@ $(".video_modal_popup-closer").click(function() {
                             <div class="sb-sidenav-menu-heading">All</div>
                             <a class="nav-link" href="/board">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                전체 게시판
+                                전체 메뉴
                             </a>
                             <div class="sb-sidenav-menu-heading">WRITE</div>
                             <a class="nav-link" href="/register">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                게시글 작성
+                                메뉴 등록
                             </a>
-                            <div class="sb-sidenav-menu-heading">Genre</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                장르
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/ro">로맨스</a>
-                                    <a class="nav-link" href="/fa">판타지</a>
-                                    <a class="nav-link" href="/co">코미디</a>
-                                    <a class="nav-link" href="/act">액션</a>
-                                    <a class="nav-link" href="/horror">공포</a>
-                                </nav>
-                            </div>
                             <div class="sb-sidenav-menu-heading"> <c:choose>
                 			   <c:when test="${sessionScope.username!=null}">
                    				 <span style="color: white; font-size: 15px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
@@ -220,7 +206,7 @@ $(".video_modal_popup-closer").click(function() {
                                     <nav class="sb-sidenav-menu-nested nav">
                                     		<c:choose>
                                     		<c:when test="${sessionScope.username==null}">
-                                    		<a class="nav-link" href="login">로그인</a>
+                                    		<a class="nav-link" href="adminLogin">로그인</a>
                                     		</c:when>
                                     		</c:choose>
                                             <a class="nav-link" href="mypage">마이페이지 이동</a>

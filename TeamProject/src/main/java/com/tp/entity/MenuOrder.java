@@ -33,7 +33,7 @@ public class MenuOrder {
 	private Long id;
 	
 	@Column
-	private Long quantity;
+	private int quantity;
 	
 	@CreationTimestamp
 	@Column
@@ -44,12 +44,21 @@ public class MenuOrder {
 	private UserEntity user;
 	
 	@ManyToOne
-	@JoinColumn(name = "drink_id")
-	private Drink drink;
+	@JoinColumn(name = "menu_id")
+	private Menu menu;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cart_id")
 	private Cart cart;
+
+	
+    public static MenuOrder createMenuorder(UserEntity user){
+    	MenuOrder menuorder = new MenuOrder();
+        menuorder.user = user;
+        menuorder.quantity = 0;
+ 
+        return menuorder;
+    }
 
 	
 }

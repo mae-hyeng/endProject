@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="drink")
-public class Drink {
+@Entity(name="Menu")
+public class Menu {
 
 	@Id
 	private Long id;
@@ -31,6 +31,8 @@ public class Drink {
 	@Column(name = "price")
 	private BigDecimal price;
 
-	
+//	@ManyToOne
+//	@JoinColumn(name = "user_id")
+//	private UserEntity user;
 	
 }

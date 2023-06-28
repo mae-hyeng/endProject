@@ -20,13 +20,17 @@ import org.hibernate.annotations.CreationTimestamp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name="cart")
+@Getter
+@Setter
+@Entity
 public class Cart {
 
 	@Id
@@ -34,13 +38,26 @@ public class Cart {
 	private Long id;
 
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "drinkId")
-	private List<Drink> drink;
-	
-//	@ManyToMany(mappedBy = "cart")
-//	private List<OrderEntity> orders;
+	@JoinColumn(name = "menuId")
+	private List<Menu> menu;
 	
 	@OneToOne(fetch = FetchType.LAZY)	
 	@JoinColumn(name = "userName")
 	private UserEntity user;
+	
+	private int count;  // 담긴 상품 개수
+	
+	public static Cart createCart(MenuOrder menuorder,Menu menu,int count){
+        Cart cart = new Cart();
+        cart.setMenu((List<Menu>) menu);
+        cart.setCount(count);
+
+        return cart;
+    }
+	
+	public void addCount(int count){
+        this.count += count;
+    }
+	
 }
+

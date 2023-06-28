@@ -253,7 +253,7 @@
 				
 				<script>
 				function modi() {
-						location.href='menu_modify?id=${menu.id}';}
+						location.href='modifyMenu?id=${menu.id}';}
 				</script>
 				
 				

@@ -57,5 +57,10 @@ public class MenuService {
 	public void delete(Long id) {
 		menuRepository.deleteById(id);
 	}
+	
+	//분류에 따라 게시글 출력
+	public List<Menu> categoryList(String category){
+		return menuRepository.findByCategory(category);
+	}
 }
 

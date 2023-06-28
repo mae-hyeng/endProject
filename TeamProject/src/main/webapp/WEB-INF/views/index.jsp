@@ -102,14 +102,14 @@
                         <div class="nav">
                         
                             <div class="sb-sidenav-menu-heading">All</div>
-                            <a class="nav-link" href="/board">
+                            <a class="nav-link" href="/menu">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                전체 게시판
+                                전체 메뉴
                             </a>
                             <div class="sb-sidenav-menu-heading">WRITE</div>
-                            <a class="nav-link" href="/register">
+                            <a class="nav-link" href="/menuRegister">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                게시글 작성
+                                메뉴 등록
                             </a>
                             <div class="sb-sidenav-menu-heading">Genre</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -117,15 +117,7 @@
                                 장르
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/ro">로맨스</a>
-                                    <a class="nav-link" href="/fa">판타지</a>
-                                    <a class="nav-link" href="/co">코미디</a>
-                                    <a class="nav-link" href="/act">액션</a>
-                                    <a class="nav-link" href="/horror">공포공포</a>
-                                </nav>
-                            </div>
+
                             <div class="sb-sidenav-menu-heading"> <c:choose>
                             <c:when test="${sessionScope.username!=null}">
                                 <span style="color: white; font-size: 15px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>

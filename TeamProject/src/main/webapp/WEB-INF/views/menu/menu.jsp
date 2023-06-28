@@ -130,7 +130,7 @@
 					</div>
 					<div class="col-xl-3 col-md-6">
 						<div class="card bg-secondary text-white mb-4">
-							<div class="card-body">DRINK</div>
+							<div class="card-body">COFFEE</div>
 							<div class="card-footer d-flex align-items-center justify-content-between">
 								<a class="small text-white stretched-link" href="drink"></a>
 								<div class="small text-white">
@@ -141,9 +141,64 @@
 					</div>
 					<div class="col-xl-3 col-md-6">
 						<div class="card bg-secondary text-white mb-4">
-							<div class="card-body">DESSERT</div>
+							<div class="card-body">MILK TEA & LATTE</div>
 							<div class="card-footer d-flex align-items-center justify-content-between">
 								<a class="small text-white stretched-link" href="dessert"></a>
+								<div class="small text-white">
+									<i class="fas fa-angle-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card bg-secondary text-white mb-4">
+							<div class="card-body">JUICE & DRINK</div>
+							<div class="card-footer d-flex align-items-center justify-content-between">
+								<a class="small text-white stretched-link" href="md"></a>
+								<div class="small text-white">
+									<i class="fas fa-angle-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card bg-secondary text-white mb-4">
+							<div class="card-body">SMOOTHIE</div>
+							<div class="card-footer d-flex align-items-center justify-content-between">
+								<a class="small text-white stretched-link" href="md"></a>
+								<div class="small text-white">
+									<i class="fas fa-angle-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card bg-secondary text-white mb-4">
+							<div class="card-body">TEA & ADE</div>
+							<div class="card-footer d-flex align-items-center justify-content-between">
+								<a class="small text-white stretched-link" href="md"></a>
+								<div class="small text-white">
+									<i class="fas fa-angle-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card bg-secondary text-white mb-4">
+							<div class="card-body">BREAD</div>
+							<div class="card-footer d-flex align-items-center justify-content-between">
+								<a class="small text-white stretched-link" href="md"></a>
+								<div class="small text-white">
+									<i class="fas fa-angle-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card bg-secondary text-white mb-4">
+							<div class="card-body">DESSERT</div>
+							<div class="card-footer d-flex align-items-center justify-content-between">
+								<a class="small text-white stretched-link" href="md"></a>
 								<div class="small text-white">
 									<i class="fas fa-angle-right"></i>
 								</div>
@@ -171,7 +226,9 @@
 							<br>
 						</c:if>
 						<c:out value="${vo.name }" />
+						<br>
 						<c:out value="${vo.price }" />
+						<br><br>
 					</c:forEach>
 					
 

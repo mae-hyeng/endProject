@@ -19,6 +19,11 @@ body {
 	margin: 50px auto;
 	margin-top: 100px;
 }
+
+img {
+	width:30%;
+	height:30%;
+}
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -85,17 +90,17 @@ body {
 								<h3 class="left-box"></h3>
 							</div>
 							<div class="card-body">
-								<form class="regform" name="regform" action="modify" method="post" enctype="multipart/form-data">
+								<form class="regform" name="regform" action="modifyMenu" method="post" enctype="multipart/form-data">
 									<tr>
 										<td><input type="hidden" name="id" value="${menu.id }"></td>
 									</tr>
-										메뉴명 <input type="text" name="title" id="title" value="${menu.name }" style="width: 100%;">
+										메뉴명 <input type="text" name="name" id="name" value="${menu.name }" style="width: 100%;" required>
 									<hr>
 										상품 구분 : <select id="type" name="type">
 											<option value="${menu.type }" selected>${menu.type}</option>
 										</select>
 									<hr>
-										가격 : <input type="text" name="price" id="price" required>
+										가격 : <input type="text" name="price" id="price" value="${menu.price }" required>
 									<hr>							
 										<c:if test="${not empty menu.filename }">
 			                              <img src="/resources/files/${menu.filename }">
@@ -103,6 +108,8 @@ body {
 			                              <input type="hidden" name="filepath" value="${menu.filepath }">
 			                              <br>
 			                           </c:if>
+			                           
+			                           
 	                           <br>
 	                           <input type="file" name="file" id="file" value="${menu.filename }">
 
@@ -135,6 +142,7 @@ body {
 	      return;
 	   }else if(confirm("게시글을 수정하겠습니까?")){
 	      regform.submit();
+	      alert("게시글이 수정되었습니다")
 	   }
 	}
 </script>
@@ -142,12 +150,13 @@ body {
 
 <script>
    function deleteCheck(){
-		val result = confirm("메뉴를 삭제하시겠습니까?")
-		if(result==true){
-			alert("삭제되었습니다")
-			location.href="deleteMenu?id="+"${menu.id}";	
-		}
-      }
+	   if(regform.id.value != '${menu.id}'){
+		   alert("게시글 수정 및 삭제 권한이 없습니다")
+		   return;
+	   } else if (confirm("게시글을 삭제하시겠습니까?")){
+		   location.href="deleteMenu?id="+"${menu.id}";
+		   alert("게시글이 삭제되었습니다")
+	   }
    }
 </script>
 

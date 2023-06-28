@@ -95,7 +95,7 @@ public class MenuController {
 	   public String afterModify(Menu menu, MultipartFile file, HttpSession session) throws Exception {
 		   session.setAttribute("listnum_mo", 2);
 		   menuService.save(menu, file);
-		   return "redirect:/content?id="+menu.getId();
+		   return "redirect:/menuContent?id="+menu.getId();
 	   }
 	   
 }

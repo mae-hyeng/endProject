@@ -145,8 +145,7 @@ ul, li {
         </nav>
         <br>
         
-        
-        <body>
+  
     <ul class="menu">
         <li class="menu-item">
             <a href="#" class="menu-link">커피</a>

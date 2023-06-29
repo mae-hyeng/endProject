@@ -36,7 +36,7 @@ public class BoardController {
    private final BoardService boardservice;
    private final CommentService commentService;
    
-   // ����¡, �Խù� �˻�, �Խù� ��� ����
+   // 페이징, 게시물 검색, 게시물 목록 보기
    @RequestMapping("/board")
    public String main(Model model, 
          @PageableDefault(page = 0,size = 10, sort = "num", direction = Sort.Direction.DESC) Pageable pageable,
@@ -50,10 +50,10 @@ public class BoardController {
          list = boardservice.boardSearch(keyword, pageable);
       }
       
-      // ���������� �������� nowPage
+      // 현재페이지 가져오는 nowPage
       int nowPage = list.getPageable().getPageNumber()+1;
       
-      //Math.max() �� �� �� ū�� ��ȯ min �� �ݴ�
+      // Math.max() 는 둘 중 큰걸 반환 min 은 반대
       int startPage = Math.max(nowPage - 4, 1);
       int endPage = Math.min(nowPage + 5, list.getTotalPages());
       
@@ -65,20 +65,20 @@ public class BoardController {
       return "board/list";
    }
    
-   //�Խù� �ۼ�
+   // 게시물 작성
    @RequestMapping("register")
    public String write() {
       return "board/register";
    }
    
-   //�Խù� ����(GET)
+   // 게시물 저장(GET)
    @GetMapping("/save")
    public String saveForm() {
       
       return "board/list";
    }
    
-   //�Խù� ����(POST)
+   // 게시물 저장(POST)
    @PostMapping("/save")
    public String postsave(Board board, 
          MultipartFile file) throws Exception {
@@ -90,7 +90,7 @@ public class BoardController {
    }
 
    
-   //�Խù� �󼼺���
+   // 게시물 상세보기
    @RequestMapping("/content")
    public String content(@RequestParam("num") Long num,
          Model model,

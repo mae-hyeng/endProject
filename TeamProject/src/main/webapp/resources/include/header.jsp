@@ -153,6 +153,9 @@ $(".video_modal_popup-closer").click(function() {
                     <span style="color: white; font-size: 22px;" >${sessionScope.username }</span>
                    </c:when>
                    </c:choose>
+                
+                   
+                   
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

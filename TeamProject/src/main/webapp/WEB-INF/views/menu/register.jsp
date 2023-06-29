@@ -11,7 +11,7 @@ const route = window.location.pathname.replace('/','');
 
 <%
 if (session.getAttribute("username") == null) {
-	response.sendRedirect("/sessionover");
+	response.sendRedirect("/adminSessionover");
 }
 %>
 <style>
@@ -110,7 +110,7 @@ div#px-6 {
 										상품 구분 : <select id="type" name="type" required>
 											<option value="">=선택=</option>
 											<option value="COFFEE">COFFEE</option>
-											<option value="MILK TEA & LATTE">MILK TEA & LATTE</option>
+											<option value="MILK TEA & LATTE">MILKTEA & LATTE</option>
 											<option value="JUICE & DRINK">JUICE & DRINK</option>
 											<option value="SMOOTHIE">SMOOTHIE</option>
 											<option value="TEA & ADE">TEA & ADE</option>
@@ -134,12 +134,9 @@ div#px-6 {
 											<br>
 										</div>
 										<div class="button">
-											<p>
-												<br> <input type="submit" style="float: right"
-													value="등록"> <input type="button"
-													style="float: right" value="목록"
-													onclick="location.href='menu'">
-											</p>
+												<br> 
+													<input type="submit" style="float: right" value="등록"> 
+													<input type="button" style="float: right" value="목록" onclick="history.go(-1); return false;">
 										</div>
 									</div>
 								</div>
@@ -175,6 +172,32 @@ function listnum(){
 	$('.text_box .count span').html(500);
 		}
 	});
+</script>
+
+<script>
+	function menuRegister(){
+		var ok;
+		ok = confirm("게시글을 등록하시겠습니까?");
+		
+		if(ok){
+			document.getElementById('registerOk').submit();
+		} else {
+			return false;
+		}
+	}
+</script>
+
+<script>
+   function listnum(){
+      if(${sessionScope.listnum} == '1'){
+         history.go(-1);
+         return;
+      }else if(${sessionScope.listnum} == '2'){
+         history.go(-2);
+      }else if(${sessionScope.listnum} == '3'){   
+         history.go(-2);
+      }
+   }
 </script>
 
 </main>

@@ -87,7 +87,7 @@ div#px-6 {
 		</div>
 		<div id="layoutSidenav_content">
 			<main>
-				<form class="menuRegister" method="POST" action="/menuSave"
+				<form class="menuRegister" name="menuRegister" method="POST" action="/menuSave"
 					enctype="multipart/form-data">
 					<div id="px-6">
 						<h2 class="mt-4" style="text-align: center;">게시글 작성</h2>
@@ -135,7 +135,7 @@ div#px-6 {
 										</div>
 										<div class="button">
 												<br> 
-													<input type="submit" style="float: right" value="등록"> 
+													<input type="button" style="float: right" value="등록" onclick=register()> 
 													<input type="button" style="float: right" value="목록" onclick="history.go(-1); return false;">
 										</div>
 									</div>
@@ -144,8 +144,7 @@ div#px-6 {
 						</div>
 					</div>
 				</form>
-				
-				
+
 <script>
 function listnum(){
 	if(${sessionScope.listnum} == '1'){
@@ -162,6 +161,7 @@ function listnum(){
 
 </script>
 
+
 <script>
 	$('.text_box textarea').keyup(function(){
 		var content = $(this).val();
@@ -174,18 +174,6 @@ function listnum(){
 	});
 </script>
 
-<script>
-	function menuRegister(){
-		var ok;
-		ok = confirm("게시글을 등록하시겠습니까?");
-		
-		if(ok){
-			document.getElementById('registerOk').submit();
-		} else {
-			return false;
-		}
-	}
-</script>
 
 <script>
    function listnum(){
@@ -198,6 +186,18 @@ function listnum(){
          history.go(-2);
       }
    }
+</script>
+
+
+<script>
+	function register(){
+		var registerOk = confirm("게시글을 등록하시겠습니까?");
+		if(registerOk){
+			menuRegister.submit();
+			alert("게시글이 등록되었습니다")
+			
+		}
+	}
 </script>
 
 </main>

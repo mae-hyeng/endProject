@@ -160,92 +160,36 @@
 	display: none;
 }
 </style>
-
-
 </head>
 
-<body class="">
-	<div id="layoutSidenav">
-
-		<div id="layoutSidenav_nav">
-			<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-				<div class="sb-sidenav-menu">
-					<div class="nav">
-						<div class="sb-sidenav-menu-heading">All</div>
-						<a class="nav-link" href="/menu">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 전체 메뉴
-						</a>
-						<div class="sb-sidenav-menu-heading">DRINK</div>
-						<a class="nav-link" href="/drink">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 메뉴 등록
-						</a>
-
-						<div class="sb-sidenav-menu-heading">
-							<c:choose>
-								<c:when test="${sessionScope.username!=null}">
-									<span style="color: white; font-size: 15px;">${sessionScope.username }</span>
-								</c:when>
-							</c:choose>
-						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-book-open"></i>
-							</div> 멤버
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-								<nav class="sb-sidenav-menu-nested nav">
-									<c:choose>
-										<c:when test="${sessionScope.username==null}">
-											<a class="nav-link" href="aaminLogin">로그인</a>
-										</c:when>
-									</c:choose>
-									<a class="nav-link" href="mypage">마이페이지 이동</a> <a class="nav-link" href="update">내 정보변경</a> <a class="nav-link" href="pwupdate">비밀번호 변경</a> <a class="nav-link" href="logout">로그아웃</a>
-								</nav>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</nav>
-		</div>
-
-		<div id="layoutSidenav_content" style="bottom: 56px;">
-
 			<main class="min-width">
-				<a style="font-size: 30px">${menu.type}</a>
-				<div class="row">
-					<div class="row-col-xl-1">
-						<div class="card mb-4">
-							<div class="card-header">
-								<div style="padding: 5px" class="writer_info">
-									<h2>${menu.name }</h2>
-								</div>
-							</div>
-
-							<form>
-								<div class="card-body">
-									<br>
-									<c:if test="${not empty menu.filename }">
-										<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
-										<br>
-									</c:if>
-									<br>
-									<div class="text_box" >
-										<pre>${menu.content }</pre>
-										<div class="count"></div>
-										<br>
-									</div>
-								</div>
-							</form>
-						</div>
-		
+				<a style="font-size: 50px">${menu.type}</a>
+				<br><br>		
+				<h2>${menu.name }</h2>
+				<br>
+					<c:if test="${not empty menu.filename }">
+						<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
+						<br>
+					</c:if>
+					<pre>${menu.content }</pre>
+					<div class="num">
+					    <span>수량</span>
+					    <div class="quantity">
+					      <button class="minus">-</button>
+					      <span id="result">1</span>
+					      <button class="plus">+</button>
+					   
+					      <form action="/cart">
+					      	<button id="confirm">확인</button>
+					      </form>
+					      
+					      
+			       		</div>
+			       	</div>
+				
+					
+				<br>
+				
 				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum()"></div>
                 <div>
   					 <%
@@ -254,9 +198,10 @@
 					  %>
   					 <button style="float: right; margin-right: 7px; padding: 6px 8px; display: <%= displayStyle %>" class="modi-btn" id="modibtn" onclick="modi()">수정</button>
 				</div>
-
-    
-    
+				
+			</main>
+	
+				
 <script>
 	function modi() {
 		  const modibtn = document.getElementById('modibtn');
@@ -272,8 +217,30 @@
 
 </script>
 
+<script>
+
+	/* 수량 증감, 감소 */
+
+    let plus = document.querySelector(".plus");
+	let minus = document.querySelector(".minus");
+	let result = document.querySelector("#result");
+	let totalcost = document.querySelector('.totalcost');
+	let i = 1;
+	plus.addEventListener("click", () => {
+		i++
+		result.textContent = i;
+	})
 	
-				
+	minus.addEventListener("click", () => {
+		if(i>1) {
+			i--
+			result.textContent = i;
+		}
+		
+	})
+</script>
+
+
 <script>
    function listnum(){
       if(${sessionScope.listnum} == '1'){
@@ -282,11 +249,10 @@
       }else if(${sessionScope.listnum} == '2'){
          history.go(-2);
       }else if(${sessionScope.listnum} == '3'){   
-         history.go(-2);
+         history.go(-3);
       }
    }
 </script>
-				
 				
 
 <%@ include file="/resources/include/footer.jsp"%>

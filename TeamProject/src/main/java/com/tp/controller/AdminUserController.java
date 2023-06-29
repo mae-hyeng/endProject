@@ -39,8 +39,6 @@ public class AdminUserController {
 			@RequestParam("password") final String password, Model model, HttpSession session,
 			RedirectAttributes rttr) {
 		
-		session.setAttribute("username", username);
-		
 		if (adminUserService.loginCheck(username, password) == 0) {
 			rttr.addFlashAttribute("result", "OK");
 			session.setAttribute("username", username);

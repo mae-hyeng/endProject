@@ -41,19 +41,6 @@ public class MenuController {
 	private final CartService cartService;
 	private final UserService userService;
 	
-	@RequestMapping("/drink")
-	public String main(Menu menu, Model model
-			,Cart cart, MenuOrder order) {
-
-		List<Menu> list = null;
-
-		list = menuService.all();
-
-		model.addAttribute("list", list);
-
-		return "drink/drink";
-	}
-	
 	   @RequestMapping("/menu")
 	   public String menu(Model model) {
 		   List<Menu> list = null;
@@ -110,7 +97,8 @@ public class MenuController {
 	   //게시물 수정
 	   @GetMapping("/modifyMenu")
 	   public String modify(@RequestParam Long id, Model model, HttpSession session) {
-		   session.setAttribute("listNum", 2);
+		   String username = (String) session.getAttribute("username");
+		   session.setAttribute("listnum", 2);
 		   model.addAttribute("menu",menuService.selectOne(id));
 		   return "menu/menu_modify";
 	   }
@@ -132,33 +120,44 @@ public class MenuController {
 	 		  UserEntity user,
 	 		  Cart cart,
 	 		  HttpSession session) {
-	 	  
+
 	 	  String username = (String)session.getAttribute("username");
-	 	  
+
+	 	  user = userService.UserInfo(username);
 	 	  if(username != null) {
 	 		 user = userService.UserInfo(username);
-	 	  
-	 		  order = MenuOrder.builder()
-	 		            .quantity(quantity)
-	 		            .menu(menuService.selectOne(id))
-//	 		            .user(user)
-	 		            .build();
-	 	
-	 		  
+
+	 		 cart = Cart.builder()
+	 				 .quantity(quantity)
+	 				 .menu(menuService.selectOne(id))
+	 				 .user(user)
+	 				 .build();
+	 		 
+//	 		  order = MenuOrder.builder()
+//	 		            .quantity(quantity)
+//	 		            .menu(menuService.selectOne(id))
+////	 		            .user(user)
+//	 		            .build();
+
+
 	 		  System.out.println("user : " + user);
-	 		  
-	 		  
-	 		  orderService.orderSave(order);
-	 		  model.addAttribute("order", order);
-//	 		  cartService.cartSave(cart);
-	 		  System.out.println("order : " + order);
-	 	  
+
+
+	 		  cartService.cartSave(cart);
+	 		  model.addAttribute("order", cart);
+//	 		  cartService.(cart);
+	 		  System.out.println("order : " + cart);
+
 	 		  return "drink/drinkOrder"; 
 	 	  }else {
 	 		  return "redirect:/sessionover";
 	 	  }
-	 	  
-	 	  
+
+	   }
+	   
+	   @PostMapping("drinkOrder")
+	   public String drinkOrderP() {
+		   return "redirect:/menu";
 	   }
 	   
 }

@@ -174,8 +174,6 @@ function listnum(){
 	});
 </script>
 
-<<<<<<< HEAD
-=======
 <script>
 	function menuRegister(){
 		var ok;
@@ -202,6 +200,5 @@ function listnum(){
    }
 </script>
 
->>>>>>> 78ceefa3c576f8b425b0db20679e5a3660e9051f
 </main>
 <%@ include file="/resources/include/footer.jsp"%>

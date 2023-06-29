@@ -19,13 +19,14 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Service;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+@Builder
 @Entity
 @Getter
 @Setter
-@Service
 @Table(name = "cart")
 public class Cart {
 	
@@ -33,13 +34,16 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column
+	private int quantity;
+	
 	@OneToOne(fetch = FetchType.LAZY)	
 	@JoinColumn(name = "userName")
 	private UserEntity user;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "menuId")
-	private List<Menu> menu = new ArrayList<Menu>();
+	private Menu menu;
 	
 	
 //	@ManyToMany(mappedBy = "cart")

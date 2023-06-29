@@ -219,63 +219,138 @@
 		<div id="layoutSidenav_content" style="bottom: 56px;">
 
 			<main class="min-width">
-				<a style="font-size: 30px">${menu.type}</a>
-				<div class="row">
-					<div class="row-col-xl-1">
-						<div class="card mb-4">
-							<div class="card-header">
-								<div style="padding: 5px" class="writer_info">
-									<h2>${menu.name }</h2>
-								</div>
-							</div>
-
-							<form>
-								<div class="card-body">
-									<br>
-									<c:if test="${not empty menu.filename }">
-										<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
-										<br>
-									</c:if>
-									<br>
-									<div class="text_box" >
-										<pre>${menu.content }</pre>
-										<div class="count"></div>
-										<br>
-									</div>
-								</div>
-							</form>
-						</div>
-		
-				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum()"></div>
-                <div><input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" value="수정" onclick="modi2()"></div>
 				
 				
+				<a style="font-size: 50px">${menu.type}</a>
+				<br><br>		
+				<h2>${menu.name }</h2>
+				<br>
+					<c:if test="${not empty menu.filename }">
+						<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
+						<br>
+					</c:if>
+					<pre>${menu.content }</pre>
+					<div class="num">
+					    <span>수량</span>
+						<form action="drinkOrder" method="get">
+						    <div class="quantity" id="quantity">
+						        <button class="minus">-</button>
+						        <span id="result">1</span>
+						        <button class="plus">+</button>
+						    </div>
+						
+						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
+						    <input type="hidden" id="menuQuantity" name="quantity" value="1">
+						
+						    <button type="submit" id="confirm">확인</button>
+						    <a href="#" onclick="addToCart(event)">담기</a>
+						</form>
+			       	</div>
+				
+					
+				<br>
+				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum();">
+                <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" value="수정" onclick="modi2()"></div>
+				
+			</main>
 	
+<script>
+function updateHref(event) {
+    const hrefElement = event.target;
+    const id = document.querySelector('input[name="id"]').value;
+    const quantity = document.querySelector('#result').textContent;
+    const updatedHref = `drinkOrder?id=${id}&quantity=${quantity}`;
+    hrefElement.setAttribute('href', updatedHref);
+}
+</script>
+		
+		
+<script>
+    function addToCart(event) {
+        event.preventDefault();
+        
+        const menuId = document.querySelector('#menuId').value;
+        const menuQuantity = document.querySelector('#menuQuantity').value;
+        const updatedHref = `drinkOrder?id=${menuId}&quantity=${menuQuantity}`;
+        
+        // 여기에서 담기 버튼 클릭 시 필요한 추가 동작을 수행할 수 있습니다.
+        
+        // URL로 이동
+        window.location.href = updatedHref;
+    }
+
+    const plusButton = document.querySelector('.plus');
+    const minusButton = document.querySelector('.minus');
+    const resultElement = document.querySelector('#result');
+    const menuQuantityElement = document.querySelector('#menuQuantity');
+
+    plusButton.addEventListener('click', () => {
+        const currentQuantity = parseInt(resultElement.textContent);
+        const newQuantity = currentQuantity + 1;
+        resultElement.textContent = newQuantity;
+        menuQuantityElement.value = newQuantity;
+    });
+
+    minusButton.addEventListener('click', () => {
+        const currentQuantity = parseInt(resultElement.textContent);
+        if (currentQuantity > 1) {
+            const newQuantity = currentQuantity - 1;
+            resultElement.textContent = newQuantity;
+            menuQuantityElement.value = newQuantity;
+        }
+    });
+</script>			
 				
+<script>
+function modi() {
+		location.href='modifyMenu?id=${menu.id}';}
+</script>
+
+<script>
+
+	/* 수량 증감, 감소 */
+
+    let plus = document.querySelector(".plus");
+	let minus = document.querySelector(".minus");
+	let result = document.querySelector("#result");
+	let totalcost = document.querySelector('.totalcost');
+	let i = 1;
+	plus.addEventListener("click", () => {
+		i++
+		result.textContent = i;
+	})
+	
+	minus.addEventListener("click", () => {
+		if(i>1) {
+			i--
+			result.textContent = i;
+		}
+		
+	})
+</script>
+
 <script>
 	function modi() {
 		location.href='modifyMenu?id=${menu.id}';}
 </script>
-			
+
 <script>
         function modi2() {
             document.addEventListener('DOMContentLoaded', function() {
                 const modibtn = document.getElementById('modi-btn');
                 const username = ${sessionScope.username};
-
                 if (username != 'admin') {
                     modibtn.style.display = 'none';
                 } else {
                     modibtn.style.display = 'block';
                 }
             });
-
             // 버튼 클릭 시 실행할 동작 추가
             location.href='modifyMenu?id=${menu.id}';}
         }
 </script>
-    
-    
+
+
 <!-- 
 <script>
      function modi2() {
@@ -283,7 +358,6 @@
         
         if (${sessionScope.username} == 'admin') {
             modibtn.style.display = 'block';
-
         } else {
            modibtn.style.display = 'none';
         }
@@ -291,8 +365,8 @@
     }
 </script>
  -->
-	
-				
+
+
 <script>
    function listnum(){
       if(${sessionScope.listnum} == '1'){
@@ -307,6 +381,5 @@
 </script>
 				
 				
-
 
 <%@ include file="/resources/include/footer.jsp"%>

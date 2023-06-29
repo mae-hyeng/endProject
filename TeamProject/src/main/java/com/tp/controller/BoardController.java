@@ -130,6 +130,7 @@ public class BoardController {
    public String modifyAfter(Board board, MultipartFile file, HttpSession session) throws Exception {
       
       session.setAttribute("listnum_mo", 2);
+      
       Timestamp now = new Timestamp(System.currentTimeMillis());
       board.setRegdate(now);
       

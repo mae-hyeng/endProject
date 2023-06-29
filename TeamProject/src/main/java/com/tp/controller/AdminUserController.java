@@ -38,7 +38,9 @@ public class AdminUserController {
 	public String adminUser(@RequestParam("username") final String username,
 			@RequestParam("password") final String password, Model model, HttpSession session,
 			RedirectAttributes rttr) {
-
+		
+//		session.setAttribute("username", username);
+		
 		if (adminUserService.loginCheck(username, password) == 0) {
 			rttr.addFlashAttribute("result", "OK");
 			session.setAttribute("username", username);
@@ -50,6 +52,7 @@ public class AdminUserController {
 		} else if (adminUserService.loginCheck(username, password) == 2)
 			rttr.addFlashAttribute("result", "NONE_ID");
 			return "redirect:/loginResult";
+			
 	}
 	
 	@GetMapping("/adminSessionover")
@@ -57,6 +60,6 @@ public class AdminUserController {
 		session.setAttribute("nosession", "NO");
 		return "admin/adminSessionover";
 	}
-
+	
+	
 }
-

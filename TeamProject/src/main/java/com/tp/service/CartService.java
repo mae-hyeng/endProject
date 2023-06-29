@@ -4,6 +4,8 @@ package com.tp.service;
 //import java.util.List;
 //
 import org.springframework.stereotype.Service;
+
+import com.tp.entity.Cart;
 //
 //import com.tp.entity.Cart;
 //import com.tp.entity.MenuOrder;
@@ -20,7 +22,6 @@ public class CartService {
 //	
 	private final CartRepository cartRepository;
 	
-}
 //	
 //
 //	
@@ -30,9 +31,10 @@ public class CartService {
 //	}
 //	
 //	
-//	public void cartSave(Cart cart) {
-//		cartRepository.save(cart);
-//	}
+	public void cartSave(Cart cart) {
+		cartRepository.save(cart);
+	}
+}
 //
 //}
 //=======

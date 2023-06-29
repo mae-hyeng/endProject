@@ -32,7 +32,7 @@
 <script>
   const clientKey = 'test_ck_oeqRGgYO1r555edOqKprQnN2Eyaz' // 상점을 특정하는 키
   const customerKey = 'YbX2HuSlsC9uVJW6NMRMj' // 결제 고객을 특정하는 키
-  const amount = 15_000 // 결제 금액
+  const amount = 100 // 결제 금액
   const couponAmount = 5_000 // 할인 쿠폰 금액
 
   /*결제위젯 영역 렌더링*/

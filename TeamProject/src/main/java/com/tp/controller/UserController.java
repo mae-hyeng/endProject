@@ -132,7 +132,7 @@ public class UserController {
 		}else if(userService.loginChek(username, password)==2)
 			rttr.addFlashAttribute("result", "NONE_ID");
 			return "redirect:/loginresult";
-		
+
 	}
 	
 	@GetMapping("/update")
@@ -245,6 +245,7 @@ public class UserController {
 	        
 }
 	
+
 	@GetMapping("/sessionover")
 	public String sessionover(HttpSession session) {
 		session.setAttribute("nosession", "NO");
@@ -295,13 +296,10 @@ public class UserController {
 		      } catch (Exception e) {
 		         e.printStackTrace();
 		         return "Fail";
-		      }		      
-		      
+		      }
 	}
 	
-}
-
+		      
 	
-
-
-
+	
+}

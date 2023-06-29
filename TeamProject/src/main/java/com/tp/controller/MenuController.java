@@ -27,6 +27,9 @@ import com.tp.service.MenuService;
 import com.tp.service.OrderService;
 import com.tp.service.UserService;
 
+import com.tp.entity.Menu;
+import com.tp.service.MenuService;
+
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -120,6 +123,7 @@ public class MenuController {
 		   return "redirect:/menuContent?id="+menu.getId();
 	   }
 	   
+
 	   @GetMapping("drinkOrder")
 	   public String drinkOrderG(@RequestParam("id") Long id,
 	 		  @RequestParam("quantity") Integer quantity,

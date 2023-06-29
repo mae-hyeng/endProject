@@ -219,68 +219,94 @@
 		<div id="layoutSidenav_content" style="bottom: 56px;">
 
 			<main class="min-width">
+				<a style="font-size: 30px">${menu.type}</a>
+				<div class="row">
+					<div class="row-col-xl-1">
+						<div class="card mb-4">
+							<div class="card-header">
+								<div style="padding: 5px" class="writer_info">
+									<h2>${menu.name }</h2>
+								</div>
+							</div>
+
+							<form>
+								<div class="card-body">
+									<br>
+									<c:if test="${not empty menu.filename }">
+										<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
+										<br>
+									</c:if>
+									<br>
+									<div class="text_box" >
+										<pre>${menu.content }</pre>
+										<div class="count"></div>
+										<br>
+									</div>
+								</div>
+							</form>
+						</div>
+		
+				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum()"></div>
+                <div><input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" value="수정" onclick="modi2()"></div>
 				
 				
-				<a style="font-size: 50px">${menu.type}</a>
-				<br><br>		
-				<h2>${menu.name }</h2>
-				<br>
-					<c:if test="${not empty menu.filename }">
-						<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
-						<br>
-					</c:if>
-					<pre>${menu.content }</pre>
-					<div class="num">
-					    <span>수량</span>
-					    <div class="quantity">
-					      <button class="minus">-</button>
-					      <span id="result">1</span>
-					      <button class="plus">+</button>
-					   
-					      <form action="/cart">
-					      	<button id="confirm">확인</button>
-					      </form>
-					      
-					      
-			       		</div>
-			       	</div>
-				
-					
-				<br>
-				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="history.go(-1); return false;">
-                <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" value="수정" onclick="modi()"></div>
-				
-			</main>
 	
 				
 <script>
-function modi() {
+	function modi() {
 		location.href='modifyMenu?id=${menu.id}';}
 </script>
-
+			
 <script>
+        function modi2() {
+            document.addEventListener('DOMContentLoaded', function() {
+                const modibtn = document.getElementById('modi-btn');
+                const username = ${sessionScope.username};
 
-	/* 수량 증감, 감소 */
+                if (username != 'admin') {
+                    modibtn.style.display = 'none';
+                } else {
+                    modibtn.style.display = 'block';
+                }
+            });
 
-    let plus = document.querySelector(".plus");
-	let minus = document.querySelector(".minus");
-	let result = document.querySelector("#result");
-	let totalcost = document.querySelector('.totalcost');
-	let i = 1;
-	plus.addEventListener("click", () => {
-		i++
-		result.textContent = i;
-	})
+            // 버튼 클릭 시 실행할 동작 추가
+            location.href='modifyMenu?id=${menu.id}';}
+        }
+</script>
+    
+    
+<!-- 
+<script>
+     function modi2() {
+        const modibtn = document.getElementById('modi-btn');
+        
+        if (${sessionScope.username} == 'admin') {
+            modibtn.style.display = 'block';
+
+        } else {
+           modibtn.style.display = 'none';
+        }
+        	
+    }
+</script>
+ -->
 	
-	minus.addEventListener("click", () => {
-		if(i>1) {
-			i--
-			result.textContent = i;
-		}
-		
-	})
+				
+<script>
+   function listnum(){
+      if(${sessionScope.listnum} == '1'){
+         history.go(-1);
+         return;
+      }else if(${sessionScope.listnum} == '2'){
+         history.go(-2);
+      }else if(${sessionScope.listnum} == '3'){   
+         history.go(-2);
+      }
+   }
 </script>
 				
 				
+
 
 <%@ include file="/resources/include/footer.jsp"%>

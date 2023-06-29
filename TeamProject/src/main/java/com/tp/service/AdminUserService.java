@@ -1,6 +1,5 @@
 package com.tp.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ public class AdminUserService {
 
 	@Autowired
 	AdminUserRepository adminUserRepository;
-
+	
 	public int loginCheck(final String username, final String password) {
 		int result = 0;
 		if(adminUserRepository.existsByUsername(username)) {

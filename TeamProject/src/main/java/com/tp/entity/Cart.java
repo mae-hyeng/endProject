@@ -44,6 +44,6 @@ public class Cart {
 	
 //	@ManyToMany(mappedBy = "cart")
 //	private List<MenuOrder> menuOrder;
-	
-	
+
 }
+

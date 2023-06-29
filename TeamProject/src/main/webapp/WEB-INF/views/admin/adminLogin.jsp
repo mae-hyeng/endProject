@@ -35,4 +35,8 @@
 		}
 		
 	</script>
+<<<<<<< HEAD
 	<%@include file ="/resources/include/footer.jsp" %>
+=======
+	<%@include file ="/resources/include/footer.jsp" %>
+>>>>>>> 78ceefa3c576f8b425b0db20679e5a3660e9051f

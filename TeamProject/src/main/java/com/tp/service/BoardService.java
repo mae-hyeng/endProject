@@ -15,7 +15,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tp.DTO.BoardDTO;
 import com.tp.entity.Board;
 import com.tp.repository.BoardRepository;
 

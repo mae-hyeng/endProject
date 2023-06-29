@@ -57,4 +57,6 @@ public class AdminUserController {
 		session.setAttribute("nosession", "NO");
 		return "admin/adminSessionover";
 	}
+
 }
+

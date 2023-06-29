@@ -117,13 +117,6 @@
                                 장르
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/drink">음료</a>
-                                    <a class="nav-link" href="/order">이벤트</a>
-                                </nav>
-                            </div>
-
                             <div class="sb-sidenav-menu-heading"> <c:choose>
                             <c:when test="${sessionScope.username!=null}">
                                 <span style="color: white; font-size: 15px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>

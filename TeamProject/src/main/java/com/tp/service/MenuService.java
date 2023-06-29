@@ -20,34 +20,6 @@ public class MenuService {
 	
 	private final MenuRepository menuRepository;
 	
-	@Transactional
-    public void save(Menu menu, MultipartFile file) throws Exception{
-       
-       if(!file.isEmpty()) {
-          String projectPath = System.getProperty("user.dir") +"\\src\\main\\webapp\\resources\\files";
-          
-          UUID uuid = UUID.randomUUID();
-          
-          String fileName = uuid +"_"+ file.getOriginalFilename();
-          
-          File savefile = new File(projectPath, fileName);
-          
-          file.transferTo(savefile);
-          
-          menu.setFilename(fileName);
-          menu.setFilepath("/resources/files/" +fileName);
-          
-       }else {
-          if(menu.getFilename()==null) {
-        	  menu.setFilename("");
-        	  menu.setFilepath("");
-          }
-          System.out.println("저장시 파일이름 : "+menu.getFilename());
-          
-       }
-       
-       menuRepository.save(menu);
-    }
     
     public List<Menu> all() {
     	return menuRepository.findAll();
@@ -59,14 +31,36 @@ public class MenuService {
     	return menuRepository.findById(id).get();
     }
     
+	public void save(Menu menu, MultipartFile file) throws Exception {
+		
+		if(!file.isEmpty()) {
+			String projectPath = System.getProperty("user.dir") +"\\src\\main\\webapp\\resources\\files";
+			
+			UUID uuid = UUID.randomUUID();
+			String fileName = uuid+"_"+file.getOriginalFilename();
+			File savefile = new File(projectPath, fileName);
+			file.transferTo(savefile);
+			
+			menu.setFilename(fileName);
+			menu.setFilepath("/resouces/files/"+fileName);
+		} else {
+			if(menu.getFilename()==null) {
+				menu.setFilename("");
+				menu.setFilepath("");
+			}
+		}
+		menuRepository.save(menu);
+	}
+	
 	//게시물 삭제
 	@Transactional
 	public void delete(Long id) {
 		menuRepository.deleteById(id);
 	}
-
 	
-//	//분류에 따라 게시글 출력
-//	public List<Menu> categoryList(String category){
-//		return menuRepository.findByCategory(category);
+	//분류에 따라 게시글 출력
+	public List<Menu> categoryList(String type) {
+		return menuRepository.findByType(type);
+	}
 }
+

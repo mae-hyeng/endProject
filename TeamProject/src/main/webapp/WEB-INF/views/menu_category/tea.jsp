@@ -56,12 +56,6 @@
 .board-table tbody th p {
 	display: none;
 }
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 78ceefa3c576f8b425b0db20679e5a3660e9051f
 </style>
 </head>
 <div id="layoutSidenav" style="background-color: #FFFFFF;">
@@ -167,34 +161,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div style=" float: left; width: 20%; margin-bottom:10%">
-					<img alt="ada" src="resources/img/wick.jpg">
-					<p><a>dfdf</a>
-				</div>
-				<div id="board-list">
-						<div class="container">
-							<br> <br>
-							<table class="board-table">
-								<thead>
-									<tr>
-										<th scope="col" class="th-title">이름</th>
-										<th scope="col" class="th-date">가격</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="vo" items="${drink }">
-										<tr>										
-											<td>${vo.name}</td>
-											<td>${vo.price}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-							
-						</div>
-					</div>
-			</div>
 					<div class="col-xl-3 col-md-6">
 						<div class="card bg-secondary text-white mb-4">
 							<div class="card-body">SMOOTHIE</div>
@@ -250,7 +216,7 @@
 							</div>
 						</div>
 					</div>
-
+					
 					<c:forEach var="vo" items="${list}">
 						<c:if test="${not empty vo.filename }">
 							<a href="menuContent?id=${vo.id }">
@@ -262,7 +228,6 @@
 						<c:out value="${vo.name }" />
 						<br>
 						<c:out value="${vo.price }" />
-
 						<br><br>
 					</c:forEach>
 					

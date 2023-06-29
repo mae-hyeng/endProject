@@ -23,8 +23,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Builder
-@Entity
+@Entity 
 @Getter
 @Setter
 @Table(name = "menuOrder")
@@ -53,5 +54,5 @@ public class MenuOrder {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cartId")
 	private Cart cart;
-
+	
 }

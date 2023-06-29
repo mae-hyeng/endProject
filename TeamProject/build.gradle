@@ -38,7 +38,6 @@ dependencies {
 
 	//spring email
 	implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.1'
-	
 
 }
 

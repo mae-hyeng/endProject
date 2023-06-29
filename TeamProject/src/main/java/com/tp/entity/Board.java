@@ -16,7 +16,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.tp.DTO.BoardDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

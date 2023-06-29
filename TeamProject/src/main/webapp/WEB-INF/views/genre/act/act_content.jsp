@@ -386,6 +386,3 @@ String s1 = "testetstet";
 			</main>
 			<%@ include file="/resources/include/footer.jsp"%>
 </body>
-=======
- 
->>>>>>> refs/remotes/origin/main

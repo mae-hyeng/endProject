@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 </head>
 <body>
 	<div class="container-fluid px-4">
@@ -11,15 +12,22 @@
 						<div class="container">
 							<br> 
 							<br>
-								<c:forEach var="order" items="${olist}">
-									<tr>
-									<br>
-									<td>${order.id}</td>
-									<td>${order.date}</td>
-									<td>${order.quantity}</td>
-									<br>
-									</tr>
-								</c:forEach>
+							<br>
+							<table>
+							    <tr>
+							        <th>주문 번호</th>
+							        <th>주문 날짜</th>
+							        <th>수량</th>
+							    </tr>
+							    <tr>
+							        <td>${order.id}</td>
+							        <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${order.orderDate}" /></td>
+							        <td>${order.quantity}</td>
+							    </tr>
+							</table>
+							<br>
+
+								
 							<br>
 						</div>
 					</div>

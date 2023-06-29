@@ -55,9 +55,11 @@ public class MenuService {
     	return menuRepository.findAll();
     }
     
-    public Menu drinkNum(Long id) {
+    public Menu MenuNum(Long id) {
     	return menuRepository.findById(id).get();
     }
+    
+    
 	
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.tp.entity.Cart;
+import com.tp.entity.MenuOrder;
 import com.tp.repository.CartRepository;
 import com.tp.repository.OrderRepository;
 
@@ -21,6 +22,11 @@ public class CartService {
 	//전체 주문 조회
 	public List<Cart> cartAll() {
 		return cartRepository.findAll();
+	}
+	
+	
+	public void cartSave(Cart cart) {
+		cartRepository.save(cart);
 	}
 
 }

@@ -126,27 +126,62 @@
 		<main>
 			<div class="container-fluid px-4">
 				<h2 class="mt-4">음료</h2>
-				
+				<a href="addCart">담기</a>
 				<div>
 					<div id="board-list">
 						<div class="container">
 							<br> 
 							<br>
 								<c:forEach var="drink" items="${list}">
-									<tr>
-										<c:if test="${not empty drink.filename }">
-											<a href="drinkOrder?id=${drink.id }"><img style="width: 200px; height: auto;" src="/resources/files/${drink.filename }" ></a>
-											<br>
-												<td>${drink.name}</td>
-												<td>${drink.price}</td>
-											<br>
-										</c:if>
-									</tr>
+								    <tr>
+								        <c:if test="${not empty drink.filename}">
+								            <a href="drinkOrder?id=${drink.id}&quantity=${param.quantity}">
+								                <img style="width: 200px; height: auto;" src="/resources/files/${drink.filename}">
+								            </a>
+								            <br>
+								            <td>${drink.name}</td>
+								            <td>${drink.price}</td>
+								            <div class="num">
+								                <span>수량</span>
+								                <span class="quantity" id="quantity${drink.id}">
+								                    <button class="minus minus${drink.id}" onclick="quantity(${drink.id})">-</button>
+								                    <span id="result">1</span>
+								                    <button class="plus plus${drink.id}" onclick="quantity(${drink.id})">+</button>
+								                </span>
+								                <br>
+								                <a href="">장바구니담기</a>
+								            </div>
+								            <br>
+								        </c:if>
+								    </tr>
 								</c:forEach>
+
 							<br>
 						</div>
 					</div>
 				</div>
 			</div>
+			
+			<script>
+			    function quantity(id) {
+			        const plus = document.querySelector(`.plus${id}`);
+			        const minus = document.querySelector(`.minus${id}`);
+			        const result = document.querySelector(`#result`);
+			        let i = 1;
+			        
+			        plus.addEventListener("click", () => {
+			            i++;
+			            result.textContent = i;
+			        });
+			
+			        minus.addEventListener("click", () => {
+			            if (i > 1) {
+			                i--;
+			                result.textContent = i;
+			            }
+			        });
+			    }
+			</script>
+
 
 <%@ include file="/resources/include/footer.jsp"%>

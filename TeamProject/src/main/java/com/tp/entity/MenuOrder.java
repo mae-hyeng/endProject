@@ -35,7 +35,7 @@ public class MenuOrder {
 	private UserEntity user;
 
 	@ManyToOne
-	@JoinColumn(name = "drink_id")
+	@JoinColumn(name = "menu_id")
 	private Menu menu;
 
 	@Column

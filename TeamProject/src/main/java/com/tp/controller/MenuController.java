@@ -29,7 +29,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MenuController {
 	
-	private final MenuService drinkservice;
+	private final MenuService menuservice;
 	private final OrderService orderService;
 	private final CartService cartService;
 	private final UserService userService;
@@ -39,17 +39,12 @@ public class MenuController {
 			,Cart cart, MenuOrder order) {
 		
 		List<Menu> list = null;
-		List<Cart> clist = null;
-		List<MenuOrder> olist = null;
 		
-		list = drinkservice.all();
-		olist = orderService.orderAll();
-		clist = cartService.cartAll();
+		list = menuservice.all();
 		
 		
 		model.addAttribute("list", list);
-		model.addAttribute("clist", clist);
-		model.addAttribute("olist", olist);
+		System.out.println(list);
 		
 		return "drink/drink";
 	}
@@ -58,7 +53,7 @@ public class MenuController {
   public String drinkSave(Menu menu,
         MultipartFile file) throws Exception {
      
-	  drinkservice.save(menu, file);
+	  menuservice.save(menu, file);
      
      return "redirect:/drink";
      
@@ -66,20 +61,39 @@ public class MenuController {
   
   @GetMapping("drinkOrder")
   public String drinkOrderG(@RequestParam("id") Long id,
+		  @RequestParam("quantity") Integer quantity,
 		  Model model,
 		  MenuOrder order, 
 		  UserEntity user,
+		  Cart cart,
 		  HttpSession session) {
 	  
 	  String username = (String)session.getAttribute("username");
 	  
-	  user = userService.UserInfo(username);
+	  if(username != null) {
+		 user = userService.UserInfo(username);
 	  
-	  System.out.println("user : " + user);
-	  orderService.orderSave(order);
-	  System.out.println("order : " + order);
+		  order = MenuOrder.builder()
+		            .quantity(quantity)
+		            .menu(menuservice.MenuNum(id))
+		            .user(user)
+		            .build();
+	
+		  
+		  System.out.println("user : " + user);
+		  
+		  
+		  orderService.orderSave(order);
+		  model.addAttribute("order", order);
+		  cartService.cartSave(cart);
+		  System.out.println("order : " + order);
 	  
-	return "drink/drinkOrder";
+		  return "drink/drinkOrder"; 
+	  }else {
+		  return "redirect:/sessionover";
+	  }
+	  
+	  
   }
   
   @PostMapping("drinkOrder")

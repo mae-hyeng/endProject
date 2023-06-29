@@ -32,7 +32,7 @@ public class OrderController {
     @RequestMapping("/order")
     public String myOrderPage(@RequestParam("id") Long id,Model model, HttpSession session){
         
-		Menu list = drinkService.drinkNum(id);
+		Menu list = drinkService.MenuNum(id);
 		
 		System.out.println(list);
 		

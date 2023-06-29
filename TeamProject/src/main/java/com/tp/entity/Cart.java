@@ -19,19 +19,27 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-@Service
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "cart")
 public class Cart {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column
+	private int quantity;
 	
 	@OneToOne(fetch = FetchType.LAZY)	
 	@JoinColumn(name = "userName")
@@ -42,8 +50,16 @@ public class Cart {
 	private List<Menu> menu = new ArrayList<Menu>();
 	
 	
-//	@ManyToMany(mappedBy = "cart")
-//	private List<MenuOrder> menuOrder;
+//	public void addQuantity(int quantity) {
+//		this.quantity += quantity;
+//	}
 	
+	public static Cart createCart(UserEntity user) {
+		Cart cart = new Cart();
+		cart.setQuantity(0);
+		cart.setUser(user);
+		
+		return cart;
+	}
 	
 }

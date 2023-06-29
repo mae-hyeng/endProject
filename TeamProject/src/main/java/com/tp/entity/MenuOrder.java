@@ -19,6 +19,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +27,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "menuOrder")
+@Builder
 public class MenuOrder {
 	
 	@Id
@@ -39,9 +41,9 @@ public class MenuOrder {
 	@Column
 	private int quantity;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "menuId")
-	private Menu menu;
+	private List<Menu> menu = new ArrayList<Menu>();
 	
 	
 	@ManyToMany(fetch = FetchType.LAZY)

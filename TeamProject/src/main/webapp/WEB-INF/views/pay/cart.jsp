@@ -46,7 +46,7 @@
   /*결제창 열기*/
   document.querySelector("#payment-button").addEventListener("click",()=>{
     paymentWidget.requestPayment({
-      orderId: 'AD8aZDpbzXs4EQa-UkIX6',
+      orderId: 'dkahffkzzwlqdprkrhtlvdjz',
       orderName: '토스 티셔츠',
       successUrl: 'http://localhost:8090/success',
       failUrl: 'http://localhost:8090/fail',

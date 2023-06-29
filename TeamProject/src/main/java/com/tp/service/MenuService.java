@@ -7,10 +7,8 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tp.entity.Board;
 import com.tp.entity.Menu;
 import com.tp.repository.MenuRepository;
 
@@ -55,11 +53,20 @@ public class MenuService {
     	return menuRepository.findAll();
     }
     
-    public Menu MenuNum(Long id) {
+    //게시물 하나
+	@Transactional
+    public Menu selectOne(Long id) {
     	return menuRepository.findById(id).get();
     }
     
-    
+	//게시물 삭제
+	@Transactional
+	public void delete(Long id) {
+		menuRepository.deleteById(id);
+	}
+
 	
-	
+//	//분류에 따라 게시글 출력
+//	public List<Menu> categoryList(String category){
+//		return menuRepository.findByCategory(category);
 }

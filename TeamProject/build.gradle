@@ -35,12 +35,11 @@ dependencies {
 	implementation "javax.servlet:jstl"
 	
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
-	
+
 	//spring email
 	implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.1'
 	
-	// firebase admin
-	implementation group: 'com.google.firebase', name: 'firebase-admin', version: '8.1.0'
+
 }
 
 tasks.named('test') {

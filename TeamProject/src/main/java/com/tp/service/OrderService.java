@@ -17,11 +17,11 @@ public class OrderService {
 	private final OrderRepository orderRepository;
 	
 	// 주문생성
-	public void createOrder(UserEntity user){
-        MenuOrder order = new MenuOrder();
-        order.setUser(user);
-        orderRepository.save(order);
-    }
+//	public void createOrder(UserEntity user){
+//        MenuOrder order = new MenuOrder();
+//        order.setUser(user);
+//        orderRepository.save(order);
+//    }
 	
 	//전체 주문 조회
 	public List<MenuOrder> orderAll() {

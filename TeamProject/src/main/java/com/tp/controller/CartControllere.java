@@ -35,7 +35,7 @@ public class CartControllere {
 		user = userService.UserInfo(username);
 		
 		cart.setUser(user);
-		cartService.cartSave(cart);
+//		cartService.cartSave(cart);
 	     
 	     return "redirect:/drink";
 	     

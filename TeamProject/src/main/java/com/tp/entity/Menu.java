@@ -1,6 +1,6 @@
 package com.tp.entity;
 
-import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,40 +8,47 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 @Builder
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Entity(name="menu")
+@Entity
+@Table(name  = "menu")
 public class Menu {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(length = 30)
+	@Column
 	private String name;
 	
-	@Column(length = 10)
-	private Integer price;
-
-	@Column(length=500)
-	private String content;
+	@Column
+	private int price;
 	
 	@Column(length=150)
 	private String filename;
 	
 	@Column(length=300)
 	private String filepath;
+	
+	@Column
+	private String type;
+	
+	@Column
+	private String content;
 	
 	
 }

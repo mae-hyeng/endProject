@@ -26,13 +26,13 @@ public class OrderController {
 
 	private final OrderService orderService;
 	private final UserService userService;
-	private final MenuService drinkService;
+	private final MenuService menuService;
 	
 	@Transactional
     @RequestMapping("/order")
     public String myOrderPage(@RequestParam("id") Long id,Model model, HttpSession session){
         
-		Menu list = drinkService.MenuNum(id);
+		Menu list = menuService.selectOne(id);
 		
 		System.out.println(list);
 		

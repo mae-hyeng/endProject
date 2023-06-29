@@ -1,6 +1,7 @@
 package com.tp.entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,53 +13,43 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Builder
-@NoArgsConstructor // 기본생성자
-@AllArgsConstructor
-@Data // 게터세터투스트링
 @Entity
+@Getter
+@Setter
+@Table(name = "menuOrder")
 public class MenuOrder {
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment로 지정
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column
+	@CreationTimestamp
+	private Timestamp orderDate;
 	
 	@Column
 	private int quantity;
 	
-	@CreationTimestamp
-	@Column
-	private Timestamp orderDate;
-	
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private UserEntity user;
-	
-	@ManyToOne
-	@JoinColumn(name = "menu_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "menuId")
 	private Menu menu;
 	
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userName")
+	private List<UserEntity> user = new ArrayList<UserEntity>();
+	
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cart_id")
+	@JoinColumn(name = "cartId")
 	private Cart cart;
 
-	
-    public static MenuOrder createMenuorder(UserEntity user){
-    	MenuOrder menuorder = new MenuOrder();
-        menuorder.user = user;
-        menuorder.quantity = 0;
- 
-        return menuorder;
-    }
-
-	
 }

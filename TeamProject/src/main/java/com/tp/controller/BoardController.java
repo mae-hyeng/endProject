@@ -36,7 +36,7 @@ public class BoardController {
    private final BoardService boardservice;
    private final CommentService commentService;
    
-   // ÆäÀÌÂ¡, °Ô½Ã¹° °Ë»ö, °Ô½Ã¹° ¸ñ·Ï º¸±â
+   // ï¿½ï¿½ï¿½ï¿½Â¡, ï¿½Ô½Ã¹ï¿½ ï¿½Ë»ï¿½, ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
    @RequestMapping("/board")
    public String main(Model model, 
          @PageableDefault(page = 0,size = 10, sort = "num", direction = Sort.Direction.DESC) Pageable pageable,
@@ -50,10 +50,10 @@ public class BoardController {
          list = boardservice.boardSearch(keyword, pageable);
       }
       
-      // ÇöÀçÆäÀÌÁö °¡Á®¿À´Â nowPage
+      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ nowPage
       int nowPage = list.getPageable().getPageNumber()+1;
       
-      //Math.max() ´Â µÑ Áß Å«°É ¹ÝÈ¯ min Àº ¹Ý´ë
+      //Math.max() ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ Å«ï¿½ï¿½ ï¿½ï¿½È¯ min ï¿½ï¿½ ï¿½Ý´ï¿½
       int startPage = Math.max(nowPage - 4, 1);
       int endPage = Math.min(nowPage + 5, list.getTotalPages());
       
@@ -65,20 +65,20 @@ public class BoardController {
       return "board/list";
    }
    
-   //°Ô½Ã¹° ÀÛ¼º
+   //ï¿½Ô½Ã¹ï¿½ ï¿½Û¼ï¿½
    @RequestMapping("register")
    public String write() {
       return "board/register";
    }
    
-   //°Ô½Ã¹° ÀúÀå(GET)
+   //ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½(GET)
    @GetMapping("/save")
    public String saveForm() {
       
       return "board/list";
    }
    
-   //°Ô½Ã¹° ÀúÀå(POST)
+   //ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½(POST)
    @PostMapping("/save")
    public String postsave(Board board, 
          MultipartFile file) throws Exception {
@@ -90,7 +90,7 @@ public class BoardController {
    }
 
    
-   //°Ô½Ã¹° »ó¼¼º¸±â
+   //ï¿½Ô½Ã¹ï¿½ ï¿½ó¼¼ºï¿½ï¿½ï¿½
    @RequestMapping("/content")
    public String content(@RequestParam("num") Long num,
          Model model,
@@ -111,7 +111,7 @@ public class BoardController {
 	   return "board/content";
    }
 
-   // °Ô½Ã¹° »èÁ¦
+   // ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
    @GetMapping("delete_content")
    public String delete(@RequestParam Long num) {
       
@@ -119,7 +119,7 @@ public class BoardController {
       return "redirect:/board";
    }
    
-   // °Ô½Ã¹° ¼öÁ¤
+   // ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
    @GetMapping("modify")
    public String modify(@RequestParam Long num, Model model, HttpSession session) {
       
@@ -129,7 +129,7 @@ public class BoardController {
       return "board/board_modify";
    }
    
-   // °Ô½Ã¹° ¼öÁ¤ ÈÄ ¼öÁ¤µÈ °á°ú º¸±â
+   // ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
    @PostMapping("modify")
    public String modifyAfter(Board board, MultipartFile file, HttpSession session) throws Exception {
       
@@ -141,7 +141,7 @@ public class BoardController {
       return "redirect:/content?num=" + board.getNum();
    }
    
-   //Á¶È¸¼ö Áßº¹ ¹æÁö ÄíÅ°°ª ¼³Á¤
+   //ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ßºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void viewCountUp(Long num, 
           HttpServletRequest req, 
           HttpServletResponse res) {
@@ -161,10 +161,10 @@ public class BoardController {
         if (oldCookie != null) {
             if (!oldCookie.getValue().contains("[" + num.toString() + "]")) {   
                 boardservice.viewCountUp(num);
-                oldCookie.setValue(oldCookie.getValue() + "_[" + num + "]");   //¼ýÀÚ ¿ÂÀüÈ÷ °Ë»çÇÏ±â À§ÇØ[]_[]
+                oldCookie.setValue(oldCookie.getValue() + "_[" + num + "]");   //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½[]_[]
 
-                oldCookie.setPath("/");            //¸ðµç °æ·Î
-                oldCookie.setMaxAge(60);         //½Ã°£¼³Á¤
+                oldCookie.setPath("/");            //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+                oldCookie.setMaxAge(60);         //ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½
                 res.addCookie(oldCookie);
             }
         } else {

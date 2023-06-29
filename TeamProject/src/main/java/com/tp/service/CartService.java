@@ -18,32 +18,32 @@ import com.tp.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
-@RequiredArgsConstructor // Lombok 어노테이션을 사용하여 생성자 자동 생성
-public class CartService {
-
-	private final MenuOrderRepository menuorderRepository; 
-	private final CartRepository cartRepository;    // CartRepository 필드 추가
-	private final UserRepository userRepository;
+//@Service
+//@RequiredArgsConstructor // Lombok 어노테이션을 사용하여 생성자 자동 생성
+//public class CartService {
+//
+//	private final MenuOrderRepository menuorderRepository; 
+//	private final CartRepository cartRepository;    // CartRepository 필드 추가
+//	private final UserRepository userRepository;
+//	
+//	// User에게 장바구니 생성
+//	public void createMenuorder(UserEntity user){
+//		MenuOrder menuorder = MenuOrder.createMenuorder(user);
+//		menuorderRepository.save(menuorder);
+//    }
+//	
 	
-	// User에게 장바구니 생성
-	public void createMenuorder(UserEntity user){
-		MenuOrder menuorder = MenuOrder.createMenuorder(user);
-		menuorderRepository.save(menuorder);
-    }
-	
-	
-	// menuorder에 menu 추가하기
-	@Transactional
-    public void addCart(UserEntity user, Menu menu, int count){
-
-		MenuOrder menuorder = menuorderRepository.findByUserId(user.getId());
-
-        // menuorder 가 비어있다면 생성.
-        if(menuorder == null){
-            menuorder = MenuOrder.createMenuorder(user);
-            menuorderRepository.save(menuorder);
-        }
+//	// menuorder에 menu 추가하기
+//	@Transactional
+//    public void addCart(UserEntity user, Menu menu, int count){
+//
+//		MenuOrder menuorder = menuorderRepository.findByUserId(user.getId());
+//
+//        // menuorder 가 비어있다면 생성.
+//        if(menuorder == null){
+//            menuorder = MenuOrder.createMenuorder(user);
+//            menuorderRepository.save(menuorder);
+//        }
 
 //        // cart 생성
 //        Cart cart = cartRepository.findByCartIdAndMenuId(cart.getId(),menu.getId());
@@ -57,8 +57,8 @@ public class CartService {
 //            // 비어있지 않다면 그만큼 갯수를 추가.
 //            cart.addCount(count);
 //        }
-
-    }
+//
+//    }
 	
 //	// 장바구니 조회하기
 //	public List<Cart> userCartView(MenuOrder menuorder){
@@ -118,4 +118,4 @@ public class CartService {
 //        }
 //    }
 //	
-}
+//}

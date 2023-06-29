@@ -1,6 +1,7 @@
 package com.tp.entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,50 +15,35 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+@Entity
 @Getter
 @Setter
-@Entity
+@Service
+@Table(name = "cart")
 public class Cart {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "menuId")
-	private List<Menu> menu;
 	
 	@OneToOne(fetch = FetchType.LAZY)	
 	@JoinColumn(name = "userName")
 	private UserEntity user;
 	
-	private int count;  // 담긴 상품 개수
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "menuId")
+	private List<Menu> menu = new ArrayList<Menu>();
 	
-	public static Cart createCart(MenuOrder menuorder,Menu menu,int count){
-        Cart cart = new Cart();
-        cart.setMenu((List<Menu>) menu);
-        cart.setCount(count);
-
-        return cart;
-    }
 	
-	public void addCount(int count){
-        this.count += count;
-    }
+//	@ManyToMany(mappedBy = "cart")
+//	private List<MenuOrder> menuOrder;
+	
 	
 }
-

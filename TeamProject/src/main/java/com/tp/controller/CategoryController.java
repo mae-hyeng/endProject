@@ -18,7 +18,7 @@ public class CategoryController {
 	
 	private final MenuService menuService;
 
-	@RequestMapping("{type}")
+	@RequestMapping("/{type}")
 	public String type(@PathVariable("type") String type, Model model) {
 		List<Menu> list = null;
 

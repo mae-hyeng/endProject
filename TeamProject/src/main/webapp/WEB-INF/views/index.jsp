@@ -60,12 +60,16 @@
     <body class="sb-nav-fixed" style="background-color:#000000">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
          <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="/">Movie Commu</a>
+            <a class="navbar-brand ps-3" href="/">Cafe</a>
         
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="#">
                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                   <div class="sb-sidenav-menu-heading">WRITE</div>
+                       <a class="nav-link" href="/menuRegister">
+                           메뉴 등록
+                       </a>
                    <c:choose>
                    <c:when test="${sessionScope.username==null}">
                     <span style="color: white; font-size: 22px;" >로그인을 해주세요</span>
@@ -101,48 +105,14 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                         
-                            <div class="sb-sidenav-menu-heading">All</div>
-                            <a class="nav-link" href="/menu">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                전체 메뉴
-                            </a>
+                            
                             <div class="sb-sidenav-menu-heading">WRITE</div>
                             <a class="nav-link" href="/menuRegister">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 메뉴 등록
                             </a>
-                            <div class="sb-sidenav-menu-heading">Genre</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                장르
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-
-                            <div class="sb-sidenav-menu-heading"> <c:choose>
-                            <c:when test="${sessionScope.username!=null}">
-                                <span style="color: white; font-size: 15px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
-                               </c:when>
-                               </c:choose></div>
-                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                멤버
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                          <c:choose>
-                                          <c:when test="${sessionScope.username==null}">
-                                          <a class="nav-link" href="login">로그인</a>
-                                          </c:when>
-                                          </c:choose>
-                                            <a class="nav-link" href="mypage">마이페이지 이동</a>
-                                            <a class="nav-link" href="update">내 정보변경</a>
-                                            <a class="nav-link" href="pwupdate">비밀번호 변경</a>
-                                            <a class="nav-link" href="logout">로그아웃</a>
-                                        </nav>
-                                   </nav>
-                                  </div>
+                            
+                           
                           </div>
                        </div>
                        </nav>

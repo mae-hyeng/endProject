@@ -144,7 +144,7 @@ public class MenuController {
 
 
 	 		  cartService.cartSave(cart);
-	 		  model.addAttribute("order", cart);
+	 		  model.addAttribute("cart", cart);
 //	 		  cartService.(cart);
 	 		  System.out.println("order : " + cart);
 

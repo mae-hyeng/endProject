@@ -276,7 +276,7 @@ public class UserController {
 			}
 		}
 		rttr.addFlashAttribute("result", "NO");
-		return "redirect:/pwfindresult";
+		return "redirect:/idfindresult";
 	}
 	
 	

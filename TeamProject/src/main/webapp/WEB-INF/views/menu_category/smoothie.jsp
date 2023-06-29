@@ -217,7 +217,6 @@
 						</div>
 					</div>
 					
-					
 					<c:forEach var="vo" items="${list}">
 						<c:if test="${not empty vo.filename }">
 							<a href="menuContent?id=${vo.id }">

@@ -172,7 +172,7 @@ img {
          history.go(-2);
       }
    }
-   </script>
+</script>
 
 <script>
    $('.text_box textarea').keyup(function(){

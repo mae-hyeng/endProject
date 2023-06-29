@@ -115,7 +115,7 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid px-4">
-				<h2 class="mt-4">DRINK</h2>
+				<h2 class="mt-4">전체 메뉴</h2>
 				<div class="row">
 					<div class="col-xl-3 col-md-6">
 						<div class="card bg-secondary text-white mb-4">
@@ -130,9 +130,64 @@
 					</div>
 					<div class="col-xl-3 col-md-6">
 						<div class="card bg-secondary text-white mb-4">
-							<div class="card-body">DRINK</div>
+							<div class="card-body">COFFEE</div>
 							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="drink"></a>
+								<a class="small text-white stretched-link" href="coffee"></a>
+								<div class="small text-white">
+									<i class="fas fa-angle-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card bg-secondary text-white mb-4">
+							<div class="card-body">MILK TEA & LATTE</div>
+							<div class="card-footer d-flex align-items-center justify-content-between">
+								<a class="small text-white stretched-link" href="milkTea"></a>
+								<div class="small text-white">
+									<i class="fas fa-angle-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card bg-secondary text-white mb-4">
+							<div class="card-body">JUICE & DRINK</div>
+							<div class="card-footer d-flex align-items-center justify-content-between">
+								<a class="small text-white stretched-link" href="juice"></a>
+								<div class="small text-white">
+									<i class="fas fa-angle-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card bg-secondary text-white mb-4">
+							<div class="card-body">SMOOTHIE</div>
+							<div class="card-footer d-flex align-items-center justify-content-between">
+								<a class="small text-white stretched-link" href="smoothie"></a>
+								<div class="small text-white">
+									<i class="fas fa-angle-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card bg-secondary text-white mb-4">
+							<div class="card-body">TEA & ADE</div>
+							<div class="card-footer d-flex align-items-center justify-content-between">
+								<a class="small text-white stretched-link" href="tea"></a>
+								<div class="small text-white">
+									<i class="fas fa-angle-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card bg-secondary text-white mb-4">
+							<div class="card-body">BREAD</div>
+							<div class="card-footer d-flex align-items-center justify-content-between">
+								<a class="small text-white stretched-link" href="bread"></a>
 								<div class="small text-white">
 									<i class="fas fa-angle-right"></i>
 								</div>
@@ -161,8 +216,6 @@
 							</div>
 						</div>
 					</div>
-					
-					
 					
 					<c:forEach var="vo" items="${list}">
 						<c:if test="${not empty vo.filename }">

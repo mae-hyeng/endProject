@@ -16,32 +16,42 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CategoryController {
 	
-	private MenuService menuService;
+	private final MenuService menuService;
 
-	@RequestMapping("/{category}")
-	public String category(@PathVariable("category") String category, Model model) {
+	@RequestMapping("/{type}")
+	public String type(@PathVariable("type") String type, Model model) {
 		List<Menu> list = null;
-		
-		if(category.equals("coffee")) {
-			category = "COFFEE";
-		} else if(category.equals("milk_tea&latte")) {
-			category = "MILK TEA & LATTE";
-		} else if(category.equals("juice&drink")) {
-			category = "JUICE & DRINK";
-		} else if(category.equals("smoothie")) {
-			category = "SMOOTHIE";
-		} else if(category.equals("tea&ade")) {
-			category = "TEA & ADE";
-		} else if(category.equals("BREAD")) {
-			category = "DESSERT";
-		} else if(category.equals("MD")) {
-			category = "MD";
+
+		if(type.equals("coffee")) {
+			type = "coffee";
+		} else if(type.equals("milkTea")) {
+			type = "MILK TEA & LATTE";
+		} else if(type.equals("juice")) {
+			type = "JUICE & DRINK";
+		} else if(type.equals("smoothie")) {
+			type = "smoothie";
+		} else if(type.equals("tea")) {
+			type = "TEA & ADE";
+		} else if(type.equals("dessert")) {
+			type = "dessert";
+		} else if(type.equals("md")) {
+			type = "md";
+		} else if(type.equals("bread")) {
+			type = "bread";
 		}
-		list = menuService.categoryList(category);
-		model.addAttribute("list",list);
 		
-		return category;
+		list = menuService.categoryList(type);
+		model.addAttribute("list",list);
+		System.out.println(list);
+		
+		if(type.equals("JUICE & DRINK")) {
+			type = "juice";
+		} else if(type.equals("MILK TEA & LATTE")) {
+			type = "milkTea";
+		} else if(type.equals("TEA & ADE")) {
+			type = "tea";
+		}
+		
+		return "menu_category"+"/"+type;
 	}
-	
-	
 }

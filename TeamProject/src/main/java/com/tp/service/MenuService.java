@@ -59,8 +59,8 @@ public class MenuService {
 	}
 	
 	//분류에 따라 게시글 출력
-	public List<Menu> categoryList(String category){
-		return menuRepository.findByCategory(category);
+	public List<Menu> categoryList(String type) {
+		return menuRepository.findByType(type);
 	}
 }
 

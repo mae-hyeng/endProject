@@ -246,15 +246,65 @@
 							</form>
 						</div>
 		
-				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="history.go(-1); return false;"></div>
-                <div><input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" value="수정" onclick="modi()"></div>
+				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum()"></div>
+                <div><input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" value="수정" onclick="modi2()"></div>
 				
 				
+	
 				
-				<script>
-				function modi() {
-						location.href='modifyMenu?id=${menu.id}';}
-				</script>
+<script>
+	function modi() {
+		location.href='modifyMenu?id=${menu.id}';}
+</script>
+			
+<script>
+        function modi2() {
+            document.addEventListener('DOMContentLoaded', function() {
+                const modibtn = document.getElementById('modi-btn');
+                const username = ${sessionScope.username};
+
+                if (username != 'admin') {
+                    modibtn.style.display = 'none';
+                } else {
+                    modibtn.style.display = 'block';
+                }
+            });
+
+            // 버튼 클릭 시 실행할 동작 추가
+            location.href='modifyMenu?id=${menu.id}';}
+        }
+</script>
+    
+    
+<!-- 
+<script>
+     function modi2() {
+        const modibtn = document.getElementById('modi-btn');
+        
+        if (${sessionScope.username} == 'admin') {
+            modibtn.style.display = 'block';
+
+        } else {
+           modibtn.style.display = 'none';
+        }
+        	
+    }
+</script>
+ -->
+	
+				
+<script>
+   function listnum(){
+      if(${sessionScope.listnum} == '1'){
+         history.go(-1);
+         return;
+      }else if(${sessionScope.listnum} == '2'){
+         history.go(-2);
+      }else if(${sessionScope.listnum} == '3'){   
+         history.go(-2);
+      }
+   }
+</script>
 				
 				
 

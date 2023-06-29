@@ -1,11 +1,14 @@
 package com.tp.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -42,6 +45,10 @@ public class UserEntity extends BaseTimeEntity{
 	 private String email;
 	 @Column(length = 30, nullable=false)
 	 private String address;
+	 
+//	 @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//	 private List<Cart> cart;
+	 
 
 
 }

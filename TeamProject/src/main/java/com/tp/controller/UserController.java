@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tp.entity.UserEntity;
 import com.tp.DTO.UserDTO;
-import com.tp.service.FirebaseService;
 import com.tp.service.MailService;
 import com.tp.service.UserService;
 
@@ -27,9 +26,6 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
-	
-	@Autowired
-	FirebaseService firebaseService;
 	
 	@Autowired
 	MailService mailService;
@@ -136,7 +132,7 @@ public class UserController {
 		}else if(userService.loginChek(username, password)==2)
 			rttr.addFlashAttribute("result", "NONE_ID");
 			return "redirect:/loginresult";
-		
+
 	}
 	
 	@GetMapping("/update")
@@ -249,6 +245,7 @@ public class UserController {
 	        
 }
 	
+
 	@GetMapping("/sessionover")
 	public String sessionover(HttpSession session) {
 		session.setAttribute("nosession", "NO");
@@ -299,13 +296,10 @@ public class UserController {
 		      } catch (Exception e) {
 		         e.printStackTrace();
 		         return "Fail";
-		      }		      
-		      
+		      }
 	}
 	
-}
-
+		      
 	
-
-
-
+	
+}

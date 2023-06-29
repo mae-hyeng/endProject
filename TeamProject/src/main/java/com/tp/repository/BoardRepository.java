@@ -26,7 +26,7 @@ public interface BoardRepository extends JpaRepository<Board, Long>{
 	//카테고리 선택 후 제목으로 검색
 	Page<Board> findByCategoryAndTitleContaining(String category, String title, Pageable pageable);
 	
-	// 장르 선택 후 카테고리 선택
+	//장르 선택 후 카테고리 선택
 	Page<Board> findByGenreAndCategory(String genre, String category, Pageable pageable);
 	
 	Page<Board> findByGenreAndCategoryAndTitleContaining(String genre, String category, String title, Pageable pageable);

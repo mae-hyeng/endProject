@@ -8,11 +8,6 @@ const route = window.location.pathname.replace('/','');
 
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 
-<%
-if (session.getAttribute("username") == null) {
-	response.sendRedirect("/sessionover");
-}
-%>
 <style>
 div#px-6 {
 	width: 1200px;
@@ -108,25 +103,9 @@ div#px-6 {
 										<h3 class="left-box"></h3>
 									</div>
 									<div class="card-body">
-										제목 : <input type="text" name="title" id="title" required>
+										이름 : <input type="text" name="name" id="name" >
 										<hr>
-										작성자 : <input type="text" name="writer" id="writer" value="${sessionScope.username }" readonly>
-										<hr>
-										장르 : <select id="genre" name="genre" required>
-											<option value="">=선택=</option>
-											<option value="로맨스">로맨스</option>
-											<option value="코미디">코미디</option>
-											<option value="액션">액션</option>
-											<option value="판타지">판타지</option>
-											<option value="공포">공포</option>
-										</select>
-										<hr>
-										분류 : <select id="category" name="category" required>
-											<option value="">=선택=</option>
-											<option value="리뷰">리뷰</option>
-											<option value="추천">추천</option>
-											<option value="정보">정보</option>
-										</select>
+										가격 : <input type="text" name="price" id="price">
 										<hr>
 										<input type="file" name="file" id="file">
 										<hr>

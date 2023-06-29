@@ -85,6 +85,7 @@ public class MenuController {
 	   //게시물 수정
 	   @GetMapping("/modifyMenu")
 	   public String modify(@RequestParam Long id, Model model, HttpSession session) {
+		   String username = (String) session.getAttribute("username");
 		   session.setAttribute("listNum", 2);
 		   model.addAttribute("menu",menuService.selectOne(id));
 		   return "menu/menu_modify";

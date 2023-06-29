@@ -38,6 +38,19 @@ public class MenuController {
 	private final CartService cartService;
 	private final UserService userService;
 	
+	@RequestMapping("/drink")
+	public String main(Menu menu, Model model
+			,Cart cart, MenuOrder order) {
+
+		List<Menu> list = null;
+
+		list = menuService.all();
+
+		model.addAttribute("list", list);
+
+		return "drink/drink";
+	}
+	
 	   @RequestMapping("/menu")
 	   public String menu(Model model) {
 		   List<Menu> list = null;
@@ -124,7 +137,7 @@ public class MenuController {
 	 		  order = MenuOrder.builder()
 	 		            .quantity(quantity)
 	 		            .menu(menuService.selectOne(id))
-	 		            .user(user)
+//	 		            .user(user)
 	 		            .build();
 	 	
 	 		  

@@ -42,6 +42,17 @@ ul, li {
   list-style:none;
 }
 
+.fixed-button {
+    position: fixed;
+    bottom: 50px; /* 버튼의 하단 여백 */
+    right: 110px; /* 버튼의 우측 여백 */
+    z-index: 9999; /* 다른 요소 위에 표시하기 위한 우선순위 */
+    padding: 10px 25px;
+    border-radius: 20px;
+    background: #ffffff
+}
+
+
 </style>
 
 </head>
@@ -58,7 +69,7 @@ ul, li {
 		            <a href="coffee" class="menu-link">COFFEE</a>
 		        </li>
 		        <li class="menu-item">
-		            <a href="milktea" class="menu-link">MILK TEA & LATTE</a>
+		            <a href="milkTea" class="menu-link">MILK TEA & LATTE</a>
 		        </li>
 		        <li class="menu-item">
 		            <a href="juice" class="menu-link">JUICE & DRINK</a>
@@ -97,6 +108,12 @@ ul, li {
 					</c:if>
 				</c:forEach>
 			</div>  
+			<br>
+			<a class="nav-link" href="/menuRegister">
+			<button class="fixed-button">+ 메뉴 추가</button>
+			</a>	
+		
+		
 		
 	</div>
 

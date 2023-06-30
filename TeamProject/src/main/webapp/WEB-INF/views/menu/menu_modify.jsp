@@ -120,11 +120,11 @@ img {
 										<div class="count"></div>
 										<br>
 									</div>
-									<p>
+									<p style="text-align: right">
 										<br> 
-										<input style="text-align: right" type="button" value="수정" onclick=modifyCheck()> 
-										<input style="text-align: right" type="button" value="목록" onclick=listnum()> 
-										<input style="text-align: right" type="button" value="삭제" onclick=deleteCheck()>
+										<input type="button" value="수정" onclick=modifyCheck()> 
+										<input type="button" value="목록" onclick=listnum()> 
+										<input type="button" value="삭제" onclick=deleteCheck()>
 									</p>
 								</form>
 							</div>

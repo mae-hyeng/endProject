@@ -143,7 +143,7 @@ public class MenuController {
 		 	  String username = (String)session.getAttribute("username");
 		 	  String orderCo = (String)session.getAttribute("order");
 		 	  user = userService.UserInfo(username);
-			  List<Cart> list = cartService.cartUsername(username);
+//			  List<Cart> list = cartService.cartUsername(username);
 
 		 	  if(username != null && orderCo != null) {
 		 		 user = userService.UserInfo(username);
@@ -158,7 +158,7 @@ public class MenuController {
 		 		 cartService.cartSave(cart);
 		 		 model.addAttribute("cart", cart);	 	
 		 		  
-		 		 model.addAttribute("MyCart", list);
+//		 		 model.addAttribute("MyCart", list);
 		 		  
 		 		  return "drink/drinkOrder"; 
 		 	  }else {

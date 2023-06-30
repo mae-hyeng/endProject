@@ -232,7 +232,7 @@
 					<pre>${menu.content }</pre>
 					<div class="num">
 					    <span>수량</span>
-						<form action="drinkOrder" method="post">
+						<form name="regForm" action="drinkOrder" method="post">
 						    <div class="quantity" id="quantity">
 						        <button class="minus" type="button">-</button>
 						        <span id="result">1</span>
@@ -243,7 +243,7 @@
 						    
 						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
 						    <input type="hidden" id="menuQuantity" name="quantity" value="1">						    
-						    <button type="submit" id="confirm">확인</button>
+						    <input type="button" id="confirm" onclick="go()" value = "확인">
 						</form>
 			       	</div>
 				
@@ -258,6 +258,19 @@
 function modi() {
 		location.href='modifyMenu?id=${menu.id}';}
 </script>
+
+<script>
+function go() {
+    if (session.getAttribute("username") != null) {
+    	alert("ㅅㄱ");
+        location.href = "/menu";
+    } else {
+        regForm.submit();
+    }
+}
+
+</script>
+
 
 <script>
     const plusBtn = document.querySelector('.plus');

@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.tp.entity.Cart;
+import com.tp.entity.UserEntity;
 //
 //import com.tp.entity.Cart;
 //import com.tp.entity.MenuOrder;
@@ -27,8 +28,8 @@ public class CartService {
 	private final CartRepository cartRepository;
 	
 	@Transactional
-	public List<Cart> cartUsername(String username) {
-		return cartRepository.findByUserName(username);
+	public List<Cart> cartUsername(UserEntity user) {
+		return cartRepository.findByUserName(user);
 	}
 //	
 //

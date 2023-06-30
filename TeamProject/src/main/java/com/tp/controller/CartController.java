@@ -1,5 +1,6 @@
 package com.tp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -36,27 +37,29 @@ public class CartController {
 	  public String drinkSave(
 			  Cart cart,
 			  Model model,
+			  UserEntity user,
 			  HttpSession session) {		
 		List<Cart> list = null;
 		
 		list = cartService.cartAll();
+		List<Cart> list2 = new ArrayList<>();
 		
-		model.addAttribute("cartList", list);
-		
-		
-		//
 		String username = (String)session.getAttribute("username");
 		
+		for(int i=0; i<list.size(); i++) {
+//			System.out.println(username.equals(list.get(i).getUser().getUsername()));
+			if(username.equals(list.get(i).getUser().getUsername())) {
+				list2.add(list.get(i));
+//				list2.add(cart);
+//				System.out.println(list.get(i));
+				model.addAttribute("list2", list2);
+				System.out.println("List2 : " + list2);
+			}
+		}
 		
-		List<Cart> list2 = null;
 		
-		list2 = cartService.cartUsername(username);
 		
-		System.out.println(list2);
-		
-		//
-		
-		System.out.println(list);
+//		System.out.println(list);
 		for(int i=0; i<list.size(); i++ ) {
 			session.setAttribute("id"+i, list.get(i).getId());
 		

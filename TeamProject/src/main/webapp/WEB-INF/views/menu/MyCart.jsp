@@ -25,15 +25,18 @@ String name = (String)session.getAttribute("name");
 							        <th>아이디</th>
 							        <th>수량</th>
 							        <th>이름</th>
+							        <th>가격</th>
 							    </tr>
-							    <c:forEach items="${cartList}" var="cart">
+							    <c:forEach items="${list2}" var="list2">
 					                <tr>
-					                    <td>${cart.id}</td>
-					                    <td>${cart.user.username}</td>
-					                    <td>${cart.quantity}</td>
-					                    <td>${cart.menu.name}</td>
+					                    <td>${list2.id}</td>
+					                    <td>${list2.user.username}</td>
+					                    <td>${list2.quantity}</td>
+					                    <td>${list2.menu.name}</td>
+					                    <td>${param.menu.price*param.quantity }</td>
 					                </tr>
 					            </c:forEach>
+					            <a></a>
 							</table>
 							<br>
 

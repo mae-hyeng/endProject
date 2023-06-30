@@ -78,6 +78,10 @@ public class MenuController {
 			   HttpServletResponse res, HttpSession session) {
 		   model.addAttribute("menu",menuService.selectOne(id));
 		   
+		   String username = (String)session.getAttribute("username");
+		 	  
+		   session.setAttribute("order", username);
+		   
 		   if(session.getAttribute("listnum_mo") != null) {
 			   session.setAttribute("listnum", 3);
 			   session.removeAttribute("listnum_mo");
@@ -112,22 +116,22 @@ public class MenuController {
 	   }
 	   
 
-	   @GetMapping("drinkOrder")
-	   public String drinkOrderG(@RequestParam("id") Long id,
-	 		  @RequestParam("quantity") Integer quantity,
-	 		  Model model,
-	 		  MenuOrder order, 
-	 		  UserEntity user,
-	 		  Cart cart,
-	 		  HttpSession session) {
-
-	 	  String username = (String)session.getAttribute("username");
-	 	  
-	 	 session.setAttribute("order", username);
-	 	 
-	 	 return "drink/drinkOrder";
-	 	  
-	   }
+//	   @GetMapping("drinkOrder")
+//	   public String drinkOrderG(@RequestParam("id") Long id,
+//	 		  @RequestParam("quantity") Integer quantity,
+//	 		  Model model,
+//	 		  MenuOrder order, 
+//	 		  UserEntity user,
+//	 		  Cart cart,
+//	 		  HttpSession session) {
+//
+//	 	  String username = (String)session.getAttribute("username");
+//	 	  
+//	 	 session.setAttribute("order", username);
+//	 	 
+//	 	 return "drink/drinkOrder";
+//	 	  
+//	   }
 	   
 	   @PostMapping("drinkOrder")
 	   public String drinkOrderP(Model model, HttpSession session, UserEntity user,
@@ -138,8 +142,8 @@ public class MenuController {
 			
 		 	  String username = (String)session.getAttribute("username");
 		 	  String orderCo = (String)session.getAttribute("order");
-		 	 user = userService.UserInfo(username);
-			   List<Cart> list = cartService.cartUsername(username);
+		 	  user = userService.UserInfo(username);
+			  List<Cart> list = cartService.cartUsername(username);
 
 		 	  if(username != null && orderCo != null) {
 		 		 user = userService.UserInfo(username);
@@ -151,14 +155,14 @@ public class MenuController {
 		 				 .build();
 
 
-		 		  cartService.cartSave(cart);
-		 		  model.addAttribute("cart", cart);	 	
+		 		 cartService.cartSave(cart);
+		 		 model.addAttribute("cart", cart);	 	
 		 		  
 		 		 model.addAttribute("MyCart", list);
 		 		  
 		 		  return "drink/drinkOrder"; 
 		 	  }else {
-		 		  return "redirect:/sessionover";
+		 		  return "redirect:/menu";
 		 	  }
 			
 	   }

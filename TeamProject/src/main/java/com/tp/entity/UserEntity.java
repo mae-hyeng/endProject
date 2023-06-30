@@ -32,9 +32,9 @@ public class UserEntity extends BaseTimeEntity{
 	 
 	 @GeneratedValue(generator = "system-uuid")
 	 @GenericGenerator(name="system-uuid", strategy = "uuid")
+	 @Id // 기본키(Primary key)
 	 private String id;
 	 @Column(length = 30, nullable=false)
-	 @Id // 기본키(Primary key)
 	 private String username;
 	 @Column
 	 private String password;

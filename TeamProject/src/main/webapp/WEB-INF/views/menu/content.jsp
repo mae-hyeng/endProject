@@ -233,18 +233,18 @@
 					<div class="num">
 					    <span>수량</span>
 						<form action="drinkOrder" method="get">
-    <div class="quantity" id="quantity">
-        <button class="minus" type="button">-</button>
-        <span id="result">1</span>
-        <button class="plus" type="button">+</button>
-    </div>
-    
-    <input type="hidden" id="menuId" name="id" value="${menu.id}">
-    <input type="hidden" id="menuQuantity" name="quantity" value="1">
-    
-    <button type="submit" id="confirm">확인</button>
-    <a href="#" onclick="addToCart(event)">담기</a>
-</form>
+						    <div class="quantity" id="quantity">
+						        <button class="minus" type="button">-</button>
+						        <span id="result">1</span>
+						        <button class="plus" type="button">+</button>
+						        <br>
+						        <a>총 금액 : </a><span id ="price">${menu.price }</span>
+						    </div>
+						    
+						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
+						    <input type="hidden" id="menuQuantity" name="quantity" value="1">						    
+						    <button type="submit" id="confirm">확인</button>
+						</form>
 			       	</div>
 				
 					
@@ -263,6 +263,11 @@ function modi() {
     const plusBtn = document.querySelector('.plus');
     const minusBtn = document.querySelector('.minus');
     const resultSpan = document.querySelector('#result');
+    const priceSpan = document.querySelector('#price');
+    
+    const resultValue = parseInt(resultSpan.textContent);
+    const priceValue = parseInt(priceSpan.textContent);
+    
     const menuQuantityInput = document.querySelector('#menuQuantity');
     
     plusBtn.addEventListener('click', () => {
@@ -270,6 +275,7 @@ function modi() {
         quantity++;
         resultSpan.textContent = quantity;
         menuQuantityInput.value = quantity;
+        priceSpan.textContent = quantity*priceValue;
     });
     
     minusBtn.addEventListener('click', () => {
@@ -278,14 +284,9 @@ function modi() {
             quantity--;
             resultSpan.textContent = quantity;
             menuQuantityInput.value = quantity;
+            priceSpan.textContent = quantity*priceValue;
         }
     });
-    
-    function addToCart(event) {
-        event.preventDefault();
-        // TODO: 카트에 추가하는 로직 작성
-        location.href='addCart';
-    }
 </script>
 
 <script>

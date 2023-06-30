@@ -1,4 +1,6 @@
 package com.tp.service;
+import java.util.List;
+
 //
 //<<<<<<< HEAD
 //import java.util.List;
@@ -22,6 +24,10 @@ public class CartService {
 //	
 	private final CartRepository cartRepository;
 	
+	
+	public List<Cart> cartUsername(String username) {
+		return cartRepository.findByUserId(username);
+	}
 //	
 //
 //	

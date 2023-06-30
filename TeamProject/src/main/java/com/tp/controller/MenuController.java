@@ -133,19 +133,11 @@ public class MenuController {
 	 				 .user(user)
 	 				 .build();
 	 		 
-//	 		  order = MenuOrder.builder()
-//	 		            .quantity(quantity)
-//	 		            .menu(menuService.selectOne(id))
-////	 		            .user(user)
-//	 		            .build();
-
-
 	 		  System.out.println("user : " + user);
 
 
 	 		  cartService.cartSave(cart);
 	 		  model.addAttribute("cart", cart);
-//	 		  cartService.(cart);
 	 		  System.out.println("order : " + cart);
 
 	 		  return "drink/drinkOrder"; 
@@ -156,8 +148,16 @@ public class MenuController {
 	   }
 	   
 	   @PostMapping("drinkOrder")
-	   public String drinkOrderP() {
-		   return "redirect:/menu";
+	   public String drinkOrderP(Model model, HttpSession session, UserEntity user) {
+		   
+		   String username = (String)session.getAttribute("username");
+		   System.out.println("username : " + username);
+		   user = userService.UserInfo(username);
+		   List<Cart> list = cartService.cartUsername(username);
+			System.out.println("listPost" + list);
+			
+			model.addAttribute("MyCart", list);
+		   return "menu/MyCart";
 	   }
 	   
 }

@@ -5,7 +5,7 @@
 </head>
 <body>
 	<div class="container-fluid px-4">
-				<h2 class="mt-4">장바구니</h2>
+				<h2 class="mt-4">음료</h2>
 				
 				<div>
 					<div id="board-list">
@@ -19,24 +19,18 @@
 							        <th>아이디</th>
 							        <th>수량</th>
 							        <th>이름</th>
-							        <th>금액</th>
 							    </tr>
 							    <tr>
-							        <td>${cart.id}</td>
+							        <td>${MyCart.id}</td>
 							        <%-- <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${cart.orderDate}" /></td> --%>
 							        <td>${cart.user.username}</td>
 							        <td>${cart.quantity}</td>
-							        <td>${cart.menu.name }</td>
-							        <td>${cart.menu.price*cart.quantity }</td>
+							        <td>${cart.menu.name }
 							    </tr>
 							</table>
 							<br>
 
-								<form action="drinkOrder?username=${sessionScope.username }" method="Post">
-									<button>
-										장바구니가기
-									</button>
-								</form>
+								
 							<br>
 						</div>
 					</div>

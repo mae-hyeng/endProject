@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+
 </head>
 <body>
 	<div class="container-fluid px-4">
@@ -32,7 +35,7 @@
 							</table>
 							<br>
 
-								<form action="drinkOrder?username=${sessionScope.username }" method="Post">
+								<form action="MyCart" method="Get">
 									<button>
 										장바구니가기
 									</button>

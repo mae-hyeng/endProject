@@ -122,42 +122,45 @@ public class MenuController {
 	 		  HttpSession session) {
 
 	 	  String username = (String)session.getAttribute("username");
-
-	 	  user = userService.UserInfo(username);
-	 	  if(username != null) {
-	 		 user = userService.UserInfo(username);
-
-	 		 cart = Cart.builder()
-	 				 .quantity(quantity)
-	 				 .menu(menuService.selectOne(id))
-	 				 .user(user)
-	 				 .build();
-	 		 
-	 		  System.out.println("user : " + user);
-
-
-	 		  cartService.cartSave(cart);
-	 		  model.addAttribute("cart", cart);
-	 		  System.out.println("order : " + cart);
-
-	 		  return "drink/drinkOrder"; 
-	 	  }else {
-	 		  return "redirect:/sessionover";
-	 	  }
-
+	 	  
+	 	 session.setAttribute("order", username);
+	 	 
+	 	 return "drink/drinkOrder";
+	 	  
 	   }
 	   
 	   @PostMapping("drinkOrder")
-	   public String drinkOrderP(Model model, HttpSession session, UserEntity user) {
+	   public String drinkOrderP(Model model, HttpSession session, UserEntity user,
+			   Cart cart,
+			   @RequestParam("quantity") Integer quantity,
+			   @RequestParam("id") Long id) {
 		   
-		   String username = (String)session.getAttribute("username");
-		   System.out.println("username : " + username);
-		   user = userService.UserInfo(username);
-		   List<Cart> list = cartService.cartUsername(username);
-			System.out.println("listPost" + list);
 			
-			model.addAttribute("MyCart", list);
-		   return "menu/MyCart";
+		 	  String username = (String)session.getAttribute("username");
+		 	  String orderCo = (String)session.getAttribute("order");
+		 	 user = userService.UserInfo(username);
+			   List<Cart> list = cartService.cartUsername(username);
+
+		 	  if(username != null && orderCo != null) {
+		 		 user = userService.UserInfo(username);
+
+		 		 cart = Cart.builder()
+		 				 .quantity(quantity)
+		 				 .menu(menuService.selectOne(id))
+		 				 .user(user)
+		 				 .build();
+
+
+		 		  cartService.cartSave(cart);
+		 		  model.addAttribute("cart", cart);	 	
+		 		  
+		 		 model.addAttribute("MyCart", list);
+		 		  
+		 		  return "drink/drinkOrder"; 
+		 	  }else {
+		 		  return "redirect:/sessionover";
+		 	  }
+			
 	   }
 	   
 }

@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<% 
+String username = (String)session.getAttribute("username");
+Integer quantity = (Integer)session.getAttribute("quantity");
+/* String id = (String)session.getAttribute("id"); */
+String name = (String)session.getAttribute("name");
+%>
 </head>
 <body>
 	<div class="container-fluid px-4">
@@ -20,13 +26,14 @@
 							        <th>수량</th>
 							        <th>이름</th>
 							    </tr>
-							    <tr>
-							        <td>${MyCart.id}</td>
-							        <%-- <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${cart.orderDate}" /></td> --%>
-							        <td>${cart.user.username}</td>
-							        <td>${cart.quantity}</td>
-							        <td>${cart.menu.name }
-							    </tr>
+							    <c:forEach items="${cartList}" var="cart">
+					                <tr>
+					                    <td>${cart.id}</td>
+					                    <td>${cart.user.username}</td>
+					                    <td>${cart.quantity}</td>
+					                    <td>${cart.menu.name}</td>
+					                </tr>
+					            </c:forEach>
 							</table>
 							<br>
 

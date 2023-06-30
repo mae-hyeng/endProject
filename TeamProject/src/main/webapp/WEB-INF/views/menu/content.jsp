@@ -232,7 +232,7 @@
 					<pre>${menu.content }</pre>
 					<div class="num">
 					    <span>수량</span>
-						<form action="drinkOrder" method="get">
+						<form action="drinkOrder" method="post">
 						    <div class="quantity" id="quantity">
 						        <button class="minus" type="button">-</button>
 						        <span id="result">1</span>

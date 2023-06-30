@@ -29,10 +29,9 @@ import lombok.NoArgsConstructor;
 public class UserEntity extends BaseTimeEntity{
 	
 	
-	 
+	 @Id // 기본키(Primary key)
 	 @GeneratedValue(generator = "system-uuid")
 	 @GenericGenerator(name="system-uuid", strategy = "uuid")
-	 @Id // 기본키(Primary key)
 	 private String id;
 	 @Column(length = 30, nullable=false)
 	 private String username;

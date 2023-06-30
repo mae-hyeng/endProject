@@ -1,6 +1,8 @@
 package com.tp.service;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 //
 //<<<<<<< HEAD
 //import java.util.List;
@@ -24,17 +26,18 @@ public class CartService {
 //	
 	private final CartRepository cartRepository;
 	
-	
+	@Transactional
 	public List<Cart> cartUsername(String username) {
-		return cartRepository.findByUserId(username);
+		return cartRepository.findByUserName(username);
 	}
 //	
 //
 //	
 //	//전체 주문 조회
-//	public List<Cart> cartAll() {
-//		return cartRepository.findAll();
-//	}
+	@Transactional
+	public List<Cart> cartAll() {
+		return cartRepository.findAll();
+	}
 //	
 //	
 	public void cartSave(Cart cart) {

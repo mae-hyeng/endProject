@@ -10,6 +10,6 @@ import com.tp.entity.MenuOrder;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
 	
-	List<Cart> findByUserId(String id);
+	List<Cart> findByUserName(String id);
 	
 }

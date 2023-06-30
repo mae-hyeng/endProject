@@ -16,13 +16,14 @@
 							<table>
 							    <tr>
 							        <th>주문 번호</th>
-							        <th>주문 날짜</th>
+							        <th>이름</th>
 							        <th>수량</th>
 							    </tr>
 							    <tr>
-							        <td>${order.id}</td>
-							        <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${order.orderDate}" /></td>
-							        <td>${order.quantity}</td>
+							        <td>${cart.id}</td>
+							        <%-- <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${cart.orderDate}" /></td> --%>
+							        <td>${cart.user.username}</td>
+							        <td>${cart.quantity}</td>
 							    </tr>
 							</table>
 							<br>

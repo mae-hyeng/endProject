@@ -233,18 +233,18 @@
 					<div class="num">
 					    <span>수량</span>
 						<form action="drinkOrder" method="get">
-						    <div class="quantity" id="quantity">
-						        <button class="minus">-</button>
-						        <span id="result">1</span>
-						        <button class="plus">+</button>
-						    </div>
-						
-						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
-						    <input type="hidden" id="menuQuantity" name="quantity" value="1">
-						
-						    <button type="submit" id="confirm">확인</button>
-						    <a href="#" onclick="addToCart(event)">담기</a>
-						</form>
+    <div class="quantity" id="quantity">
+        <button class="minus" type="button">-</button>
+        <span id="result">1</span>
+        <button class="plus" type="button">+</button>
+    </div>
+    
+    <input type="hidden" id="menuId" name="id" value="${menu.id}">
+    <input type="hidden" id="menuQuantity" name="quantity" value="1">
+    
+    <button type="submit" id="confirm">확인</button>
+    <a href="#" onclick="addToCart(event)">담기</a>
+</form>
 			       	</div>
 				
 					
@@ -252,54 +252,7 @@
 				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum();">
                 <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" value="수정" onclick="modi2()"></div>
 				
-			</main>
-	
-<script>
-function updateHref(event) {
-    const hrefElement = event.target;
-    const id = document.querySelector('input[name="id"]').value;
-    const quantity = document.querySelector('#result').textContent;
-    const updatedHref = `drinkOrder?id=${id}&quantity=${quantity}`;
-    hrefElement.setAttribute('href', updatedHref);
-}
-</script>
-		
-		
-<script>
-    function addToCart(event) {
-        event.preventDefault();
-        
-        const menuId = document.querySelector('#menuId').value;
-        const menuQuantity = document.querySelector('#menuQuantity').value;
-        const updatedHref = `drinkOrder?id=${menuId}&quantity=${menuQuantity}`;
-        
-        // 여기에서 담기 버튼 클릭 시 필요한 추가 동작을 수행할 수 있습니다.
-        
-        // URL로 이동
-        window.location.href = updatedHref;
-    }
-
-    const plusButton = document.querySelector('.plus');
-    const minusButton = document.querySelector('.minus');
-    const resultElement = document.querySelector('#result');
-    const menuQuantityElement = document.querySelector('#menuQuantity');
-
-    plusButton.addEventListener('click', () => {
-        const currentQuantity = parseInt(resultElement.textContent);
-        const newQuantity = currentQuantity + 1;
-        resultElement.textContent = newQuantity;
-        menuQuantityElement.value = newQuantity;
-    });
-
-    minusButton.addEventListener('click', () => {
-        const currentQuantity = parseInt(resultElement.textContent);
-        if (currentQuantity > 1) {
-            const newQuantity = currentQuantity - 1;
-            resultElement.textContent = newQuantity;
-            menuQuantityElement.value = newQuantity;
-        }
-    });
-</script>			
+			</main>			
 				
 <script>
 function modi() {
@@ -307,26 +260,32 @@ function modi() {
 </script>
 
 <script>
-
-	/* 수량 증감, 감소 */
-
-    let plus = document.querySelector(".plus");
-	let minus = document.querySelector(".minus");
-	let result = document.querySelector("#result");
-	let totalcost = document.querySelector('.totalcost');
-	let i = 1;
-	plus.addEventListener("click", () => {
-		i++
-		result.textContent = i;
-	})
-	
-	minus.addEventListener("click", () => {
-		if(i>1) {
-			i--
-			result.textContent = i;
-		}
-		
-	})
+    const plusBtn = document.querySelector('.plus');
+    const minusBtn = document.querySelector('.minus');
+    const resultSpan = document.querySelector('#result');
+    const menuQuantityInput = document.querySelector('#menuQuantity');
+    
+    plusBtn.addEventListener('click', () => {
+        let quantity = parseInt(resultSpan.textContent);
+        quantity++;
+        resultSpan.textContent = quantity;
+        menuQuantityInput.value = quantity;
+    });
+    
+    minusBtn.addEventListener('click', () => {
+        let quantity = parseInt(resultSpan.textContent);
+        if (quantity > 1) {
+            quantity--;
+            resultSpan.textContent = quantity;
+            menuQuantityInput.value = quantity;
+        }
+    });
+    
+    function addToCart(event) {
+        event.preventDefault();
+        // TODO: 카트에 추가하는 로직 작성
+        location.href='addCart';
+    }
 </script>
 
 <script>

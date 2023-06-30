@@ -163,6 +163,7 @@
 </head>
 
 			<main class="min-width">
+<<<<<<< HEAD
 				<a style="font-size: 50px">${menu.type}</a>
 				<br><br>		
 				<h2>${menu.name }</h2>
@@ -202,8 +203,80 @@
 			</main>
 	
 				
+=======
+				
+				
+				<a style="font-size: 50px">${menu.type}</a>
+				<br><br>		
+				<h2>${menu.name }</h2>
+				<br>
+					<c:if test="${not empty menu.filename }">
+						<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
+						<br>
+					</c:if>
+					<pre>${menu.content }</pre>
+					<div class="num">
+					    <span>수량</span>
+						<form action="drinkOrder" method="get">
+    <div class="quantity" id="quantity">
+        <button class="minus" type="button">-</button>
+        <span id="result">1</span>
+        <button class="plus" type="button">+</button>
+    </div>
+    
+    <input type="hidden" id="menuId" name="id" value="${menu.id}">
+    <input type="hidden" id="menuQuantity" name="quantity" value="1">
+    
+    <button type="submit" id="confirm">확인</button>
+    <a href="#" onclick="addToCart(event)">담기</a>
+</form>
+			       	</div>
+				
+					
+				<br>
+				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum();">
+                <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" value="수정" onclick="modi2()"></div>
+				
+			</main>			
+				
+<script>
+function modi() {
+		location.href='modifyMenu?id=${menu.id}';}
+</script>
+
+<script>
+    const plusBtn = document.querySelector('.plus');
+    const minusBtn = document.querySelector('.minus');
+    const resultSpan = document.querySelector('#result');
+    const menuQuantityInput = document.querySelector('#menuQuantity');
+    
+    plusBtn.addEventListener('click', () => {
+        let quantity = parseInt(resultSpan.textContent);
+        quantity++;
+        resultSpan.textContent = quantity;
+        menuQuantityInput.value = quantity;
+    });
+    
+    minusBtn.addEventListener('click', () => {
+        let quantity = parseInt(resultSpan.textContent);
+        if (quantity > 1) {
+            quantity--;
+            resultSpan.textContent = quantity;
+            menuQuantityInput.value = quantity;
+        }
+    });
+    
+    function addToCart(event) {
+        event.preventDefault();
+        // TODO: 카트에 추가하는 로직 작성
+        location.href='addCart';
+    }
+</script>
+
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 <script>
 	function modi() {
+<<<<<<< HEAD
 		  const modibtn = document.getElementById('modibtn');
 		  const username = '<%= session.getAttribute("username") %>';
 	
@@ -239,6 +312,42 @@
 		
 	})
 </script>
+=======
+		location.href='modifyMenu?id=${menu.id}';}
+</script>
+
+<script>
+        function modi2() {
+            document.addEventListener('DOMContentLoaded', function() {
+                const modibtn = document.getElementById('modi-btn');
+                const username = ${sessionScope.username};
+                if (username != 'admin') {
+                    modibtn.style.display = 'none';
+                } else {
+                    modibtn.style.display = 'block';
+                }
+            });
+            // 버튼 클릭 시 실행할 동작 추가
+            location.href='modifyMenu?id=${menu.id}';}
+        }
+</script>
+
+
+<!-- 
+<script>
+     function modi2() {
+        const modibtn = document.getElementById('modi-btn');
+        
+        if (${sessionScope.username} == 'admin') {
+            modibtn.style.display = 'block';
+        } else {
+           modibtn.style.display = 'none';
+        }
+        	
+    }
+</script>
+ -->
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 
 
 <script>

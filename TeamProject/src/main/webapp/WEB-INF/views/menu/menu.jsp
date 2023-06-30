@@ -50,6 +50,7 @@ ul, li {
 	<div class="contents">
 		<center><font size="7">MENU</font></center>
 		<br><br>
+<<<<<<< HEAD
 		<a class="nav-link" href="/menuRegister">
         	메뉴 등록
 		</a>
@@ -64,6 +65,17 @@ ul, li {
 		        </li>
 		        <li class="menu-item">
 		            <a href="milkTea" class="menu-link">MILK TEA & LATTE</a>
+=======
+	        <ul class="menu">
+		        <li class="menu-item">
+		            <a href="menu" class="menu-link">All</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="coffee" class="menu-link">COFFEE</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="milktea" class="menu-link">MILK TEA & LATTE</a>
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 		        </li>
 		        <li class="menu-item">
 		            <a href="juice" class="menu-link">JUICE & DRINK</a>
@@ -107,6 +119,44 @@ ul, li {
 
 </body>
 
+<<<<<<< HEAD
+<script>
+
+	/* 수량 증감, 감소 */
+
+    let plus = document.querySelector(".plus");
+	let minus = document.querySelector(".minus");
+	let result = document.querySelector("#result");
+	let totalcost = document.querySelector('.totalcost');
+	let i = 1;
+	plus.addEventListener("click", () => {
+		i++
+		result.textContent = i;
+	})
+	
+	minus.addEventListener("click", () => {
+		if(i>1) {
+			i--
+			result.textContent = i;
+		}
+		
+	})
+</script>
+
+=======
+	
+						
+						
+
+						
+						
+					
+					
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
+					
+
+<<<<<<< HEAD
+=======
 <script>
 
 	/* 수량 증감, 감소 */
@@ -132,4 +182,5 @@ ul, li {
 
 					
 
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 <%@ include file="/resources/include/footer.jsp"%>

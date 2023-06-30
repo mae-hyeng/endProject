@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -20,7 +19,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity(name = "adminUser")
 public class AdminUser {
-	
 	 @Id // 기본키(Primary key)
 	 @GeneratedValue(generator = "system-uuid")
 	 @GenericGenerator(name="system-uuid", strategy = "uuid")

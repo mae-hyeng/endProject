@@ -20,7 +20,17 @@ public class MenuService {
 	
 	private final MenuRepository menuRepository;
 	
+    
+    public List<Menu> all() {
+    	return menuRepository.findAll();
+    }
+    
+    //게시물 하나
 	@Transactional
+    public Menu selectOne(Long id) {
+    	return menuRepository.findById(id).get();
+    }
+    
 	public void save(Menu menu, MultipartFile file) throws Exception {
 		
 		if(!file.isEmpty()) {
@@ -40,16 +50,6 @@ public class MenuService {
 			}
 		}
 		menuRepository.save(menu);
-	}
-	
-	//게시물 하나
-	@Transactional
-	public Menu selectOne(Long id) {
-		return menuRepository.findById(id).get();
-	}
-	
-	public List<Menu> all(){
-		return menuRepository.findAll();
 	}
 	
 	//게시물 삭제

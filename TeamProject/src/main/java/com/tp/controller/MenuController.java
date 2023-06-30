@@ -18,6 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tp.entity.Cart;
+import com.tp.entity.Menu;
+import com.tp.entity.MenuOrder;
+import com.tp.entity.UserEntity;
+import com.tp.service.CartService;
+import com.tp.service.MenuService;
+import com.tp.service.OrderService;
+import com.tp.service.UserService;
+
 import com.tp.entity.Menu;
 import com.tp.service.MenuService;
 
@@ -28,6 +37,9 @@ import lombok.RequiredArgsConstructor;
 public class MenuController {
 	
 	private final MenuService menuService;
+	private final OrderService orderService;
+	private final CartService cartService;
+	private final UserService userService;
 	
 	   @RequestMapping("/menu")
 	   public String menu(Model model) {
@@ -85,8 +97,13 @@ public class MenuController {
 	   //게시물 수정
 	   @GetMapping("/modifyMenu")
 	   public String modify(@RequestParam Long id, Model model, HttpSession session) {
+<<<<<<< HEAD
 		   session.setAttribute("listnum", 2);
 		   
+=======
+		   String username = (String) session.getAttribute("username");
+		   session.setAttribute("listnum", 2);
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 		   model.addAttribute("menu",menuService.selectOne(id));
 		   return "menu/menu_modify";
 	   }
@@ -99,6 +116,57 @@ public class MenuController {
 		   return "redirect:/menuContent?id="+menu.getId();
 	   }
 	   
+<<<<<<< HEAD
 	   
+=======
+
+	   @GetMapping("drinkOrder")
+	   public String drinkOrderG(@RequestParam("id") Long id,
+	 		  @RequestParam("quantity") Integer quantity,
+	 		  Model model,
+	 		  MenuOrder order, 
+	 		  UserEntity user,
+	 		  Cart cart,
+	 		  HttpSession session) {
+
+	 	  String username = (String)session.getAttribute("username");
+
+	 	  user = userService.UserInfo(username);
+	 	  if(username != null) {
+	 		 user = userService.UserInfo(username);
+
+	 		 cart = Cart.builder()
+	 				 .quantity(quantity)
+	 				 .menu(menuService.selectOne(id))
+	 				 .user(user)
+	 				 .build();
+	 		 
+//	 		  order = MenuOrder.builder()
+//	 		            .quantity(quantity)
+//	 		            .menu(menuService.selectOne(id))
+////	 		            .user(user)
+//	 		            .build();
+
+
+	 		  System.out.println("user : " + user);
+
+
+	 		  cartService.cartSave(cart);
+	 		  model.addAttribute("cart", cart);
+//	 		  cartService.(cart);
+	 		  System.out.println("order : " + cart);
+
+	 		  return "drink/drinkOrder"; 
+	 	  }else {
+	 		  return "redirect:/sessionover";
+	 	  }
+
+	   }
+	   
+	   @PostMapping("drinkOrder")
+	   public String drinkOrderP() {
+		   return "redirect:/menu";
+	   }
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 	   
 }

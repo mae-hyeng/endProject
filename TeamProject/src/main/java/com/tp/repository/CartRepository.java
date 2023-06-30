@@ -1,5 +1,6 @@
 package com.tp.repository;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import org.apache.catalina.User;
@@ -18,4 +19,16 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 	
 	Cart findByUserName(String userName);
 
+=======
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.tp.entity.Cart;
+import com.tp.entity.MenuOrder;
+
+public interface CartRepository extends JpaRepository<Cart, Long> {
+	
+//	Cart findByCartIdAndMenuId(long cartId, long menuId);
+	
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 }

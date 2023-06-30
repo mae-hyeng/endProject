@@ -117,7 +117,6 @@
                                 장르
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-
                             <div class="sb-sidenav-menu-heading"> <c:choose>
                             <c:when test="${sessionScope.username!=null}">
                                 <span style="color: white; font-size: 15px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
@@ -191,7 +190,7 @@
          </div>
          <div class="video_modal_popup-closer">
            <div class="video_modal_popup">
-         </div>
+         </div> 
          </div>
          <div class="popupModalVideo" style=" float: left; width: 20%; margin-bottom:10%">
            <a data-video="ik_Sptvs80Y" style="cursor: pointer;"><img src="resources/img/ren.jpg" alt="렌필드" /><p style="color:#FFFFFF">렌필드 <br>예매율:7.9%%</p></a>
@@ -313,11 +312,7 @@
                     <div class="container-fluid px-4" >
                         <div class="d-flex align-items-center justify-content-between small" >
                             <div class="text-muted" >2023.04.19 </div>
-                            <div>
-                              
-                               <div class="text-muted" >Team By 더 이상의 유기는 없다</div>
-                          
-                        </div>
+                            
                     </div>
                 </footer>
             </div>

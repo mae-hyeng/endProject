@@ -19,18 +19,28 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+=======
+import lombok.Builder;
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Builder
 @Entity
+<<<<<<< HEAD
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+=======
+@Getter
+@Setter
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 @Table(name = "cart")
 public class Cart {
 	
@@ -41,15 +51,19 @@ public class Cart {
 	@Column
 	private int quantity;
 	
+	@Column
+	private int quantity;
+	
 	@OneToOne(fetch = FetchType.LAZY)	
 	@JoinColumn(name = "userName")
 	private UserEntity user;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "menuId")
-	private List<Menu> menu = new ArrayList<Menu>();
+	private Menu menu;
 	
 	
+<<<<<<< HEAD
 //	public void addQuantity(int quantity) {
 //		this.quantity += quantity;
 //	}
@@ -62,4 +76,10 @@ public class Cart {
 		return cart;
 	}
 	
+=======
+//	@ManyToMany(mappedBy = "cart")
+//	private List<MenuOrder> menuOrder;
+
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 }
+

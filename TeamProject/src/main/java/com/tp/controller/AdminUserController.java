@@ -39,6 +39,11 @@ public class AdminUserController {
 			@RequestParam("password") final String password, Model model, HttpSession session,
 			RedirectAttributes rttr) {
 		
+<<<<<<< HEAD
+=======
+//		session.setAttribute("username", username);
+		
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 		if (adminUserService.loginCheck(username, password) == 0) {
 			rttr.addFlashAttribute("result", "OK");
 			session.setAttribute("username", username);
@@ -60,4 +65,8 @@ public class AdminUserController {
 	}
 	
 	
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git

@@ -14,8 +14,10 @@
       <label>Password</label>
     </div>
 	<div>
-		<input type="button" value ="로그인" class="btn first" onclick=check() style="margin-left: 70px">
-		<input type="button" value ="회원가입" class="btn second" onclick="location.href='join'">
+		<input type="button" value ="로그인" class="btn first" onclick=check()>
+		<input type="button" value ="회원가입" class="btn first" onclick="location.href='join'">
+		<input type="button" value ="ID 찾기" class="btn second" onclick="location.href='IdFind'">
+		<input type="button" value ="pw 찾기" class="btn second" onclick="location.href='PwFind'">
 	</div>
   </form>
 </div>

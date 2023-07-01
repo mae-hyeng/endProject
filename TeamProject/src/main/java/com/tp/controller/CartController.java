@@ -47,51 +47,15 @@ public class CartController {
 		String username = (String)session.getAttribute("username");
 		
 		for(int i=0; i<list.size(); i++) {
-//			System.out.println(username.equals(list.get(i).getUser().getUsername()));
 			if(username.equals(list.get(i).getUser().getUsername())) {
 				list2.add(list.get(i));
-//				list2.add(cart);
-//				System.out.println(list.get(i));
 				model.addAttribute("list2", list2);
-				System.out.println("List2 : " + list2);
 			}
 		}
+		System.out.println("List2 : " + list2);    
 		
-		
-		
-//		System.out.println(list);
-		for(int i=0; i<list.size(); i++ ) {
-			session.setAttribute("id"+i, list.get(i).getId());
-		
-			session.setAttribute("quantity"+i, list.get(i).getQuantity());
-		
-			session.setAttribute("username"+i, list.get(i).getUser().getUsername());
-		
-			session.setAttribute("name"+i, list.get(i).getMenu().getName());
-			i++;
-			
-		}
-		    
 	    return "menu/MyCart";
 	     
 	  }
-	
-	@PostMapping("/MyCart")
-	@Transactional
-	public String orderAll(
-			Cart cart,
-			UserEntity user,
-			HttpSession session,
-			Model model
-			) {
-		
-		String username = (String)session.getAttribute("username");
-		
-		System.out.println("username Post : " + username);
-				
-		
-		
-		return "redirect:/drink";
-	}
 	
 }

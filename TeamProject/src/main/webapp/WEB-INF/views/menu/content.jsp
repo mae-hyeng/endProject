@@ -242,7 +242,8 @@
 						    </div>
 						    
 						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
-						    <input type="hidden" id="menuQuantity" name="quantity" value="1">						    
+						    <input type="hidden" id="menuQuantity" name="quantity" value="1">
+						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }>						    
 						    <input type="button" id="confirm" onclick="go()" value = "확인">
 						</form>
 			       	</div>
@@ -259,7 +260,7 @@ function modi() {
 		location.href='modifyMenu?id=${menu.id}';}
 </script>
 
-<script>
+<!-- <script>
 function go() {
     if (session.getAttribute("username") != null) {
     	alert("ㅅㄱ");
@@ -269,6 +270,12 @@ function go() {
     }
 }
 
+</script> -->
+
+<script>
+function go() {
+	regForm.submit();
+}
 </script>
 
 

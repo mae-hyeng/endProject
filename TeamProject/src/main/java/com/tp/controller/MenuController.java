@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tp.entity.Cart;
 import com.tp.entity.Menu;
@@ -117,54 +118,58 @@ public class MenuController {
 	   
 
 //	   @GetMapping("drinkOrder")
-//	   public String drinkOrderG(@RequestParam("id") Long id,
-//	 		  @RequestParam("quantity") Integer quantity,
-//	 		  Model model,
-//	 		  MenuOrder order, 
-//	 		  UserEntity user,
-//	 		  Cart cart,
-//	 		  HttpSession session) {
-//
-//	 	  String username = (String)session.getAttribute("username");
-//	 	  
-//	 	 session.setAttribute("order", username);
+//	   public String drinkOrderG(
+//			   @RequestParam("menuName") String menuname, 
+//			   HttpSession session,
+//			   RedirectAttributes rttr) {
+//		   
+//		   
 //	 	 
-//	 	 return "drink/drinkOrder";
-//	 	  
+//		   return "drink/drinkOrder";  
 //	   }
 	   
 	   @PostMapping("drinkOrder")
 	   public String drinkOrderP(Model model, HttpSession session, UserEntity user,
 			   Cart cart,
+			   RedirectAttributes rttr,
 			   @RequestParam("quantity") Integer quantity,
-			   @RequestParam("id") Long id) {
+			   @RequestParam("id") Long id,
+			   @RequestParam("menuName") String menuname) {
 		   
 			
-		 	  String username = (String)session.getAttribute("username");
-		 	  String orderCo = (String)session.getAttribute("order");
-		 	  user = userService.UserInfo(username);
-//			  List<Cart> list = cartService.cartUsername(username);
+	 	   String username = (String)session.getAttribute("username");
+	 	   Integer menuOrder = (Integer)session.getAttribute(menuname);
 
-		 	  if(username != null && orderCo != null) {
-		 		 user = userService.UserInfo(username);
+	 	   if(username != null && menuOrder == null) {
+	 	 	  user = userService.UserInfo(username);
 
-		 		 cart = Cart.builder()
-		 				 .quantity(quantity)
-		 				 .menu(menuService.selectOne(id))
-		 				 .user(user)
-		 				 .build();
+	 	 	  cart = Cart.builder()
+	 	 			  .quantity(quantity)
+	 	 			  .menu(menuService.selectOne(id))
+	 	 			  .user(user)
+	 	 			  .build();
 
 
-		 		 cartService.cartSave(cart);
-		 		 model.addAttribute("cart", cart);	 	
-		 		  
-//		 		 model.addAttribute("MyCart", list);
-		 		  
-		 		  return "drink/drinkOrder"; 
-		 	  }else {
-		 		  return "redirect:/menu";
-		 	  }
+	 	 	  cartService.cartSave(cart);
+	 	 	  model.addAttribute("cart", cart);	 
+	 	 	  
+	 	 	  session.setAttribute(menuname, 1);
+	 	 	  
+	 	 	  rttr.addFlashAttribute("order", "OK");
+	 		  
+	 		  
+	 	 	  return "redirect:/orderResult"; 
+	 	  }else {
+	 		  rttr.addFlashAttribute("order", "already");
+	 		  return "redirect:/orderResult";
+	 	  }
 			
 	   }
+	   
+	   @RequestMapping("/orderResult")
+		public String orderResult() {
+			
+			return "menu/orderRttr";
+		}
 	   
 }

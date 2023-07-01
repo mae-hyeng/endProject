@@ -40,6 +40,7 @@
                <c:otherwise>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+                        <li><a class="dropdown-item" href="/MyCart">basket</a></li>
                          </c:otherwise>
                     </c:choose>
                     </ul>

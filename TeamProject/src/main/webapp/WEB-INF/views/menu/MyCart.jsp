@@ -11,7 +11,7 @@ String name = (String)session.getAttribute("name");
 </head>
 <body>
 	<div class="container-fluid px-4">
-				<h2 class="mt-4">음료</h2>
+				<h2 class="mt-4">내 주문내역</h2>
 				
 				<div>
 					<div id="board-list">
@@ -33,18 +33,36 @@ String name = (String)session.getAttribute("name");
 					                    <td>${list2.user.username}</td>
 					                    <td>${list2.quantity}</td>
 					                    <td>${list2.menu.name}</td>
-					                    <td>${param.menu.price*param.quantity }</td>
+					                    <td id="price" class="price">${list2.menu.price*list2.quantity }</td>
 					                </tr>
 					            </c:forEach>
-					            <a></a>
 							</table>
 							<br>
-
-								
+							<button>주문하기</button>
+							총 금액 : <span id="totalPrice"></span>						
 							<br>
 						</div>
 					</div>
 				</div>
 			</div>
+			
+<script>
+function totalP() {
+	var totalPrice = 0;
+	var priceElements = document.getElementsByClassName("price");
+	
+	// 각 가격 값들을 더함
+	for (var i = 0; i < priceElements.length; i++) {
+	    var price = parseInt(priceElements[i].innerText);
+	    totalPrice += price;
+	}
+	var totalPriceElement = document.getElementById("totalPrice");
+    totalPriceElement.innerText = totalPrice;
+}
+
+window.onload=totalP;
+	     
+</script>
+
 </body>
 </html>

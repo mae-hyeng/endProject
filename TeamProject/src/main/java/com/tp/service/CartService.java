@@ -44,6 +44,10 @@ public class CartService {
 	public void cartSave(Cart cart) {
 		cartRepository.save(cart);
 	}
+	
+//	public List<Cart> findSame(String menuname) {
+//		return cartRepository.findByMenuName(menuname);
+//	}
 }
 //
 //}

@@ -9,12 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-<<<<<<< HEAD
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-=======
 import javax.persistence.OneToMany;
->>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -29,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor // 기본생성자
 @AllArgsConstructor
-@Data // 게터세터투스트링
+@Data
 @Entity(name = "user")
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
 public class UserEntity extends BaseTimeEntity{
@@ -56,11 +53,4 @@ public class UserEntity extends BaseTimeEntity{
 //	 @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 //	 private List<Cart> cart;
 	 
-
-<<<<<<< HEAD
-	 
 }
-=======
-
-}
->>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git

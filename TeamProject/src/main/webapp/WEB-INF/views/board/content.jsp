@@ -243,7 +243,7 @@ if (session.getAttribute("username") == null) {
 								<h3 class="left-box"></h3>
 							</div>
 
-							<form action="drinkOrder">
+							<form action="drinkOrder" method="get">
 								<div class="card-body">
 									<br>
 									<c:forEach var="drink" items="${orderList}">

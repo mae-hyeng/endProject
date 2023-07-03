@@ -165,6 +165,7 @@ $(".video_modal_popup-closer").click(function() {
 					<c:otherwise>
 						<li><a class="dropdown-item" href="/mypage">Mypage</a></li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        <li><a class="dropdown-item" href="/MyCart">Cart</a></li>
                          </c:otherwise>
                     </c:choose>
                     </ul>

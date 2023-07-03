@@ -160,10 +160,67 @@
 	display: none;
 }
 </style>
+
+
 </head>
 
+<body class="">
+	<div id="layoutSidenav">
+
+		<div id="layoutSidenav_nav">
+			<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<div class="sb-sidenav-menu-heading">All</div>
+						<a class="nav-link" href="/menu">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 전체 메뉴
+						</a>
+						<div class="sb-sidenav-menu-heading">DRINK</div>
+						<a class="nav-link" href="/drink">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 메뉴 등록
+						</a>
+
+						<div class="sb-sidenav-menu-heading">
+							<c:choose>
+								<c:when test="${sessionScope.username!=null}">
+									<span style="color: white; font-size: 15px;">${sessionScope.username }</span>
+								</c:when>
+							</c:choose>
+						</div>
+						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-book-open"></i>
+							</div> 멤버
+							<div class="sb-sidenav-collapse-arrow">
+								<i class="fas fa-angle-down"></i>
+							</div>
+						</a>
+						<div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+							<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+								<nav class="sb-sidenav-menu-nested nav">
+									<c:choose>
+										<c:when test="${sessionScope.username==null}">
+											<a class="nav-link" href="aaminLogin">로그인</a>
+										</c:when>
+									</c:choose>
+									<a class="nav-link" href="mypage">마이페이지 이동</a> <a class="nav-link" href="update">내 정보변경</a> <a class="nav-link" href="pwupdate">비밀번호 변경</a> <a class="nav-link" href="logout">로그아웃</a>
+								</nav>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+
+		<div id="layoutSidenav_content" style="bottom: 56px;">
+
 			<main class="min-width">
-<<<<<<< HEAD
+				
+				
 				<a style="font-size: 50px">${menu.type}</a>
 				<br><br>		
 				<h2>${menu.name }</h2>
@@ -175,22 +232,24 @@
 					<pre>${menu.content }</pre>
 					<div class="num">
 					    <span>수량</span>
-					    <div class="quantity">
-					      <button class="minus">-</button>
-					      <span id="result">1</span>
-					      <button class="plus">+</button>
-					   
-					      <form action="/cart">
-					      	<button id="confirm">확인</button>
-					      </form>
-					      
-					      
-			       		</div>
+						<form name="regForm" id="regForm" action="drinkOrder" method="post">
+						    <div class="quantity" id="quantity">
+						        <button class="minus" type="button">-</button>
+						        <span id="result">1</span>
+						        <button class="plus" type="button">+</button>
+						        <br>
+						        <a>금액 : </a><span id ="price">${menu.price }</span>
+						    </div>
+						    
+						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
+						    <input type="hidden" id="menuQuantity" name="quantity" value="1">
+						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }>						    
+						    <input type="button" id="confirm" onclick="go()" value = "담기">
+						</form>
 			       	</div>
 				
 					
 				<br>
-				
 				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum()"></div>
                 <div>
   					 <%
@@ -200,54 +259,26 @@
   					 <button style="float: right; margin-right: 7px; padding: 6px 8px; display: <%= displayStyle %>" class="modi-btn" id="modibtn" onclick="modi()">수정</button>
 				</div>
 				
-			</main>
-	
-				
-=======
-				
-				
-				<a style="font-size: 50px">${menu.type}</a>
-				<br><br>		
-				<h2>${menu.name }</h2>
-				<br>
-					<c:if test="${not empty menu.filename }">
-						<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
-						<br>
-					</c:if>
-					<pre>${menu.content }</pre>
-					<div class="num">
-					    <span>수량</span>
-						<form action="drinkOrder" method="get">
-    <div class="quantity" id="quantity">
-        <button class="minus" type="button">-</button>
-        <span id="result">1</span>
-        <button class="plus" type="button">+</button>
-    </div>
-    
-    <input type="hidden" id="menuId" name="id" value="${menu.id}">
-    <input type="hidden" id="menuQuantity" name="quantity" value="1">
-    
-    <button type="submit" id="confirm">확인</button>
-    <a href="#" onclick="addToCart(event)">담기</a>
-</form>
-			       	</div>
-				
-					
-				<br>
-				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum();">
-                <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" value="수정" onclick="modi2()"></div>
-				
 			</main>			
-				
+
 <script>
-function modi() {
-		location.href='modifyMenu?id=${menu.id}';}
+function go() {
+	regForm.submit();
+}
 </script>
+
+
+
 
 <script>
     const plusBtn = document.querySelector('.plus');
     const minusBtn = document.querySelector('.minus');
     const resultSpan = document.querySelector('#result');
+    const priceSpan = document.querySelector('#price');
+    
+    const resultValue = parseInt(resultSpan.textContent);
+    const priceValue = parseInt(priceSpan.textContent);
+    
     const menuQuantityInput = document.querySelector('#menuQuantity');
     
     plusBtn.addEventListener('click', () => {
@@ -255,6 +286,7 @@ function modi() {
         quantity++;
         resultSpan.textContent = quantity;
         menuQuantityInput.value = quantity;
+        priceSpan.textContent = quantity*priceValue;
     });
     
     minusBtn.addEventListener('click', () => {
@@ -263,61 +295,13 @@ function modi() {
             quantity--;
             resultSpan.textContent = quantity;
             menuQuantityInput.value = quantity;
+            priceSpan.textContent = quantity*priceValue;
         }
     });
-    
-    function addToCart(event) {
-        event.preventDefault();
-        // TODO: 카트에 추가하는 로직 작성
-        location.href='addCart';
-    }
-</script>
-
->>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
-<script>
-	function modi() {
-<<<<<<< HEAD
-		  const modibtn = document.getElementById('modibtn');
-		  const username = '<%= session.getAttribute("username") %>';
-	
-		  if (username !== 'admin') {
-		    modibtn.style.display = 'none';
-		  }
-	
-		  // 버튼 클릭 시 실행할 동작 추가
-		  location.href = 'modifyMenu?id=${menu.id}';
-		}
-
 </script>
 
 <script>
-
-	/* 수량 증감, 감소 */
-
-    let plus = document.querySelector(".plus");
-	let minus = document.querySelector(".minus");
-	let result = document.querySelector("#result");
-	let totalcost = document.querySelector('.totalcost');
-	let i = 1;
-	plus.addEventListener("click", () => {
-		i++
-		result.textContent = i;
-	})
-	
-	minus.addEventListener("click", () => {
-		if(i>1) {
-			i--
-			result.textContent = i;
-		}
-		
-	})
-</script>
-=======
-		location.href='modifyMenu?id=${menu.id}';}
-</script>
-
-<script>
-        function modi2() {
+        function modi() {
             document.addEventListener('DOMContentLoaded', function() {
                 const modibtn = document.getElementById('modi-btn');
                 const username = ${sessionScope.username};
@@ -332,24 +316,6 @@ function modi() {
         }
 </script>
 
-
-<!-- 
-<script>
-     function modi2() {
-        const modibtn = document.getElementById('modi-btn');
-        
-        if (${sessionScope.username} == 'admin') {
-            modibtn.style.display = 'block';
-        } else {
-           modibtn.style.display = 'none';
-        }
-        	
-    }
-</script>
- -->
->>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
-
-
 <script>
    function listnum(){
       if(${sessionScope.listnum} == '1'){
@@ -358,10 +324,11 @@ function modi() {
       }else if(${sessionScope.listnum} == '2'){
          history.go(-2);
       }else if(${sessionScope.listnum} == '3'){   
-         history.go(-3);
+         history.go(-2);
       }
    }
 </script>
+				
 				
 
 <%@ include file="/resources/include/footer.jsp"%>

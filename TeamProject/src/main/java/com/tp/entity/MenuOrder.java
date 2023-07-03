@@ -29,7 +29,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "menuOrder")
-@Builder
 public class MenuOrder {
 	
 	@Id
@@ -43,9 +42,9 @@ public class MenuOrder {
 	@Column
 	private int quantity;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "menuId")
-	private List<Menu> menu = new ArrayList<Menu>();
+	private Menu menu;
 	
 	
 	@ManyToMany(fetch = FetchType.LAZY)

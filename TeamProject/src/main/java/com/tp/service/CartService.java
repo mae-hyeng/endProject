@@ -1,11 +1,15 @@
 package com.tp.service;
-//
-//<<<<<<< HEAD
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.apache.catalina.User;
 //import java.util.List;
 //
 import org.springframework.stereotype.Service;
 
 import com.tp.entity.Cart;
+import com.tp.entity.UserEntity;
 //
 //import com.tp.entity.Cart;
 //import com.tp.entity.MenuOrder;
@@ -22,19 +26,38 @@ public class CartService {
 //	
 	private final CartRepository cartRepository;
 	
+	@Transactional
+	public List<Cart> cartUsername(UserEntity user) {
+		return cartRepository.findByUserName(user);
+	}
 //	
 //
 //	
 //	//전체 주문 조회
-//	public List<Cart> cartAll() {
-//		return cartRepository.findAll();
-//	}
+	@Transactional
+	public List<Cart> cartAll() {
+		return cartRepository.findAll();
+	}
 //	
 //	
 	public void cartSave(Cart cart) {
 		cartRepository.save(cart);
 	}
+
+	@Transactional
+	public void deleteCartMenu(List<Long> ids) {
+	    if (!ids.isEmpty()) {
+	        cartRepository.deleteByIdIn(ids);
+	    }
+	}
+
+
 }
+
+//	public List<Cart> findSame(String menuname) {
+//		return cartRepository.findByMenuName(menuname);
+//	}
+
 //
 //}
 //=======
@@ -156,4 +179,3 @@ public class CartService {
 //        }
 //    }
 //	
-//}

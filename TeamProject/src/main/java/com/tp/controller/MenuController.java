@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tp.entity.Cart;
 import com.tp.entity.Menu;
@@ -78,6 +79,10 @@ public class MenuController {
 			   HttpServletResponse res, HttpSession session) {
 		   model.addAttribute("menu",menuService.selectOne(id));
 		   
+		   String username = (String)session.getAttribute("username");
+		 	  
+		   session.setAttribute("order", username);
+		   
 		   if(session.getAttribute("listnum_mo") != null) {
 			   session.setAttribute("listnum", 3);
 			   session.removeAttribute("listnum_mo");
@@ -97,13 +102,8 @@ public class MenuController {
 	   //게시물 수정
 	   @GetMapping("/modifyMenu")
 	   public String modify(@RequestParam Long id, Model model, HttpSession session) {
-<<<<<<< HEAD
-		   session.setAttribute("listnum", 2);
-		   
-=======
 		   String username = (String) session.getAttribute("username");
 		   session.setAttribute("listnum", 2);
->>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
 		   model.addAttribute("menu",menuService.selectOne(id));
 		   return "menu/menu_modify";
 	   }
@@ -116,57 +116,61 @@ public class MenuController {
 		   return "redirect:/menuContent?id="+menu.getId();
 	   }
 	   
-<<<<<<< HEAD
+
+//	   @GetMapping("drinkOrder")
+//	   public String drinkOrderG(
+//			   @RequestParam("menuName") String menuname, 
+//			   HttpSession session,
+//			   RedirectAttributes rttr) {
+//		   
+//		   
+//	 	 
+//		   return "drink/drinkOrder";  
+//	   }
 	   
-=======
+	   @PostMapping("/drinkOrder")
+	   public String drinkOrderP(Model model, HttpSession session, UserEntity user,
+			   Cart cart,
+			   RedirectAttributes rttr,
+			   @RequestParam("quantity") Integer quantity,
+			   @RequestParam("id") Long id,
+			   @RequestParam("menuName") String menuname) {
+		   
+			
+	 	   String username = (String)session.getAttribute("username");
+	 	   Integer menuOrder = (Integer)session.getAttribute(menuname);
 
-	   @GetMapping("drinkOrder")
-	   public String drinkOrderG(@RequestParam("id") Long id,
-	 		  @RequestParam("quantity") Integer quantity,
-	 		  Model model,
-	 		  MenuOrder order, 
-	 		  UserEntity user,
-	 		  Cart cart,
-	 		  HttpSession session) {
+	 	   if(username != null && menuOrder == null) {
+	 	 	  user = userService.UserInfo(username);
 
-	 	  String username = (String)session.getAttribute("username");
-
-	 	  user = userService.UserInfo(username);
-	 	  if(username != null) {
-	 		 user = userService.UserInfo(username);
-
-	 		 cart = Cart.builder()
-	 				 .quantity(quantity)
-	 				 .menu(menuService.selectOne(id))
-	 				 .user(user)
-	 				 .build();
-	 		 
-//	 		  order = MenuOrder.builder()
-//	 		            .quantity(quantity)
-//	 		            .menu(menuService.selectOne(id))
-////	 		            .user(user)
-//	 		            .build();
+	 	 	  cart = Cart.builder()
+	 	 			  .quantity(quantity)
+	 	 			  .menu(menuService.selectOne(id))
+	 	 			  .user(user)
+	 	 			  .build();
 
 
-	 		  System.out.println("user : " + user);
-
-
-	 		  cartService.cartSave(cart);
-	 		  model.addAttribute("cart", cart);
-//	 		  cartService.(cart);
-	 		  System.out.println("order : " + cart);
-
-	 		  return "drink/drinkOrder"; 
-	 	  }else {
-	 		  return "redirect:/sessionover";
+	 	 	  cartService.cartSave(cart);
+	 	 	  model.addAttribute("cart", cart);	 
+	 	 	  
+	 	 	  session.setAttribute(menuname, 1);
+	 	 	  
+	 	 	  rttr.addFlashAttribute("order", "OK");
+	 		  
+	 		  
+	 	 	  return "redirect:/orderResult"; 
+	 	  }else if(username == null){
+	 		  rttr.addFlashAttribute("order", "login");
+	 		  return "redirect:/orderResult";
+	 	  } else {
+	 		  return "redirect:/orderResult";
 	 	  }
-
 	   }
 	   
-	   @PostMapping("drinkOrder")
-	   public String drinkOrderP() {
-		   return "redirect:/menu";
-	   }
->>>>>>> branch 'main' of https://github.com/mae-hyeng/endProject.git
+	   @RequestMapping("/orderResult")
+		public String orderResult() {
+			
+			return "menu/orderRttr";
+		}
 	   
 }

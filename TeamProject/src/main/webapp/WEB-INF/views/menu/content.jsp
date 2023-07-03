@@ -254,21 +254,21 @@ ul, li {
 					<hr>
 					<br>
 					<div class="num">
-					    <span style="font-size: 20px;">주문하기</span>
+					    <b><span style="font-size: 18px;">주문하기</span></b>
 					    <form name="regForm" id="regForm" action="drinkOrder" method="post">
-						    <div class="quantity" id="quantity">
-						        <button style="all: unset" "class="minus" type="button">-</button>
+						    <div style="margin-left: 4px;" class="quantity" id="quantity"><br>
+						        <button style="border: none; border-radius: 10px;" class="minus" type="button">-</button>
 						        <span id="result">1</span>
-						        <button style="all: unset" class="plus" type="button">+</button>
-						        <br>
-						        <a>금액 : </a><span id ="price">${menu.price }</span>원
+						        <button style="border: none; border-radius: 10px;" style="all: unset" class="plus" type="button">+</button>
+						        <br><br>
+						        <a style="font-size: 17px;">금액 : </a><span id ="price" style="font-size: 17px;">${menu.price }</span>원
 						    </div>
 
 						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
 						    <input type="hidden" id="menuQuantity" name="quantity" value="1">
 						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }><br>						    
-						    <input type="button" id="confirm" onclick="go()" value = "장바구니 담기">
-						    <input type="button" id="confirm" onclick="location.href='/cart';" value = "바로 주문하기">
+						    <input type="button" style="background: #ffffff;" id="confirm" onclick="go()" value = "장바구니 담기">
+						    <input type="button" style="background: #ffffff;" id="confirm" onclick="location.href='/cart';" value = "바로 주문하기">
 						</form>
 			       	</div>
 				

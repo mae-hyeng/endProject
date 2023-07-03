@@ -2,6 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@include file ="/resources/include/header.jsp" %>
 
+<style>
+.button-container {
+   display: flex;
+   justify-content: center;
+}
+</style>
+
 <div class="login-box">
   <h2>회원정보 수정</h2>
   <form name="regForm" action="update" method="post">
@@ -35,10 +42,10 @@
       <input type="text" name="address" value="${user.getAddress() }" required="true">
       <label>주소를 입력하세요</label>
     </div>		
-<div>
+	<div class="button-container">
             <input type="button" value="정보수정" class="btn first" onclick=check()>
             <input type="button" value="마이페이지" class="btn second" onclick="location.href='mypage'">
-</div>
+	</div>
   </form>
 </div>
  <script>

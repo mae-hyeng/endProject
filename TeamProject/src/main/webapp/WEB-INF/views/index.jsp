@@ -61,23 +61,6 @@ ul, li {
    display: block;
 }
 
-#to-top {
-  width: 42px;
-  height: 42px;
-  background-color: #333;
-  color: #fff;
-  border: 2px solid #fff;
-  border-radius: 10px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 9;
-}
-
 .swiper {
 	margin: 270px;
 	width: 1000px;
@@ -159,7 +142,7 @@ ul, li {
     
        <div id="layoutSidenav">
 
-		<div id="layoutSidenav_nav" style="margin-left: 50px">
+		<div id="layoutSidenav_nav" style="margin-left: 130px">
 			<ul class="menu">
 				<li class="menu-item2">
 		            <h2 class="menu-link2">MENU</h2>
@@ -215,10 +198,6 @@ ul, li {
 		 
 	   </div>
    </main>
-   
-   	<div id="to-top">
-		<div class="material-icons">top</div>
-	</div>
 
        
 <footer style="background-color:#FFFFFF">
@@ -271,24 +250,6 @@ slidesPerView: 1,
 
 </script>
 
-
-<script>
-$(function() { // 보이기 | 숨기기
-	$(window).scroll(function() {
-    if ($(this).scrollTop() > 250) { //250 넘으면 버튼이 보여짐니다. 
-      $('#to-top').fadeIn();
-    } else {
-      $('#to-top').fadeOut();
-    }
-  }); // 버튼 클릭시 
-  $("#to-top").click(function() { 
-  	$('html, body').animate({ scrollTop : 0 // 0 까지 animation 이동합니다. 
-  	}, 400); // 속도 400 
-  	return false; 
-  }); 
-});
-
-</script>
 
     </body>
 </html>

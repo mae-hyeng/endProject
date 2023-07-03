@@ -110,12 +110,17 @@ ul, li {
                 <div class="#">
                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                    <div class="sb-sidenav-menu-heading">WRITE</div>
-                       <a class="nav-link" href="/menuRegister">
-                           메뉴 등록
-                       </a>
+                   
+                   <div>
+                   	  <%
+					    String username = (String) session.getAttribute("username");
+					    String displayStyle = (username != null && username.equals("admin")) ? "block" : "none";
+					  %>
+                       <a class="nav-link" style="display: <%= displayStyle %>" id="orderList" href="/orderList">주문 리스트</a>
+                   </div>
                    <c:choose>
                    <c:when test="${sessionScope.username==null}">
-                    <span style="color: white; font-size: 22px;" >로그인을 해주세요</span>
+                    <span style="color: white; font-size: 22px;" >로그인을 해주세요</span> 
                    </c:when>
                    <c:when test="${sessionScope.username!=null}">
                     <span style="color: white; font-size: 22px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
@@ -197,10 +202,10 @@ ul, li {
 	    </div>
 		
 	    <div id="content" style="margin-top: 10px;">
-	     
 	          
 		 
 	   </div>
+	   
    </main>
    
    	<div id="to-top">
@@ -267,6 +272,22 @@ $(function() { // 보이기 | 숨기기
   }); 
 });
 
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const orderList = document.getElementById('orderList');
+        const username = '<%= session.getAttribute("username") %>';
+        
+        if (username !== 'admin') {
+            orderList.style.display = 'none';
+        }
+        
+        orderList.addEventListener('click', function() {
+            location.href = 'orderList';
+        });
+    });
+    
 </script>
 
     </body>

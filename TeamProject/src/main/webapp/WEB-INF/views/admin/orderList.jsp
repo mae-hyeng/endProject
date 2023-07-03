@@ -190,9 +190,10 @@ td {
 				<thead>
 				    <tr>
 				        <td><input type="checkbox" id="selectAllCheckbox"></td>
-				        <td colspan="2">상품정보</td>
+				        <td colspan="2">메뉴</td>
 				        <td colspan="2">수량</td>
 				        <td>가격</td>
+				        <td>주문자</td>
 				    </tr>
 				</thead>
 				<tbody>
@@ -202,6 +203,7 @@ td {
 						    <td>${item.menu.name}</td>
 						    <td colspan="2">${item.quantity}</td>
 						    <td>${item.menu.price*item.quantity}</td>
+						    <td>${item.user.username }</td>
 						</tr>
 
 				    </c:forEach>
@@ -218,76 +220,15 @@ td {
 				                <a>총 수량 : <span id="totalQuantity"></span></a>
 				            </td>
 				            <td colspan="2">
-				                <a>총 금액 : <span id="totalPrice"></span></a>
+				                <a>총 매출액 : <span id="totalPrice"></span></a>
 		          	  		</td>
 					    </tr>
 				</tfoot>	
             
         </table>
         <div class="cart__mainbtns">
-            <button class="cart__bigorderbtn left" onclick="location.href='menu'">주문 추가하기</button>
-            <button class="cart__bigorderbtn right" onclick="location.href='cart'">주문하기</button>
+            <button class="cart__bigorderbtn left" onclick="location.href='/'">처음으로</button>
+            <button class="cart__bigorderbtn right" onclick="location.href='cart'">이 자리엔 뭐가...</button>
         </div>
     </section>
 </body>
-
-
-<script>
-    
-    // 체크박스 전체 선택
-    const selectAllCheckbox = document.querySelector('#selectAllCheckbox');
-    const itemCheckboxes = document.querySelectorAll('.itemCheckbox');
-    
-    selectAllCheckbox.addEventListener('change', function() {
-        itemCheckboxes.forEach(function(checkbox) {
-            checkbox.checked = selectAllCheckbox.checked;
-        });
-    });
-    
-    // 삭제 버튼 요소 가져오기
-    const deleteButton = document.querySelector('.deleteCartButton');
-
- 	// 삭제 버튼에 클릭 이벤트 리스너 추가
-    deleteButton.addEventListener('click', function() {
-        const checkedItems = document.querySelectorAll('.itemCheckbox:checked');
-        const selectedIds = Array.from(checkedItems).map(function(checkbox) {
-            return checkbox.dataset.itemId;
-        });
-
-        if (selectedIds.length === 0) {
-            alert("선택된 항목이 없습니다.");
-            return;
-        }
-
-        const confirmation = confirm("선택한 항목을 삭제하시겠습니까?");
-        if (confirmation) {
-            deleteCartMenu(selectedIds);
-        }
-    });
-
-    function deleteCartMenu(selectedIds) {
-        fetch('/deleteCartMenu', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(selectedIds),
-        })
-        .then(function(response) {
-            if (response.ok) {
-                return response.text();
-            } else {
-                throw new Error('선택한 상품을 삭제하는 데 실패했습니다.');
-            }
-        })
-        .then(function(data) {
-            alert(data);	
-            location.reload();
-        })
-        .catch(function(error) {
-            console.error(error);
-        });
-    }
-
-</script>
-</html>

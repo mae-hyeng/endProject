@@ -1,10 +1,15 @@
 package com.tp.service;
 
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tp.entity.AdminUser;
+import com.tp.entity.Cart;
 import com.tp.repository.AdminUserRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +20,9 @@ public class AdminUserService {
 
 	@Autowired
 	AdminUserRepository adminUserRepository;
+	
+	@Autowired
+	CartService cartService;
 
 	public int loginCheck(final String username, final String password) {
 		int result = 0;
@@ -27,5 +35,10 @@ public class AdminUserService {
 			result = 2;
 		}
 		return result;
+	}
+	
+	@Transactional
+	public List<Cart> orderAll(){
+		return cartService.cartAll();
 	}
 }

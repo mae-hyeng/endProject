@@ -301,19 +301,20 @@ function go() {
 </script>
 
 <script>
-        function modi() {
-            document.addEventListener('DOMContentLoaded', function() {
-                const modibtn = document.getElementById('modi-btn');
-                const username = ${sessionScope.username};
-                if (username != 'admin') {
-                    modibtn.style.display = 'none';
-                } else {
-                    modibtn.style.display = 'block';
-                }
-            });
-            // 버튼 클릭 시 실행할 동작 추가
-            location.href='modifyMenu?id=${menu.id}';}
+    document.addEventListener('DOMContentLoaded', function() {
+        const modibtn = document.getElementById('modibtn');
+        const username = '<%= session.getAttribute("username") %>';
+        
+        if (username !== 'admin') {
+            modibtn.style.display = 'none';
         }
+        
+        modibtn.addEventListener('click', function() {
+            location.href = 'modifyMenu?id=${menu.id}';
+        });
+    });
+    
+    
 </script>
 
 <script>

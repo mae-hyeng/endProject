@@ -207,15 +207,7 @@ ul, li {
 		<div class="material-icons">top</div>
 	</div>
 
-       
-<footer style="background-color:#FFFFFF">
-    <div class="container-fluid px-4" >
-        <div class="d-flex align-items-center justify-content-between small" >
-        <div class="text-muted" >2023.04.19 </div>
-        <div class="text-muted" >Team By 더 이상의 유기는 없다</div>
-		</div>
-	</div>
-</footer>
+
 
 
 

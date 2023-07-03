@@ -191,32 +191,5 @@ $(".video_modal_popup-closer").click(function() {
                 </div>
             </form>
         </nav>
- 	<!-- 사이드 네비 -->
  	
- 	        <div id="layoutSidenav">
-           <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                        
-                            
-                            <div class="sb-sidenav-menu-heading">WRITE</div>
-                            <a class="nav-link" href="/register">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                메뉴 등록
-                            </a>
-                            <div class="sb-sidenav-menu-heading"> <c:choose>
-                			   <c:when test="${sessionScope.username!=null}">
-                   				 <span style="color: white; font-size: 15px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
-                  				 </c:when>
-                  				 </c:choose>
-                 				 </div>
-                				 
-                            
-        						</div>
-        					</div>
-        					</nav>
-        				</div>
-        			</div>
-        				
 	  

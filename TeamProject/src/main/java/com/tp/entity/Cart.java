@@ -54,4 +54,3 @@ public class Cart {
 //	private List<MenuOrder> menuOrder;
 
 }
-

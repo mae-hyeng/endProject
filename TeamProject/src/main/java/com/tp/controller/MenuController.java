@@ -116,18 +116,6 @@ public class MenuController {
 		   return "redirect:/menuContent?id="+menu.getId();
 	   }
 	   
-
-//	   @GetMapping("drinkOrder")
-//	   public String drinkOrderG(
-//			   @RequestParam("menuName") String menuname, 
-//			   HttpSession session,
-//			   RedirectAttributes rttr) {
-//		   
-//		   
-//	 	 
-//		   return "drink/drinkOrder";  
-//	   }
-	   
 	   @PostMapping("drinkOrder")
 	   public String drinkOrderP(Model model, HttpSession session, UserEntity user,
 			   Cart cart,
@@ -173,3 +161,4 @@ public class MenuController {
 		}
 	   
 }
+

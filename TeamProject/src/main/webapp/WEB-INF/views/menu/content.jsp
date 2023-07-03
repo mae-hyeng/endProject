@@ -232,45 +232,46 @@
 					<pre>${menu.content }</pre>
 					<div class="num">
 					    <span>수량</span>
+<<<<<<< HEAD
 						<form name="regForm" action="drinkOrder" method="post">
+=======
+						<form name="regForm" id="regForm" action="drinkOrder" method="post">
+>>>>>>> 3ab9227aa4d1e093b31dbd624fd59a5e40bb4681
 						    <div class="quantity" id="quantity">
 						        <button class="minus" type="button">-</button>
 						        <span id="result">1</span>
 						        <button class="plus" type="button">+</button>
 						        <br>
+<<<<<<< HEAD
 						        <a>총 금액 : </a><span id ="price">${menu.price }</span>
+=======
+						        <a>금액 : </a><span id ="price">${menu.price }</span>
+>>>>>>> 3ab9227aa4d1e093b31dbd624fd59a5e40bb4681
 						    </div>
 						    
 						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
 						    <input type="hidden" id="menuQuantity" name="quantity" value="1">
 						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }>						    
+<<<<<<< HEAD
 						    <input type="button" id="confirm" onclick="go()" value = "확인">
+=======
+						    <input type="button" id="confirm" onclick="go()" value = "담기">
+>>>>>>> 3ab9227aa4d1e093b31dbd624fd59a5e40bb4681
 						</form>
 			       	</div>
 				
 					
 				<br>
-				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum();">
-                <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" value="수정" onclick="modi2()"></div>
+				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum()"></div>
+                <div>
+  					 <%
+					    String username = (String) session.getAttribute("username");
+					    String displayStyle = (username != null && username.equals("admin")) ? "block" : "none";
+					  %>
+  					 <button style="float: right; margin-right: 7px; padding: 6px 8px; display: <%= displayStyle %>" class="modi-btn" id="modibtn" onclick="modi()">수정</button>
+				</div>
 				
 			</main>			
-				
-<script>
-function modi() {
-		location.href='modifyMenu?id=${menu.id}';}
-</script>
-
-<!-- <script>
-function go() {
-    if (session.getAttribute("username") != null) {
-    	alert("ㅅㄱ");
-        location.href = "/menu";
-    } else {
-        regForm.submit();
-    }
-}
-
-</script> -->
 
 <script>
 function go() {
@@ -310,12 +311,7 @@ function go() {
 </script>
 
 <script>
-	function modi() {
-		location.href='modifyMenu?id=${menu.id}';}
-</script>
-
-<script>
-        function modi2() {
+        function modi() {
             document.addEventListener('DOMContentLoaded', function() {
                 const modibtn = document.getElementById('modi-btn');
                 const username = ${sessionScope.username};
@@ -329,23 +325,6 @@ function go() {
             location.href='modifyMenu?id=${menu.id}';}
         }
 </script>
-
-
-<!-- 
-<script>
-     function modi2() {
-        const modibtn = document.getElementById('modi-btn');
-        
-        if (${sessionScope.username} == 'admin') {
-            modibtn.style.display = 'block';
-        } else {
-           modibtn.style.display = 'none';
-        }
-        	
-    }
-</script>
- -->
-
 
 <script>
    function listnum(){

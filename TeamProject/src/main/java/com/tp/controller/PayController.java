@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tp.entity.UserEntity;
@@ -18,7 +19,9 @@ public class PayController {
 	UserService userService;
 	
 	@RequestMapping("/cart")
-	public String cart(HttpSession session) {
+	public String cart(HttpSession session,
+			@RequestParam("QuantitySum") Integer totalQuantity,
+			@RequestParam("PriceSum") Integer PriceSum) {
 		
 		String username=(String)session.getAttribute("username");
 		if(username!=null) {

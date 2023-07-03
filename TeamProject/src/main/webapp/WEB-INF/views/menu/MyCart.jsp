@@ -190,47 +190,58 @@ td {
 				<thead>
 				    <tr>
 				        <td><input type="checkbox" id="selectAllCheckbox"></td>
-				        <td colspan="2">상품정보</td>
-				        <td colspan="2">수량</td>
+				        <td>상품정보</td>
+				        <td>수량</td>
 				        <td>가격</td>
 				    </tr>
 				</thead>
 				<tbody>
 				    <c:forEach items="${list2}" var="item">
 						<tr>
-						    <td colspan="2"><input type="checkbox" class="itemCheckbox" data-item-id="${item.id}"></td>
+						    <td><input type="checkbox" class="itemCheckbox" data-item-id="${item.id}"></td>
 						    <td>${item.menu.name}</td>
-						    <td id="quantity" class="quantity" colspan="2">${item.quantity}</td>
+						    <td id="quantity" class="quantity">${item.quantity}</td>
 						    <td id="price" class = "price">${item.menu.price*item.quantity}</td>
 						</tr>
-
 				    </c:forEach>
+				    <tr>
+					        <td></td>
+					        <td>
+					        <td>총 수량</td>
+					        <td>총 금액</td>
+					    </tr>
 					</tbody>
 
 				<tfoot>
-				
 					    <tr>
-					        <td colspan="3">
-					            <button class="deleteCartButton">선택상품 삭제</button>
-					            <button class="cart_list_optionbtn">선택상품 찜</button>
-					        </td>
 					        <td>
-					        	<a>총 수량 : <span id="totalQuantity"></span></a>
+					        <form name="regForm" action="/cart" method="post">
+							    <input type="text" name="PriceSum" id="PriceSum" value="">
+							    <input type="text" name="QuantitySum" id="QuantitySum" value="">
+							</form>
+					            <button class="deleteCartButton">선택상품 삭제</button>
 					        </td>
-					        <td colspan="2">
-					        	<a>총 금액 : <span id="totalPrice"></span></a>
+					        <td></td>
+					        <td id="totalQuantity"></td>
+					        <td id="totalPrice"></td>
 					    </tr>
-				</tfoot>	
+				</tfoot>
+						
             
         </table>
+        
         <div class="cart__mainbtns">
             <button class="cart__bigorderbtn left" onclick="location.href='menu'">주문 추가하기</button>
-            <button class="cart__bigorderbtn right" onclick="location.href='cart'">주문하기</button>
+            <button class="cart__bigorderbtn right" onclick="order()">주문하기</button>
         </div>
     </section>
 </body>
 
-
+<script>
+function order() {
+	regForm.submit();
+}
+</script>
 
 <script>
     
@@ -295,24 +306,35 @@ td {
 function totalP() {
 	var totalPrice = 0;
 	var totalQuantity = 0;
+	var checkbox = document.getElementsByClassName("itemCheckbox");
+	var checkboxAll = document.getElementsByClassName("selectAllCheckbox");
 	var priceElements = document.getElementsByClassName("price");
 	var quantityElements = document.getElementsByClassName("quantity");
 	
-	// 각 가격 값들을 더함
-	for (var i = 0; i < priceElements.length; i++) {
+	for (var i = 0; i < checkbox.length; i++) {
+	  if (checkbox[i].checked || checkboxAll.checked) {
 	    var price = parseInt(priceElements[i].innerText);
 	    totalPrice += price;
-	}
-	for (var i = 0; i < quantityElements.length; i++) {
 	    var quantity = parseInt(quantityElements[i].innerText);
 	    totalQuantity += quantity;
+	  }
 	}
+	
 	var totalPriceElement = document.getElementById("totalPrice");
 	var totalQuantityElement = document.getElementById("totalQuantity");
-    totalPriceElement.innerText = totalPrice;
-    totalQuantityElement.innerText = totalQuantity;
+	totalPriceElement.innerText = totalPrice;
+	totalQuantityElement.innerText = totalQuantity;
+	
+	var totalPriceInput = document.getElementById("PriceSum");
+    var totalQuantityInput = document.getElementById("QuantitySum");
+    totalPriceInput.value = totalPrice;
+    totalQuantityInput.value = totalQuantity;
 }
-window.onload=totalP;
-	     
+
+var checkboxes = document.getElementsByClassName("itemCheckbox");
+for (var i = 0; i < checkboxes.length; i++) {
+  checkboxes[i].addEventListener("change", totalP);
+}
 </script>
+
 </html>

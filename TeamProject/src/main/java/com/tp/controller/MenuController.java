@@ -118,42 +118,35 @@ public class MenuController {
 
 	   
 	   @PostMapping("/drinkOrder")
-	   public String drinkOrderP(Model model, HttpSession session, UserEntity user,
-			   Cart cart,
-			   RedirectAttributes rttr,
-			   @RequestParam("quantity") Integer quantity,
-			   @RequestParam("id") Long id,
-			   @RequestParam("menuName") String menuname) {
-		   
-			
-	 	   String username = (String)session.getAttribute("username");
-	 	   Integer menuOrder = (Integer)session.getAttribute(menuname);
+		public String drinkOrderP(Model model, HttpSession session, UserEntity user, Cart cart, RedirectAttributes rttr,
+				@RequestParam("quantity") Integer quantity, @RequestParam("id") Long id,
+				@RequestParam("menuName") String menuname) {
 
-	 	   if(username != null && menuOrder == null) {
-	 	 	  user = userService.UserInfo(username);
+			String username = (String) session.getAttribute("username");
+			Integer menuOrder = (Integer) session.getAttribute(menuname);
 
-	 	 	  cart = Cart.builder()
-	 	 			  .quantity(quantity)
-	 	 			  .menu(menuService.selectOne(id))
-	 	 			  .user(user)
-	 	 			  .build();
+			if (username != null) {
+				user = userService.UserInfo(username);
+				cart = cartService.getCartByUserAndMenu(user, menuService.selectOne(id));
 
+				if (cart == null) {
+					cart = Cart.builder().quantity(quantity).menu(menuService.selectOne(id)).user(user).build();
 
-	 	 	  cartService.cartSave(cart);
-	 	 	  model.addAttribute("cart", cart);	 
-	 	 	  
-	 	 	  session.setAttribute(menuname, 1);
-	 	 	  
-	 	 	  rttr.addFlashAttribute("order", "OK");
-	 		  
-	 		  
-	 	 	  return "redirect:/orderResult"; 
-	 	  }else if(username == null){
-	 		  rttr.addFlashAttribute("order", "login");
-	 		  return "redirect:/orderResult";
-	 	  } else {
-	 		  return "redirect:/orderResult";
-	 	  }
+					cartService.cartSave(cart);
+					session.setAttribute(menuname, 1);
+				} else {
+					cart.setQuantity(cart.getQuantity() + quantity);
+					cartService.cartSave(cart);
+				}
+
+				model.addAttribute("cart", cart);
+				rttr.addFlashAttribute("order", "OK");
+				return "redirect:/orderResult";
+			} else {
+				rttr.addFlashAttribute("order", "login");
+				return "redirect:/orderResult";
+			}
+
 	   }
 	   
 	   @RequestMapping("/orderResult")

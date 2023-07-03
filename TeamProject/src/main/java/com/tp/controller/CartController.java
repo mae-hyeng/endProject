@@ -58,6 +58,10 @@ public class CartController {
 		
 		String username = (String)session.getAttribute("username");
 		
+		System.out.println("list : "+list);
+		
+		System.out.println(username);
+		
 		for(int i=0; i<list.size(); i++) {
 			if(username.equals(list.get(i).getUser().getUsername())) {
 				list2.add(list.get(i));

@@ -30,7 +30,6 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Service
 @Data
 @Table(name = "cart")
 public class Cart {
@@ -42,7 +41,7 @@ public class Cart {
 	@Column
 	private int quantity;
 	
-	@OneToOne(fetch = FetchType.EAGER)	
+	@OneToOne(fetch = FetchType.LAZY)	
 	@JoinColumn(name = "userName")
 	private UserEntity user;
 	
@@ -55,4 +54,3 @@ public class Cart {
 //	private List<MenuOrder> menuOrder;
 
 }
-

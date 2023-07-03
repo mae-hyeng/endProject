@@ -234,11 +234,12 @@ td {
 				</tbody>
 				<tfoot>
 				    <tr>
-				        <td colspan="2"></td>
+				        <td colspan="2">
 				        <form name="regForm" action="/cart" method="post">
 						    <input type="hidden" name="PriceSum" id="PriceSum" value="">
 						    <input type="hidden" name="QuantitySum" id="QuantitySum" value="">
 						</form>
+						</td>
 				        <td colspan="2"></td>
 				        <td id="totalQuantity"></td>
 				        <td colspan="2" id="totalPrice"></td>
@@ -348,7 +349,7 @@ function totalP() {
 	    totalQuantity += quantity;
 	  }
 	}
-	
+
 	var totalPriceElement = document.getElementById("totalPrice");
 	var totalQuantityElement = document.getElementById("totalQuantity");
 	totalPriceElement.innerText = totalPrice;

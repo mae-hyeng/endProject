@@ -54,11 +54,11 @@ public class PayController {
 		
 		user = userService.UserInfo(username);
 		
-		menuOrder = MenuOrder.builder()			
-				.cart(cart)
-				.user(user)
-				.menu(menu)
-				.build();
+//		menuOrder = MenuOrder.builder()			
+//				.cart(cart)
+//				.user(user)
+//				.menu(menu)
+//				.build();
 		
 		return "/pay/success";
 	}

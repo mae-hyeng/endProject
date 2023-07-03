@@ -30,14 +30,12 @@ import lombok.NoArgsConstructor;
 @Entity(name = "user")
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
 public class UserEntity extends BaseTimeEntity{
-	
-	
-	 
+
+	 @Id // 기본키(Primary key)
 	 @GeneratedValue(generator = "system-uuid")
 	 @GenericGenerator(name="system-uuid", strategy = "uuid")
 	 private String id;
 	 @Column(length = 30, nullable=false)
-	 @Id // 기본키(Primary key)
 	 private String username;
 	 @Column
 	 private String password;

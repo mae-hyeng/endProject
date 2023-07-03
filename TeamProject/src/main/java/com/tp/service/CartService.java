@@ -47,6 +47,10 @@ public class CartService {
 	        cartRepository.deleteByIdIn(ids);
 	    }
 	}
+	
+	public Cart getCartByUserAndMenu(UserEntity user, Menu menu) {
+	    return cartRepository.findByUserAndMenu(user, menu);
+    }
 
 
 }

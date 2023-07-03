@@ -159,6 +159,40 @@
 .scroll::-webkit-scrollbar {
 	display: none;
 }
+
+.menu {
+	margin-top: 150px;
+}
+
+.menu-item {
+  background-color: #ffffff;
+  flex-grow: 1;
+  transition: 0.5s;
+}
+.menu-item:hover {
+  background-color: crimson;
+  flex-grow: 1.2;
+}
+.menu-link {
+  /* block이면 마우스 클릭영역이 더 커짐, a태그는 inline으로서 클릭영역이 콘텐츠에 한정됨*/
+  display: block; 
+  padding: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  text-decoration: none;
+  text-align: center;
+}
+.menu-link:hover {
+  color: white;
+}
+
+ul, li {
+  list-style:none;
+} 
+
+
+
 </style>
 
 
@@ -167,100 +201,89 @@
 <body class="">
 	<div id="layoutSidenav">
 
-		<div id="layoutSidenav_nav">
-			<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-				<div class="sb-sidenav-menu">
-					<div class="nav">
-						<div class="sb-sidenav-menu-heading">All</div>
-						<a class="nav-link" href="/menu">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 전체 메뉴
-						</a>
-						<div class="sb-sidenav-menu-heading">DRINK</div>
-						<a class="nav-link" href="/drink">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 메뉴 등록
-						</a>
-
-						<div class="sb-sidenav-menu-heading">
-							<c:choose>
-								<c:when test="${sessionScope.username!=null}">
-									<span style="color: white; font-size: 15px;">${sessionScope.username }</span>
-								</c:when>
-							</c:choose>
-						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-book-open"></i>
-							</div> 멤버
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-								<nav class="sb-sidenav-menu-nested nav">
-									<c:choose>
-										<c:when test="${sessionScope.username==null}">
-											<a class="nav-link" href="aaminLogin">로그인</a>
-										</c:when>
-									</c:choose>
-									<a class="nav-link" href="mypage">마이페이지 이동</a> <a class="nav-link" href="update">내 정보변경</a> <a class="nav-link" href="pwupdate">비밀번호 변경</a> <a class="nav-link" href="logout">로그아웃</a>
-								</nav>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</nav>
-		</div>
+		<div id="layoutSidenav_nav" style="margin-left: 50px">
+			<ul class="menu">
+		        <li class="menu-item">
+		            <a href="menu" class="menu-link">All</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="coffee" class="menu-link">COFFEE</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="milkTea" class="menu-link">MILK TEA & LATTE</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="juice" class="menu-link">JUICE & DRINK</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="smoothie" class="menu-link">SMOOTHIE</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="tea" class="menu-link">TEA & ADE</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="bread" class="menu-link">BREAD</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="dessert" class="menu-link">DESSERT</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="md" class="menu-link">MD</a>
+		        </li>
+		    </ul>
+		</div>	
+				
+		
 
 		<div id="layoutSidenav_content" style="bottom: 56px;">
 
 			<main class="min-width">
 				
 				
-				<a style="font-size: 50px">${menu.type}</a>
+				<a style="font-size: 20px">${menu.type}</a>
 				<br><br>		
-				<h2>${menu.name }</h2>
+				<h1>${menu.name }</h1>
 				<br>
 					<c:if test="${not empty menu.filename }">
 						<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
 						<br>
 					</c:if>
-					<pre>${menu.content }</pre>
+					<br>
+					<p>${menu.content }</p>
+					<br>
+					<hr>
+					<br>
 					<div class="num">
-					    <span>수량</span>
-						<form name="regForm" id="regForm" action="drinkOrder" method="post">
+					    <span style="font-size: 20px;">주문하기</span>
+					    <form name="regForm" id="regForm" action="drinkOrder" method="post">
 						    <div class="quantity" id="quantity">
-						        <button class="minus" type="button">-</button>
+						        <button style="all: unset" "class="minus" type="button">-</button>
 						        <span id="result">1</span>
-						        <button class="plus" type="button">+</button>
+						        <button style="all: unset" class="plus" type="button">+</button>
 						        <br>
-						        <a>금액 : </a><span id ="price">${menu.price }</span>
+						        <a>금액 : </a><span id ="price">${menu.price }</span>원
 						    </div>
-						    
+
 						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
 						    <input type="hidden" id="menuQuantity" name="quantity" value="1">
-						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }>						    
-						    <input type="button" id="confirm" onclick="go()" value = "담기">
+						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }><br>						    
+						    <input type="button" id="confirm" onclick="go()" value = "장바구니 담기">
+						    <input type="button" id="confirm" onclick="location.href='/cart';" value = "바로 주문하기">
 						</form>
 			       	</div>
 				
 					
 				<br>
-				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum()"></div>
-                <div>
-  					 <%
+				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum();">
+                 <%
 					    String username = (String) session.getAttribute("username");
 					    String displayStyle = (username != null && username.equals("admin")) ? "block" : "none";
 					  %>
-  					 <button style="float: right; margin-right: 7px; padding: 6px 8px; display: <%= displayStyle %>" class="modi-btn" id="modibtn" onclick="modi()">수정</button>
-				</div>
+                <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" display: <%= displayStyle %> id="modibtn" value="수정" onclick="modi()"></div>
 				
-			</main>			
-
+			</main>
+	
+				
 <script>
 function go() {
 	regForm.submit();
@@ -301,20 +324,19 @@ function go() {
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const modibtn = document.getElementById('modibtn');
-        const username = '<%= session.getAttribute("username") %>';
-        
-        if (username !== 'admin') {
-            modibtn.style.display = 'none';
+        function modi() {
+            document.addEventListener('DOMContentLoaded', function() {
+                const modibtn = document.getElementById('modi-btn');
+                const username = ${sessionScope.username};
+                if (username != 'admin') {
+                    modibtn.style.display = 'none';
+                } else {
+                    modibtn.style.display = 'block';
+                }
+            });
+            // 버튼 클릭 시 실행할 동작 추가
+            location.href='modifyMenu?id=${menu.id}';}
         }
-        
-        modibtn.addEventListener('click', function() {
-            location.href = 'modifyMenu?id=${menu.id}';
-        });
-    });
-    
-    
 </script>
 
 <script>
@@ -329,7 +351,5 @@ function go() {
       }
    }
 </script>
-				
-				
 
 <%@ include file="/resources/include/footer.jsp"%>

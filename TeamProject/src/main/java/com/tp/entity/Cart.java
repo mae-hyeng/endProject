@@ -19,7 +19,6 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Service;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,9 +30,6 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-
-@Getter
-@Setter
 @Service
 @Data
 @Table(name = "cart")
@@ -50,7 +46,7 @@ public class Cart {
 	@JoinColumn(name = "userName")
 	private UserEntity user;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "menuId")
 	private Menu menu;
 	
@@ -59,3 +55,4 @@ public class Cart {
 //	private List<MenuOrder> menuOrder;
 
 }
+

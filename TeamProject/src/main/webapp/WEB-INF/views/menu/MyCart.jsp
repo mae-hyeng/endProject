@@ -69,6 +69,11 @@ thead {
 
 tbody {
   font-size: 12px;
+  text-align: center;
+}
+
+tfoot {
+	text-align: center;
 }
 
 td {
@@ -173,6 +178,14 @@ td {
   border: none;
 }
 
+.selectItem {
+	font-size: 14px;
+	margin-left: 33px;
+}
+.deleteItem {
+	margin-left: 20px;
+}
+
 
 
 </style>
@@ -186,50 +199,66 @@ td {
                 <li>오늘출발 상품은 판매자 설정 시점에 따라 오늘출발 여부가 변경될 수 있으니 주문 시 꼭 다시 확인해 주시기 바랍니다.</li>
             </ul>
         </div>
+        
+        <div>
+			
+		</div>
 	        <table class="cart__list">
 				<thead>
 				    <tr>
-				        <td><input type="checkbox" id="selectAllCheckbox"></td>
+				        <td colspan="2"></td>
+				        <td>이미지</td>
 				        <td>상품정보</td>
-				        <td>수량</td>
+				        <td colspan="2">수량</td>
 				        <td>가격</td>
 				    </tr>
-				</thead>
+			    </thead>
+
 				<tbody>
 				    <c:forEach items="${list2}" var="item">
 						<tr>
-						    <td><input type="checkbox" class="itemCheckbox" data-item-id="${item.id}"></td>
+						    <td colspan="2"><input type="checkbox" class="itemCheckbox" data-item-id="${item.id}"></td>
+						    <td><img style="width:auto" src="/resources/files/${item.menu.filename }"/></td>
 						    <td>${item.menu.name}</td>
-						    <td id="quantity" class="quantity">${item.quantity}</td>
-						    <td id="price" class = "price">${item.menu.price*item.quantity}</td>
+						    <td colspan="2" id="quantity" class="quantity">${item.quantity}</td>
+						    <td id="price" class="price">${item.menu.price*item.quantity}</td>
 						</tr>
+
 				    </c:forEach>
 				    <tr>
-					        <td></td>
-					        <td>
-					        <td>총 수량</td>
-					        <td>총 금액</td>
-					    </tr>
-					</tbody>
-
+				        <td colspan="2"></td>
+				        <td colspan="2"></td>
+				        <td>총 수량</td>
+			            <td colspan="2">총 금액</td>
+				    </tr>
+				</tbody>
 				<tfoot>
-					    <tr>
-					        <td>
-					        <form name="regForm" action="/cart" method="post">
-							    <input type="text" name="PriceSum" id="PriceSum" value="">
-							    <input type="text" name="QuantitySum" id="QuantitySum" value="">
-							</form>
-					            <button class="deleteCartButton">선택상품 삭제</button>
-					        </td>
-					        <td></td>
-					        <td id="totalQuantity"></td>
-					        <td id="totalPrice"></td>
-
-					    </tr>
+				    <tr>
+				        <td colspan="2"></td>
+				        <form name="regForm" action="/cart" method="post">
+						    <input type="hidden" name="PriceSum" id="PriceSum" value="">
+						    <input type="hidden" name="QuantitySum" id="QuantitySum" value="">
+						</form>
+				        <td colspan="2"></td>
+				        <td id="totalQuantity"></td>
+				        <td colspan="2" id="totalPrice"></td>
+				    </tr>
 				</tfoot>
-						
-            
+		
         </table>
+				
+				<br>
+				<div style="display: flex">
+				<div class="selectItem">
+				<input type="checkbox" id="selectAllCheckbox">
+	            </div>
+	            <div class="deleteItem">
+	            <button class="deleteCartButton">선택상품 삭제</button>
+				</div>
+				</div>
+        
+        <br>
+		
         
         <div class="cart__mainbtns">
             <button class="cart__bigorderbtn left" onclick="location.href='menu'">주문 추가하기</button>
@@ -237,7 +266,6 @@ td {
         </div>
     </section>
 </body>
-
 <script>
 function order() {
 	regForm.submit();

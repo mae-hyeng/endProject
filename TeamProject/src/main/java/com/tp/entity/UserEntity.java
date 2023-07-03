@@ -32,11 +32,12 @@ import lombok.NoArgsConstructor;
 public class UserEntity extends BaseTimeEntity{
 	
 	
-	 @Id // 기본키(Primary key)
+	 
 	 @GeneratedValue(generator = "system-uuid")
 	 @GenericGenerator(name="system-uuid", strategy = "uuid")
 	 private String id;
 	 @Column(length = 30, nullable=false)
+	 @Id // 기본키(Primary key)
 	 private String username;
 	 @Column
 	 private String password;
@@ -51,5 +52,6 @@ public class UserEntity extends BaseTimeEntity{
 	 
 //	 @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 //	 private List<Cart> cart;
-	 
+
 }
+

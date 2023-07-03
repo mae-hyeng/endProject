@@ -200,8 +200,8 @@ td {
 						<tr>
 						    <td colspan="2"><input type="checkbox" class="itemCheckbox" data-item-id="${item.id}"></td>
 						    <td>${item.menu.name}</td>
-						    <td colspan="2">${item.quantity}</td>
-						    <td>${item.menu.price*item.quantity}</td>
+						    <td id="quantity" class="quantity" colspan="2">${item.quantity}</td>
+						    <td id="price" class = "price">${item.menu.price*item.quantity}</td>
 						</tr>
 
 				    </c:forEach>
@@ -215,10 +215,10 @@ td {
 					            <button class="cart_list_optionbtn">선택상품 찜</button>
 					        </td>
 					        <td>
-					        	<a>총 수량 : </a>
+					        	<a>총 수량 : <span id="totalQuantity"></span></a>
 					        </td>
 					        <td colspan="2">
-					        	<a>총 금액 : </a>
+					        	<a>총 금액 : <span id="totalPrice"></span></a>
 					    </tr>
 				</tfoot>	
             
@@ -229,6 +229,9 @@ td {
         </div>
     </section>
 </body>
+
+
+
 <script>
     
     // 체크박스 전체 선택
@@ -286,5 +289,30 @@ td {
         });
     }
 
+</script>
+
+<script>
+function totalP() {
+	var totalPrice = 0;
+	var totalQuantity = 0;
+	var priceElements = document.getElementsByClassName("price");
+	var quantityElements = document.getElementsByClassName("quantity");
+	
+	// 각 가격 값들을 더함
+	for (var i = 0; i < priceElements.length; i++) {
+	    var price = parseInt(priceElements[i].innerText);
+	    totalPrice += price;
+	}
+	for (var i = 0; i < quantityElements.length; i++) {
+	    var quantity = parseInt(quantityElements[i].innerText);
+	    totalQuantity += quantity;
+	}
+	var totalPriceElement = document.getElementById("totalPrice");
+	var totalQuantityElement = document.getElementById("totalQuantity");
+    totalPriceElement.innerText = totalPrice;
+    totalQuantityElement.innerText = totalQuantity;
+}
+window.onload=totalP;
+	     
 </script>
 </html>

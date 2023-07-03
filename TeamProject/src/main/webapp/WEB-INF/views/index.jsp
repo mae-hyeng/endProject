@@ -79,7 +79,8 @@ ul, li {
 }
 
 .swiper {
-	margin: 250px 100px;
+	margin: 270px;
+	width: 1000px;
 }
  
 </style>
@@ -109,21 +110,26 @@ ul, li {
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="#">
                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                   <div class="sb-sidenav-menu-heading">WRITE</div>
-                   
-                   <div>
-                   	  <%
-					    String username = (String) session.getAttribute("username");
-					    String displayStyle = (username != null && username.equals("admin")) ? "block" : "none";
-					  %>
-                       <a class="nav-link" style="display: <%= displayStyle %>" id="orderList" href="/orderList">주문 리스트</a>
-                   </div>
+                
                    <c:choose>
                    <c:when test="${sessionScope.username==null}">
-                    <span style="color: white; font-size: 22px;" >로그인을 해주세요</span> 
+                    <span style="color: white; font-size: 18px;" >로그인을 해주세요</span>
                    </c:when>
                    <c:when test="${sessionScope.username!=null}">
-                    <span style="color: white; font-size: 22px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
+                    <span style="color: white; font-size: 18px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
+                    
+                    
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    
+                  <li><a class="dropdown-item" href="/mypage">장바구니</a></li>
+                        <li><a class="dropdown-item" href="/logout">구매내역</a></li>
+
+                    </ul>
+                </li>	
+                    
+                    
                    </c:when>
                    </c:choose>
                 <li class="nav-item dropdown">
@@ -140,7 +146,7 @@ ul, li {
                          </c:otherwise>
                     </c:choose>
                     </ul>
-                </li>
+                </li>	
             </ul>
                 </div>
             </form>
@@ -190,29 +196,35 @@ ul, li {
 	       <div class="swiper">
 	      <div class="swiper-wrapper">
 	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
+	        <div class="swiper-slide"><img src="resources/person1.png" alt=""></div>
+	        <div class="swiper-slide"><img src="resources/person2.png" alt=""></div>
 	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/라일락블라썸티.jpg" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/캐모마일릴렉서.jpg" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/라일락블라썸티.jpg" alt=""></div>
+	        
 	      </div>
 	      <div class="swiper-button-prev"></div>
 	      <div class="swiper-button-next"></div>
 	    </div>
 		
 	    <div id="content" style="margin-top: 10px;">
+	     
 	          
 		 
 	   </div>
-	   
    </main>
    
    	<div id="to-top">
 		<div class="material-icons">top</div>
 	</div>
 
-
+       
+<footer style="background-color:#FFFFFF">
+    <div class="container-fluid px-4" >
+        <div class="d-flex align-items-center justify-content-between small" >
+        <div class="text-muted" >2023.04.19 </div>
+        <div class="text-muted" >Team By 더 이상의 유기는 없다</div>
+		</div>
+	</div>
+</footer>
 
 
 
@@ -272,22 +284,6 @@ $(function() { // 보이기 | 숨기기
   }); 
 });
 
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const orderList = document.getElementById('orderList');
-        const username = '<%= session.getAttribute("username") %>';
-        
-        if (username !== 'admin') {
-            orderList.style.display = 'none';
-        }
-        
-        orderList.addEventListener('click', function() {
-            location.href = 'orderList';
-        });
-    });
-    
 </script>
 
     </body>

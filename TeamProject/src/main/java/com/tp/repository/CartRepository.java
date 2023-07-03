@@ -18,3 +18,4 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 	void deleteByIdIn(List<Long> ids);
 	Cart findByUserAndMenu(UserEntity user, Menu menu);
 }
+

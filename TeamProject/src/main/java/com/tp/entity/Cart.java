@@ -19,6 +19,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Service;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,10 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+
+@Getter
+@Setter
+@Service
 @Data
 @Table(name = "cart")
 public class Cart {

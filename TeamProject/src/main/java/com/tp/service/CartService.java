@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.tp.entity.Cart;
 import com.tp.entity.Menu;
+
 import com.tp.entity.UserEntity;
 //
 //import com.tp.entity.Cart;
@@ -34,7 +35,8 @@ public class CartService {
 	public List<Cart> cartAll() {
 		return cartRepository.findAll();
 	}
-
+//	
+//	
 	public void cartSave(Cart cart) {
 		cartRepository.save(cart);
 	}
@@ -45,10 +47,6 @@ public class CartService {
 	        cartRepository.deleteByIdIn(ids);
 	    }
 	}
-	
-	public Cart getCartByUserAndMenu(UserEntity user, Menu menu) {
-	    return cartRepository.findByUserAndMenu(user, menu);
-	    }
 
 
 }

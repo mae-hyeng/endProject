@@ -11,7 +11,7 @@
   display: flex;
 }
 .menu-item {
-  background-color: gold;
+  background-color: #ffffff;
   flex-grow: 1;
   transition: 0.5s;
 }

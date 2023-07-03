@@ -203,9 +203,9 @@ td {
 						    <td colspan="2">${item.quantity}</td>
 						    <td>${item.menu.price*item.quantity}</td>
 						</tr>
+
 				    </c:forEach>
-				</tbody>
-					
+					</tbody>
 
 				<tfoot>
 				
@@ -220,7 +220,8 @@ td {
 					        <td colspan="2">
 					        	<a>총 금액 : </a>
 					    </tr>
-				</tfoot>
+				</tfoot>	
+            
         </table>
         <div class="cart__mainbtns">
             <button class="cart__bigorderbtn left" onclick="location.href='menu'">주문 추가하기</button>

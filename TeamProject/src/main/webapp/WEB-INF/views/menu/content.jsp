@@ -191,6 +191,8 @@ ul, li {
   list-style:none;
 } 
 
+
+
 </style>
 
 
@@ -238,24 +240,36 @@ ul, li {
 			<main class="min-width">
 				
 				
-				<a style="font-size: 50px">${menu.type}</a>
+				<a style="font-size: 20px">${menu.type}</a>
 				<br><br>		
-				<h2>${menu.name }</h2>
+				<h1>${menu.name }</h1>
 				<br>
 					<c:if test="${not empty menu.filename }">
 						<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
 						<br>
 					</c:if>
-					<pre>${menu.content }</pre>
+					<br>
+					<p>${menu.content }</p>
+					<br>
+					<hr>
+					<br>
 					<div class="num">
-					    <span>수량</span>
-					    <div class="quantity">
-					      <button class="minus">-</button>
-					      <span id="result">1</span>
-					      <button class="plus">+</button>
-					      <button id="confirm">확인</button>
-					      
-			       		</div>
+					    <span style="font-size: 20px;">주문하기</span>
+					    <form name="regForm" id="regForm" action="drinkOrder" method="post">
+						    <div class="quantity" id="quantity">
+						        <button style="all: unset" "class="minus" type="button">-</button>
+						        <span id="result">1</span>
+						        <button style="all: unset" class="plus" type="button">+</button>
+						        <br>
+						        <a>금액 : </a><span id ="price">${menu.price }</span>원
+						    </div>
+
+						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
+						    <input type="hidden" id="menuQuantity" name="quantity" value="1">
+						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }><br>						    
+						    <input type="button" id="confirm" onclick="go()" value = "장바구니 담기">
+						    <input type="button" id="confirm" onclick="location.href='/cart';" value = "바로 주문하기">
+						</form>
 			       	</div>
 				
 					
@@ -271,46 +285,71 @@ ul, li {
 	
 				
 <script>
-function modi() {
-		location.href='modifyMenu?id=${menu.id}';}
+function go() {
+	regForm.submit();
+}
+</script>
+
+
+
+
+<script>
+    const plusBtn = document.querySelector('.plus');
+    const minusBtn = document.querySelector('.minus');
+    const resultSpan = document.querySelector('#result');
+    const priceSpan = document.querySelector('#price');
+    
+    const resultValue = parseInt(resultSpan.textContent);
+    const priceValue = parseInt(priceSpan.textContent);
+    
+    const menuQuantityInput = document.querySelector('#menuQuantity');
+    
+    plusBtn.addEventListener('click', () => {
+        let quantity = parseInt(resultSpan.textContent);
+        quantity++;
+        resultSpan.textContent = quantity;
+        menuQuantityInput.value = quantity;
+        priceSpan.textContent = quantity*priceValue;
+    });
+    
+    minusBtn.addEventListener('click', () => {
+        let quantity = parseInt(resultSpan.textContent);
+        if (quantity > 1) {
+            quantity--;
+            resultSpan.textContent = quantity;
+            menuQuantityInput.value = quantity;
+            priceSpan.textContent = quantity*priceValue;
+        }
+    });
 </script>
 
 <script>
-
-	/* 수량 증감, 감소 */
-
-    let plus = document.querySelector(".plus");
-	let minus = document.querySelector(".minus");
-	let result = document.querySelector("#result");
-	let totalcost = document.querySelector('.totalcost');
-	let i = 1;
-	plus.addEventListener("click", () => {
-		i++
-		result.textContent = i;
-	})
-	
-	minus.addEventListener("click", () => {
-		if(i>1) {
-			i--
-			result.textContent = i;
-		}
-		
-	})
+        function modi() {
+            document.addEventListener('DOMContentLoaded', function() {
+                const modibtn = document.getElementById('modi-btn');
+                const username = ${sessionScope.username};
+                if (username != 'admin') {
+                    modibtn.style.display = 'none';
+                } else {
+                    modibtn.style.display = 'block';
+                }
+            });
+            // 버튼 클릭 시 실행할 동작 추가
+            location.href='modifyMenu?id=${menu.id}';}
+        }
 </script>
-				
-<script>
-	function modi() {
-		  const modibtn = document.getElementById('modibtn');
-		  const username = '<%= session.getAttribute("username") %>';
-	
-		  if (username !== 'admin') {
-		    modibtn.style.display = 'none';
-		  }
-	
-		  // 버튼 클릭 시 실행할 동작 추가
-		  location.href = 'modifyMenu?id=${menu.id}';
-		}
 
+<script>
+   function listnum(){
+      if(${sessionScope.listnum} == '1'){
+         history.go(-1);
+         return;
+      }else if(${sessionScope.listnum} == '2'){
+         history.go(-2);
+      }else if(${sessionScope.listnum} == '3'){   
+         history.go(-2);
+      }
+   }
 </script>
 
 <%@ include file="/resources/include/footer.jsp"%>

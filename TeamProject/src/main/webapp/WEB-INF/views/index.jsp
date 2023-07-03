@@ -123,13 +123,11 @@ ul, li {
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     
-                  <li><a class="dropdown-item" href="/mypage">장바구니</a></li>
+                  <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
                         <li><a class="dropdown-item" href="/logout">구매내역</a></li>
 
                     </ul>
                 </li>	
-                    
-                    
                    </c:when>
                    </c:choose>
                 <li class="nav-item dropdown">
@@ -139,14 +137,20 @@ ul, li {
                      <c:when test="${sessionScope.username==null}">
                         <li><a class="dropdown-item" href="/login">Login</a></li>
                         <li><a class="dropdown-item" href="/join">Join</a></li>
+                        <li><a class="dropdown-item" href="/adminLogin">AdminLogin</a></li>
                         </c:when>
                <c:otherwise>
-                  <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+               
+               <li class="nav-item dropdown">
+                </li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+                        <li><a class="dropdown-item" href="/MyCart">basket</a></li>
                          </c:otherwise>
                     </c:choose>
                     </ul>
-                </li>	
+                </li>
+                
             </ul>
                 </div>
             </form>

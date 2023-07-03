@@ -6,8 +6,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -23,17 +26,18 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor // 기본생성자
 @AllArgsConstructor
-@Data // 게터세터투스트링
+@Data
 @Entity(name = "user")
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
 public class UserEntity extends BaseTimeEntity{
 	
 	
-	 @Id // 기본키(Primary key)
+	 
 	 @GeneratedValue(generator = "system-uuid")
 	 @GenericGenerator(name="system-uuid", strategy = "uuid")
 	 private String id;
 	 @Column(length = 30, nullable=false)
+	 @Id // 기본키(Primary key)
 	 private String username;
 	 @Column
 	 private String password;
@@ -49,6 +53,4 @@ public class UserEntity extends BaseTimeEntity{
 //	 @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 //	 private List<Cart> cart;
 	 
-
-
 }

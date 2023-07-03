@@ -147,10 +147,21 @@ $(".video_modal_popup-closer").click(function() {
                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                    <c:choose>
                    <c:when test="${sessionScope.username==null}">
-                    <span style="color: white; font-size: 22px;" >로그인을 해주세요.</span>
+                    <span style="color: white; font-size: 18px;" >로그인을 해주세요</span>
                    </c:when>
                    <c:when test="${sessionScope.username!=null}">
-                    <span style="color: white; font-size: 22px;" >${sessionScope.username }</span>
+                    <span style="color: white; font-size: 18px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
+                    
+                    
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    
+                  <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
+                        <li><a class="dropdown-item" href="/logout">구매내역</a></li>
+
+                    </ul>
+                </li>	
                    </c:when>
                    </c:choose>
                 
@@ -163,11 +174,15 @@ $(".video_modal_popup-closer").click(function() {
                      <c:when test="${sessionScope.username==null}">
                         <li><a class="dropdown-item" href="/login">Login</a></li>
                         <li><a class="dropdown-item" href="/join">Join</a></li>
-                        <li><a class="dropdown-item" href="/adminLogin">Admin</a></li>
+                        <li><a class="dropdown-item" href="/adminLogin">AdminLogin</a></li>
                         </c:when>
-					<c:otherwise>
-						<li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+               <c:otherwise>
+               
+               <li class="nav-item dropdown">
+                </li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+                        <li><a class="dropdown-item" href="/MyCart">basket</a></li>
                          </c:otherwise>
                     </c:choose>
                     </ul>

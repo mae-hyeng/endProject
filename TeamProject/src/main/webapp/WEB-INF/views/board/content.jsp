@@ -2,12 +2,6 @@
 <%@ include file="/resources/include/h2.jsp"%>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
-<script type="text/javascript">
-	const route = window.location.pathname.replace('/', '');
-</script>
-<script type="text/javascript">
-	const wrap = document.referrer;
-</script>
 <%
 if (session.getAttribute("username") == null) {
 	response.sendRedirect("/sessionover");
@@ -20,7 +14,6 @@ if (session.getAttribute("username") == null) {
     overflow:hidden;
     height:auto;
     }
-
 .min-width {
 	width: 1080px;
 	margin: 0 auto;
@@ -166,8 +159,6 @@ if (session.getAttribute("username") == null) {
 	display: none;
 }
 </style>
-
-
 </head>
 
 <body class="">
@@ -240,145 +231,53 @@ if (session.getAttribute("username") == null) {
 		<div id="layoutSidenav_content" style="bottom: 56px;">
 
 			<main class="min-width">
-				<a>${one.genre}/${one.category }</a>
 				<h2 class="mt-6" style="text-align: left;">게시판 글 내용 보기</h2>
 				<div class="row">
 					<div class="row-col-xl-1">
 						<div class="card mb-4">
 							<div class="card-header">
 								<div style="padding: 5px" class="writer_info">
-									<h2>${one.title }</h2>
+									<h2>${orderList.name }</h2>
 								</div>
 								<img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77" alt="프로필 사진" width="36" height="36"><span class="blind"></span>&nbsp; <span style="font-size: 1.2em" class="writer_info">${one.writer }</span> <span style="font-size: 0.7em" class="writer_info">${one.regdate }</span>
 								<h3 class="left-box"></h3>
 							</div>
 
-							<form>
+							<form action="drinkOrder" method="get">
 								<div class="card-body">
 									<br>
-									<c:if test="${not empty one.filename }">
-										<img style="width: 300px; height: auto;" src="/resources/files/${one.filename }">
-										<br>
-									</c:if>
-									<br>
-									<div class="text_box" >
-										<pre>${one.content }</pre>
-										<div class="count"></div>
-										<br>
-									</div>
+									<c:forEach var="drink" items="${orderList}">
+									<tr>
+										<c:if test="${not empty drink.filename }">
+											<img style="width: 200px; height: auto;" src="/resources/files/${drink.filename }">
+											<br>
+											<td>${drink.id }</td>
+												<td>${drink.name}</td>
+												<td>${drink.price}</td>
+												<a href="/order?id=${drink.id}">주문하기</a>
+											<br>
+										</c:if>
+									</tr>
+								</c:forEach>
 
 								</div>
 
 							</form>
 
 						</div>
-		
-						<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="location.href='board?page='+'${param.page}'+'&keyword='+'${param.keyword }'"></div>
-                  <div><input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" value="수정" onclick="modi()"></div>
+						<input style="float: right" type="button" class="list-btn" value="목록" onclick=listnum()>
+						<input style="float: right" class="modi-btn" type="button" value="수정" onclick="modi()">
 					</div>
 
 				</div>
 
 
-				<!-- 댓글 작성 부분 -->
-				<br>
-				<div class="rounded-box">
-					<div style="padding: 9px">
-						<img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77" alt="프로필 사진" width="36" height="36"><span class="blind"></span>&nbsp; <input type="text" id="commentWriter" style="border: none" value="${sessionScope.username }" readonly><br>
-					</div>
-					<textarea class="scroll" id="commentContents" style="outline: none; border: none; resize: none; margin-left: 8px" rows="5" cols="125" placeholder="내용" required></textarea>
-
-
-					<input style="float: right" type="button" value="댓글작성" onclick="commentWrite()" class="comment-btn">
-
-				</div>
-				<br>
-
-
-				<!-- 댓글 출력 부분 -->
-				<div id="comment-list">
-					<table class="table">
-						<tr>
-							<th style="width: 10%;">작성자</th>
-							<th style="width: 60%;">내용</th>
-							<th style="width: 18%;">작성시간</th>
-							<th></th>
-							<th></th>
-						</tr>
-						<c:forEach var="comment" items="${commentList }">
-							<tr>
-								<td>${comment.commentWriter }</td>
-								<td>${comment.commentContents }</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${comment.commentCreatedTime }" /></td>
-								<td><button class="modify-btn" id="comment-modify-btn" onclick="Popup('${comment.id}', '${comment.commentWriter }')">수정</button></td>
-								<td><button class="delete-btn" id="comment-delete-btn" onclick="deleteCheck('${comment.id}', '${comment.commentWriter }')">삭제</button></td>
-
-							</tr>
-						</c:forEach>
-					</table>
-				</div>
-				<script>
-				function modi() {
-					if('${one.writer}' != '${sessionScope.username}') {
-						alert("수정 권한이 없습니다");
-					}else{
-						location.href='modify?num=${one.num}&page=${param.page}';
-					}
-				}
-				</script>
-
-				<!-- 댓글 수정 -->
-				<script>
-               function Popup(id, writer){
-                  if(writer != '${sessionScope.username}') {
-                     alert("수정 권한이 없습니다.");
-                  }else {
-                     window.open("/commMo?id="+id+"&num=${one.num}", "_blank", "width=800, height=200, left=600, top=700");
-                  }
-            }
-               </script>
-
-				<!-- 댓글 작성 -->
-				<script>
-               const commentWrite = () => {
-                  const writer = document.getElementById("commentWriter").value;
-                  const contents = document.getElementById("commentContents").value;
-                  const id = ${one.num};
-                  
-                  $.ajax({
-                     type:"post",
-                     url: "/comment/save",
-                     data:{
-                        "commentWriter": writer,
-                        "commentContents": contents,
-                        "boardNum": id
-                     },
-                     success: function(res){
-                        redirct:history.go(0);
-                          },
-                          error: function (err) {
-                              console.log("요청실패", err);
-                          }
-                       });
-                   };
-             </script>
-
-				<script>
-               function deleteCheck(id, writer){
-                  /* const writer = document.getElementById("comWriter").innerText; */
-                  
-                  if(writer != '${sessionScope.username}'){
-                     alert("삭제 권한이 없습니다.")
-                     return;
-                  }else if(confirm("게시글을 삭제하시겠습니까?")){
-                     location.href="comment/deleteById?id="+id+"&num=${one.num }";
-                  }
-               }
-         </script>
+				
 				<script>
                function listnum(){
                      if(${sessionScope.listnum} == '1'){
-                    	 location.href="board?page="+"${param.page}"+"&keyword="+"${param.keyword }";
+                        history.go(-1);
+                        return;
                      }else if(${sessionScope.listnum} == '2'){
                         history.go(-2);
                      }else if(${sessionScope.listnum} == '3'){   
@@ -388,4 +287,6 @@ if (session.getAttribute("username") == null) {
                      }
                   }
             </script>
+			</main>
 			<%@ include file="/resources/include/footer.jsp"%>
+</body>

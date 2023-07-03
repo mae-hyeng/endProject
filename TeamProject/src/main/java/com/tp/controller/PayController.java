@@ -3,7 +3,9 @@ package com.tp.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,23 @@ public class PayController {
 	public String cart(HttpSession session,
 			@RequestParam("QuantitySum") Integer totalQuantity,
 			@RequestParam("PriceSum") Integer PriceSum) {
+		
+		String username=(String)session.getAttribute("username");
+		if(username!=null) {
+			UserEntity userinfo = userService.UserInfo(username);
+			session.setAttribute("user", userinfo);
+			session.setAttribute("name", userinfo.getName());
+			session.setAttribute("email", userinfo.getEmail());
+			return "/pay/cart";
+		}else {
+			return "redirect:/sessionover";
+		}
+		
+	}
+	
+	@RequestMapping("/cart2")
+	public String cart2(HttpSession session,
+			@RequestParam("priceAll") Integer priceAll) {
 		
 		String username=(String)session.getAttribute("username");
 		if(username!=null) {

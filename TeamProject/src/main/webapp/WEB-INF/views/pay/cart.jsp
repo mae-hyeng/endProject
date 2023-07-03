@@ -21,7 +21,7 @@ String email =(String)session.getAttribute("email");
   <!-- 상품 정보 영역-->
   <div class="title">상품 정보</div>
   <p>토스 티셔츠</p>
-  <p>결제 금액: ${param.PriceSum }</p>
+  <p>결제 금액: ${param.PriceSum }${param.priceAll }</p>
   <form id="discount-coupon">
     <input type="checkbox" id="coupon"/>5,000원 할인받기 
   </form>

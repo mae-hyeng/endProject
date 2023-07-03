@@ -41,11 +41,11 @@ public class Cart {
 	@Column
 	private int quantity;
 	
-	@OneToOne(fetch = FetchType.LAZY)	
+	@OneToOne(fetch = FetchType.EAGER)	
 	@JoinColumn(name = "userName")
 	private UserEntity user;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "menuId")
 	private Menu menu;
 	

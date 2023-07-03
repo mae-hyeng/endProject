@@ -224,6 +224,7 @@ td {
 					        <td></td>
 					        <td id="totalQuantity"></td>
 					        <td id="totalPrice"></td>
+
 					    </tr>
 				</tfoot>
 						

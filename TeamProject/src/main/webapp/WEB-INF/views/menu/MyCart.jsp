@@ -337,34 +337,44 @@ function totalP() {
 	var totalPrice = 0;
 	var totalQuantity = 0;
 	var checkbox = document.getElementsByClassName("itemCheckbox");
-	var checkboxAll = document.getElementsByClassName("selectAllCheckbox");
+	var checkboxAll = document.getElementById("selectAllCheckbox");
 	var priceElements = document.getElementsByClassName("price");
 	var quantityElements = document.getElementsByClassName("quantity");
+	var allChecked = true; // 모든 체크박스가 선택되었는지 확인하는 변수
 	
 	for (var i = 0; i < checkbox.length; i++) {
-	  if (checkbox[i].checked || checkboxAll.checked) {
-	    var price = parseInt(priceElements[i].innerText);
-	    totalPrice += price;
-	    var quantity = parseInt(quantityElements[i].innerText);
-	    totalQuantity += quantity;
-	  }
+		if (checkbox[i].checked) {
+			var price = parseInt(priceElements[i].innerText);
+			totalPrice += price;
+			var quantity = parseInt(quantityElements[i].innerText);
+			totalQuantity += quantity;
+		} else {
+			allChecked = false; // 하나라도 선택 해제된 체크박스가 있으면 allChecked를 false로 설정
+		}
 	}
-
+	
+	checkboxAll.checked = allChecked;
+	
 	var totalPriceElement = document.getElementById("totalPrice");
 	var totalQuantityElement = document.getElementById("totalQuantity");
 	totalPriceElement.innerText = totalPrice;
 	totalQuantityElement.innerText = totalQuantity;
 	
 	var totalPriceInput = document.getElementById("PriceSum");
-    var totalQuantityInput = document.getElementById("QuantitySum");
-    totalPriceInput.value = totalPrice;
-    totalQuantityInput.value = totalQuantity;
+	var totalQuantityInput = document.getElementById("QuantitySum");
+	totalPriceInput.value = totalPrice;
+	totalQuantityInput.value = totalQuantity;
 }
 
 var checkboxes = document.getElementsByClassName("itemCheckbox");
+var checkboxAll = document.getElementById("selectAllCheckbox");
+checkboxAll.addEventListener("change", totalP);
+
 for (var i = 0; i < checkboxes.length; i++) {
-  checkboxes[i].addEventListener("change", totalP);
+	checkboxes[i].addEventListener("change", totalP);
 }
 </script>
+
+
 
 </html>

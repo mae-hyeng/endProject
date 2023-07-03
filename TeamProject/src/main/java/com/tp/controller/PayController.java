@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tp.entity.Cart;
+import com.tp.entity.Menu;
+import com.tp.entity.MenuOrder;
 import com.tp.entity.UserEntity;
 import com.tp.service.UserService;
 
@@ -39,7 +42,24 @@ public class PayController {
 
 	
 	@RequestMapping("/success")
-	public String success() {
+	public String success(
+			MenuOrder menuOrder,
+			Menu menu,
+			UserEntity user,
+			Cart cart,
+			HttpSession session
+			) {
+		
+		String username = (String)session.getAttribute("username");
+		
+		user = userService.UserInfo(username);
+		
+		menuOrder = MenuOrder.builder()			
+				.cart(cart)
+				.user(user)
+				.menu(menu)
+				.build();
+		
 		return "/pay/success";
 	}
 	

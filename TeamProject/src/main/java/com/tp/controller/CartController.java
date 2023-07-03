@@ -42,8 +42,6 @@ import lombok.RequiredArgsConstructor;
 public class CartController {
 
 	private final CartService cartService;
-	private final UserService userService;
-	private final MenuService menuService;
 	
 	
 	@GetMapping("/MyCart")

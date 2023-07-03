@@ -49,7 +49,7 @@ public class MenuOrder {
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userName")
-	private List<UserEntity> user = new ArrayList<UserEntity>();
+	private UserEntity user;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cartId")

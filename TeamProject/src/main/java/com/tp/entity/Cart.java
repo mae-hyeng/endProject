@@ -19,6 +19,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Service;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +27,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Service
+@Data
 @Table(name = "cart")
 public class Cart {
 	

@@ -2,20 +2,17 @@ package com.tp.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
-=======
-import java.util.Map;
->>>>>>> 3ab9227aa4d1e093b31dbd624fd59a5e40bb4681
+
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
-<<<<<<< HEAD
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-=======
+
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +22,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
->>>>>>> 3ab9227aa4d1e093b31dbd624fd59a5e40bb4681
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -67,10 +63,6 @@ public class CartController {
 				list2.add(list.get(i));
 				model.addAttribute("list2", list2);
 			}
-<<<<<<< HEAD
-=======
-			
->>>>>>> 3ab9227aa4d1e093b31dbd624fd59a5e40bb4681
 		}
 		System.out.println("List2 : " + list2);    
 		
@@ -78,9 +70,7 @@ public class CartController {
 	     
 	  }
 	
-<<<<<<< HEAD
-}
-=======
+
 	// 장바구니 메뉴 삭제
 	@PostMapping("/deleteCartMenu")
 	public ResponseEntity<String> deleteMenu(@RequestBody List<Long> ids) {
@@ -96,10 +86,5 @@ public class CartController {
 	        return new ResponseEntity<>("선택한 제품을 삭제하는 동안 오류가 발생했습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
 	}
-
-
-
-
 	
 }
->>>>>>> 3ab9227aa4d1e093b31dbd624fd59a5e40bb4681

@@ -58,5 +58,4 @@ public class PayController {
 	public String faill() {
 		return "/pay/fail";
 	}
-
 }

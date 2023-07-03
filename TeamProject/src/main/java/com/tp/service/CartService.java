@@ -2,29 +2,20 @@ package com.tp.service;
 import java.util.List;
 
 import javax.transaction.Transactional;
-import org.apache.catalina.User;
-//import java.util.List;
-//
+
 import org.springframework.stereotype.Service;
 
 import com.tp.entity.Cart;
 import com.tp.entity.UserEntity;
-//
-//import com.tp.entity.Cart;
-//import com.tp.entity.MenuOrder;
 import com.tp.repository.CartRepository;
 
 import lombok.RequiredArgsConstructor;
-//import com.tp.repository.OrderRepository;
-//
-//import lombok.RequiredArgsConstructor;
-//
 @Service
 @RequiredArgsConstructor
 public class CartService {
 //	
 	private final CartRepository cartRepository;
-	
+
 	@Transactional
 	public List<Cart> cartUsername(UserEntity user) {
 		return cartRepository.findByUserName(user);
@@ -35,7 +26,15 @@ public class CartService {
 	public List<Cart> cartAll() {
 		return cartRepository.findAll();
 	}
-
+//	
+//
+//	
+//	//전체 주문 조회
+//	public List<Cart> cartAll() {
+//		return cartRepository.findAll();
+//	}
+//	
+//	
 	public void cartSave(Cart cart) {
 		cartRepository.save(cart);
 	}

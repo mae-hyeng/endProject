@@ -134,7 +134,6 @@ div#px-6 {
 											<br>
 										</div>
 										<div class="button">
-												<br> 
 													<input type="button" style="float: right" value="등록" onclick=register()> 
 													<input type="button" style="float: right" value="목록" onclick="history.go(-1); return false;">
 										</div>
@@ -174,7 +173,6 @@ function listnum(){
 	});
 </script>
 
-
 <script>
    function listnum(){
       if(${sessionScope.listnum} == '1'){
@@ -187,7 +185,6 @@ function listnum(){
       }
    }
 </script>
-
 
 <script>
 	function register(){

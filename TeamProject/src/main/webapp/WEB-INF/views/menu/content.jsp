@@ -232,31 +232,19 @@
 					<pre>${menu.content }</pre>
 					<div class="num">
 					    <span>수량</span>
-<<<<<<< HEAD
-						<form name="regForm" action="drinkOrder" method="post">
-=======
 						<form name="regForm" id="regForm" action="drinkOrder" method="post">
->>>>>>> 3ab9227aa4d1e093b31dbd624fd59a5e40bb4681
 						    <div class="quantity" id="quantity">
 						        <button class="minus" type="button">-</button>
 						        <span id="result">1</span>
 						        <button class="plus" type="button">+</button>
 						        <br>
-<<<<<<< HEAD
-						        <a>총 금액 : </a><span id ="price">${menu.price }</span>
-=======
 						        <a>금액 : </a><span id ="price">${menu.price }</span>
->>>>>>> 3ab9227aa4d1e093b31dbd624fd59a5e40bb4681
 						    </div>
 						    
 						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
 						    <input type="hidden" id="menuQuantity" name="quantity" value="1">
 						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }>						    
-<<<<<<< HEAD
-						    <input type="button" id="confirm" onclick="go()" value = "확인">
-=======
 						    <input type="button" id="confirm" onclick="go()" value = "담기">
->>>>>>> 3ab9227aa4d1e093b31dbd624fd59a5e40bb4681
 						</form>
 			       	</div>
 				
@@ -278,6 +266,8 @@ function go() {
 	regForm.submit();
 }
 </script>
+
+
 
 
 <script>

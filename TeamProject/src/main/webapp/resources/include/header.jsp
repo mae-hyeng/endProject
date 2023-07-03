@@ -153,6 +153,9 @@ $(".video_modal_popup-closer").click(function() {
                     <span style="color: white; font-size: 22px;" >${sessionScope.username }</span>
                    </c:when>
                    </c:choose>
+                
+                   
+                   
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -182,11 +185,7 @@ $(".video_modal_popup-closer").click(function() {
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                         
-                            <div class="sb-sidenav-menu-heading">All</div>
-                            <a class="nav-link" href="/board">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                전체 메뉴
-                            </a>
+                            
                             <div class="sb-sidenav-menu-heading">WRITE</div>
                             <a class="nav-link" href="/register">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -196,27 +195,10 @@ $(".video_modal_popup-closer").click(function() {
                 			   <c:when test="${sessionScope.username!=null}">
                    				 <span style="color: white; font-size: 15px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
                   				 </c:when>
-                  				 </c:choose></div>
-                				 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                멤버
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                    		<c:choose>
-                                    		<c:when test="${sessionScope.username==null}">
-                                    		<a class="nav-link" href="adminLogin">로그인</a>
-                                    		</c:when>
-                                    		</c:choose>
-                                            <a class="nav-link" href="mypage">마이페이지 이동</a>
-                                            <a class="nav-link" href="update">내 정보변경</a>
-                                            <a class="nav-link" href="pwupdate">비밀번호 변경</a>
-                                            <a class="nav-link" href="logout">로그아웃</a>
-                                        </nav>
-                                	</nav>
-                           		 </div>
+                  				 </c:choose>
+                 				 </div>
+                				 
+                            
         						</div>
         					</div>
         					</nav>

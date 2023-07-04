@@ -32,14 +32,14 @@ import com.tp.service.UserService;
 
 @Controller
 public class PayController {
+	
 	@Autowired
 	UserService userService;
+	@Autowired 
+	CartService cartService;
 	
 	@Autowired
 	MenuOrderService menuOrderService;
-	
-	@Autowired
-	CartService cartService;
 	
 	@Autowired
 	CartRepository cartRepository;
@@ -74,7 +74,7 @@ public class PayController {
 		        String orderNumber = dateFormat.format(now) + randomNumber;
 		        
 		        session.setAttribute("orderNumber", orderNumber);
-				
+				cartService.deleteCartByUser(userinfo);
 				return "/pay/cart";
 			}else {
 				return "redirect:/sessionover";

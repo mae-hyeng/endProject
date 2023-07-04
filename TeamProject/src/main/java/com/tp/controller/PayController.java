@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import com.tp.entity.Cart;
 import com.tp.entity.Menu;
 import com.tp.entity.MenuOrder;
 import com.tp.entity.UserEntity;
+import com.tp.repository.CartRepository;
 import com.tp.service.CartService;
 import com.tp.service.MenuOrderService;
 import com.tp.service.UserService;
@@ -32,6 +34,15 @@ import com.tp.service.UserService;
 public class PayController {
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	MenuOrderService menuOrderService;
+	
+	@Autowired
+	CartService cartService;
+	
+	@Autowired
+	CartRepository cartRepository;
 	
 	@PostMapping("/cart")
 	public String cart(HttpSession session,
@@ -112,32 +123,47 @@ public class PayController {
 		
 		
 	}
-	@RequestMapping("/success")
+	@GetMapping("/success")
 	public String success(
 			MenuOrder menuOrder,
 			Menu menu,
 			UserEntity user,
 			Cart cart,
-			HttpSession session
+			HttpSession session,
+			Model model
 			) {
+		System.out.println("success");
+		String username = (String)session.getAttribute("username");
+		String id = (String)session.getAttribute("id");
+		System.out.println("id session : " + id);
+		System.out.println("username session : " + username);
 		
-//		String username = (String)session.getAttribute("username");
-//		
-//		user = userService.UserInfo(username);
-//		
-//		List<UserEntity> userList = new ArrayList<>();
-//		userList.add(user);
-//		
-//		
-//		System.out.println("pay : " + userList);
-//		
-//		menuOrder = MenuOrder.builder()			
-//				.cart(cart)
-//				.user(userList)
-//				.menu(menu)
-//				.build();
-//		
-//		menuOrderService.saveOrder(menuOrder);
+		user = userService.UserInfo(username);
+		System.out.println("user : " + user);
+		
+		List<Cart> clist = null;
+		
+		List<UserEntity> userList = new ArrayList<>();
+		userList.add(user);
+		System.out.println("userList : " + userList);
+		clist = cartService.cartOut(user.getId());
+		
+		System.out.println("cart : " + clist);
+
+		menuOrder = MenuOrder.builder()
+				.cart(cart)
+				.quantity(cart.getQuantity())
+				.user(userList)
+				.menu(cart.getMenu())
+				.build();
+		
+		menuOrderService.saveOrder(menuOrder);
+		
+		model.addAttribute("menuOrder", menuOrder);
+		
+		System.out.println("menuOrder : " + menuOrder);
+		
+		
 		
 		return "/pay/success";
 	}
@@ -171,10 +197,10 @@ public class PayController {
 //		return "/pay/success";
 //	}
 	
-	@GetMapping("/success")
-	public String success() {
-		return "/pay/success";
-	}
+//	@GetMapping("/success")
+//	public String success() {
+//		return "/pay/success";
+//	}
 	@PostMapping("/success")
 	public String successs() {
 		return "/pay/success";

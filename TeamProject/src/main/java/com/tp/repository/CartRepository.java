@@ -12,8 +12,10 @@ import com.tp.entity.UserEntity;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
 	
-	List<Cart> findByUserName(UserEntity user);
+//	List<Cart> findByUserName(UserEntity user);
 //	List<Cart> findByMenuName(String menuname);
+	
+	List<Cart> findByUserId(String id);
 
 	void deleteByIdIn(List<Long> ids);
 	Cart findByUserAndMenu(UserEntity user, Menu menu);

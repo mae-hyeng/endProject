@@ -24,9 +24,13 @@ public class CartService {
 
 	private final CartRepository cartRepository;
 	
-	@Transactional
-	public List<Cart> cartUsername(UserEntity user) {
-		return cartRepository.findByUserName(user);
+//	@Transactional
+//	public List<Cart> cartUsername(UserEntity user) {
+//		return cartRepository.findByUserName(user);
+//	}
+	
+	public List<Cart> cartOut(String id) {
+		return cartRepository.findByUserId(id);
 	}
 
 //	//전체 주문 조회

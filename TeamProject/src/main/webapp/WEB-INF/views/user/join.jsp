@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file ="/resources/include/header.jsp" %>
-<div class="login-box">
-  <h2>Join</h2>
+
+
+<body class="join">
+<div class="login-box" style="margin-top: 100px;">
+  <h2>Join</h2><br>
   <form name="regForm" action="join" method="post">
     <div class="user-box">
       <input type="text" name="username"  required="true">
@@ -25,18 +28,18 @@
       <label>전화번호는 '-'를 빼고 입력하세요</label>
     </div>	
     
-      <input type="text" name="email" placeholder="이메일을 입력하세요" required="true">
+      <input type="text" size="35" style="border: none" name="email" placeholder="이메일을 입력하세요" required="true">
      
       
-	<input type="button" value="메일발송"  onclick=mailcheck()>
+	<input type="button" style="border: none" value="메일발송"  onclick=mailcheck()><br><br>
 	<div class="user-box">
      <input type="text" name="email_check_number" maxlength="10" required="true">
       <label>메일로 발송된 인증번호 6자리를 입력해주세요</label>
     </div>
-    	
-	<input type="text" id="address" name="address" placeholder="주소">
-	<input type="button" onclick="execDaumPostcode()" value="주소 검색"><br>
-	<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+
+	<input type="text" size="35" style="border: none" id="address" name="address" placeholder="주소">
+	<input type="button" style="border: none" onclick="execDaumPostcode()" value="주소 검색"><br><br>
+	<div id="map" style="width:450px;height:200px;margin-top:10px;display:none"></div><br>
 	
 <div>
 <input type="button" value="회원가입" class="btn first" onclick="check()" style="margin-left: 55px">
@@ -195,3 +198,4 @@
 
 
 <%@include file="/resources/include/footer.jsp" %>
+</body>

@@ -52,4 +52,3 @@ public class UserEntity extends BaseTimeEntity{
 //	 private List<Cart> cart;
 
 }
-

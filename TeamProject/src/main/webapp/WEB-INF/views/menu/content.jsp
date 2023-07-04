@@ -262,19 +262,21 @@ ul, li {
 						        <button style="border: none; border-radius: 10px;" style="all: unset" class="plus" type="button">+</button>
 						        <br><br>
 						        <a style="font-size: 17px;">금액 : </a><span id ="price" style="font-size: 17px;">${menu.price }</span>원
-						        
 						    </div>
 
 						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
 						    <input type="hidden" id="menuQuantity" name="quantity" value="1">
-						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }><br>						    
-						    <input type="button" style="background: #ffffff;" id="confirm" onclick="go()" value = "장바구니 담기">  
-						</form>
-						<br>
-						<form name="regForm2" id="regForm2" action="cart2">
-							<input type="hidden" name="priceAll" id="priceAll" value="${menu.price}">
-							<input type="button" style="background: #ffffff;" id="confirm" onclick="go2()" value = "바로 주문하기">
-						</form>
+						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }><br>	
+						 </form>					    
+						
+						<div style="display: flex;">
+						    <input type="button" style="background: #ffffff; margin-right: 20px;" id="confirm" onclick="go()" value = "장바구니 담기">
+						
+							<form name="regForm2" id="regForm2" action="cart2">
+								<input type="hidden" name="priceAll" id="priceAll" value="${menu.price}">
+								<input type="button" style="background: #ffffff;" id="confirm" onclick="go2()" value = "바로 주문하기">
+							</form>
+						</div>
 			       	</div>
 				
 					
@@ -298,6 +300,10 @@ function go2() {
 	regForm2.submit();
 }
 </script>
+
+
+
+
 <script>
     const plusBtn = document.querySelector('.plus');
     const minusBtn = document.querySelector('.minus');

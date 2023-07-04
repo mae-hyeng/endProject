@@ -1,7 +1,8 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/resources/include/h2.jsp"%>
 <% 
 String username = (String)session.getAttribute("username");
 Integer quantity = (Integer)session.getAttribute("quantity");
@@ -39,6 +40,7 @@ img {
   width: 80%;
   margin: auto;
   padding: 30px;
+  margin-top: 100px;
 }
 
 .cart ul {
@@ -219,31 +221,27 @@ td {
 						<tr>
 						    <td colspan="2"><input type="checkbox" class="itemCheckbox" data-item-id="${item.id}"></td>
 						    <td><img style="width:auto" src="/resources/files/${item.menu.filename }"/></td>
-						    <td id="menuName" class="menuName">${item.menu.name}</td>
-						    <td colspan="2" id="quantity" class="quantity">${item.quantity}</td>
-						    <td id="price" class="price">${item.menu.price*item.quantity}</td>
+						    <td>${item.menu.name}</td>
+						    <td colspan="2">${item.quantity}</td>
+						    <td>${item.menu.price*item.quantity}</td>
 						</tr>
 
 				    </c:forEach>
-				    <tr>
-				        <td colspan="2"></td>
-				        <td colspan="2"></td>
-				        <td>총 수량</td>
-			            <td colspan="2">총 금액</td>
-				    </tr>
 				</tbody>
 				<tfoot>
 				    <tr>
 				        <td colspan="2">
-				        <form name="regForm" action="/cart" method="post">
-						    <input type="hidden" name="PriceSum" id="PriceSum" value="">
-						    <input type="hidden" name="QuantitySum" id="QuantitySum" value="">
-						    <input type="hidden" name="menuOrderName" id="menuOrderName" value="">
-						</form>
-						</td>
-				        <td colspan="2"></td>
-				        <td id="totalQuantity"></td>
-				        <td colspan="2" id="totalPrice"></td>
+				            
+				        </td>
+				        <td colspan="2">
+				            
+				        </td>
+				        <td>
+			                <a id="totalQuantity">총 수량 : </a>
+			            </td>
+			            <td colspan="2">
+			                <a id="totalPrice">총 금액 : </a>
+			            </td>
 				    </tr>
 				</tfoot>
 		
@@ -264,16 +262,10 @@ td {
         
         <div class="cart__mainbtns">
             <button class="cart__bigorderbtn left" onclick="location.href='menu'">주문 추가하기</button>
-            <button class="cart__bigorderbtn right" onclick="order()">주문하기</button>
+            <button class="cart__bigorderbtn right" onclick="location.href='cart'">주문하기</button>
         </div>
     </section>
 </body>
-<script>
-function order() {
-	regForm.submit();
-}
-</script>
-
 <script>
     
     // 체크박스 전체 선택
@@ -330,60 +322,46 @@ function order() {
             console.error(error);
         });
     }
-
 </script>
 
 <script>
-function totalP() {
-	var totalPrice = 0;
-	var totalQuantity = 0;
-	var str = "";
-	var checkbox = document.getElementsByClassName("itemCheckbox");
-	var checkboxAll = document.getElementById("selectAllCheckbox");
-	var priceElements = document.getElementsByClassName("price");
-	var menuNameElements = document.getElementsByClassName("menuName");
-	var quantityElements = document.getElementsByClassName("quantity");
-	var allChecked = true; // 모든 체크박스가 선택되었는지 확인하는 변수
-	
-	for (var i = 0; i < checkbox.length; i++) {
-		if (checkbox[i].checked) {
-			var price = parseInt(priceElements[i].innerText);
-			totalPrice += price;
-			var quantity = parseInt(quantityElements[i].innerText);
-			totalQuantity += quantity;
-			var menuName = menuNameElements[i].innerText;
-			str += menuName + " ";
-		} else {
-			allChecked = false;
-		}
-	}
-	
-	// 선택되지 않은 체크박스가 하나라도 있다면 false
-	checkboxAll.checked = allChecked;
-	
-	var totalPriceElement = document.getElementById("totalPrice");
-	var totalQuantityElement = document.getElementById("totalQuantity");
-	totalPriceElement.innerText = totalPrice;
-	totalQuantityElement.innerText = totalQuantity;
-	
-	var totalPriceInput = document.getElementById("PriceSum");
-	var totalQuantityInput = document.getElementById("QuantitySum");
-	totalPriceInput.value = totalPrice;
-	totalQuantityInput.value = totalQuantity;
-	
-	var menuOrderName = document.getElementById("menuOrderName")
-	menuOrderName.value = str;
-}
+    // 총 수량과 총 금액 계산 및 업데이트
+    function calculateTotal() {
+        const checkboxes = document.querySelectorAll('.itemCheckbox');
+        let totalQuantity = 0;
+        let totalPrice = 0;
 
-var checkboxes = document.getElementsByClassName("itemCheckbox");
-var checkboxAll = document.getElementById("selectAllCheckbox");
-checkboxAll.addEventListener("change", totalP);
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                const row = checkbox.parentNode.parentNode;
+                const quantity = parseInt(row.cells[3].textContent);
+                const price = parseInt(row.cells[5].textContent);
 
-for (var i = 0; i < checkboxes.length; i++) {
-	checkboxes[i].addEventListener("change", totalP);
-}
+                totalQuantity += quantity;
+                totalPrice += price;
+            }
+        });
+
+        document.getElementById('totalQuantity').textContent = '총 수량: ' + totalQuantity;
+        document.getElementById('totalPrice').textContent = '총 금액: ' + totalPrice;
+    }
+
+    // 체크박스 상태 변경 시 총 수량과 총 금액 업데이트
+    const checkboxes = document.querySelectorAll('.itemCheckbox');
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+            setTimeout(() => {
+                calculateTotal();
+            }, 0);
+        });
+    });
+
+    // 초기화 시 총 수량과 총 금액 계산
+    window.addEventListener('DOMContentLoaded', () => {
+        calculateTotal();
+    });
 </script>
 
-
+<%@ include file="/resources/include/footer.jsp"%>
 
 </html>

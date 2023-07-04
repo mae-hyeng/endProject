@@ -85,12 +85,8 @@ public class PayController {
 	
 	@PostMapping("/cart2")
 	public String cart2(HttpSession session,
-			@RequestParam(value = "QuantitySum", required = false) Integer totalQuantity,
-			@RequestParam(value = "PriceSum", required = false) Integer PriceSum, RedirectAttributes rttr) {
-		if(totalQuantity== null || PriceSum == null) {
-			rttr.addFlashAttribute("result", "NO");
-			return "redirect:/nocart";
-		}else {
+			@RequestParam("priceAll") Integer priceAll) {
+		 
 			String username=(String)session.getAttribute("username");
 			if(username!=null) {
 				UserEntity userinfo = userService.UserInfo(username);
@@ -118,7 +114,7 @@ public class PayController {
 			}else {
 				return "redirect:/sessionover";
 			}	
-		}
+		
 		
 		
 	}

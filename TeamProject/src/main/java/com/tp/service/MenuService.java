@@ -63,4 +63,3 @@ public class MenuService {
 		return menuRepository.findByType(type);
 	}
 }
-

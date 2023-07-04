@@ -219,7 +219,7 @@ td {
 						<tr>
 						    <td colspan="2"><input type="checkbox" class="itemCheckbox" data-item-id="${item.id}"></td>
 						    <td><img style="width:auto" src="/resources/files/${item.menu.filename }"/></td>
-						    <td>${item.menu.name}</td>
+						    <td id="menuName" class="menuName">${item.menu.name}</td>
 						    <td colspan="2" id="quantity" class="quantity">${item.quantity}</td>
 						    <td id="price" class="price">${item.menu.price*item.quantity}</td>
 						</tr>
@@ -238,6 +238,7 @@ td {
 				        <form name="regForm" action="/cart" method="post">
 						    <input type="hidden" name="PriceSum" id="PriceSum" value="">
 						    <input type="hidden" name="QuantitySum" id="QuantitySum" value="">
+						    <input type="hidden" name="menuOrderName" id="menuOrderName" value="">
 						</form>
 						</td>
 				        <td colspan="2"></td>
@@ -336,9 +337,11 @@ function order() {
 function totalP() {
 	var totalPrice = 0;
 	var totalQuantity = 0;
+	var str = "";
 	var checkbox = document.getElementsByClassName("itemCheckbox");
 	var checkboxAll = document.getElementById("selectAllCheckbox");
 	var priceElements = document.getElementsByClassName("price");
+	var menuNameElements = document.getElementsByClassName("menuName");
 	var quantityElements = document.getElementsByClassName("quantity");
 	var allChecked = true; // 모든 체크박스가 선택되었는지 확인하는 변수
 	
@@ -348,11 +351,14 @@ function totalP() {
 			totalPrice += price;
 			var quantity = parseInt(quantityElements[i].innerText);
 			totalQuantity += quantity;
+			var menuName = menuNameElements[i].innerText;
+			str += menuName + " ";
 		} else {
-			allChecked = false; // 하나라도 선택 해제된 체크박스가 있으면 allChecked를 false로 설정
+			allChecked = false;
 		}
 	}
 	
+	// 선택되지 않은 체크박스가 하나라도 있다면 false
 	checkboxAll.checked = allChecked;
 	
 	var totalPriceElement = document.getElementById("totalPrice");
@@ -364,6 +370,9 @@ function totalP() {
 	var totalQuantityInput = document.getElementById("QuantitySum");
 	totalPriceInput.value = totalPrice;
 	totalQuantityInput.value = totalQuantity;
+	
+	var menuOrderName = document.getElementById("menuOrderName")
+	menuOrderName.value = str;
 }
 
 var checkboxes = document.getElementsByClassName("itemCheckbox");

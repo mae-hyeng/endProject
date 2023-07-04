@@ -40,7 +40,7 @@ public class MenuOrder {
 	private Timestamp orderDate;
 	
 	@Column
-	private int quantity;
+	private Integer quantity;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "menuId")

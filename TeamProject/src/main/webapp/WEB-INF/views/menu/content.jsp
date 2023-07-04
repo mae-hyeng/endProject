@@ -298,10 +298,6 @@ function go2() {
 	regForm2.submit();
 }
 </script>
-
-
-
-
 <script>
     const plusBtn = document.querySelector('.plus');
     const minusBtn = document.querySelector('.minus');

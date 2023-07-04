@@ -129,12 +129,14 @@ public class MenuController {
 				user = userService.UserInfo(username);
 				cart = cartService.getCartByUserAndMenu(user, menuService.selectOne(id));
 
+				// 장바구니에 새로 추가할 때
 				if (cart == null) {
 					cart = Cart.builder().quantity(quantity).menu(menuService.selectOne(id)).user(user).build();
 
 					cartService.cartSave(cart);
 					session.setAttribute(menuname, 1);
 				} else {
+					// 기존에 있는 품목에 수량을 추가할 때(cart != null일 때)
 					cart.setQuantity(cart.getQuantity() + quantity);
 					cartService.cartSave(cart);
 				}

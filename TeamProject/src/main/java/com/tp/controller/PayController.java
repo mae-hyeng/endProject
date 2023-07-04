@@ -1,5 +1,8 @@
 package com.tp.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,8 @@ import com.tp.entity.Cart;
 import com.tp.entity.Menu;
 import com.tp.entity.MenuOrder;
 import com.tp.entity.UserEntity;
+import com.tp.service.CartService;
+import com.tp.service.MenuOrderService;
 import com.tp.service.UserService;
 
 @Controller
@@ -23,10 +28,16 @@ public class PayController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	MenuOrderService menuOrderService;
+	
 	@RequestMapping("/cart")
 	public String cart(HttpSession session,
 			@RequestParam("QuantitySum") Integer totalQuantity,
-			@RequestParam("PriceSum") Integer PriceSum) {
+			@RequestParam("PriceSum") Integer PriceSum,
+			@RequestParam("menuOrderName") String menuOrderName) {
+		
+		System.out.println("menuOrderName" + menuOrderName);
 		
 		String username=(String)session.getAttribute("username");
 		if(username!=null) {
@@ -73,11 +84,19 @@ public class PayController {
 		
 		user = userService.UserInfo(username);
 		
-//		menuOrder = MenuOrder.builder()			
-//				.cart(cart)
-//				.user(user)
-//				.menu(menu)
-//				.build();
+		List<UserEntity> userList = new ArrayList<>();
+		userList.add(user);
+		
+		
+		System.out.println("pay : " + userList);
+		
+		menuOrder = MenuOrder.builder()			
+				.cart(cart)
+				.user(userList)
+				.menu(menu)
+				.build();
+		
+		menuOrderService.saveOrder(menuOrder);
 		
 		return "/pay/success";
 	}

@@ -3,6 +3,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 //
 //<<<<<<< HEAD
 //import java.util.List;
@@ -24,11 +25,24 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CartService {
 //	
-	private final CartRepository cartRepository;
+	@Autowired
+	CartRepository cartRepository;
 	
 	@Transactional
 	public List<Cart> cartUsername(String username) {
 		return cartRepository.findByUserName(username);
+	}
+	
+	
+	
+	public int existsUser(String username){
+		int result =0;
+		if(cartRepository.existsByUsername(username)) {
+			result=1;
+		}else {
+			result=0;
+		}
+		return result;
 	}
 //	
 //

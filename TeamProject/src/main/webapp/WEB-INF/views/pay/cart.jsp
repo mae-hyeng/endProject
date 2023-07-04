@@ -50,7 +50,7 @@ String email =(String)session.getAttribute("email");
   /*결제창 열기*/
   document.querySelector("#payment-button").addEventListener("click",()=>{
     paymentWidget.requestPayment({
-      orderId: 'wlqdprkrhtlvekzzd123',
+      orderId: 'wlqdprkrhtlvekzzd1123',
       orderName: '토스 티셔츠',
       successUrl: 'http://localhost:8090/success',
       failUrl: 'http://localhost:8090/fail',

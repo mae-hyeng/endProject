@@ -34,8 +34,8 @@
       <label>메일로 발송된 인증번호 6자리를 입력해주세요</label>
     </div>
     	
-	<input type="text" id="sample5_address" name="address" placeholder="주소">
-	<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+	<input type="text" id="address" name="address" placeholder="주소">
+	<input type="button" onclick="execDaumPostcode()" value="주소 검색"><br>
 	<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 	
 <div>
@@ -162,13 +162,13 @@
     });
 
 
-    function sample5_execDaumPostcode() {
+    function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 var addr = data.address; // 최종 주소 변수
 
                 // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("sample5_address").value = addr;
+                document.getElementById("address").value = addr;
                 // 주소로 상세 정보를 검색
                 geocoder.addressSearch(data.address, function(results, status) {
                     // 정상적으로 검색이 완료됐으면

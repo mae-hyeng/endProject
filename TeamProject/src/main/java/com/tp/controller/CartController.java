@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,10 +26,13 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class CartController {
-
-	private final CartService cartService;
-	private final UserService userService;
-	private final MenuService menuService;
+	
+	@Autowired
+	CartService cartService;
+	@Autowired
+	UserService userService;
+	@Autowired
+	MenuService menuService;
 	
 	
 	@GetMapping("/MyCart")
@@ -50,22 +54,26 @@ public class CartController {
 		
 		List<Cart> list2 = null;
 		
-		list2 = cartService.cartUsername(username);
 		
-		System.out.println(list2);
 		
-		//
+		System.out.println(list2+"리스트2");
+		
+		System.out.println(cartService.existsUser(username));
 		
 		System.out.println(list);
+		
 		for(int i=0; i<list.size(); i++ ) {
-			session.setAttribute("id"+i, list.get(i).getId());
-		
-			session.setAttribute("quantity"+i, list.get(i).getQuantity());
-		
-			session.setAttribute("username"+i, list.get(i).getUser().getUsername());
-		
-			session.setAttribute("name"+i, list.get(i).getMenu().getName());
-			i++;
+			if(cartService.existsUser(username) == 1) {
+				List userList = null;
+				session.setAttribute("id"+i, list.get(i).getId());
+				
+				session.setAttribute("quantity"+i, list.get(i).getQuantity());
+			
+				session.setAttribute("username"+i, list.get(i).getUser().getUsername());
+			
+				session.setAttribute("name"+i, list.get(i).getMenu().getName());
+				i++;	
+			}
 			
 		}
 		    

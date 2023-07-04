@@ -65,6 +65,10 @@ ul, li {
 	margin: 270px;
 	width: 1000px;
 }
+
+.font-cafe {
+	font-family: 'Roboto', sans-serif;
+}
  
 </style>
 	<style>
@@ -76,7 +80,7 @@ ul, li {
        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
        <meta name="description" content="" />
        <meta name="author" content="" />
-       <title>영화 카페</title>
+       <title>카페</title>
        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
        <link href="resources/css/styles.css" rel="stylesheet" />
        <link href="resources/css/btn.css" rel="stylesheet" />
@@ -85,9 +89,9 @@ ul, li {
 </head>
 
     <body class="sb-nav-fixed" style="background-color:#ffffff">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="margin: 30px;">
          <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="/">Cafe</a>
+            <b><a class="navbar-brand ps-3 font-cafe" href="/" style="margin: 2px 6px; margin-left: 800px; font-size: 50px;">TeampCafe</a></b>
         
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -96,21 +100,13 @@ ul, li {
                 
                    <c:choose>
                    <c:when test="${sessionScope.username==null}">
-                    <span style="color: white; font-size: 18px;" >로그인을 해주세요</span>
+                    <span style="color: #41464b; font-size: 18px; margin-top: 6px;" >로그인을 해주세요</span>
                    </c:when>
                    <c:when test="${sessionScope.username!=null}">
-                    <span style="color: white; font-size: 18px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
+                    <span style="color: #41464b; font-size: 18px; margin-top: 6px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
                     
                     
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    
-                  <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
-                        <li><a class="dropdown-item" href="/logout">구매내역</a></li>
-
-                    </ul>
-                </li>	
+                   	
                    </c:when>
                    </c:choose>
                 <li class="nav-item dropdown">
@@ -128,7 +124,8 @@ ul, li {
                 </li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
-                        <li><a class="dropdown-item" href="/MyCart">basket</a></li>
+                        <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
+                        <li><a class="dropdown-item" href="/logout">구매내역</a></li>
                          </c:otherwise>
                     </c:choose>
                     </ul>
@@ -200,14 +197,7 @@ ul, li {
    </main>
 
        
-<footer style="background-color:#FFFFFF">
-    <div class="container-fluid px-4" >
-        <div class="d-flex align-items-center justify-content-between small" >
-        <div class="text-muted" >2023.04.19 </div>
-        <div class="text-muted" >Team By 더 이상의 유기는 없다</div>
-		</div>
-	</div>
-</footer>
+
 
 
 

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
+String uuid = (String)session.getAttribute("uuid");
+String orderNumber = (String)session.getAttribute("orderNumber");
 String name =(String)session.getAttribute("name");
 String email =(String)session.getAttribute("email");
 %>
@@ -20,12 +22,10 @@ String email =(String)session.getAttribute("email");
 <body>
   <!-- 상품 정보 영역-->
   <div class="title">상품 정보</div>
-  <p>토스 티셔츠</p>
-  <p>결제 금액: 15,000원</p>
-  <form id="discount-coupon">
-    <input type="checkbox" id="coupon"/>5,000원 할인받기 
-  </form>
-  <hr>	
+  <%-- <p>${param.menuOrderName}</p> --%>
+  <p><%=name%>님의 주문</p>
+  <p>결제 금액: ${param.PriceSum }${param.priceAll }</p>
+ 	
 
   <!-- 결제 방법 영역-->
   <div class="title">결제 방법</div>
@@ -35,10 +35,10 @@ String email =(String)session.getAttribute("email");
 </body>
 <script>
   const clientKey = 'test_ck_oeqRGgYO1r555edOqKprQnN2Eyaz' // 상점을 특정하는 키
-  const customerKey = 'YbX2HuSlsC9uVJW6NMRMj' // 결제 고객을 특정하는 키
-  const amount = 100 // 결제 금액
-  const couponAmount = 5_000 // 할인 쿠폰 금액
-
+  const customerKey ='<%=uuid%>' // 결제 고객을 특정하는 키
+  const amount = ${param.PriceSum }${param.priceAll }원 // 결제 금액
+  
+ 
   /*결제위젯 영역 렌더링*/
   const paymentWidget = PaymentWidget(clientKey, customerKey) // 회원 결제
   // const paymentWidget = PaymentWidget(clientKey, PaymentWidget.ANONYMOUS) // 비회원 결제
@@ -50,12 +50,12 @@ String email =(String)session.getAttribute("email");
   /*결제창 열기*/
   document.querySelector("#payment-button").addEventListener("click",()=>{
     paymentWidget.requestPayment({
-      orderId: 'wlqdprkrhtlvekzzd123',
-      orderName: '토스 티셔츠',
+      orderId: '<%=orderNumber%>',
+      orderName: '<%=name%>님의 주문',
       successUrl: 'http://localhost:8090/success',
       failUrl: 'http://localhost:8090/fail',
-      customerEmail: 'customer123@gmail.com', 
-      customerName: '김토스'
+      customerEmail: '<%=email%>', 
+      customerName: '<%=name%>'
       }).catch(function (error) {
           if (error.code === 'USER_CANCEL') {
           // 결제 고객이 결제창을 닫았을 때 에러 처리
@@ -65,16 +65,7 @@ String email =(String)session.getAttribute("email");
       })  
   })
 
-  /*할인 쿠폰 적용*/
-  document.querySelector("#coupon").addEventListener("click", applyDiscount)
-	
-  function applyDiscount(e) {
-    if (e.target.checked) {
-      paymentMethods.updateAmount(amount - couponAmount, "쿠폰")
-    } else {
-      paymentMethods.updateAmount(amount)
-    }
-  }
+
 </script>
 
 </html>

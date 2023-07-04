@@ -4,6 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
+
+<style>
+.font-cafe {
+	font-family: 'Roboto', sans-serif;
+}
+</style>
+
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,9 +24,9 @@
 
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="margin: 15px;margin-left: 91px;margin-right: 67px;">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="/">Cafe</a>
+            <b><a class="navbar-brand ps-3 font-cafe" href="/" style="margin: 2px 6px; font-size: 30px;">TeampCafe</a></b>
             <!-- Navbar Search-->
 
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">           
@@ -28,21 +35,12 @@
                    
                    <c:choose>
                    <c:when test="${sessionScope.username==null}">
-                    <span style="color: white; font-size: 18px;" >로그인을 해주세요</span>
+                    <span style="color: #41464b; font-size: 18px; margin-top: 6px;" >로그인을 해주세요</span>
                    </c:when>
                    <c:when test="${sessionScope.username!=null}">
                     <span style="color: white; font-size: 18px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
                     
-                    
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    
-                  <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
-                        <li><a class="dropdown-item" href="/logout">구매내역</a></li>
-
-                    </ul>
-                </li>	
+               
                    </c:when>
                    </c:choose>
                
@@ -61,7 +59,8 @@
                 </li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
-                        <li><a class="dropdown-item" href="/MyCart">basket</a></li>
+                        <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
+                        <li><a class="dropdown-item" href="/logout">구매내역</a></li>
                          </c:otherwise>
                     </c:choose>
                     </ul>

@@ -15,7 +15,7 @@
         <link href="resources/css/styles.css" rel="stylesheet" />
         <link href="/resources/css/login.css" rel="stylesheet">
         
-        <style>
+<style>
 .myswal-class {
 	width:500px;
 	font-size:15px;
@@ -57,12 +57,18 @@
     z-index: 9999999
 }
 </style>
-         <style>
-        div.a{float:center; height:auto; width:auto; margin: 1px; border :1px ; text-align:center;}
 
-      </style>
+<style>
+	div.a{float:center; height:auto; width:auto; margin: 1px; border :1px ; text-align:center;}
+</style>
+
+<style>
+.font-cafe {
+	font-family: 'Roboto', sans-serif;
+}
+</style>
   	
-    </head>
+</head>
     
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>   
 <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
@@ -137,9 +143,9 @@ $(".video_modal_popup-closer").click(function() {
 </script>
 <!-- 상단 네비 -->
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="margin: 15px;margin-left: 91px;margin-right: 67px;">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="/">Cafe</a>
+            <b><a class="navbar-brand ps-3" href="/" style="margin: 2px 6px; font-size: 30px;">TeampCafe</a></b>
         
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -147,21 +153,12 @@ $(".video_modal_popup-closer").click(function() {
                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                    <c:choose>
                    <c:when test="${sessionScope.username==null}">
-                    <span style="color: white; font-size: 18px;" >로그인을 해주세요</span>
+                    <span style="color: #41464b; font-size: 18px; margin-top: 6px;" >로그인을 해주세요</span>
                    </c:when>
                    <c:when test="${sessionScope.username!=null}">
                     <span style="color: white; font-size: 18px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
                     
                     
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    
-                  <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
-                        <li><a class="dropdown-item" href="/logout">구매내역</a></li>
-
-                    </ul>
-                </li>	
                    </c:when>
                    </c:choose>
                 
@@ -182,7 +179,8 @@ $(".video_modal_popup-closer").click(function() {
                 </li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
-                        <li><a class="dropdown-item" href="/MyCart">basket</a></li>
+                        <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
+                        <li><a class="dropdown-item" href="/logout">구매내역</a></li>
                          </c:otherwise>
                     </c:choose>
                     </ul>

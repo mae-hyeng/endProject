@@ -1,7 +1,8 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/resources/include/h2.jsp"%>
 <% 
 String username = (String)session.getAttribute("username");
 Integer quantity = (Integer)session.getAttribute("quantity");
@@ -39,6 +40,7 @@ img {
   width: 80%;
   margin: auto;
   padding: 30px;
+  margin-top: 100px;
 }
 
 .cart ul {
@@ -359,5 +361,7 @@ td {
         calculateTotal();
     });
 </script>
+
+<%@ include file="/resources/include/footer.jsp"%>
 
 </html>

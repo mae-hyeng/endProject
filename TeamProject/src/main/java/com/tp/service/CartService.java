@@ -21,21 +21,16 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CartService {
+	
 
 	private final CartRepository cartRepository;
-	
-	@Transactional
-	public List<Cart> cartUsername(UserEntity user) {
-		return cartRepository.findByUserName(user);
-	}
 
 //	//전체 주문 조회
 	@Transactional
 	public List<Cart> cartAll() {
 		return cartRepository.findAll();
 	}
-//	
-//	
+
 	public void cartSave(Cart cart) {
 		cartRepository.save(cart);
 	}
@@ -50,6 +45,14 @@ public class CartService {
 	public Cart getCartByUserAndMenu(UserEntity user, Menu menu) {
 	    return cartRepository.findByUserAndMenu(user, menu);
     }
-
+	
+	@Transactional
+	public void deleteCartByUser(UserEntity user) {
+	    List<Cart> cartEntities = cartRepository.findByUser(user);
+	    for (Cart cartEntity : cartEntities) {
+	        cartRepository.delete(cartEntity);
+	    }
+	
+	}
 
 }

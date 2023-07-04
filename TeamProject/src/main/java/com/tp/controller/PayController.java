@@ -30,8 +30,11 @@ import com.tp.service.UserService;
 
 @Controller
 public class PayController {
+	
 	@Autowired
 	UserService userService;
+	@Autowired 
+	CartService cartService;
 	
 	@PostMapping("/cart")
 	public String cart(HttpSession session,
@@ -63,7 +66,7 @@ public class PayController {
 		        String orderNumber = dateFormat.format(now) + randomNumber;
 		        
 		        session.setAttribute("orderNumber", orderNumber);
-				
+				cartService.deleteCartByUser(userinfo);
 				return "/pay/cart";
 			}else {
 				return "redirect:/sessionover";

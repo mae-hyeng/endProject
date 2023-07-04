@@ -47,6 +47,12 @@ public class CartService {
 	    return cartRepository.findByUserAndMenu(user, menu);
     }
 	
+	
+	public List<Cart> cartSave(UserEntity user){
+		return cartRepository.findByUser(user);
+		
+	}
+	
 	@Transactional
 	public void deleteCartByUser(UserEntity user) {
 	    List<Cart> cartEntities = cartRepository.findByUser(user);

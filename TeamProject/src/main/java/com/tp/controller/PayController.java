@@ -74,6 +74,7 @@ public class PayController {
 		        String orderNumber = dateFormat.format(now) + randomNumber;
 		        
 		        session.setAttribute("orderNumber", orderNumber);
+		        
 				cartService.deleteCartByUser(userinfo);
 				return "/pay/cart";
 			}else {

@@ -3,75 +3,114 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-    	<style>
-.video_modal_popup.reveal {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999999
+<head>
+<style>
+.menu {
+	margin-top: 150px;
 }
 
-.video_modal_popup .video-wrapper {
-    position: relative;
-    width: 80%;
-    padding-bottom: 45%;
-    z-index: 10
+.menu-item {
+  background-color: #ffffff;
+  flex-grow: 1;
+  transition: 0.5s;
 }
 
-.video_modal_popup .video-wrapper iframe {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+.menu-item2 {
+  background-color: #ffffff;
+  flex-grow: 1;
 }
 
-.video_modal_popup.reveal .video_modal_popup-closer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, .5);
-    z-index: 9999999
+.menu-item:hover {
+  background-color: crimson;
+  flex-grow: 1.2;
 }
+.menu-link {
+  /* block이면 마우스 클릭영역이 더 커짐, a태그는 inline으로서 클릭영역이 콘텐츠에 한정됨*/
+  display: block; 
+  padding: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  text-decoration: none;
+  text-align: center;
+}
+
+.menu-link2 {
+  /* block이면 마우스 클릭영역이 더 커짐, a태그는 inline으로서 클릭영역이 콘텐츠에 한정됨*/
+  display: block; 
+  padding: 16px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #555;
+  text-decoration: none;
+  text-align: center;
+}
+
+.menu-link:hover {
+  color: white;
+}
+
+ul, li {
+  list-style:none;
+}
+
+.swiper-slide img {
+   max-width: 1000%;
+   background-size :contain;
+    margin: auto;
+   display: block;
+}
+
+.swiper {
+	margin: 270px;
+	width: 1000px;
+}
+ 
 </style>
-   		<style>
- 		 div.a{float:center; height:auto; width:auto; margin: 1px; border :1px ; text-align:center;}
+	<style>
+		div.a{float:center; height:auto; width:auto; margin: 1px; border :1px ; text-align:center;}
+	</style>
+   
+       <meta charset="utf-8" />
+       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+       <meta name="description" content="" />
+       <meta name="author" content="" />
+       <title>영화 카페</title>
+       <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+       <link href="resources/css/styles.css" rel="stylesheet" />
+       <link href="resources/css/btn.css" rel="stylesheet" />
+       
+       <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
 
-		</style>
-    
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>영화 카페</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="resources/css/styles.css" rel="stylesheet" />
-        <link href="resources/css/btn.css" rel="stylesheet" />
-        
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    </head>
-    <body class="sb-nav-fixed" style="background-color:#000000">
+    <body class="sb-nav-fixed" style="background-color:#ffffff">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
          <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="/">Movie Commu</a>
+            <a class="navbar-brand ps-3" href="/">Cafe</a>
         
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="#">
                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                
                    <c:choose>
                    <c:when test="${sessionScope.username==null}">
-                    <span style="color: white; font-size: 22px;" >로그인을 해주세요</span>
+                    <span style="color: white; font-size: 18px;" >로그인을 해주세요</span>
                    </c:when>
                    <c:when test="${sessionScope.username!=null}">
-                    <span style="color: white; font-size: 22px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
+                    <span style="color: white; font-size: 18px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
+                    
+                    
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    
+                  <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
+                        <li><a class="dropdown-item" href="/logout">구매내역</a></li>
+
+                    </ul>
+                </li>	
                    </c:when>
                    </c:choose>
                 <li class="nav-item dropdown">
@@ -81,261 +120,136 @@
                      <c:when test="${sessionScope.username==null}">
                         <li><a class="dropdown-item" href="/login">Login</a></li>
                         <li><a class="dropdown-item" href="/join">Join</a></li>
+                        <li><a class="dropdown-item" href="/adminLogin">AdminLogin</a></li>
                         </c:when>
                <c:otherwise>
-                  <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+               
+               <li class="nav-item dropdown">
+                </li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+                        <li><a class="dropdown-item" href="/MyCart">basket</a></li>
                          </c:otherwise>
                     </c:choose>
                     </ul>
                 </li>
+                
             </ul>
                 </div>
             </form>
         </nav>
     <!-- 사이드 네비 -->
     
-            <div id="layoutSidenav">
-           <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                        
-                            <div class="sb-sidenav-menu-heading">All</div>
-                            <a class="nav-link" href="/menu">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                전체 메뉴
-                            </a>
-                            <div class="sb-sidenav-menu-heading">WRITE</div>
-                            <a class="nav-link" href="/menuRegister">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                메뉴 등록
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Genre</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                장르
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="sb-sidenav-menu-heading"> <c:choose>
-                            <c:when test="${sessionScope.username!=null}">
-                                <span style="color: white; font-size: 15px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
-                               </c:when>
-                               </c:choose></div>
-                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                멤버
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                          <c:choose>
-                                          <c:when test="${sessionScope.username==null}">
-                                          <a class="nav-link" href="login">로그인</a>
-                                          </c:when>
-                                          </c:choose>
-                                            <a class="nav-link" href="mypage">마이페이지 이동</a>
-                                            <a class="nav-link" href="update">내 정보변경</a>
-                                            <a class="nav-link" href="pwupdate">비밀번호 변경</a>
-                                            <a class="nav-link" href="logout">로그아웃</a>
-                                        </nav>
-                                   </nav>
-                                  </div>
-                          </div>
-                       </div>
-                       </nav>
-                    </div>
-               
+       <div id="layoutSidenav">
 
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        <h2 class="mt-4" style="color:#FFFFFF">Movie Commu</h2>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active" style="color:#FFFFFF">박스오피스 순위</li>
-                        </ol>
- 
-      
-<div id="main">
-    <div id="content" style="height: 33%;">
-     
-           <div class="popupModalVideo" style=" float: left; width: 20%; margin-bottom:10%">
-           <a data-video="4jhz2NU-24Q" style="cursor: pointer;"><img src="resources/img/mario.jpg" alt="마리오" /><p style="color:#FFFFFF">슈퍼 마리오 브라더스<br> 예매율:23.3%</p></a>
-           <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=1&page=1&keyword='">
-         </div>
-         <div class="video_modal_popup-closer ">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-           <div class="popupModalVideo" style=" float: left; width: 20%; margin-bottom:10%">
-           <a data-video="ly3QrgEZaQY" style="cursor: pointer;"><img src="resources/img/wick.jpg" alt="존윅" /><p style="color:#FFFFFF">존윅 4 <br>예매율:15.4%</p></a>
-           <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=2&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-         <div class="popupModalVideo" style=" float: left; width: 20%; margin-bottom:10%">
-           <a data-video="UoXfG4uxl6o" style="cursor: pointer;"><img src="resources/img/dream.jpg" alt="드림" /><p style="color:#FFFFFF">드림 <br>예매율:10.6%</p></a>
-           <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=3&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-         <div class="popupModalVideo" style=" float: left; width: 20%; margin-bottom:10%">
-           <a data-video="Medg8btyy3A" style="cursor: pointer;"><img src="resources/img/ok.jpg" alt="옥수역" /><p style="color:#FFFFFF">옥수역 귀신 <br>예매율:8.2%</p></a>
-           <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=4&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div> 
-         </div>
-         <div class="popupModalVideo" style=" float: left; width: 20%; margin-bottom:10%">
-           <a data-video="ik_Sptvs80Y" style="cursor: pointer;"><img src="resources/img/ren.jpg" alt="렌필드" /><p style="color:#FFFFFF">렌필드 <br>예매율:7.9%%</p></a>
-           <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=5&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-         
-	</div>
-	
-	
-   <div id="content" style="height: 33%; margin-top: 40px;">
-     
-           <div class="popupModalVideo" style=" float: left; width: 20%; margin-bottom:10%">
-           <a data-video="sdFIv-yogIY" style="cursor: pointer;"><img src="resources/img/slam.jpg" alt="슬램" /><p style="color:#FFFFFF">더 퍼스트 슬램덩크 <br>예매율:5.7%</p></a>
-            <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=6&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-           <div class="popupModalVideo" style=" float: left; width: 20%; margin-bottom:10%">
-           <a data-video="UUpk0wnNhtU" style="cursor: pointer;"><img src="resources/img/suzu.jpg" alt="스즈메" /><p style="color:#FFFFFF">스즈메의 문단속 <br>예매율:4.7%</p></a>
-            <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=7&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-         <div class="popupModalVideo" style=" float: left; width: 20%; margin-bottom:10%">
-           <a data-video="1FdB6LPSMkI"><img src="resources/img/mosam2.jpg" alt="인셉션" /><p style="color:#FFFFFF">인셉션 <br>예매율:4.2%</p></a>
-            <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=8&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-         <div class="popupModalVideo" style=" float: left; width: 20%; margin-bottom:10%">
-           <a data-video="lNW1TvpM3hE"><img src="resources/img/kill.jpg" alt="킬링로맨스" /><p style="color:#FFFFFF">킬링 로맨스 <br>예매율:3.2%</p></a>
-            <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=9&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-         <div class="popupModalVideo" style=" float: left; width: 20%; margin-bottom:10%">
-           <a data-video="mKFleKy3Si8"><img src="resources/img/rice.jpg" alt="라이스보이" /><p style="color:#FFFFFF">라이스보이 슬립스 <br>예매율:3.1%</p></a>
-            <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=10&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-         
- </div>
-   </main>
-  <main >
-     <div class="container-fluid px-4" >
-        <h2 class="mt-4" style="color:#FFFFFF">상영 예정작</h2>
-      <br>
-      <br>
-   
-	
-    <div id="content" style="margin-top: 10px;">
-     
-           <div class="popupModalVideo" style=" float: left; width: 20%;">
-           <a data-video="1FdB6LPSMkI"><img src="resources/img/mosam2.jpg" alt="인셉션" /><p style="color:#FFFFFF">인셉션  </p></a>
-            <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=8&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-           <div class="popupModalVideo" style=" float: left; width: 20%;">
-           <a data-video="Medg8btyy3A"><img src="resources/img/ok.jpg" alt="옥수역" /><p style="color:#FFFFFF">옥수역 귀신 </p></a>
-            <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=4&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-         <div class="popupModalVideo" style=" float: left; width: 20%;">
-           <a data-video="ik_Sptvs80Y" style="cursor: pointer;"><img src="resources/img/ren.jpg" alt="랜필드" /><p style="color:#FFFFFF">랜필드 </p></a>
-            <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=5&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-         <div class="popupModalVideo" style=" float: left; width: 20%;">
-           <a data-video="mKFleKy3Si8" style="cursor: pointer;"><img src="resources/img/rice.jpg" alt="라이스" /><p style="color:#FFFFFF">라이스보이 슬립스 </p></a>
-            <input type="button" value="상세정보" class="btn first" onclick="location.href='http://localhost:8090/info_content?num=10&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-         <div class="popupModalVideo" style=" float: left; width: 20%;">
-           <a data-video="qUaeE30DEcM" style="cursor: pointer;"><img src="resources/img/65.jpg" alt="65" /><p style="color:#FFFFFF" >65 </p></a>
-            <input type="button" value="상세정보" class="btn first" style="margin-bottom:30px;" onclick="location.href='http://localhost:8090/info_content?num=11&page=0&keyword='">
-         </div>
-         <div class="video_modal_popup-closer">
-           <div class="video_modal_popup">
-         </div>
-         </div>
-         
-	</div>
-	 
-   </div>
-   </main>
-   
-      
+		<div id="layoutSidenav_nav" style="margin-left: 130px">
+			<ul class="menu">
+				<li class="menu-item2">
+		            <h2 class="menu-link2">MENU</h2>
+		        </li>
+		        <li class="menu-item">
+		            <a href="menu" class="menu-link">All</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="coffee" class="menu-link">COFFEE</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="milkTea" class="menu-link">MILK TEA & LATTE</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="juice" class="menu-link">JUICE & DRINK</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="smoothie" class="menu-link">SMOOTHIE</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="tea" class="menu-link">TEA & ADE</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="bread" class="menu-link">BREAD</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="dessert" class="menu-link">DESSERT</a>
+		        </li>
+		        <li class="menu-item">
+		            <a href="md" class="menu-link">MD</a>
+		        </li>
+		    </ul>
+		</div>	
 
- 
-    
-                <footer style="background-color:#FFFFFF"  >
-                    <div class="container-fluid px-4" >
-                        <div class="d-flex align-items-center justify-content-between small" >
-                            <div class="text-muted" >2023.04.19 </div>
-                            
-                    </div>
-                </footer>
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="resources/js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="resources/assets/demo/chart-area-demo.js"></script>
-        <script src="resources/assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="resources/js/datatables-simple-demo.js"></script>
-        <script src="//code.jquery.com/jquery-1.12.4.min.js" crossorigin="anonymous"></script>
+         <div id="layoutSidenav_content">
+    <main >
+	    <div class="container-fluid px-4" >
+	       <div class="swiper">
+	      <div class="swiper-wrapper">
+	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
+	        <div class="swiper-slide"><img src="resources/person1.png" alt=""></div>
+	        <div class="swiper-slide"><img src="resources/person2.png" alt=""></div>
+	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
+	        
+	      </div>
+	      <div class="swiper-button-prev"></div>
+	      <div class="swiper-button-next"></div>
+	    </div>
+		
+	    <div id="content" style="margin-top: 10px;">
+	     
+	          
+		 
+	   </div>
+   </main>
+
+       
+<footer style="background-color:#FFFFFF">
+    <div class="container-fluid px-4" >
+        <div class="d-flex align-items-center justify-content-between small" >
+        <div class="text-muted" >2023.04.19 </div>
+        <div class="text-muted" >Team By 더 이상의 유기는 없다</div>
+		</div>
+	</div>
+</footer>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="resources/js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="resources/assets/demo/chart-area-demo.js"></script>
+<script src="resources/assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="resources/js/datatables-simple-demo.js"></script>
+<script src="//code.jquery.com/jquery-1.12.4.min.js" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js" integrity="sha512-VEBjfxWUOyzl0bAwh4gdLEaQyDYPvLrZql3pw1ifgb6fhEvZl9iDDehwHZ+dsMzA0Jfww8Xt7COSZuJ/slxc4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollToPlugin.min.js" integrity="sha512-lZACdYsy0W98dOcn+QRNHDxFuhm62lfs8qK5+wPp7X358CN3f+ml49HpnwzTiXFzETs4++fADePDI+L2zwlm7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link
+	rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
 <script>
-$(".popupModalVideo a").click(function() {
-    $(".video_modal_popup").addClass("reveal"),
-    $(".video_modal_popup .video-wrapper").remove(),
-    $(".video_modal_popup").append("<div class='video-wrapper'><iframe width='560' height='315' src='https://www.youtube.com/embed/" + $(this).data("video") +"?title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen></iframe></div>")
-});
-$(".video_modal_popup-closer").click(function() {
-    $(".video_modal_popup .video-wrapper").remove(),
-    $(".video_modal_popup").removeClass("reveal")
-});
-</script> 
+const swiper = new Swiper( '.swiper', {
+autoplay: true,
+loop: true,
+navigation: {
+nextEl: '.swiper-button-next',
+prevEl: '.swiper-button-prev',
+},
+slidesPerView: 1,
+slidesPerGroup : 1,
+breakpoints: {
+768: {
+slidesPerView: 1,
+},
+1024: {
+slidesPerView: 1,
+}
+}
+} );
+
+</script>
+
 
     </body>
 </html>

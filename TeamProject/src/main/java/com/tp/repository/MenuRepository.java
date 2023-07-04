@@ -11,7 +11,8 @@ import com.tp.entity.Menu;
 
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Long> {
-	
 	//카테고리별
 	List<Menu> findByType(String type);
+	
+	Menu findMenuById(Long menuId);
 }

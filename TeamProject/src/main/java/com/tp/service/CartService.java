@@ -21,9 +21,9 @@ public class CartService {
 //		return cartRepository.findByUserName(user);
 //	}
 	
-	public List<Cart> cartOut(String id) {
-		return cartRepository.findByUserId(id);
-	}
+//	public List<Cart> cartOut(String id) {
+//		return cartRepository.findByUserId(id);
+//	}
 
 
 	//전체 주문 조회
@@ -32,8 +32,8 @@ public class CartService {
 		return cartRepository.findAll();
 	}
 
-	public void cartSave(Cart cart) {
-		cartRepository.save(cart);
+	public Cart cartSave(Cart cart) {
+		return cartRepository.save(cart);
 	}
 
 	@Transactional
@@ -54,6 +54,10 @@ public class CartService {
 	        cartRepository.delete(cartEntity);
 	    }
 	
+	}
+	
+	public Cart findCartId(Long id) {
+		return cartRepository.findById(id).orElse(null);
 	}
 
 }

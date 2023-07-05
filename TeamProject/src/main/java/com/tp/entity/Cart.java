@@ -41,16 +41,16 @@ public class Cart {
 	@Column
 	private int quantity;
 	
-	@OneToOne(fetch = FetchType.LAZY)	
-	@JoinColumn(name = "userName")
-	private UserEntity user;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "menuId")
-	private Menu menu;
-	
-	
-//	@ManyToMany(mappedBy = "cart")
-//	private List<MenuOrder> menuOrder;
+    @JoinColumn(name = "userName")
+    private UserEntity user;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menuId")
+    private Menu menu;
+    
+    @OneToOne(mappedBy = "cart", fetch = FetchType.LAZY)
+    private MenuOrder menuOrder;
+
 
 }

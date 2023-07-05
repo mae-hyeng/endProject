@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@include file ="/resources/include/header.jsp" %>
 
-
+<html style="margin-bottom: 300px;">
 <body class="join">
-<div class="login-box" style="margin-top: 100px;">
+<div class="login-box" style="margin-top: 150px; margin-bottom: 100px;">
   <h2>Join</h2><br>
   <form name="regForm" action="join" method="post">
     <div class="user-box">
@@ -199,3 +199,4 @@
 
 <%@include file="/resources/include/footer.jsp" %>
 </body>
+</html>

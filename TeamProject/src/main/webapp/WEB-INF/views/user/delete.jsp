@@ -5,7 +5,7 @@
 
 
 <div class="login-box">
-  <h2>회원탈퇴 비밀번호 확인</h2>
+  <h2>회원탈퇴 비밀번호 확인</h2><br>
   <form name="regForm" action="delete" method="post">
     <div class="user-box">
       <input type="password" name="password"  required="true">
@@ -15,7 +15,7 @@
       <input type="password" name="password_check" required="true">
       <label>비밀번호 확인란</label>
 	</div>
-	<div>
+	<div style="margin-left: 20px;">
     <input type="button" value="계정삭제" class="btn first" onclick="check()">
     <input type="button" value="마이페이지" class="btn second" onclick="location.href='mypage'">
     </div>

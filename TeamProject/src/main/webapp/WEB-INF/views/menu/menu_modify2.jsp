@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/resources/include/h2.jsp"%>
-<html>
+
+<html style="margin: 100px;">
 <script type="text/javascript">
 const route = window.location.pathname.replace('/','');
 </script>
-
 
 <%
 if (session.getAttribute("username") == null) {
@@ -14,25 +13,25 @@ if (session.getAttribute("username") == null) {
 }
 %>
 <style>
-div#px-6 {
-	width: 1200px;
-	height: 600px;
-	margin-left: 370px;
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 50px auto;
+	margin-top: 100px;
 }
 
 img {
 	width:30%;
 	height:30%;
 }
-
 </style>
 </head>
-<body>
+<body >
 	<div id="layoutSidenav">
 		
 		<div id="layoutSidenav_content2">
 			<main>
-			<div id="px-6">
 				<h2 class="mt-4" style="text-align: center;">메뉴 수정</h2>
 				<ol class="breadcrumb mb-4">
 					<li class="breadcrumb-item active"></li>
@@ -142,7 +141,6 @@ img {
    
 </script>
 
-				</div>
 				</div>
 			</main>
 			

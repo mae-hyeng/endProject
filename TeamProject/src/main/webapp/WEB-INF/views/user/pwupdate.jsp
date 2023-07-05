@@ -4,7 +4,7 @@
 
 
 <div class="login-box">
-  <h2>비밀번호 수정</h2>
+  <h2>비밀번호 수정</h2><br>
   <form name="regForm" action="pwupdate" method="post">
     <div class="user-box">
       <input type="password" name="password"  required="true">

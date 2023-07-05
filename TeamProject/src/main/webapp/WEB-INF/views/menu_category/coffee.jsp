@@ -4,7 +4,7 @@
 	<style>
 	
 	.contents {
-		padding: 100px;
+		padding: 30px 100px;
 	}
 	
 	.menu {

@@ -50,5 +50,4 @@ public class Menu {
 	@Column
 	private String content;
 	
-	
 }

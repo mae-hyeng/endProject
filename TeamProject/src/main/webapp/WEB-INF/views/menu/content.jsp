@@ -17,8 +17,8 @@
 
 .min-width {
 	width: 1080px;
-	margin: 0 auto;
-	margin-top: 60px;
+	margin: 0 210px;
+	margin-top: 90px;
 	margin-bottom: 50px;
 }
 
@@ -161,7 +161,7 @@
 }
 
 .menu {
-	margin-top: 150px;
+	margin-top: 110px;
 }
 
 .menu-item {
@@ -201,7 +201,7 @@ ul, li {
 <body class="">
 	<div id="layoutSidenav">
 
-		<div id="layoutSidenav_nav" style="margin-left: 50px">
+		<div id="layoutSidenav_nav" style="margin-left: 70px">
 			<ul class="menu">
 		        <li class="menu-item">
 		            <a href="menu" class="menu-link">All</a>
@@ -248,7 +248,7 @@ ul, li {
 						<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
 						<br>
 					</c:if>
-					<br>
+					<br><br>
 					<p>${menu.content }</p>
 					<br>
 					<hr>
@@ -266,27 +266,29 @@ ul, li {
 
 						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
 						    <input type="hidden" id="menuQuantity" name="quantity" value="1">
-						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }><br>	
-						 </form>					    
+						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }><br>						    
+						</form>
 						
 						<div style="display: flex;">
-						    <input type="button" style="background: #ffffff; margin-right: 20px;" id="confirm" onclick="go()" value = "장바구니 담기">
+						    <input type="button" style="background: #ffffff;" id="confirm" onclick="go()" value = "장바구니 담기">  
 						
-							<form name="regForm2" id="regForm2" action="cart2">
+							<form name="regForm2" id="regForm2" action="cart2" method="post">
 								<input type="hidden" name="priceAll" id="priceAll" value="${menu.price}">
-								<input type="button" style="background: #ffffff;" id="confirm" onclick="go2()" value = "바로 주문하기">
+								<input type="button" style="background: #ffffff; margin-left: 10px;" id="confirm" onclick="go2()" value = "바로 주문하기">
 							</form>
 						</div>
 			       	</div>
 				
 					
 				<br>
-				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum();">
-                 <%
+				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum();"></div>
+				<div>
+  					 <%
 					    String username = (String) session.getAttribute("username");
 					    String displayStyle = (username != null && username.equals("admin")) ? "block" : "none";
 					  %>
-                <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" display: <%= displayStyle %> id="modibtn" value="수정" onclick="modi()"></div>
+  					 <button style="float: right; margin-right: 7px; padding: 6px 8px; display: <%= displayStyle %>" class="modi-btn" id="modibtn" onclick="modi()">수정</button>
+				</div>
 				
 			</main>
 	
@@ -353,7 +355,6 @@ function go2() {
             });
             // 버튼 클릭 시 실행할 동작 추가
             location.href='modifyMenu?id=${menu.id}';}
-        }
 </script>
 
 <script>

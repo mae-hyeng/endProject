@@ -10,12 +10,12 @@
 	
       <form>
       	<div align="center" class="login-box">
-         <h2>Mypage</h2>
+         <h2>Mypage</h2><br>
          <hr>
          <span style="color: black; font-size: 20px;">${sessionScope.username } [ ${sessionScope.name } ] 님의 <br> 회원 정보를 관리합니다.</span>
          <hr>
          <br>
-         <br>
+         
          <input type="button" value="회원정보 변경" class="btn first" onclick="location.href='update'" style="margin-bottom:-10px" >
          <input type="button" value="로그아웃" class="btn second" onclick="location.href='logout'" style="margin-left:-10px; margin-bottom:-10px;">
          <input type="button" value="비밀번호 변경" class="btn first" onclick="location.href='pwupdate'" style="margin-right: -10px">

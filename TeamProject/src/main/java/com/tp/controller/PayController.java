@@ -138,22 +138,16 @@ public class PayController {
 			System.out.println(userList.get(i));
 		}
 		
-		Cart newCart = new Cart();
-		
-//		Cart newCart = cartService.findCartId(null)
-	    newCart.setQuantity(cart.getQuantity());
-	    newCart.setUser(user);
-	    newCart.setMenu(cart.getMenu());
-
-	    Cart savedCart = cartService.cartSave(newCart);
+		Cart savedCart = cartService.cartSave(cart); // cart 저장
+		savedCart.setQuantity(savedCart.getQuantity());
+		savedCart.setUser(user);
+		savedCart.setMenu(savedCart.getMenu());
 		
 		System.out.println("savedCart : " + savedCart);
 		System.out.println("cart : " + cart);
 		
 		System.out.println("getQuantity" + savedCart.getQuantity());
 		System.out.println("getMenu : " + savedCart.getMenu());
-		
-		menuOrder.setCart(savedCart);
 		
 		menuOrderService.saveOrder(menuOrder);
 		

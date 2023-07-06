@@ -40,7 +40,8 @@ public class PayController {
 	
 	@Autowired
 	MenuOrderService menuOrderService;
-
+	
+	// 장바구니 결제
 	@PostMapping("/cart")
 	public String cart(HttpSession session,
 			@RequestParam(value = "QuantitySum", required = false) Integer totalQuantity,
@@ -71,8 +72,7 @@ public class PayController {
 		        String orderNumber = dateFormat.format(now) + randomNumber;
 		        
 		        session.setAttribute("orderNumber", orderNumber);
-				cartService.deleteCartByUser(userinfo);
-
+			
 				return "/pay/cart";
 			}else {
 				return "redirect:/sessionover";
@@ -82,6 +82,7 @@ public class PayController {
 		
 	}
 	
+	// 바로결제
 	@PostMapping("/cart2")
 	public String cart2(HttpSession session,
 			@RequestParam("priceAll") Integer priceAll) {
@@ -154,7 +155,7 @@ public class PayController {
 		
 		System.out.println("menuOrder : " + menuOrder);
 		
-		
+		cartService.deleteCartByUser(user);
 		
 		return "/pay/success";
 	}

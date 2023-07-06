@@ -13,6 +13,8 @@
 <%@ page import="java.io.Reader" %>
 <%@ page import="java.nio.charset.StandardCharsets" %>	
 <%@ page import="java.net.URLEncoder" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <%
@@ -85,6 +87,13 @@
         <%
     }
     %>
+    <div>
+<%--     <c:forEach var="menuOrder" items="${menuOrder}">
+			<div style="width: 300px; margin: 20px;">
+				<a>${menuOrder.id }</a>
+			</div>
+	</c:forEach> --%>
+    </div>
 
 </section>
 </body>

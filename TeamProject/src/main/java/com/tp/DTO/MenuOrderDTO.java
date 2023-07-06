@@ -2,6 +2,7 @@ package com.tp.DTO;
 
 import java.sql.Timestamp;
 
+import com.tp.entity.Menu;
 import com.tp.entity.MenuOrder;
 
 import lombok.AllArgsConstructor;

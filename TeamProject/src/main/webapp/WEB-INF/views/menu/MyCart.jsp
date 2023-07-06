@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%   if(session.getAttribute("username")==null){
+   response.sendRedirect("/sessionover"); 
+}
+%>
+
 <% 
 String username = (String)session.getAttribute("username");
 Integer quantity = (Integer)session.getAttribute("quantity");
@@ -69,6 +75,11 @@ thead {
 
 tbody {
   font-size: 12px;
+  text-align: center;
+}
+
+tfoot {
+	text-align: center;
 }
 
 td {
@@ -173,6 +184,14 @@ td {
   border: none;
 }
 
+.selectItem {
+	font-size: 14px;
+	margin-left: 33px;
+}
+.deleteItem {
+	margin-left: 20px;
+}
+
 
 
 </style>
@@ -186,51 +205,80 @@ td {
                 <li>오늘출발 상품은 판매자 설정 시점에 따라 오늘출발 여부가 변경될 수 있으니 주문 시 꼭 다시 확인해 주시기 바랍니다.</li>
             </ul>
         </div>
+        
+        <div>
+			
+		</div>
 	        <table class="cart__list">
 				<thead>
 				    <tr>
-				        <td><input type="checkbox" id="selectAllCheckbox"></td>
-				        <td colspan="2">상품정보</td>
+				        <td colspan="2"></td>
+				        <td>이미지</td>
+				        <td>상품정보</td>
 				        <td colspan="2">수량</td>
 				        <td>가격</td>
 				    </tr>
-				</thead>
+			    </thead>
+
 				<tbody>
 				    <c:forEach items="${list2}" var="item">
 						<tr>
 						    <td colspan="2"><input type="checkbox" class="itemCheckbox" data-item-id="${item.id}"></td>
-						    <td>${item.menu.name}</td>
-						    <td colspan="2">${item.quantity}</td>
-						    <td>${item.menu.price*item.quantity}</td>
+						    <td><img style="width:auto" src="/resources/files/${item.menu.filename }"/></td>
+						    <td id="menuName" class="menuName">${item.menu.name}</td>
+						    <td colspan="2" id="quantity" class="quantity">${item.quantity}</td>
+						    <td id="price" class="price">${item.menu.price*item.quantity}</td>
 						</tr>
 
 				    </c:forEach>
-					</tbody>
-
+				    <tr>
+				        <td colspan="2"></td>
+				        <td colspan="2"></td>
+				        <td>총 수량</td>
+			            <td colspan="2">총 금액</td>
+				    </tr>
+				</tbody>
 				<tfoot>
-				
-					    <tr>
-					        <td colspan="3">
-					            <button class="deleteCartButton">선택상품 삭제</button>
-					            <button class="cart_list_optionbtn">선택상품 찜</button>
-					        </td>
-				            <td>
-				                <a>총 수량 : <span id="totalQuantity"></span></a>
-				            </td>
-				            <td colspan="2">
-				                <a>총 금액 : <span id="totalPrice"></span></a>
-		          	  		</td>
-					    </tr>
-				</tfoot>	
-            
+				    <tr>
+				        <td colspan="2">
+				        <form name="regForm" action="/cart" method="post">
+						    <input type="hidden" name="PriceSum" id="PriceSum" value="">
+						    <input type="hidden" name="QuantitySum" id="QuantitySum" value="">
+						    <input type="hidden" name="menuOrderName" id="menuOrderName" value="">
+						</form>
+						</td>
+				        <td colspan="2"></td>
+				        <td id="totalQuantity"></td>
+				        <td colspan="2" id="totalPrice"></td>
+				    </tr>
+				</tfoot>
+		
         </table>
+				
+				<br>
+				<div style="display: flex">
+				<div class="selectItem">
+				<input type="checkbox" id="selectAllCheckbox">
+	            </div>
+	            <div class="deleteItem">
+	            <button class="deleteCartButton">선택상품 삭제</button>
+				</div>
+				</div>
+        
+        <br>
+		
+        
         <div class="cart__mainbtns">
             <button class="cart__bigorderbtn left" onclick="location.href='menu'">주문 추가하기</button>
-            <button class="cart__bigorderbtn right" onclick="location.href='cart'">주문하기</button>
+            <button class="cart__bigorderbtn right" onclick="order()">주문하기</button>
         </div>
     </section>
 </body>
-
+<script>
+function order() {
+	regForm.submit();
+}
+</script>
 
 <script>
     
@@ -290,4 +338,58 @@ td {
     }
 
 </script>
+
+<script>
+function totalP() {
+	var totalPrice = 0;
+	var totalQuantity = 0;
+	var str = "";
+	var checkbox = document.getElementsByClassName("itemCheckbox");
+	var checkboxAll = document.getElementById("selectAllCheckbox");
+	var priceElements = document.getElementsByClassName("price");
+	var menuNameElements = document.getElementsByClassName("menuName");
+	var quantityElements = document.getElementsByClassName("quantity");
+	var allChecked = true; // 모든 체크박스가 선택되었는지 확인하는 변수
+	
+	for (var i = 0; i < checkbox.length; i++) {
+		if (checkbox[i].checked) {
+			var price = parseInt(priceElements[i].innerText);
+			totalPrice += price;
+			var quantity = parseInt(quantityElements[i].innerText);
+			totalQuantity += quantity;
+			var menuName = menuNameElements[i].innerText;
+			str += menuName + " ";
+		} else {
+			allChecked = false;
+		}
+	}
+	
+	// 선택되지 않은 체크박스가 하나라도 있다면 false
+	checkboxAll.checked = allChecked;
+	
+	var totalPriceElement = document.getElementById("totalPrice");
+	var totalQuantityElement = document.getElementById("totalQuantity");
+	totalPriceElement.innerText = totalPrice;
+	totalQuantityElement.innerText = totalQuantity;
+	
+	var totalPriceInput = document.getElementById("PriceSum");
+	var totalQuantityInput = document.getElementById("QuantitySum");
+	totalPriceInput.value = totalPrice;
+	totalQuantityInput.value = totalQuantity;
+	
+	var menuOrderName = document.getElementById("menuOrderName")
+	menuOrderName.value = str;
+}
+
+var checkboxes = document.getElementsByClassName("itemCheckbox");
+var checkboxAll = document.getElementById("selectAllCheckbox");
+checkboxAll.addEventListener("change", totalP);
+
+for (var i = 0; i < checkboxes.length; i++) {
+	checkboxes[i].addEventListener("change", totalP);
+}
+</script>
+
+
+
 </html>

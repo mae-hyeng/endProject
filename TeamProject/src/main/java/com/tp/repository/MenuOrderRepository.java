@@ -8,5 +8,5 @@ import com.tp.entity.MenuOrder;
 public interface MenuOrderRepository extends JpaRepository<MenuOrder, String> {
 	
 	MenuOrder findByUserId(String string);
-	
+
 }

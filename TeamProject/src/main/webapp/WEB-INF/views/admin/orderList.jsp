@@ -190,6 +190,7 @@ td {
 				<thead>
 				    <tr>
 				        <td><input type="checkbox" id="selectAllCheckbox"></td>
+				        <td></td>
 				        <td colspan="2">메뉴</td>
 				        <td colspan="2">수량</td>
 				        <td>가격</td>
@@ -200,6 +201,7 @@ td {
 				    <c:forEach items="${list2}" var="item">
 						<tr>
 						    <td colspan="2"><input type="checkbox" class="itemCheckbox" data-item-id="${item.id}"></td>
+						    <td><img style="width:auto" src="/resources/files/${item.menu.filename }" /></td>
 						    <td>${item.menu.name}</td>
 						    <td colspan="2">${item.quantity}</td>
 						    <td>${item.menu.price*item.quantity}</td>

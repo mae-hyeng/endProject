@@ -109,7 +109,7 @@ ul, li {
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="#">
                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                   <div class="sb-sidenav-menu-heading">WRITE</div>
+                   <div class="sb-sidenav-menu-heading"></div>
                    
                    <div>
                    	  <%
@@ -134,9 +134,10 @@ ul, li {
                         <li><a class="dropdown-item" href="/login">Login</a></li>
                         <li><a class="dropdown-item" href="/join">Join</a></li>
                         </c:when>
-               <c:otherwise>
-                  <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+               		<c:otherwise>
+                  		<li><a class="dropdown-item" href="/mypage">Mypage</a></li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        <li><a class="dropdown-item" href="/MyCart">Cart</a></li>
                          </c:otherwise>
                     </c:choose>
                     </ul>

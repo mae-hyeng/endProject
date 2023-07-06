@@ -125,7 +125,7 @@ ul, li {
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
                         <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
-                        <li><a class="dropdown-item" href="/logout">구매내역</a></li>
+                        <li><a class="dropdown-item" href="/MyOrder">구매내역</a></li>
                          </c:otherwise>
                     </c:choose>
                     </ul>

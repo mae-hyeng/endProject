@@ -17,15 +17,6 @@ public class CartService {
 
 	private final CartRepository cartRepository;
 	
-//	@Transactional
-//	public List<Cart> cartUsername(UserEntity user) {
-//		return cartRepository.findByUserName(user);
-//	}
-	
-//	public List<Cart> cartOut(String id) {
-//		return cartRepository.findByUserId(id);
-//	}
-
 
 	//전체 주문 조회
 	@Transactional
@@ -55,12 +46,14 @@ public class CartService {
 	public void deleteCartByUser(UserEntity user) {
 	    List<Cart> cartEntities = cartRepository.findByUser(user);
 	    for (Cart cartEntity : cartEntities) {
-	        MenuOrder menuOrder = cartEntity.getMenuOrder();
-	        if (menuOrder != null) {
-	            menuOrder.setCart(null);
+	    	 cartRepository.delete(cartEntity);
 	        }
-	        cartRepository.delete(cartEntity);
-	    }
+	      
+	}
+	
+	@Transactional
+	public List<Cart> findCartByUser(UserEntity user){
+		return cartRepository.findByUser(user);
 	}
 	
 	public Cart findCartByUserId(String userId) {

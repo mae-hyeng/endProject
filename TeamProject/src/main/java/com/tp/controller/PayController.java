@@ -141,32 +141,19 @@ public class PayController {
 	    String username = (String) session.getAttribute("username");
 
 	    user = userService.UserInfo(username);
+	    List<Cart> cartList = new ArrayList<>();
+	    cartList.addAll(cartService.findCartByUser(user));
+	    for(int i=0; i<cartList.size(); i++) {
+	    	menuOrder.setCartId(cartList.get(i).getId());
+	    	menuOrder.setUsername(user.getName());
+	    	menuOrder.setQuantity(cartList.get(i).getQuantity());
+	    	menuOrder.setMenuId(cartList.get(i).getMenu());
+	    	menuOrderService.saveOrder(menuOrder);
+	    	
+	    }
 	    
-	    List<UserEntity> userList = new ArrayList<>();
-		userList.add(user);
-	    
-	    String userId = user.getId();
+	   
 
-	    Cart savedCart = cartService.findCartByUserId(userId);
-
-	    System.out.println("savedCart : " + savedCart);
-	    
-	    menuOrder.setQuantity(savedCart.getQuantity());
-	    menuOrder.setCart(savedCart);
-	    menuOrder.setMenu(savedCart.getMenu());
-	    
-	    System.out.println(savedCart.getQuantity());
-	    System.out.println(savedCart.getMenu());
-	    System.out.println(savedCart.getMenu().getId());
-	    
-	    menuOrderService.saveOrder(menuOrder);
-
-	    List<MenuOrder> menuOrderList = new ArrayList<>();
-	    menuOrderList.add(menuOrder);
-	    model.addAttribute("menuOrderList", menuOrderList);
-	    
-	    System.out.println("menuOrder : " + menuOrder);
-	    
 	    cartService.deleteCartByUser(user);
 
 	    return "pay/success";

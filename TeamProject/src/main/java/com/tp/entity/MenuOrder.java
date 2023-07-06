@@ -40,24 +40,23 @@ public class MenuOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
-	@CreationTimestamp
-	private Timestamp orderDate;
-	
-	@Column
-	private Integer quantity;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "menuId")
-	private Menu menu;
-	
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userName")
-	private List<UserEntity> user = new ArrayList<>();
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cartId")
-	private Cart cart;
+	   @Column
+	   @CreationTimestamp
+	   private Timestamp orderDate;
+	   
+	   @Column
+	   private Integer quantity;
+	   
+	   @ManyToOne(fetch = FetchType.LAZY)
+	   @JoinColumn(name = "menu")
+	   private Menu menuId;
+	   
+	   
+	   @Column
+	   private String username;
+	   
+	   @Column
+	   private Long cartId;
+
 	
 }

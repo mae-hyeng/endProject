@@ -298,8 +298,4 @@ public class UserController {
 		         return "Fail";
 		      }
 	}
-	
-		      
-	
-	
 }

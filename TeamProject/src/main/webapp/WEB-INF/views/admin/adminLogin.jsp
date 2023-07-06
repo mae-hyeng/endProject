@@ -3,7 +3,7 @@
 <%@include file ="/resources/include/header.jsp" %>
 
 <div class="login-box">
-  <h2>Login</h2>
+  <h2>Admin Login</h2><br>
   <form name="regForm" action="/adminLogin" method="post">
     <div class="user-box">
       <input type="text" name="username"  required="true">

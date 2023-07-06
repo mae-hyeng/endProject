@@ -16,4 +16,3 @@ public class MenuOrderService {
     	menuOrderRepository.save(menuOrder);
     }
 }
-

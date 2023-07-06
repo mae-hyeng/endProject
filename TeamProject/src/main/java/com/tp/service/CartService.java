@@ -48,10 +48,7 @@ public class CartService {
     }
 	
 	
-	public List<Cart> cartSave(UserEntity user){
-		return cartRepository.findByUser(user);
-		
-	}
+
 	
 	@Transactional
 	public void deleteCartByUser(UserEntity user) {

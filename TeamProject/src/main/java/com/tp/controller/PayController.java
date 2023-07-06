@@ -25,7 +25,6 @@ import com.tp.entity.Cart;
 import com.tp.entity.Menu;
 import com.tp.entity.MenuOrder;
 import com.tp.entity.UserEntity;
-import com.tp.repository.CartRepository;
 import com.tp.service.CartService;
 import com.tp.service.MenuOrderService;
 import com.tp.service.UserService;
@@ -35,15 +34,13 @@ public class PayController {
 	
 	@Autowired
 	UserService userService;
+	
 	@Autowired 
 	CartService cartService;
 	
 	@Autowired
 	MenuOrderService menuOrderService;
-	
-	@Autowired
-	CartRepository cartRepository;
-	
+
 	@PostMapping("/cart")
 	public String cart(HttpSession session,
 			@RequestParam(value = "QuantitySum", required = false) Integer totalQuantity,
@@ -74,8 +71,8 @@ public class PayController {
 		        String orderNumber = dateFormat.format(now) + randomNumber;
 		        
 		        session.setAttribute("orderNumber", orderNumber);
-		        
 				cartService.deleteCartByUser(userinfo);
+
 				return "/pay/cart";
 			}else {
 				return "redirect:/sessionover";
@@ -87,12 +84,8 @@ public class PayController {
 	
 	@PostMapping("/cart2")
 	public String cart2(HttpSession session,
-			@RequestParam(value = "QuantitySum", required = false) Integer totalQuantity,
-			@RequestParam(value = "PriceSum", required = false) Integer PriceSum, RedirectAttributes rttr) {
-		if(totalQuantity== null || PriceSum == null) {
-			rttr.addFlashAttribute("result", "NO");
-			return "redirect:/nocart";
-		}else {
+			@RequestParam("priceAll") Integer priceAll) {
+		 
 			String username=(String)session.getAttribute("username");
 			if(username!=null) {
 				UserEntity userinfo = userService.UserInfo(username);
@@ -120,7 +113,7 @@ public class PayController {
 			}else {
 				return "redirect:/sessionover";
 			}	
-		}
+		
 		
 		
 	}
@@ -164,8 +157,6 @@ public class PayController {
 		
 		System.out.println("menuOrder : " + menuOrder);
 		
-		
-		
 		return "/pay/success";
 	}
 	
@@ -202,6 +193,7 @@ public class PayController {
 //	public String success() {
 //		return "/pay/success";
 //	}
+
 	@PostMapping("/success")
 	public String successs() {
 		return "/pay/success";
@@ -217,3 +209,4 @@ public class PayController {
 		return "/pay/fail";
 	}
 }
+

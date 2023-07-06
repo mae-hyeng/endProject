@@ -271,7 +271,7 @@ ul, li {
 						    <input type="button" style="background: #ffffff;" id="confirm" onclick="go()" value = "장바구니 담기">  
 						</form>
 						<br>
-						<form name="regForm2" id="regForm2" action="cart2">
+						<form name="regForm2" id="regForm2" action="cart2" method="post">
 							<input type="hidden" name="priceAll" id="priceAll" value="${menu.price}">
 							<input type="button" style="background: #ffffff;" id="confirm" onclick="go2()" value = "바로 주문하기">
 						</form>
@@ -298,6 +298,10 @@ function go2() {
 	regForm2.submit();
 }
 </script>
+
+
+
+
 <script>
     const plusBtn = document.querySelector('.plus');
     const minusBtn = document.querySelector('.minus');

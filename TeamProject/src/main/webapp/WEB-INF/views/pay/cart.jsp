@@ -36,6 +36,7 @@ String email =(String)session.getAttribute("email");
 <script>
   const clientKey = 'test_ck_oeqRGgYO1r555edOqKprQnN2Eyaz' // 상점을 특정하는 키
   const customerKey ='<%=uuid%>' // 결제 고객을 특정하는 키
+
   const amount = ${param.PriceSum }${param.priceAll } // 결제 금액
   
  

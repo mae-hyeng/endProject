@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.tp.entity.Cart;
 import com.tp.entity.Menu;
+import com.tp.entity.MenuOrder;
 import com.tp.entity.UserEntity;
 import com.tp.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
@@ -54,13 +55,21 @@ public class CartService {
 	public void deleteCartByUser(UserEntity user) {
 	    List<Cart> cartEntities = cartRepository.findByUser(user);
 	    for (Cart cartEntity : cartEntities) {
+	        MenuOrder menuOrder = cartEntity.getMenuOrder();
+	        if (menuOrder != null) {
+	            menuOrder.setCart(null);
+	        }
 	        cartRepository.delete(cartEntity);
 	    }
-	
 	}
 	
-	public Cart findCartId(Long id) {
-		return cartRepository.findById(id).orElse(null);
+	public Cart findCartByUserId(String userId) {
+	    return cartRepository.findByUser_Id(userId);
 	}
+	
+	public Cart findCartByIdAndUserId(Long cartId, String userId) {
+	    return cartRepository.findByIdAndUser_Id(cartId, userId);
+	}
+
 
 }

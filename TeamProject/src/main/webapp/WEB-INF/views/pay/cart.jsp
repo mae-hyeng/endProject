@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%   if(session.getAttribute("username")==null){
+   response.sendRedirect("/sessionover"); 
+}
+%>
 <% 
 String uuid = (String)session.getAttribute("uuid");
 String orderNumber = (String)session.getAttribute("orderNumber");
@@ -23,6 +27,7 @@ String email =(String)session.getAttribute("email");
   <!-- 상품 정보 영역-->
   <div class="title">상품 정보</div>
   <%-- <p>${param.menuOrderName}</p> --%>
+  <p>${list2.id }</p>
   <p><%=name%>님의 주문</p>
   <p>결제 금액: ${param.PriceSum }${param.priceAll }</p>
  	

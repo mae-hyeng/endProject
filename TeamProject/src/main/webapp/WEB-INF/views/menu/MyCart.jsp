@@ -40,7 +40,7 @@ img {
   width: 80%;
   margin: auto;
   padding: 30px;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 
 .cart ul {
@@ -183,6 +183,8 @@ td {
 .selectItem {
 	font-size: 14px;
 	margin-left: 33px;
+	display: flex;
+	align-items: center;
 }
 .deleteItem {
 	margin-left: 20px;
@@ -194,16 +196,10 @@ td {
 
  <body>
     <section class="cart">
-        <div class="cart__information">
-            <ul>
-                <li>장바구니 상품은 최대 30일간 저장됩니다.</li>
-                <li>가격, 옵션 등 정보가 변경된 경우 주문이 불가할 수 있습니다.</li>
-            </ul>
-        </div>
         
-        <div>
-			
-		</div>
+        <center><font size="7">MyCart</font></center>  
+        <br><br>      
+        
 	        <table class="cart__list">
 				<thead>
 				    <tr>
@@ -254,6 +250,7 @@ td {
 				<div style="display: flex; align-items: center;">
 				<div class="selectItem">
 				<input type="checkbox" id="selectAllCheckbox">
+				<label for="selectAllCheckbox" id="selectAllLabel" style="margin-left: 8px;">전체선택</label>
 	            </div>
 	            <div class="deleteItem">
 	            <button class="deleteCartButton" style="background: #ffffff; border: 1px solid #000000; padding: 3px; border-radius: 5px; font-size: 14px;">선택상품 삭제</button>

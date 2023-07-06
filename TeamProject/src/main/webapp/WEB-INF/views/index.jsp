@@ -6,7 +6,7 @@
 <head>
 <style>
 .menu {
-	margin-top: 70px;
+	margin-top: 50px;
 }
 
 .menu-item {
@@ -89,7 +89,7 @@ ul, li {
 </head>
 
     <body style="background-color:#ffffff">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="margin: 30px;">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="margin: 40px;">
          <!-- Navbar Brand-->
             <b><a class="navbar-brand ps-3 font-cafe" href="/" style="margin: 2px 6px; margin-left: 800px; font-size: 50px;">TeampCafe</a></b>
         
@@ -129,7 +129,7 @@ ul, li {
 				                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
 				                        <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
 				                        <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
-				                        <li><a class="dropdown-item" href="/purchase-history">구매내역</a></li>
+				                        <li><a class="dropdown-item" href="/MyOrder">구매내역</a></li>
 				                    </c:otherwise>
 				                </c:choose>
 				            </c:otherwise>

@@ -93,19 +93,19 @@
 				<br>
 				<br>
 				<div style="display: flex; flex-wrap: wrap;">
-					<c:forEach var="vo" items="${list}">
-						<c:if test="${not empty vo.filename }">
-							<div style="width: 300px; margin: 20px;">
-								<a href="menuContent?id=${vo.id }">
-									<img style=
-									"width: 300px; height: auto;" src="/resources/files/${vo.filename }" />
-								</a>
-								<br>
-								<b><c:out value="${vo.name }" /></b>
-								<br>
-							</div>
-						</c:if>
-					</c:forEach>
+				<c:forEach var="vo" items="${list}">
+					<c:if test="${not empty vo.filename }">
+						<div style="width: 300px; margin: 20px;">
+							<a href="menuContent?id=${vo.id }">
+								<img style=
+								"width: 300px; height: auto;" src="/resources/files/${vo.filename }" />
+							</a>
+							<br>
+							<div style="text-align: center;"><b><c:out value="${vo.name }" /></b></div>
+							<br>
+						</div>
+					</c:if>
+				</c:forEach>
 				</div>  
 				<br>
 				<div>

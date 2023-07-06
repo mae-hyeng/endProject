@@ -4,7 +4,7 @@
 <style>
 
 .contents {
-	padding: 30px 100px;
+	padding: 100px;
 }
 
 .menu {
@@ -93,19 +93,20 @@ ul, li {
 			<br>
 			<br>
 			<div style="display: flex; flex-wrap: wrap;">
-				<c:forEach var="vo" items="${list}">
-					<c:if test="${not empty vo.filename }">
-						<div style="width: 300px; margin: 20px;">
-							<a href="menuContent?id=${vo.id }">
-								<img style=
-								"width: 300px; height: auto;" src="/resources/files/${vo.filename }" />
-							</a>
-							<br>
-							<div style="text-align: center;"><b><c:out value="${vo.name }" /></b></div>
-							<br>
-						</div>
-					</c:if>
-				</c:forEach>
+				<c:forEach var="menuOrderList" items="${menuOrderList}">
+            <div style="width: 300px; margin: 20px;">
+                <a>${menuOrderList.id}</a>
+                <a>${menuOrderList.orderDate}</a>
+                <a>${menuOrderList.quantity}</a>
+            </div>
+        </c:forEach>
+        <c:forEach var="menuOrder" items="${menuOrder}">
+            <div style="width: 300px; margin: 20px;">
+                <a>${menuOrder.id}</a>
+                <a>${menuOrder.orderDate}</a>
+                <a>${menuOrder.quantity}</a>
+            </div>
+        </c:forEach>
 			</div>  
 			<br>
 			<div>

@@ -4,7 +4,7 @@
 
 <html style="margin-bottom: 300px;">
 <body class="join">
-<div class="login-box" style="margin-top: 150px; margin-bottom: 100px;">
+<div class="login-box" style="margin-top: 200px; margin-bottom: 100px;">
   <h2>Join</h2><br>
   <form name="regForm" action="join" method="post">
     <div class="user-box">
@@ -28,22 +28,37 @@
       <label>전화번호는 '-'를 빼고 입력하세요</label>
     </div>	
     
-      <input type="text" size="35" style="border: none" name="email" placeholder="이메일을 입력하세요" required="true">
-     
-      
-	<input type="button" style="border: none" value="메일발송"  onclick=mailcheck()><br><br>
+    <div style="display: flex; align-items: center;">
+      <div class="user-box" >
+	      <div>
+	      	<input type="text" name="email" required="true" style="width: 185%;">
+	      	<label>이메일을 입력하세요</label>
+	      </div>
+      </div>
+      		<input type="button" class="btn2" value="메일발송"  onclick=mailcheck()>
+      </div>
+    
 	<div class="user-box">
      <input type="text" name="email_check_number" maxlength="10" required="true">
-      <label>메일로 발송된 인증번호 6자리를 입력해주세요</label>
-    </div>
-    	
-	<input type="text" size="35" style="border: none" id="address" name="address" placeholder="주소">
-	<input type="button" style="border: none" onclick="execDaumPostcode()" value="주소 검색"><br><br>
-	<div id="map" style="width:450px;height:200px;margin-top:10px;display:none"></div><br>
+      <label>메일로 발송된 인증번호 8자리를 입력해주세요</label>
+    </div>  		
+
+	<div style="display: flex; align-items: center;">
+      <div class="user-box" >
+	      <div>
+	      	<input type="text" name="address" id="address" required="true" style="width: 185%;">
+	      	<label>주소</label>
+	      </div>
+      </div>
+      		<input type="button" class="btn2" value="주소 검색"  onclick="execDaumPostcode()">
+      </div>
+			<div id="map" style="width:450px;height:200px;margin-top:10px;display:none"></div><br>
+
+
 	
 <div>
-<input type="button" value="회원가입" class="btn first" onclick="check()" style="margin-left: 55px">
-<input type="button" value="로그인" class="btn second" onclick="location.href='login'">
+<input type="button" style="margin-left: 55px" value="로그인" class="btn first" onclick="location.href='login'">
+<input type="button" value="회원가입" class="btn second" onclick="check()">
 </div>
   </form>
 </div>
@@ -62,7 +77,7 @@
            alert("아이디는 영문만 가능합니다")
            return;
         }else if(regForm.username.value.search(" ") != -1){
-              alert("아이디   는 공백을 포함 할 수 없습니다.")
+              alert("아이디는 공백을 포함 할 수 없습니다.")
               return;
         }else if(regForm.username.value.length < 4 || regForm.username.value.length > 12){
            alert("아이디는 4글자 이상 12글자 이하로 입력하세요.")

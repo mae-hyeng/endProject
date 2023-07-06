@@ -14,7 +14,7 @@
       <label>Password</label>
     </div>
 	<div>
-		<input type="button" value ="로그인" class="btn first" onclick=check() style="margin-left: 150px">
+		<input type="button" value ="로그인" class="btn second" onclick=check() style="margin-left: 150px">
 	</div>
   </form>
 </div>

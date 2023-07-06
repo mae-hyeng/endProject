@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,16 +42,16 @@ public class Cart {
 	@Column
 	private int quantity;
 	
-	@OneToOne(fetch = FetchType.LAZY)	
-	@JoinColumn(name = "userName")
-	private UserEntity user;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "menuId")
-	private Menu menu;
-	
-	
-//	@ManyToMany(mappedBy = "cart")
-//	private List<MenuOrder> menuOrder;
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userName")
+    private UserEntity user;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "menuId")
+    private Menu menu;
+    
+    @OneToOne(mappedBy = "cart", fetch = FetchType.LAZY)
+    private MenuOrder menuOrder;
+
 
 }

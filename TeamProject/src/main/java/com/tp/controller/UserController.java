@@ -299,7 +299,8 @@ public class UserController {
 		      }
 	}
 	
-		      
-	
-	
+	@GetMapping("/MyOrder")
+	public String myorder() {
+		return "user/myorder";
+	}
 }

@@ -74,7 +74,7 @@ div#px-6 {
 										<div class="text_box">
 											<textarea name="content" id="content"
 												placeholder="내용을 입력해주세요." class="text" style="resize: none;"
-												cols="150px;" rows="5px;" required></textarea>
+												cols="153px;" rows="5px;" required></textarea>
 											<div class="count">
 												<span>0</span>/500
 											</div>
@@ -82,8 +82,8 @@ div#px-6 {
 										</div>
 										<div class="button">
 												<br> 
-													<input type="submit" style="float: right" value="등록"> 
-													<input type="button" style="float: right" value="목록" onclick="history.go(-1); return false;">
+													<input type="submit" style="float: right; margin: 5px;" value="등록"> 
+													<input type="button" style="float: right; margin: 5px;" value="목록" onclick="history.go(-1); return false;">
 										</div>
 									</div>
 								</div>

@@ -284,7 +284,8 @@ ul, li {
 					    String username = (String) session.getAttribute("username");
 					    String displayStyle = (username != null && username.equals("admin")) ? "block" : "none";
 					  %>
-                <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" display: <%= displayStyle %> id="modibtn" value="수정" onclick="modi()"></div>
+                <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" display: <%= displayStyle %> id="modibtn" value="수정" onclick="modi()">
+                </div>
 				
 			</main>
 	
@@ -339,19 +340,19 @@ function go2() {
 </script>
 
 <script>
-        function modi() {
-            document.addEventListener('DOMContentLoaded', function() {
-                const modibtn = document.getElementById('modi-btn');
-                const username = ${sessionScope.username};
-                if (username != 'admin') {
-                    modibtn.style.display = 'none';
-                } else {
-                    modibtn.style.display = 'block';
-                }
-            });
-            // 버튼 클릭 시 실행할 동작 추가
-            location.href='modifyMenu?id=${menu.id}';}
+function modi() {
+    document.addEventListener('DOMContentLoaded', function() {
+        const modibtn = document.getElementById('modi-btn');
+        const username = ${sessionScope.username};
+        if (username != 'admin') {
+            modibtn.style.display = 'none';
+        } else {
+            modibtn.style.display = 'block';
         }
+    });
+    // 버튼 클릭 시 실행할 동작 추가
+    location.href='modifyMenu?id=${menu.id}';
+}
 </script>
 
 <script>

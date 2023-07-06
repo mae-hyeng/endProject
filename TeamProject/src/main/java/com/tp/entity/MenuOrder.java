@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,7 +50,7 @@ public class MenuOrder {
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userName")
-	private List<UserEntity> user = new ArrayList<UserEntity>();
+	private List<UserEntity> user = new ArrayList<>();
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cartId")

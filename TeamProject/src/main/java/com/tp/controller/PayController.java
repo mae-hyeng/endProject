@@ -126,36 +126,35 @@ public class PayController {
 			HttpSession session,
 			Model model
 			) {
-		System.out.println("success");
 		String username = (String)session.getAttribute("username");
-		String id = (String)session.getAttribute("id");
-		System.out.println("id session : " + id);
-		System.out.println("username session : " + username);
 		
 		user = userService.UserInfo(username);
-		System.out.println("user : " + user);
-		
-		List<Cart> clist = null;
 		
 		List<UserEntity> userList = new ArrayList<>();
 		userList.add(user);
-		System.out.println("userList : " + userList);
-		clist = cartService.cartOut(user.getId());
 		
-		System.out.println("cart : " + clist);
-
-		menuOrder = MenuOrder.builder()
-				.cart(cart)
-				.quantity(cart.getQuantity())
-				.user(userList)
-				.menu(cart.getMenu())
-				.build();
+		for(int i=0; i<userList.size(); i++) {
+			System.out.println(userList.get(i));
+		}
+		
+		Cart savedCart = cartService.cartSave(cart); // cart 저장
+		savedCart.setQuantity(savedCart.getQuantity());
+		savedCart.setUser(user);
+		savedCart.setMenu(savedCart.getMenu());
+		
+		System.out.println("savedCart : " + savedCart);
+		System.out.println("cart : " + cart);
+		
+		System.out.println("getQuantity" + savedCart.getQuantity());
+		System.out.println("getMenu : " + savedCart.getMenu());
 		
 		menuOrderService.saveOrder(menuOrder);
 		
 		model.addAttribute("menuOrder", menuOrder);
 		
 		System.out.println("menuOrder : " + menuOrder);
+		
+		
 		
 		return "/pay/success";
 	}

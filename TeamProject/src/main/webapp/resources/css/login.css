@@ -15,7 +15,7 @@ width: 100%;
   margin:0;
   padding:0;
   font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(#778899, #000000);
+  background: #ffffff;
 }
 
 .login-box {
@@ -25,16 +25,19 @@ width: 100%;
   width: 550px;
   padding: 40px;
   transform: translate(-50%, -50%);
-  background: rgba(204,204,204,.5);
+  background: #a7adb3;
+  border: 1.5px dotted #41464b;
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0,0,0,.6);
-  border-radius: 10px;
+  border-radius: 70px;
 }
 
+  
+
+
 .login-box h2 {
-  margin: 0 0 30px;
+  margin:rgb(0, 0, 0) 30px;
   padding: 0;
-  color: #fff;
+  color: #ffffff;
   text-align: center;
   font-size: 40px;
 }

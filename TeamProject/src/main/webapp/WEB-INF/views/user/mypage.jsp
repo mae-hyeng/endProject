@@ -12,7 +12,7 @@
       	<div align="center" class="login-box">
          <h2>Mypage</h2>
          <hr>
-         <span style="color: white; font-size: 20px;">${sessionScope.username } [ ${sessionScope.name } ] 님의 <br> 회원 정보를 관리합니다.</span>
+         <span style="color: black; font-size: 20px;">${sessionScope.username } [ ${sessionScope.name } ] 님의 <br> 회원 정보를 관리합니다.</span>
          <hr>
          <br>
          <br>

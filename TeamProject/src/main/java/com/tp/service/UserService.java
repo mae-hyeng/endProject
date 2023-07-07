@@ -50,13 +50,32 @@ public class UserService {
 		return result;
 	}
 	
+
+	
 	// 이름값으로 유저 정보 찾는 기능
 	public UserEntity UserInfo(final String username) {
-		
 		return userRepository.findByUsername(username);
-		
+	}
+	
+	
+	
+	// 이메일 유효체크
+	public int emailExists(final String email) {
+		int result =0;
+		if(userRepository.existsByEmail(email)) {
+			result=1;
+		}else {
+			result=0;
+		}
+		return result;
 		
 	}
+	// 메일로 유저 정보 찾기
+	public UserEntity infoToEmail(final String email) {
+		return userRepository.findByEmail(email);
+		
+	}
+	
 	
 	
 	
@@ -73,12 +92,4 @@ public class UserService {
 		}
 		return result;
 	}
-
-
-	
-	
-	
-
-	
-	
 }

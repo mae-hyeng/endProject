@@ -56,122 +56,114 @@
 .board-table tbody th p {
 	display: none;
 }
+
+
+
+ #topMenu {            
+         height: 30px; 
+         width: 850px; 
+ }
+ #topMenu ul li {                       
+         list-style: none;            
+         color: white;               
+         background-color: #ffffff;  
+         float: left;                
+         line-height: 30px;          
+         vertical-align: middle;     
+         text-align: center;   
+         margin: 10px;      
+ }
+ #topMenu .menuLink {                               
+         text-decoration:none;                      
+         color: white;                              
+         display: block;                            
+         width: 150px;                              
+         font-size: 12px;                           
+         font-weight: bold;                         
+         font-family: "Trebuchet MS", Dotum, Arial; 
+ }
+ #topMenu .menuLink:hover {            
+         color: red;                   
+         background-color: #4d4d4d;    
+ }
+
+
+
+	body,ul,li {
+	  margin: 0;
+	  padding: 0;
+	}
+ul, li {
+  list-style:none;
+}
+.menu {
+  display: flex;
+}
+.menu-item {
+  background-color: gold;
+  flex-grow: 1;
+  transition: 0.5s;
+}
+.menu-item:hover {
+  background-color: crimson;
+  flex-grow: 1.2;
+}
+.menu-link {
+  /* block이면 마우스 클릭영역이 더 커짐, a태그는 inline으로서 클릭영역이 콘텐츠에 한정됨*/
+  display: block; 
+  padding: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  text-decoration: none;
+  text-align: center;
+}
+.menu-link:hover {
+  color: white;
+}
+
+
 </style>
 </head>
 <div id="layoutSidenav" style="background-color: #FFFFFF;">
-	<div id="layoutSidenav_nav">
-		<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-			<div class="sb-sidenav-menu">
-				<div class="nav">
-
-					<div class="sb-sidenav-menu-heading">All</div>
-					<a class="nav-link" href="/board">
-						<div class="sb-nav-link-icon">
-							<i class="fas fa-tachometer-alt"></i>
-						</div> 전체 게시판
-					</a>
-					<div class="sb-sidenav-menu-heading">WRITE</div>
-					<a class="nav-link" href="/register">
-						<div class="sb-nav-link-icon">
-							<i class="fas fa-tachometer-alt"></i>
-						</div> 게시글 작성
-					</a>
-					<div class="sb-sidenav-menu-heading">Genre</div>
-					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-						<div class="sb-nav-link-icon">
-							<i class="fas fa-columns"></i>
-						</div> 장르
-						<div class="sb-sidenav-collapse-arrow">
-							<i class="fas fa-angle-down"></i>
-						</div>
-					</a>
-					<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-						<nav class="sb-sidenav-menu-nested nav">
-							<a class="nav-link" href="/ro">로맨스</a> <a class="nav-link" href="/fa">판타지</a> <a class="nav-link" href="/co">코미디</a> <a class="nav-link" href="/act">액션</a> <a class="nav-link" href="/horror">공포</a>
-						</nav>
-					</div>
-					<div class="sb-sidenav-menu-heading">
-						<c:choose>
-							<c:when test="${sessionScope.username!=null}">
-								<span style="color: white; font-size: 15px;">${sessionScope.username } [ ${sessionScope.name } ]</span>
-							</c:when>
-						</c:choose>
-					</div>
-					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-						<div class="sb-nav-link-icon">
-							<i class="fas fa-book-open"></i>
-						</div> 멤버
-						<div class="sb-sidenav-collapse-arrow">
-							<i class="fas fa-angle-down"></i>
-						</div>
-					</a>
-					<div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-						<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-							<nav class="sb-sidenav-menu-nested nav">
-								<c:choose>
-									<c:when test="${sessionScope.username==null}">
-										<a class="nav-link" href="login">로그인</a>
-									</c:when>
-								</c:choose>
-								<a class="nav-link" href="mypage">마이페이지 이동</a> <a class="nav-link" href="update">내 정보변경</a> <a class="nav-link" href="pwupdate">비밀번호 변경</a> <a class="nav-link" href="logout">로그아웃</a>
-							</nav>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</nav>
-	</div>
+	
 
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid px-4">
 				<h2 class="mt-4">전체 게시판</h2>
-				<div class="row">
-					<div class="col-xl-3 col-md-6">
-						<div class="card bg-secondary text-white mb-4">
-							<div class="card-body">전체</div>
-							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="board"></a>
-								<div class="small text-white">
-									<i class="fas fa-angle-right"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-3 col-md-6">
-						<div class="card bg-secondary text-white mb-4">
-							<div class="card-body">리뷰</div>
-							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="review_all"></a>
-								<div class="small text-white">
-									<i class="fas fa-angle-right"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-3 col-md-6">
-						<div class="card bg-secondary text-white mb-4">
-							<div class="card-body">추천</div>
-							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="recom_all"></a>
-								<div class="small text-white">
-									<i class="fas fa-angle-right"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-3 col-md-6">
-						<div class="card bg-secondary text-white mb-4">
-							<div class="card-body">정보</div>
-							<div class="card-footer d-flex align-items-center justify-content-between">
-								<a class="small text-white stretched-link" href="info_all"></a>
-								<div class="small text-white">
-									<i class="fas fa-angle-right"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				
+				
+		<nav id="topMenu" >
+           <ul>
+              <li><a href="#">커피</a></li>
+              <li><a href="#">음료</a></li>
+              <li><a href="#">디저트</a></li>
+              <li><a href="#">MD</a></li>
+              <li><a href="#">기타</a></li>
+           </ul>
+        </nav>
+        <br>
+        
+  
+    <ul class="menu">
+        <li class="menu-item">
+            <a href="#" class="menu-link">커피</a>
+        </li>
+        <li class="menu-item">
+            <a href="#" class="menu-link">음료</a>
+        </li>
+        <li class="menu-item">
+            <a href="#" class="menu-link">디저트</a>
+        </li>
+        <li class="menu-item">
+            <a href="#" class="menu-link">MD</a>
+        </li>
+    </ul>
+    <br>
+				
+				
+				
 				<div class="card mb-4">
 					<div class="card-header">
 						<i class="fas fa-table me-1"></i>

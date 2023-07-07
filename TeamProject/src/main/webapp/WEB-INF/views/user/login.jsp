@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file ="/resources/include/header.jsp" %>
-
+<% session.invalidate(); %>
+<body>
 <div class="login-box">
-  <h2>Login</h2>
+  <h2>Login</h2><br>
   <form name="regForm" action="login" method="post">
     <div class="user-box">
       <input type="text" name="username"  required="true">
@@ -13,9 +14,11 @@
       <input type="password" name="password" required="true">
       <label>Password</label>
     </div>
-	<div>
-		<input type="button" value ="로그인" class="btn first" onclick=check() style="margin-left: 70px">
-		<input type="button" value ="회원가입" class="btn second" onclick="location.href='join'">
+	<div style="margin-left: 35px;">
+		<input type="button" value ="로그인" class="btn first" onclick=check()>
+		<input type="button" value ="회원가입" class="btn first" onclick="location.href='join'">
+		<input type="button" value ="ID 찾기" class="btn second" onclick="location.href='IdFind'">
+		<input type="button" value ="pw 찾기" class="btn second" onclick="location.href='PwFind'">
 	</div>
   </form>
 </div>
@@ -36,4 +39,5 @@
 		}
 		
 	</script>
-	<%@include file ="/resources/include/footer.jsp" %>
+</body>
+<%@include file ="/resources/include/footer.jsp" %>

@@ -87,13 +87,6 @@
         <%
     }
     %>
-    <div>
-<%--     <c:forEach var="menuOrder" items="${menuOrder}">
-			<div style="width: 300px; margin: 20px;">
-				<a>${menuOrder.id }</a>
-			</div>
-	</c:forEach> --%>
-    </div>
 
 </section>
 </body>

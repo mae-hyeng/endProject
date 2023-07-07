@@ -3,7 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+		<script>
+			if('orderFail' == '${orderFail}'){
+				alert("결제 실패. 메인페이지로 이동합니다.")
+			}
+		</script><head>
 <style>
 .menu {
 	margin-top: 150px;

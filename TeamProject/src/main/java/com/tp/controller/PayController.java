@@ -195,8 +195,9 @@ public class PayController {
 	
 	
 	@GetMapping("/fail")
-	public String fail() {
-		return "/pay/fail";
+	public String fail(RedirectAttributes rttr) {
+		rttr.addFlashAttribute("orderFail", "orderFail");
+		return "redirect:/index";
 	}
 	@PostMapping("/fail")
 	public String faill() {

@@ -27,6 +27,7 @@ import com.tp.entity.MenuOrder;
 import com.tp.entity.UserEntity;
 import com.tp.service.CartService;
 import com.tp.service.MenuOrderService;
+import com.tp.service.MenuService;
 import com.tp.service.UserService;
 
 @Controller
@@ -37,6 +38,9 @@ public class PayController {
 	
 	@Autowired 
 	CartService cartService;
+	
+	@Autowired
+	MenuService menuService;
 	
 	@Autowired
 	MenuOrderService menuOrderService;
@@ -96,8 +100,7 @@ public class PayController {
 	
 	@PostMapping("/cart2")
 	public String cart2(HttpSession session,
-			@RequestParam("priceAll") Integer priceAll) {
-		 
+			@RequestParam("menuName") final String menuName, @RequestParam("menuPrice") final Integer menuPrice) {
 			String username=(String)session.getAttribute("username");
 			if(username!=null) {
 				UserEntity userinfo = userService.UserInfo(username);
@@ -105,7 +108,7 @@ public class PayController {
 				session.setAttribute("uuid", userinfo.getId());
 				session.setAttribute("name", userinfo.getName());
 				session.setAttribute("email", userinfo.getEmail());
-				
+				session.setAttribute("menuName", menuName);
 				 // 현재 날짜 및 시간 가져오기
 		        Date now = new Date();
 
@@ -121,7 +124,7 @@ public class PayController {
 		        
 		        session.setAttribute("orderNumber", orderNumber);
 				
-				return "/pay/cart";
+				return "/pay/cart2";
 			}else {
 				return "redirect:/sessionover";
 			}	
@@ -135,7 +138,6 @@ public class PayController {
 	    String username = (String) session.getAttribute("username");
 	    String orderNumber = (String)session.getAttribute("orderNumber");
 	    UserEntity user = userService.UserInfo(username);
-	    System.out.println(orderNumber);
 	    List<Cart> cartList = cartService.findCartByUser(user);
 	    for(int i=0; i<cartList.size(); i++) {
 	    	MenuOrder menuOrder = new MenuOrder();
@@ -151,6 +153,26 @@ public class PayController {
 
 	    return "pay/success";
 	}
+	
+	@GetMapping("/success2")
+	public String successs(HttpSession session) {
+	    String username = (String) session.getAttribute("username");
+	    String orderNumber = (String)session.getAttribute("orderNumber");
+	    UserEntity user = userService.UserInfo(username);
+	    String menuName = (String) session.getAttribute("menuName");
+	    Menu menuList = menuService.findByName(menuName);
+	   
+	    	MenuOrder menuOrder = new MenuOrder();
+	    	menuOrder.setUsername(user.getName());
+	    	menuOrder.setQuantity(1);
+	    	menuOrder.setMenuId(menuList);
+	    	menuOrder.setOrderNumber(orderNumber);
+	    	menuOrderService.saveOrder(menuOrder);
+	    	
+	   
+
+	    return "pay/success";
+	}
 
 	
 	@GetMapping("/nocart")
@@ -158,34 +180,6 @@ public class PayController {
 		return "/pay/nocart";
 	}
 	
-
-	
-//	@RequestMapping("/success")
-//	public String success(
-//			MenuOrder menuOrder,
-//			Menu menu,
-//			UserEntity user,
-//			Cart cart,
-//			HttpSession session
-//			) {
-//		
-//		String username = (String)session.getAttribute("username");
-//		
-//		user = userService.UserInfo(username);
-//		
-////		menuOrder = MenuOrder.builder()			
-////				.cart(cart)
-////				.user(user)
-////				.menu(menu)
-////				.build();
-//		
-//		return "/pay/success";
-//	}
-	
-//	@GetMapping("/success")
-//	public String success() {
-//		return "/pay/success";
-//	}
 
 	@PostMapping("/success")
 	public String successs() {

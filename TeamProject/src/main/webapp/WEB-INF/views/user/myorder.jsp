@@ -163,18 +163,33 @@ ul, li {
 				<thead>
 					<tr>
 						<th scope="col" class="th-num">주문번호</th>
-						<th scope="col" class="th-title">상품</th>
-						<th scope="col" class="th-date">수량</th>
-						<th scope="col" class="th-date">주문일자</th>
+						
+						<th scope="col" class="th-num">상품명</th>
+						<td>
+						<td>
+						<th scope="col" class="th-num">가격</th>
+						<td>
+						<th scope="col" class="th-num">수량</th>
+						<td>
+						<td>
+						<td><td>
+						<th scope="col" class="th-num">주문일자</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="menuOrderList" items="${menuOrderList }">
+					<c:forEach var="menuOrder" items="${menuOrderList }">
 						<tr>
-							<td>${menuOrderList.orderNumber }</td>
-							<td>${menuOrderList.menuId}</td>
-							<td>${menuOrderList.quantity}</td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrderList.orderDate}" /></td>
+							<td>${menuOrder.orderNumber }</td>
+							
+							<td>${menuOrder.menuId.name}</td>
+							<td>
+							<td>
+							<td>${menuOrder.menuId.price} 원</td>
+							<td>
+							<td>${menuOrder.quantity}</td>
+							<td><td>
+							<td><td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrder.orderDate}" /></td>
 							
 						</tr>
 					</c:forEach>

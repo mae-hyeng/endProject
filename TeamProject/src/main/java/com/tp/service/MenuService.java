@@ -52,6 +52,11 @@ public class MenuService {
 		menuRepository.save(menu);
 	}
 	
+	// 메뉴 찾기
+	public Menu findByName(String name){
+		return menuRepository.findByName(name);
+	}
+	
 	//게시물 삭제
 	@Transactional
 	public void delete(Long id) {

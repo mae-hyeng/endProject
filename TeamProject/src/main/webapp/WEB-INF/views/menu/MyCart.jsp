@@ -276,7 +276,42 @@ td {
 </body>
 <script>
 function order() {
-	regForm.submit();
+    const checkedItems = document.querySelectorAll('.itemCheckbox:checked');
+    const uncheckedItems = document.querySelectorAll('.itemCheckbox:not(:checked)');
+    const selectedIds = Array.from(checkedItems).map(function(checkbox) {
+        return checkbox.dataset.itemId;
+    });
+
+    // 체크되지 않은 항목 삭제 처리
+    if (checkedItems.length > 0 && uncheckedItems.length > 0) {
+        const unselectedIds = Array.from(uncheckedItems).map(function(checkbox) {
+            return checkbox.dataset.itemId;
+        });
+        deleteUncheckCartMenu(unselectedIds)
+            .then(function() {
+                regForm.submit();
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
+    } else {
+        regForm.submit();
+    }
+
+    function deleteUncheckCartMenu(selectedIds) {
+        return fetch('/deleteCartMenu', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(selectedIds),
+        })
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('선택한 상품을 삭제하는 데 실패했습니다.');
+            }
+        });
+    }
 }
 </script>
 

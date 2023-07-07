@@ -44,7 +44,8 @@ public class PayController {
 	@PostMapping("/cart")
 	public String cart(HttpSession session,
 			@RequestParam(value = "QuantitySum", required = false) Integer totalQuantity,
-			@RequestParam(value = "PriceSum", required = false) Integer PriceSum, RedirectAttributes rttr) {
+			@RequestParam(value = "PriceSum", required = false) Integer PriceSum, 
+			RedirectAttributes rttr) {
 		if(totalQuantity== null || PriceSum == null) {
 			rttr.addFlashAttribute("result", "NO");
 			return "redirect:/nocart";
@@ -121,7 +122,6 @@ public class PayController {
 	
 	@GetMapping("/success")
 	public String success(
-	    MenuOrder menuOrder,
 	    Menu menu,
 	    UserEntity user,
 	    Cart cart,
@@ -134,28 +134,43 @@ public class PayController {
 	    
 	    List<UserEntity> userList = new ArrayList<>();
 		userList.add(user);
-	    
-	    String userId = user.getId();
-
-	    Cart savedCart = cartService.findCartByUserId(userId);
+	    List<Cart> savedCart = cartService.findCart(user);
 
 	    System.out.println("savedCart : " + savedCart);
 	    
-	    menuOrder.setQuantity(savedCart.getQuantity());
-	    menuOrder.setCart(savedCart);
-	    menuOrder.setMenu(savedCart.getMenu());
+	    for(int i = 0; i<savedCart.size(); i++) {
+	    	MenuOrder menuOrder = new MenuOrder();
+	    	
+	    	System.out.println("0000000000"+savedCart.get(0));
+	    	System.out.println("1111111111"+savedCart.get(1));
+	    	
+	    	menuOrder.setQuantity(savedCart.get(i).getQuantity());
+	    	menuOrder.setCart(savedCart.get(i));
+	    	menuOrder.setMenu(savedCart.get(i).getMenu());
+	    	menuOrder.setUser(userList);
+	    	menuOrder.setCartId(savedCart.get(i).getId());
+	    	menuOrder.setOrderusername(savedCart.get(i).getUser().getUsername());
+	    	
+	    	menuOrderService.saveOrder(menuOrder);
+	    	
+		    List<MenuOrder> menuOrderList = new ArrayList<>();
+		    menuOrderList.add(menuOrder);
+		    
+		    System.out.println("출력 1" + savedCart.get(i).getQuantity());
+		    System.out.println("출력 2" + savedCart.get(i).getMenu());
+		    System.out.println("출력 3" + savedCart.get(i).getMenu().getId());
+	    	
+	    }
 	    
-	    System.out.println(savedCart.getQuantity());
-	    System.out.println(savedCart.getMenu());
-	    System.out.println(savedCart.getMenu().getId());
-	    
-	    menuOrderService.saveOrder(menuOrder);
+//	    menuOrder.setQuantity(savedCart.getQuantity());
+//	    menuOrder.setCartId(savedCart.getId());
+//	    menuOrder.setMenu(savedCart.getMenu());
+//	    menuOrder.setUser(userList);
+//	    
 
-	    List<MenuOrder> menuOrderList = new ArrayList<>();
-	    menuOrderList.add(menuOrder);
-	    model.addAttribute("menuOrderList", menuOrderList);
-	    
-	    System.out.println("menuOrder : " + menuOrder);
+//	    model.addAttribute("menuOrderList", menuOrderList);
+//	    
+//	    System.out.println("menuOrderList : " + menuOrderList);
 	    
 	    UserEntity userinfo = userService.UserInfo(username);
 	    

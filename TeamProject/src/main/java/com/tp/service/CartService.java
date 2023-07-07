@@ -1,5 +1,6 @@
 package com.tp.service;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,10 @@ public class CartService {
 	public List<Cart> cartAll() {
 		return cartRepository.findAll();
 	}
+	
+	public List<Cart> findCart(UserEntity user) {
+		return cartRepository.findByUser(user);
+	}
 
 	public Cart cartSave(Cart cart) {
 		return cartRepository.save(cart);
@@ -53,9 +58,7 @@ public class CartService {
 	    List<Cart> cartEntities = cartRepository.findByUser(user);
 	    for (Cart cartEntity : cartEntities) {
 	        MenuOrder menuOrder = cartEntity.getMenuOrder();
-	        if (menuOrder != null) {
-	            menuOrder.setCart(null);
-	        }
+
 	        cartRepository.delete(cartEntity);
 	    }
 	}
@@ -66,6 +69,11 @@ public class CartService {
 	
 	public Cart findCartByIdAndUserId(Long cartId, String userId) {
 	    return cartRepository.findByIdAndUser_Id(cartId, userId);
+	}
+	
+	//
+	public Optional<Cart> findCartId(Long id) {
+		return cartRepository.findById(id);
 	}
 
 

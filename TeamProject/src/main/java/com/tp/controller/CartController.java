@@ -55,9 +55,16 @@ public class CartController {
 			if(username.equals(list.get(i).getUser().getUsername())) {
 				list2.add(list.get(i));
 				model.addAttribute("list2", list2);
+				session.setAttribute("MenuId"+i, list2.get(i).getId());
+				System.out.println("테스트menuId"+i);
+			System.out.println("메뉴 아이디 : "+ i + " = " + session.getAttribute("MenuId"+i));
+			
 			}
 		}
 		System.out.println("List2 : " + list2);    
+		System.out.println(session.getAttribute("MenuId0"));
+		System.out.println(session.getAttribute("MenuId1"));
+		
 		
 	    return "menu/MyCart";
 	     

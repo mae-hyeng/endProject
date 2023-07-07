@@ -50,7 +50,8 @@ public class Cart {
     @JoinColumn(name = "menuId")
     private Menu menu;
     
-    @OneToOne(mappedBy = "cart", fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menuOrderId")
     private MenuOrder menuOrder;
 
 

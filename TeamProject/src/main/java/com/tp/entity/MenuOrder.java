@@ -56,8 +56,13 @@ public class MenuOrder {
 	@JoinColumn(name = "userName")
 	private List<UserEntity> user = new ArrayList<>();
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cartId")
-	private Cart cart;
+	@OneToOne(mappedBy = "menuOrder", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private Cart cart;
+	
+	@Column
+	private Long cartId;
+	
+	@Column
+	private String orderusername;
 	
 }

@@ -13,6 +13,6 @@ import com.tp.entity.Menu;
 public interface MenuRepository extends JpaRepository<Menu, Long> {
 	//카테고리별
 	List<Menu> findByType(String type);
-	
+	Menu findByName(String name);
 	Menu findMenuById(Long menuId);
 }

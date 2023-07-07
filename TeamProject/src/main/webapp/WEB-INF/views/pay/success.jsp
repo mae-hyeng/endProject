@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
@@ -93,7 +92,7 @@
         <span>에러코드: <%= jsonObject.get("code") %></span>
         <script>
 	    window.onload = function() {
-	   		alert("결제 실패")
+	   		alert("결제 실패. 메인페이지로 이동합니다.")
 	       	window.location.href = "/MyCart";
 	    }
 		</script>

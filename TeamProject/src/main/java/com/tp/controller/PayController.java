@@ -40,6 +40,15 @@ public class PayController {
 	
 	@Autowired
 	MenuOrderService menuOrderService;
+	
+	@GetMapping("/cart")
+	public String cartz(HttpSession session) {
+		String username = (String)session.getAttribute("username");
+		if(username == null) {
+			return "redirect:/sessionover";
+		}else
+		return "redirect:/index";
+	}
 
 	@PostMapping("/cart")
 	public String cart(HttpSession session,
@@ -49,6 +58,9 @@ public class PayController {
 		if(totalQuantity== null || PriceSum == null) {
 			rttr.addFlashAttribute("result", "NO");
 			return "redirect:/nocart";
+//		}else if(totalQuantity== 0 || PriceSum == 0) {
+//			rttr.addFlashAttribute("result", "NO");
+//			return "redirect:/nocart";
 		}else {
 			String username=(String)session.getAttribute("username");
 			if(username!=null) {
@@ -72,8 +84,6 @@ public class PayController {
 		        String orderNumber = dateFormat.format(now) + randomNumber;
 		        
 		        session.setAttribute("orderNumber", orderNumber);
-
-//				cartService.deleteCartByUser(userinfo);
 
 				return "/pay/cart";
 			}else {
@@ -121,62 +131,25 @@ public class PayController {
 	}
 	
 	@GetMapping("/success")
-	public String success(
-	    Menu menu,
-	    UserEntity user,
-	    Cart cart,
-	    HttpSession session,
-	    Model model
-	) {
+	public String success(HttpSession session) {
 	    String username = (String) session.getAttribute("username");
-
-	    user = userService.UserInfo(username);
-	    
-	    List<UserEntity> userList = new ArrayList<>();
-		userList.add(user);
-	    List<Cart> savedCart = cartService.findCart(user);
-
-	    System.out.println("savedCart : " + savedCart);
-	    
-	    for(int i = 0; i<savedCart.size(); i++) {
+	    String orderNumber = (String)session.getAttribute("orderNumber");
+	    UserEntity user = userService.UserInfo(username);
+	    System.out.println(orderNumber);
+	    List<Cart> cartList = cartService.findCartByUser(user);
+	    for(int i=0; i<cartList.size(); i++) {
 	    	MenuOrder menuOrder = new MenuOrder();
-	    	
-	    	System.out.println("0000000000"+savedCart.get(0));
-	    	System.out.println("1111111111"+savedCart.get(1));
-	    	
-	    	menuOrder.setQuantity(savedCart.get(i).getQuantity());
-	    	menuOrder.setCart(savedCart.get(i));
-	    	menuOrder.setMenu(savedCart.get(i).getMenu());
-	    	menuOrder.setUser(userList);
-	    	menuOrder.setCartId(savedCart.get(i).getId());
-	    	menuOrder.setOrderusername(savedCart.get(i).getUser().getUsername());
-	    	
+	    	menuOrder.setUsername(user.getName());
+	    	menuOrder.setQuantity(cartList.get(i).getQuantity());
+	    	menuOrder.setMenuId(cartList.get(i).getMenu());
+	    	menuOrder.setOrderNumber(orderNumber);
 	    	menuOrderService.saveOrder(menuOrder);
 	    	
-		    List<MenuOrder> menuOrderList = new ArrayList<>();
-		    menuOrderList.add(menuOrder);
-		    
-		    System.out.println("출력 1" + savedCart.get(i).getQuantity());
-		    System.out.println("출력 2" + savedCart.get(i).getMenu());
-		    System.out.println("출력 3" + savedCart.get(i).getMenu().getId());
-	    	
 	    }
-	    
-//	    menuOrder.setQuantity(savedCart.getQuantity());
-//	    menuOrder.setCartId(savedCart.getId());
-//	    menuOrder.setMenu(savedCart.getMenu());
-//	    menuOrder.setUser(userList);
-//	    
 
-//	    model.addAttribute("menuOrderList", menuOrderList);
-//	    
-//	    System.out.println("menuOrderList : " + menuOrderList);
-	    
-	    UserEntity userinfo = userService.UserInfo(username);
-	    
-	    cartService.deleteCartByUser(userinfo);
+	    cartService.deleteCartByUser(user);
 
-	    return "redirect:/MyOrder";
+	    return "pay/success";
 	}
 
 	
@@ -229,4 +202,3 @@ public class PayController {
 		return "/pay/fail";
 	}
 }
-

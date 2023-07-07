@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 
 
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tp.entity.Cart;
 import com.tp.entity.UserEntity;
@@ -39,34 +40,34 @@ public class CartController {
 			  Cart cart,
 			  Model model,
 			  UserEntity user,
-			  HttpSession session) {		
-		List<Cart> list = null;
-		
-		list = cartService.cartAll();
-		List<Cart> list2 = new ArrayList<>();
+			  HttpSession session) {
 		
 		String username = (String)session.getAttribute("username");
-		
-		System.out.println("list : "+list);
-		
-		System.out.println(username);
-		
-		for(int i=0; i<list.size(); i++) {
-			if(username.equals(list.get(i).getUser().getUsername())) {
-				list2.add(list.get(i));
-				model.addAttribute("list2", list2);
-				session.setAttribute("MenuId"+i, list2.get(i).getId());
-				System.out.println("테스트menuId"+i);
-			System.out.println("메뉴 아이디 : "+ i + " = " + session.getAttribute("MenuId"+i));
+		if(username == null) {
+			return "redirect:/sessionover";
+		}else {
+			List<Cart> list = null;
 			
+			list = cartService.cartAll();
+			List<Cart> list2 = new ArrayList<>();
+			
+			
+			
+			System.out.println("list : "+list);
+			
+			System.out.println(username);
+			
+			for(int i=0; i<list.size(); i++) {
+				if(username.equals(list.get(i).getUser().getUsername())) {
+					list2.add(list.get(i));
+					model.addAttribute("list2", list2);
+				}
 			}
+			System.out.println("List2 : " + list2);    
+			
+		    return "menu/MyCart";
 		}
-		System.out.println("List2 : " + list2);    
-		System.out.println(session.getAttribute("MenuId0"));
-		System.out.println(session.getAttribute("MenuId1"));
 		
-		
-	    return "menu/MyCart";
 	     
 	  }
 	// 장바구니 메뉴 삭제

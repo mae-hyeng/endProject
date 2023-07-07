@@ -43,26 +43,45 @@ public class MenuOrder {
 	@Column
 	@CreationTimestamp
 	private Timestamp orderDate;
-	
+	   
 	@Column
 	private Integer quantity;
-	
+	   
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "menuId")
-	private Menu menu;
-	
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userName")
-	private List<UserEntity> user = new ArrayList<>();
-	
-	@OneToOne(mappedBy = "menuOrder", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Cart cart;
-	
+	@JoinColumn(name = "menu")
+	private Menu menuId;
+	   
+	   
 	@Column
-	private Long cartId;
+	private String username;
+	      
+	@Column(nullable = true)
+	private String orderNumber;
 	
-	@Column
-	private String orderusername;
+//	@Column
+//	@CreationTimestamp
+//	private Timestamp orderDate;
+//	
+//	@Column
+//	private Integer quantity;
+//	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "menuId")
+//	private Menu menu;
+//	
+//	
+//	@ManyToMany(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "userName")
+//	private List<UserEntity> user = new ArrayList<>();
+//	
+//	@OneToOne(mappedBy = "menuOrder", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    private Cart cart;
+//	
+//	@Column
+//	private Long cartId;
+//	
+//	@Column
+//	private String orderusername;
+
 	
 }

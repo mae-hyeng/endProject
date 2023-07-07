@@ -18,15 +18,6 @@ public class CartService {
 
 	private final CartRepository cartRepository;
 	
-//	@Transactional
-//	public List<Cart> cartUsername(UserEntity user) {
-//		return cartRepository.findByUserName(user);
-//	}
-	
-//	public List<Cart> cartOut(String id) {
-//		return cartRepository.findByUserId(id);
-//	}
-
 
 	//전체 주문 조회
 	@Transactional
@@ -52,29 +43,18 @@ public class CartService {
 	public Cart getCartByUserAndMenu(UserEntity user, Menu menu) {
 	    return cartRepository.findByUserAndMenu(user, menu);
     }
-	
+
 	@Transactional
 	public void deleteCartByUser(UserEntity user) {
 	    List<Cart> cartEntities = cartRepository.findByUser(user);
 	    for (Cart cartEntity : cartEntities) {
-	        MenuOrder menuOrder = cartEntity.getMenuOrder();
-
-	        cartRepository.delete(cartEntity);
-	    }
+	    	 cartRepository.delete(cartEntity);
+	        }
 	}
 	
-	public Cart findCartByUserId(String userId) {
-	    return cartRepository.findByUser_Id(userId);
+	@Transactional
+	public List<Cart> findCartByUser(UserEntity user){
+		return cartRepository.findByUser(user);
 	}
-	
-	public Cart findCartByIdAndUserId(Long cartId, String userId) {
-	    return cartRepository.findByIdAndUser_Id(cartId, userId);
-	}
-	
-	//
-	public Optional<Cart> findCartId(Long id) {
-		return cartRepository.findById(id);
-	}
-
 
 }

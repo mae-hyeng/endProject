@@ -172,7 +172,7 @@ ul, li {
 					<c:forEach var="menuOrderList" items="${menuOrderList }">
 						<tr>
 							<td>${menuOrderList.orderNumber }</td>
-							<td>${menuOrderList.menuId.price}</td>
+							<td>${menuOrderList.menuId}</td>
 							<td>${menuOrderList.quantity}</td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrderList.orderDate}" /></td>
 							

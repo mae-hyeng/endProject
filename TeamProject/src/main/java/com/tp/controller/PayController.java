@@ -53,7 +53,8 @@ public class PayController {
 	@PostMapping("/cart")
 	public String cart(HttpSession session,
 			@RequestParam(value = "QuantitySum", required = false) Integer totalQuantity,
-			@RequestParam(value = "PriceSum", required = false) Integer PriceSum, RedirectAttributes rttr) {
+			@RequestParam(value = "PriceSum", required = false) Integer PriceSum, 
+			RedirectAttributes rttr) {
 		if(totalQuantity== null || PriceSum == null) {
 			rttr.addFlashAttribute("result", "NO");
 			return "redirect:/nocart";
@@ -145,8 +146,6 @@ public class PayController {
 	    	menuOrderService.saveOrder(menuOrder);
 	    	
 	    }
-	    
-	   
 
 	    cartService.deleteCartByUser(user);
 

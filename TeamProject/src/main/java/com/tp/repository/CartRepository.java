@@ -20,7 +20,7 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 	
 	void deleteByIdIn(List<Long> ids);
 	Cart findByUserAndMenu(UserEntity user, Menu menu);
-	Cart findByUser_Id(String id);
+	Cart findByUser_Id(String id);	
 	
 	List<Cart> findByUser(UserEntity user);
     void deleteByUser(UserEntity user);

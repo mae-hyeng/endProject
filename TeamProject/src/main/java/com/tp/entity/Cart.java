@@ -49,8 +49,7 @@ public class Cart {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "menuID")
     private Menu menu;
-    
-    
+
 
 
 }

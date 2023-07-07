@@ -11,5 +11,6 @@ import com.tp.entity.UserEntity;
 @Repository
 public interface MenuOrderRepository extends JpaRepository<MenuOrder, Long> {
 
+	List<MenuOrder> findByUsername(String username);
 
 }

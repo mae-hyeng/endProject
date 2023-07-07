@@ -3,6 +3,72 @@
 <head>
 <style>
 
+.cart__list__detail :nth-child(3) {
+  vertical-align: top;
+}
+
+.cart__list__detail :nth-child(3) a {
+  font-size: 12px;
+}
+
+.cart__list__detail :nth-child(3) p {
+  margin-top: 6px;
+  font-weight: bold;
+}
+
+.cart__list__smartstore {
+  font-size: 12px;
+  color: gray;
+}
+
+.cart__list__option {
+  vertical-align: top;
+  padding: 20px;
+}
+
+.cart__list__option p {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.cart__list__option p::after {
+  content: "";
+  width: 90%;
+  height: 1px;
+  background-color: lightgrey;
+  left: 0px;
+  top: 25px;
+  position: absolute;
+}
+
+.cart__list__optionbtn {
+  background-color: white;
+  font-size: 10px;
+  border: lightgrey solid 1px;
+  padding: 7px;
+}
+
+.cart__list__detail :nth-child(4),
+.cart__list__detail :nth-child(5),
+.cart__list__detail :nth-child(6) {
+  border-left: 2px solid whitesmoke;
+}
+
+.cart__list__detail :nth-child(5),
+.cart__list__detail :nth-child(6) {
+  text-align: center;
+}
+
+.cart__list__detail :nth-child(5) button {
+  background-color: limegreen;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 .contents {
 	padding: 100px;
 }
@@ -92,22 +158,29 @@ ul, li {
 		    </ul>
 			<br>
 			<br>
-			<div style="display: flex; flex-wrap: wrap;">
-				<c:forEach var="menuOrderList" items="${menuOrderList}">
-            <div style="width: 300px; margin: 20px;">
-                <a>${menuOrderList.id}</a>
-                <a>${menuOrderList.orderDate}</a>
-                <a>${menuOrderList.quantity}</a>
-            </div>
-        </c:forEach>
-        <c:forEach var="menuOrder" items="${menuOrder}">
-            <div style="width: 300px; margin: 20px;">
-                <a>${menuOrder.id}</a>
-                <a>${menuOrder.orderDate}</a>
-                <a>${menuOrder.quantity}</a>
-            </div>
-        </c:forEach>
-			</div>  
+			<section class="cart">
+			<table class="cart__list">
+				<thead>
+					<tr>
+						<th scope="col" class="th-num">주문번호</th>
+						<th scope="col" class="th-title">상품</th>
+						<th scope="col" class="th-date">수량</th>
+						<th scope="col" class="th-date">주문일자</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="menuOrderList" items="${menuOrderList }">
+						<tr>
+							<td>${menuOrderList.orderNumber }</td>
+							<td>${menuOrderList.menuId.price}</td>
+							<td>${menuOrderList.quantity}</td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrderList.orderDate}" /></td>
+							
+						</tr>
+					</c:forEach>
+				</tbody>
+	        </table>
+	        </section>  
 			<br>
 			<div>
 			    <%
@@ -121,54 +194,7 @@ ul, li {
 
 		</div>
 
-</body>
-
-	
-						
-						
-
-						
-						
-					
-					
-					
-
-<script>
-
-/* 수량 증감, 감소 */
-
-   let plus = document.querySelector(".plus");
-let minus = document.querySelector(".minus");
-let result = document.querySelector("#result");
-let totalcost = document.querySelector('.totalcost');
-let i = 1;
-plus.addEventListener("click", () => {
-	i++
-	result.textContent = i;
-})
-
-minus.addEventListener("click", () => {
-	if(i>1) {
-		i--
-		result.textContent = i;
-	}
-	
-})
-</script>
-
-<script>
-   function menuRegister(username) {
-       const fixed_button = document.getElementById('fixed-button');
-       if (username != 'admin') {
-           fixed_button.style.display = 'none';
-       } else {
-           fixed_button.style.display = 'block';
-       }
-       
-       // 버튼 클릭 시 실행할 동작 추가
-       location.href = 'menuRegister';
-   }
-</script>			
+</body>	
 
 					
 

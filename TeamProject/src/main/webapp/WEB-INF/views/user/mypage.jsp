@@ -4,6 +4,13 @@
    response.sendRedirect("/sessionover"); 
 }
 %>
+
+<style>
+.font-cafe {
+	font-family: 'Roboto', sans-serif;
+}
+
+</style>
 <%@ include file="/resources/include/header.jsp" %>
 
 

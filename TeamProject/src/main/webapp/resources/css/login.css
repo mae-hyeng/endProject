@@ -25,8 +25,7 @@ width: 100%;
   width: 550px;
   padding: 40px;
   transform: translate(-50%, -50%);
-  background: #a7adb3;
-  border: 1.5px dotted #41464b;
+  background: #fde3e9;
   box-sizing: border-box;
   border-radius: 70px;
 }
@@ -37,7 +36,7 @@ width: 100%;
 .login-box h2 {
   margin:rgb(0, 0, 0) 30px;
   padding: 0;
-  color: #ffffff;
+  color: #555;
   text-align: center;
   font-size: 40px;
 }
@@ -195,9 +194,8 @@ width: 100%;
     box-sizing: border-box;
     appearance: none;
     background-color: transparent;
-    border: 2px solid #c0c0c0;
     border-radius: 0.6em;
-    color: #ffffff;
+    color: #555;
     cursor: pointer;
     display: flex;
     align-self: center;
@@ -218,9 +216,8 @@ width: 100%;
     box-sizing: border-box;
     appearance: none;
     background-color: transparent;
-    border: 2px solid #c0c0c0;
     border-radius: 0.6em;
-    color: #ffffff;
+    color: #555;
     cursor: pointer;
     display: flex;
     align-self: center;
@@ -245,15 +242,15 @@ width: 100%;
 }
 .first {
     transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    background: #fff1f1;
 }
 .first:hover {
     box-shadow: 0 0 40px 40px #dddddd inset;
 }
 
 .second {
-    border-color: #c0c0c0;
-    color: #fff;
-    box-shadow: 0 0 40px 40px #666666 inset, 0 0 0 0 #ffffff;
+    color: #555;
+    box-shadow: 0 0 40px 40px #f7d7d7 inset, 0 0 0 0 #ffffff;
     transition: all 150ms ease-in-out;
 }
 .second:hover {

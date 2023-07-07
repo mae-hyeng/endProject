@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity(name = "user")
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
+@Table(name = "user")
 public class UserEntity extends BaseTimeEntity{
 
 	 @Id // 기본키(Primary key)

@@ -47,11 +47,9 @@ public class Cart {
     private UserEntity user;
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "menuId")
+    @JoinColumn(name = "menuID")
     private Menu menu;
-    
-    @OneToOne(mappedBy = "cart", fetch = FetchType.LAZY)
-    private MenuOrder menuOrder;
+
 
 
 }

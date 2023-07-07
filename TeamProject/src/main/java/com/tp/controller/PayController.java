@@ -53,7 +53,8 @@ public class PayController {
 	@PostMapping("/cart")
 	public String cart(HttpSession session,
 			@RequestParam(value = "QuantitySum", required = false) Integer totalQuantity,
-			@RequestParam(value = "PriceSum", required = false) Integer PriceSum, RedirectAttributes rttr) {
+			@RequestParam(value = "PriceSum", required = false) Integer PriceSum, 
+			RedirectAttributes rttr) {
 		if(totalQuantity== null || PriceSum == null) {
 			rttr.addFlashAttribute("result", "NO");
 			return "redirect:/nocart";
@@ -130,43 +131,22 @@ public class PayController {
 	}
 	
 	@GetMapping("/success")
-	public String success(
-	    MenuOrder menuOrder,
-	    Menu menu,
-	    UserEntity user,
-	    Cart cart,
-	    HttpSession session,
-	    Model model
-	) {
+	public String success(HttpSession session) {
 	    String username = (String) session.getAttribute("username");
+	    String orderNumber = (String)session.getAttribute("orderNumber");
+	    UserEntity user = userService.UserInfo(username);
+	    System.out.println(orderNumber);
+	    List<Cart> cartList = cartService.findCartByUser(user);
+	    for(int i=0; i<cartList.size(); i++) {
+	    	MenuOrder menuOrder = new MenuOrder();
+	    	menuOrder.setUsername(user.getName());
+	    	menuOrder.setQuantity(cartList.get(i).getQuantity());
+	    	menuOrder.setMenuId(cartList.get(i).getMenu());
+	    	menuOrder.setOrderNumber(orderNumber);
+	    	menuOrderService.saveOrder(menuOrder);
+	    	
+	    }
 
-	    user = userService.UserInfo(username);
-	    
-	    List<UserEntity> userList = new ArrayList<>();
-		userList.add(user);
-	    
-	    String userId = user.getId();
-
-	    Cart savedCart = cartService.findCartByUserId(userId);
-
-	    System.out.println("savedCart : " + savedCart);
-	    
-	    menuOrder.setQuantity(savedCart.getQuantity());
-	    menuOrder.setCart(savedCart);
-	    menuOrder.setMenu(savedCart.getMenu());
-	    
-	    System.out.println(savedCart.getQuantity());
-	    System.out.println(savedCart.getMenu());
-	    System.out.println(savedCart.getMenu().getId());
-	    
-	    menuOrderService.saveOrder(menuOrder);
-
-	    List<MenuOrder> menuOrderList = new ArrayList<>();
-	    menuOrderList.add(menuOrder);
-	    model.addAttribute("menuOrderList", menuOrderList);
-	    
-	    System.out.println("menuOrder : " + menuOrder);
-	    
 	    cartService.deleteCartByUser(user);
 
 	    return "pay/success";

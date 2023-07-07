@@ -88,13 +88,15 @@
     }
     %>
     <div>
-    <c:forEach var="menuOrder" items="${menuOrder}">
-			<div style="width: 300px; margin: 20px;">
-				<a>${menuOrder.id }</a>
-			</div>
-	</c:forEach>
     </div>
 
 </section>
 </body>
+<script>
+    window.onload = function() {
+   		alert("결제 완료")
+       	window.location.href = "/MyOrder";
+    }
+</script>
+
 </html>

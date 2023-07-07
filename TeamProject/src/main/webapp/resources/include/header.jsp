@@ -179,6 +179,7 @@ $(".video_modal_popup-closer").click(function() {
 				                <c:choose>
 				                    <c:when test="${sessionScope.username == 'admin'}">
 				                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+				                        <li><a class="dropdown-item" href="/orderList">주문내역</a></li>
 				                    </c:when>
 				                    <c:otherwise>
 				                        <li><a class="dropdown-item" href="/logout">Logout</a></li>

@@ -88,26 +88,15 @@
     }
     %>
     <div>
-<%--     <c:forEach var="menuOrder" items="${menuOrder}">
-			<div style="width: 300px; margin: 20px;">
-				<a>${menuOrder.id }</a>
-			</div>
-	</c:forEach> --%>
     </div>
 
 </section>
 </body>
 <script>
-    // 페이지 로드 후 자동으로 다른 페이지로 이동
     window.onload = function() {
-    	if(isSuccess) {
-    		alert("성공")
-        	window.location.href = "/MyOrder";
-    	}else {
-    		alert("실패")
-    		window.location.href = "/menu"
-    	}
-    };
+   		alert("결제 완료")
+       	window.location.href = "/MyOrder";
+    }
 </script>
 
 </html>

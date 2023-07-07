@@ -49,6 +49,15 @@ public class PayController {
 		}else
 		return "redirect:/index";
 	}
+	
+	@GetMapping("/cart2")
+	public String cart2(HttpSession session) {
+		String username = (String)session.getAttribute("username");
+		if(username == null) {
+			return "redirect:/sessionover";
+		}else
+		return "redirect:/index";
+	}
 
 	@PostMapping("/cart")
 	public String cart(HttpSession session,
@@ -96,7 +105,8 @@ public class PayController {
 	
 	@PostMapping("/cart2")
 	public String cart2(HttpSession session,
-			@RequestParam("priceAll") Integer priceAll) {
+			@RequestParam("priceAll") Integer priceAll,
+			RedirectAttributes rttr) {
 		 
 			String username=(String)session.getAttribute("username");
 			if(username!=null) {
@@ -123,7 +133,8 @@ public class PayController {
 				
 				return "/pay/cart";
 			}else {
-				return "redirect:/sessionover";
+				rttr.addFlashAttribute("order", "login");
+				return "redirect:/orderResult";
 			}	
 		
 		

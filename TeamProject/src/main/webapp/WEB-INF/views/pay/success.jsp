@@ -79,11 +79,24 @@
             <% if(jsonObject.get("method").equals("휴대폰")) { out.println(((JSONObject)jsonObject.get("mobilePhone")).get("customerMobilePhone"));} %>
         
         </p>
+        
+        <script>
+	    window.onload = function() {
+	   		alert("결제 완료")
+	       	window.location.href = "/MyOrder";
+	    }
+		</script>
        
     <%} else { %>
         <h1>결제 실패</h1>
         <p><%= jsonObject.get("message") %></p>
         <span>에러코드: <%= jsonObject.get("code") %></span>
+        <script>
+	    window.onload = function() {
+	   		alert("결제 실패")
+	       	window.location.href = "/MyCart";
+	    }
+		</script>
         <%
     }
     %>
@@ -92,11 +105,6 @@
 
 </section>
 </body>
-<script>
-    window.onload = function() {
-   		alert("결제 완료")
-       	window.location.href = "/MyOrder";
-    }
-</script>
+
 
 </html>

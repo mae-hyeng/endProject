@@ -160,26 +160,40 @@ ul, li {
 			<br>
 			<section class="cart">
 			<table class="cart__list">
-				<thead>
-					<tr>
-						<th scope="col" class="th-num">주문번호</th>
-						<th scope="col" class="th-title">상품</th>
-						<th scope="col" class="th-date">수량</th>
-						<th scope="col" class="th-date">주문일자</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="menuOrder" items="${menuOrderList }">
-						<tr>
-							<td>${menuOrder.orderNumber }</td>
-							<td>${menuOrder.menuId.name}</td>
-							<td>${menuOrder.quantity}</td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrder.orderDate}" /></td>
-							
-						</tr>
-					</c:forEach>
-				</tbody>
-	        </table>
+			    <thead>
+			        <tr>
+			            <th scope="col" class="th-num">주문번호</th>
+			            <th scope="col" class="th-title">상품</th>
+			            <th scope="col" class="th-date">수량</th>
+			            <th scope="col" class="th-date">주문일자</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			        <c:forEach var="menuOrder" items="${menuOrderList}">
+			            <c:if test="${!orderNumber.equals(menuOrder.orderNumber)}">
+			                <c:set var="orderNumber" value="${menuOrder.orderNumber}" />
+			                <tr style="border-top: 1px solid;">
+			                    <td>${menuOrder.orderNumber}</td>
+			                    <td>${menuOrder.menuId.name}</td>
+			                    <td>${menuOrder.quantity}</td>
+			                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrder.orderDate}" /></td>
+
+			                </tr>
+			            </c:if>
+			            <c:if test="${orderNumber.equals(menuOrder.orderNumber)}">
+			                <tr style="border-bottom: 1px solid; margin-top: 10px; margin-bottom: 10px;">
+			                    <td>${menuOrder.orderNumber}</td>
+			                    <td>${menuOrder.menuId.name}</td>
+			                    <td>${menuOrder.quantity}</td>
+			                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrder.orderDate}" /></td>
+			                    
+			                </tr>
+			                
+			            </c:if>
+			        </c:forEach>
+			    </tbody>
+			</table>
+
 	        </section>  
 			<br>
 			<div>

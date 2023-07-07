@@ -169,12 +169,12 @@ ul, li {
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="menuOrderList" items="${menuOrderList }">
+					<c:forEach var="menuOrder" items="${menuOrderList }">
 						<tr>
-							<td>${menuOrderList.orderNumber }</td>
-							<td>${menuOrderList.menuId.price}</td>
-							<td>${menuOrderList.quantity}</td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrderList.orderDate}" /></td>
+							<td>${menuOrder.orderNumber }</td>
+							<td>${menuOrder.menuId.name}</td>
+							<td>${menuOrder.quantity}</td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrder.orderDate}" /></td>
 							
 						</tr>
 					</c:forEach>

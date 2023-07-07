@@ -159,34 +159,6 @@ public class PayController {
 	}
 	
 
-	
-//	@RequestMapping("/success")
-//	public String success(
-//			MenuOrder menuOrder,
-//			Menu menu,
-//			UserEntity user,
-//			Cart cart,
-//			HttpSession session
-//			) {
-//		
-//		String username = (String)session.getAttribute("username");
-//		
-//		user = userService.UserInfo(username);
-//		
-////		menuOrder = MenuOrder.builder()			
-////				.cart(cart)
-////				.user(user)
-////				.menu(menu)
-////				.build();
-//		
-//		return "/pay/success";
-//	}
-	
-//	@GetMapping("/success")
-//	public String success() {
-//		return "/pay/success";
-//	}
-
 	@PostMapping("/success")
 	public String successs() {
 		return "/pay/success";

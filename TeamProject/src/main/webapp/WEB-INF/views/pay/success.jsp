@@ -97,4 +97,17 @@
 
 </section>
 </body>
+<script>
+    // 페이지 로드 후 자동으로 다른 페이지로 이동
+    window.onload = function() {
+    	if(isSuccess) {
+    		alert("성공")
+        	window.location.href = "/MyOrder";
+    	}else {
+    		alert("실패")
+    		window.location.href = "/menu"
+    	}
+    };
+</script>
+
 </html>

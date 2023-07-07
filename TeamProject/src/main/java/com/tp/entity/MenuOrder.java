@@ -47,7 +47,7 @@ public class MenuOrder {
 	@Column
 	private Integer quantity;
 	   
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "menu")
 	private Menu menuId;
 	   

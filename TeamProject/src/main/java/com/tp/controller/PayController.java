@@ -130,24 +130,18 @@ public class PayController {
 	}
 	
 	@GetMapping("/success")
-	public String success(
-	    MenuOrder menuOrder,
-	    Menu menu,
-	    UserEntity user,
-	    Cart cart,
-	    HttpSession session,
-	    Model model
-	) {
+	public String success(HttpSession session) {
 	    String username = (String) session.getAttribute("username");
-
-	    user = userService.UserInfo(username);
-	    List<Cart> cartList = new ArrayList<>();
-	    cartList.addAll(cartService.findCartByUser(user));
+	    String orderNumber = (String)session.getAttribute("orderNumber");
+	    UserEntity user = userService.UserInfo(username);
+	    System.out.println(orderNumber);
+	    List<Cart> cartList = cartService.findCartByUser(user);
 	    for(int i=0; i<cartList.size(); i++) {
-	    	menuOrder.setCartId(cartList.get(i).getId());
+	    	MenuOrder menuOrder = new MenuOrder();
 	    	menuOrder.setUsername(user.getName());
 	    	menuOrder.setQuantity(cartList.get(i).getQuantity());
 	    	menuOrder.setMenuId(cartList.get(i).getMenu());
+	    	menuOrder.setOrderNumber(orderNumber);
 	    	menuOrderService.saveOrder(menuOrder);
 	    	
 	    }

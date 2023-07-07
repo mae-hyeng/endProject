@@ -55,8 +55,9 @@ public class MenuOrder {
 	   @Column
 	   private String username;
 	   
-	   @Column
-	   private Long cartId;
+	   
+	   @Column(nullable = true)
+	   private String orderNumber;
 
 	
 }

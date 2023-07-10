@@ -28,11 +28,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity(name = "user")
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
+@Table(name = "user")
 public class UserEntity extends BaseTimeEntity{
-	
-	
-	 
+
+
 	 @GeneratedValue(generator = "system-uuid")
 	 @GenericGenerator(name="system-uuid", strategy = "uuid")
 	 @Id // 기본키(Primary key)
@@ -50,5 +49,4 @@ public class UserEntity extends BaseTimeEntity{
 	 @Column(length = 30, nullable=false)
 	 private String address;
 
-	 
 }

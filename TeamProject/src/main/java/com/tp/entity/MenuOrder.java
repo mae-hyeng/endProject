@@ -20,8 +20,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -29,6 +31,8 @@ import lombok.Setter;
 @Entity 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "menuOrder")
 public class MenuOrder {
 	
@@ -39,21 +43,45 @@ public class MenuOrder {
 	@Column
 	@CreationTimestamp
 	private Timestamp orderDate;
-	
+	   
 	@Column
 	private Integer quantity;
+	   
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "menu")
+	private Menu menuId;
+	   
+	   
+	@Column
+	private String username;
+	      
+	@Column(nullable = true)
+	private String orderNumber;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "menuId")
-	private Menu menu;
-	
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userName")
-	private List<UserEntity> user = new ArrayList<>();
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cartId")
-	private Cart cart;
+//	@Column
+//	@CreationTimestamp
+//	private Timestamp orderDate;
+//	
+//	@Column
+//	private Integer quantity;
+//	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "menuId")
+//	private Menu menu;
+//	
+//	
+//	@ManyToMany(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "userName")
+//	private List<UserEntity> user = new ArrayList<>();
+//	
+//	@OneToOne(mappedBy = "menuOrder", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    private Cart cart;
+//	
+//	@Column
+//	private Long cartId;
+//	
+//	@Column
+//	private String orderusername;
+
 	
 }

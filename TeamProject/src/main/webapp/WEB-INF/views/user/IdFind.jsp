@@ -5,22 +5,22 @@
 <div class="login-box">
   <h2>아이디 찾기</h2>
   <form name="regForm" action="IdFind" method="post">
-     <div class="user-box">
+  	<div class="user-box">
       <input type="text" name="name" required="true">
       <label>이름을 입력하세요</label>
     </div>
     <div class="user-box">
       <input type="email" name="email"  required="true">
       <label>가입하신 이메일로 아이디를 보내드립니다. </label>
-     </div>
-   <div>
-      <input type="button" value ="찾기" class="btn first" onclick=check()>
-   </div>
+ 	 </div>
+	<div>
+		<input type="button" value ="찾기" class="btn first" onclick=check()>
+	</div>
   </form>
 </div>
 <script>
 function check(){
-   if(regForm.name.value ==''){
+	if(regForm.name.value ==''){
         alert("이름을 입력하세요.")
         return;
      }else  if (regForm.email.value == '') {
@@ -34,4 +34,4 @@ function check(){
      }
 }
 </script>
-   <%@include file ="/resources/include/footer.jsp" %>
+	<%@include file ="/resources/include/footer.jsp" %>

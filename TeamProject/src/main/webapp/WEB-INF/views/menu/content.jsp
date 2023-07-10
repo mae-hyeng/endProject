@@ -271,7 +271,9 @@ ul, li {
 						    <input type="button" style="background: #ffffff;" id="confirm" onclick="go()" value = "장바구니 담기">  
 						</form>
 						<br>
-						<form name="regForm2" id="regForm2" action="cart2">
+
+						<form name="regForm2" id="regForm2" action="cart2" method="post">
+
 							<input type="hidden" name="priceAll" id="priceAll" value="${menu.price}">
 							<input type="button" style="background: #ffffff;" id="confirm" onclick="go2()" value = "바로 주문하기">
 						</form>
@@ -280,11 +282,13 @@ ul, li {
 					
 				<br>
 				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum();">
-                 <%
+                	 <%
 					    String username = (String) session.getAttribute("username");
 					    String displayStyle = (username != null && username.equals("admin")) ? "block" : "none";
 					  %>
-                <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" display: <%= displayStyle %> id="modibtn" value="수정" onclick="modi()"></div>
+
+                <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" display: <%= displayStyle %> id="modibtn" value="수정" onclick="modi()">
+                </div>
 				
 			</main>
 	
@@ -339,20 +343,19 @@ function go2() {
 </script>
 
 <script>
+function modi() {
     document.addEventListener('DOMContentLoaded', function() {
-        const modibtn = document.getElementById('modibtn');
-        const username = '<%= session.getAttribute("username") %>';
-        
-        if (username !== 'admin') {
+        const modibtn = document.getElementById('modi-btn');
+        const username = ${sessionScope.username};
+        if (username != 'admin') {
             modibtn.style.display = 'none';
+        } else {
+            modibtn.style.display = 'block';
         }
-        
-        modibtn.addEventListener('click', function() {
-            location.href = 'modifyMenu?id=${menu.id}';
-        });
     });
-    
-    
+    // 버튼 클릭 시 실행할 동작 추가
+    location.href='modifyMenu?id=${menu.id}';
+}
 </script>
 
 <script>

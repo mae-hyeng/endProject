@@ -2,7 +2,6 @@ package com.tp.service;
 
 import java.io.File;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
@@ -53,6 +52,11 @@ public class MenuService {
 		menuRepository.save(menu);
 	}
 	
+	// 메뉴 찾기
+	public Menu findByName(String name){
+		return menuRepository.findByName(name);
+	}
+	
 	//게시물 삭제
 	@Transactional
 	public void delete(Long id) {
@@ -63,10 +67,4 @@ public class MenuService {
 	public List<Menu> categoryList(String type) {
 		return menuRepository.findByType(type);
 	}
-	
-    public Menu getMenuById(Long id) {
-        Optional<Menu> menuOptional = menuRepository.findById(id);
-        return menuOptional.orElse(null); // ID에 해당하는 Menu가 없으면 null 반환하거나 원하는 예외 처리를 수행
-    }
 }
-

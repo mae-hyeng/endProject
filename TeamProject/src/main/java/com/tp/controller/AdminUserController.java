@@ -16,9 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tp.entity.AdminUser;
 import com.tp.entity.Cart;
+import com.tp.entity.MenuOrder;
 import com.tp.entity.UserEntity;
 import com.tp.service.AdminUserService;
 import com.tp.service.CartService;
+import com.tp.service.MenuOrderService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,6 +30,9 @@ public class AdminUserController {
 
 	@Autowired
 	AdminUserService adminUserService;
+	
+	@Autowired
+	MenuOrderService menuOrderService;
 	
 	@Autowired
 	CartService cartService;
@@ -71,21 +76,28 @@ public class AdminUserController {
 	
 	//관리자 계정 주문 리스트 조회
 	@GetMapping("/orderList")
-	public String orderList(Cart cart, Model model, AdminUser admin, HttpSession session) {
-	    List<Cart> list = cartService.cartAll();
-	    List<Cart> list2 = new ArrayList<>();
-
+	public String orderList(Model model, HttpSession session) {
 	    String username = (String) session.getAttribute("username");
 
-	    if (username.equals("admin")) {
-	        for (int i = 0; i < list.size(); i++) {
-	            list2.add(list.get(i));
-	        }
+	    if (username == null || !username.equals("admin")) {
+	        return "admin/noPermission";
 	    }
+
+	    List<Cart> list = cartService.cartAll();
+	    List<Cart> list2 = new ArrayList<>();
+	    
+//      List<MenuOrder> menuList = menuOrderService.allOrderList();
+//      List<MenuOrder> AllList = new ArrayList<>();
+	    
+	    for (int i = 0; i < list.size(); i++) {
+	        list2.add(list.get(i));
+	    }
+
 	    model.addAttribute("list2", list2);
-	    System.out.println("orderList: " + list2);
+//	    System.out.println("model"+model);
 	    return "admin/orderList";
 	}
+
 
 	
 	

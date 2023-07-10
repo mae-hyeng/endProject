@@ -1,5 +1,6 @@
 package com.tp.service;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -17,20 +18,15 @@ public class CartService {
 
 	private final CartRepository cartRepository;
 	
-//	@Transactional
-//	public List<Cart> cartUsername(UserEntity user) {
-//		return cartRepository.findByUserName(user);
-//	}
-	
-//	public List<Cart> cartOut(String id) {
-//		return cartRepository.findByUserId(id);
-//	}
-
 
 	//전체 주문 조회
 	@Transactional
 	public List<Cart> cartAll() {
 		return cartRepository.findAll();
+	}
+	
+	public List<Cart> findCart(UserEntity user) {
+		return cartRepository.findByUser(user);
 	}
 
 	public Cart cartSave(Cart cart) {
@@ -47,29 +43,18 @@ public class CartService {
 	public Cart getCartByUserAndMenu(UserEntity user, Menu menu) {
 	    return cartRepository.findByUserAndMenu(user, menu);
     }
-	
-	
 
-	
 	@Transactional
 	public void deleteCartByUser(UserEntity user) {
 	    List<Cart> cartEntities = cartRepository.findByUser(user);
 	    for (Cart cartEntity : cartEntities) {
-	        MenuOrder menuOrder = cartEntity.getMenuOrder();
-	        if (menuOrder != null) {
-	            menuOrder.setCart(null);
+	    	 cartRepository.delete(cartEntity);
 	        }
-	        cartRepository.delete(cartEntity);
-	    }
 	}
 	
-	public Cart findCartByUserId(String userId) {
-	    return cartRepository.findByUser_Id(userId);
+	@Transactional
+	public List<Cart> findCartByUser(UserEntity user){
+		return cartRepository.findByUser(user);
 	}
-	
-	public Cart findCartByIdAndUserId(Long cartId, String userId) {
-	    return cartRepository.findByIdAndUser_Id(cartId, userId);
-	}
-
 
 }

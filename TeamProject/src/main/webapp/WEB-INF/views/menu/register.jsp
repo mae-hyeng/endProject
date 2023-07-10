@@ -19,7 +19,7 @@ div#px-6 {
 	width: 1200px;
 	height: 600px;
 	margin-top: 100px;
-	margin-left: 200px;
+	margin-left: 150px;
 }
 
 .writer_info1 {
@@ -31,60 +31,7 @@ div#px-6 {
 </head>
 <body class="sb-nav-fixed">
 	<div id="layoutSidenav">
-		<div id="layoutSidenav_nav">
-			<nav class="sb-sidenav accordion sb-sidenav-dark"
-				id="sidenavAccordion">
-				<div class="sb-sidenav-menu">
-					<div class="nav">
-						<div class="sb-sidenav-menu-heading">All</div>
-						<a class="nav-link" href="/menu">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 전체 메뉴
-						</a>
-						<div class="sb-sidenav-menu-heading">WRITE</div>
-						<a class="nav-link" href="/menuRegister">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 메뉴 등록
-						</a>
-						<div class="sb-sidenav-menu-heading">
-							<c:choose>
-								<c:when test="${sessionScope.username!=null}">
-									<span style="color: white; font-size: 15px;">${sessionScope.username }</span>
-								</c:when>
-							</c:choose>
-						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-							data-bs-target="#collapsePages" aria-expanded="false"
-							aria-controls="collapsePages">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-book-open"></i>
-							</div> 멤버
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapsePages"
-							aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav accordion"
-								id="sidenavAccordionPages">
-								<nav class="sb-sidenav-menu-nested nav">
-									<c:choose>
-										<c:when test="${sessionScope.username==null}">
-											<a class="nav-link" href="adminLogin">로그인</a>
-										</c:when>
-									</c:choose>
-									<a class="nav-link" href="mypage">마이페이지 이동</a> <a
-										class="nav-link" href="update">내 정보변경</a> <a class="nav-link"
-										href="pwupdate">비밀번호 변경</a> <a class="nav-link" href="logout">로그아웃</a>
-								</nav>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</nav>
-		</div>
+		
 		<div id="layoutSidenav_content">
 			<main>
 				<form class="menuRegister" name="menuRegister" method="POST" action="/menuSave"
@@ -134,7 +81,6 @@ div#px-6 {
 											<br>
 										</div>
 										<div class="button">
-												<br> 
 													<input type="button" style="float: right" value="등록" onclick=register()> 
 													<input type="button" style="float: right" value="목록" onclick="history.go(-1); return false;">
 										</div>
@@ -174,7 +120,6 @@ function listnum(){
 	});
 </script>
 
-
 <script>
    function listnum(){
       if(${sessionScope.listnum} == '1'){
@@ -187,7 +132,6 @@ function listnum(){
       }
    }
 </script>
-
 
 <script>
 	function register(){

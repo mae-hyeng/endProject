@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%   if(session.getAttribute("username")==null){
+   response.sendRedirect("/sessionover"); 
+}
+%>
 <% 
 String uuid = (String)session.getAttribute("uuid");
 String orderNumber = (String)session.getAttribute("orderNumber");
@@ -31,11 +35,8 @@ String email =(String)session.getAttribute("email");
   <!-- 결제 방법 영역-->
   <div class="title">결제 방법</div>
   <div id="payment-method"></div>
-  <div id="agreement"></div>
-  <form name="form" action="/success" method="post">
-  	
-  	<button id="payment-button">결제하기</button>
-  </form>
+  <div id="agreement"></div> 
+  <button id="payment-button">결제하기</button>
 </body>
 <script>
   const clientKey = 'test_ck_oeqRGgYO1r555edOqKprQnN2Eyaz' // 상점을 특정하는 키

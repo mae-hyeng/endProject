@@ -42,124 +42,118 @@ public class MenuController {
 	private final CartService cartService;
 	private final UserService userService;
 
-	@RequestMapping("/menu")
-	public String menu(Model model) {
-		List<Menu> list = null;
+	   @RequestMapping("/menu")
+	   public String menu(Model model) {
+		   List<Menu> list = null;
+		   
+		   list = menuService.all();
+		   
+		   model.addAttribute("list",list);
+		   return "menu/menu";
+	   }
+	   
+	   //메뉴 작성
+	   @RequestMapping("menuRegister")
+	   public String write() {
+		   return "menu/register";
+	   }
+	   
+	   //메뉴 저장
+	   @GetMapping("/menuSave")
+	   public String save() {
+		   return "menu/menu";
+	   }
+	   
+	   //메뉴 저장
+	   @PostMapping("/menuSave")
+	   public String menuSave(Menu menu, MultipartFile file) throws Exception {
+		   menuService.save(menu, file);
+		   return "redirect:/menu";
+	   }
+	   
+	   //게시물 상세보기
+	   @RequestMapping("/menuContent")
+	   public String content(@RequestParam("id") Long id,
+			   Model model,	
+			   HttpServletRequest req,
+			   HttpServletResponse res, HttpSession session) {
+		   model.addAttribute("menu",menuService.selectOne(id));
+		   
+		   String username = (String)session.getAttribute("username");
+		 	  
+		   session.setAttribute("order", username);
+		   
+		   if(session.getAttribute("listnum_mo") != null) {
+			   session.setAttribute("listnum", 3);
+			   session.removeAttribute("listnum_mo");
+		   } else {
+			   session.setAttribute("listnum", 1);
+		   }
+		   return "menu/content";
+	   }
+	   
+	   //게시물 삭제
+	   @GetMapping("/deleteMenu")
+	   public String delete(@RequestParam Long id) {
+		   menuService.delete(id);
+		   return "redirect:/menu";
+	   }
+	   
+	   //게시물 수정
+	   @GetMapping("/modifyMenu")
+	   public String modify(@RequestParam Long id, Model model, HttpSession session) {
+		   String username = (String) session.getAttribute("username");
+		   session.setAttribute("listnum", 2);
+		   model.addAttribute("menu",menuService.selectOne(id));
+		   return "menu/menu_modify";
+	   }
+	   
+	   // 게시물 수정 후 수정된 결과 보기
+	   @PostMapping("/modifyMenu")
+	   public String afterModify(Menu menu, MultipartFile file, HttpSession session) throws Exception {
+		   session.setAttribute("listnum_mo", 2);
+		   menuService.save(menu, file);
+		   return "redirect:/menuContent?id="+menu.getId();
+	   }
 
-		list = menuService.all();
+	   
+	   @PostMapping("/drinkOrder")
+		public String drinkOrderP(Model model, HttpSession session, UserEntity user, Cart cart, RedirectAttributes rttr,
+				@RequestParam("quantity") Integer quantity, @RequestParam("id") Long id,
+				@RequestParam("menuName") String menuname) {
 
-		model.addAttribute("list", list);
-		return "menu/menu";
-	}
+			String username = (String) session.getAttribute("username");
+			Integer menuOrder = (Integer) session.getAttribute(menuname);
 
-	// 메뉴 작성
-	@RequestMapping("menuRegister")
-	public String write() {
-		return "menu/register";
-	}
+			if (username != null) {
+				user = userService.UserInfo(username);
+				cart = cartService.getCartByUserAndMenu(user, menuService.selectOne(id));
 
-	// 메뉴 저장
-	@GetMapping("/menuSave")
-	public String save() {
-		return "menu/menu";
-	}
+				// 장바구니에 새로 추가할 때
+				if (cart == null) {
+					cart = Cart.builder().quantity(quantity).menu(menuService.selectOne(id)).user(user).build();
 
-	// 메뉴 저장
-	@PostMapping("/menuSave")
-	public String menuSave(Menu menu, MultipartFile file) throws Exception {
-		menuService.save(menu, file);
-		return "redirect:/menu";
-	}
+					cartService.cartSave(cart);
+					session.setAttribute(menuname, 1);
+				} else {
+					// 기존에 있는 품목에 수량을 추가할 때(cart != null일 때)
+					cart.setQuantity(cart.getQuantity() + quantity);
+					cartService.cartSave(cart);
+				}
 
-	// 게시물 상세보기
-	@RequestMapping("/menuContent")
-	public String content(@RequestParam("id") Long id, Model model, HttpServletRequest req, HttpServletResponse res,
-			HttpSession session) {
-		model.addAttribute("menu", menuService.selectOne(id));
-
-		String username = (String) session.getAttribute("username");
-
-		session.setAttribute("order", username);
-
-		if (session.getAttribute("listnum_mo") != null) {
-			session.setAttribute("listnum", 3);
-			session.removeAttribute("listnum_mo");
-		} else {
-			session.setAttribute("listnum", 1);
-		}
-		return "menu/content";
-	}
-
-	// 게시물 삭제
-	@GetMapping("/deleteMenu")
-	public String delete(@RequestParam Long id) {
-		menuService.delete(id);
-		return "redirect:/menu";
-	}
-
-	// 게시물 수정
-	@GetMapping("/modifyMenu")
-	public String modify(@RequestParam Long id, Model model, HttpSession session) {
-		String username = (String) session.getAttribute("username");
-		session.setAttribute("listnum", 2);
-		model.addAttribute("menu", menuService.selectOne(id));
-		return "menu/menu_modify";
-	}
-
-	// 게시물 수정 후 수정된 결과 보기
-	@PostMapping("/modifyMenu")
-	public String afterModify(Menu menu, MultipartFile file, HttpSession session) throws Exception {
-		session.setAttribute("listnum_mo", 2);
-		menuService.save(menu, file);
-		return "redirect:/menuContent?id=" + menu.getId();
-	}
-
-//	   @GetMapping("drinkOrder")
-//	   public String drinkOrderG(
-//			   @RequestParam("menuName") String menuname, 
-//			   HttpSession session,
-//			   RedirectAttributes rttr) {
-//		   
-//		   
-//	 	 
-//		   return "drink/drinkOrder";  
-//	   }
-
-	@PostMapping("/drinkOrder")
-	public String drinkOrderP(Model model, HttpSession session, UserEntity user, Cart cart, RedirectAttributes rttr,
-			@RequestParam("quantity") Integer quantity, @RequestParam("id") Long id,
-			@RequestParam("menuName") String menuname) {
-
-		String username = (String) session.getAttribute("username");
-		Integer menuOrder = (Integer) session.getAttribute(menuname);
-
-		if (username != null) {
-			user = userService.UserInfo(username);
-			cart = cartService.getCartByUserAndMenu(user, menuService.selectOne(id));
-
-			if (cart == null) {
-				cart = Cart.builder().quantity(quantity).menu(menuService.selectOne(id)).user(user).build();
-
-				cartService.cartSave(cart);
-				session.setAttribute(menuname, 1);
+				model.addAttribute("cart", cart);
+				rttr.addFlashAttribute("order", "OK");
+				return "redirect:/orderResult";
 			} else {
-				cart.setQuantity(cart.getQuantity() + quantity);
-				cartService.cartSave(cart);
+				rttr.addFlashAttribute("order", "login");
+				return "redirect:/orderResult";
 			}
 
-			model.addAttribute("cart", cart);
-			rttr.addFlashAttribute("order", "OK");
-			return "redirect:/orderResult";
-		} else {
-			rttr.addFlashAttribute("order", "login");
-			return "redirect:/orderResult";
+	   }
+	   
+	   @RequestMapping("/orderResult")
+		public String orderResult() {
+			
+			return "menu/orderRttr";
 		}
-	}
-
-	@RequestMapping("/orderResult")
-	public String orderResult() {
-
-		return "menu/orderRttr";
-	}
-
 }

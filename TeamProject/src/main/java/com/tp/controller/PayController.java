@@ -27,6 +27,7 @@ import com.tp.entity.MenuOrder;
 import com.tp.entity.UserEntity;
 import com.tp.service.CartService;
 import com.tp.service.MenuOrderService;
+import com.tp.service.MenuService;
 import com.tp.service.UserService;
 
 @Controller
@@ -39,6 +40,9 @@ public class PayController {
 	CartService cartService;
 	
 	@Autowired
+	MenuService menuService;
+	
+	@Autowired
 	MenuOrderService menuOrderService;
 	
 	@GetMapping("/cart")
@@ -49,11 +53,21 @@ public class PayController {
 		}else
 		return "redirect:/index";
 	}
+	
+	@GetMapping("/cart2")
+	public String cart2(HttpSession session) {
+		String username = (String)session.getAttribute("username");
+		if(username == null) {
+			return "redirect:/sessionover";
+		}else
+		return "redirect:/index";
+	}
 
 	@PostMapping("/cart")
 	public String cart(HttpSession session,
 			@RequestParam(value = "QuantitySum", required = false) Integer totalQuantity,
-			@RequestParam(value = "PriceSum", required = false) Integer PriceSum, RedirectAttributes rttr) {
+			@RequestParam(value = "PriceSum", required = false) Integer PriceSum, 
+			RedirectAttributes rttr) {
 		if(totalQuantity== null || PriceSum == null) {
 			rttr.addFlashAttribute("result", "NO");
 			return "redirect:/nocart";
@@ -95,8 +109,8 @@ public class PayController {
 	
 	@PostMapping("/cart2")
 	public String cart2(HttpSession session,
-			@RequestParam("priceAll") Integer priceAll) {
-		 
+			RedirectAttributes rttr,
+			@RequestParam("menuName") final String menuName, @RequestParam("menuPrice") final Integer menuPrice) {
 			String username=(String)session.getAttribute("username");
 			if(username!=null) {
 				UserEntity userinfo = userService.UserInfo(username);
@@ -104,7 +118,7 @@ public class PayController {
 				session.setAttribute("uuid", userinfo.getId());
 				session.setAttribute("name", userinfo.getName());
 				session.setAttribute("email", userinfo.getEmail());
-				
+				session.setAttribute("menuName", menuName);
 				 // 현재 날짜 및 시간 가져오기
 		        Date now = new Date();
 
@@ -120,9 +134,10 @@ public class PayController {
 		        
 		        session.setAttribute("orderNumber", orderNumber);
 				
-				return "/pay/cart";
+				return "/pay/cart2";
 			}else {
-				return "redirect:/sessionover";
+				rttr.addFlashAttribute("order", "login");
+				return "redirect:/orderResult";
 			}	
 		
 		
@@ -130,44 +145,42 @@ public class PayController {
 	}
 	
 	@GetMapping("/success")
-	public String success(
-	    MenuOrder menuOrder,
-	    Menu menu,
-	    UserEntity user,
-	    Cart cart,
-	    HttpSession session,
-	    Model model
-	) {
+	public String success(HttpSession session) {
 	    String username = (String) session.getAttribute("username");
+	    String orderNumber = (String)session.getAttribute("orderNumber");
+	    UserEntity user = userService.UserInfo(username);
+	    List<Cart> cartList = cartService.findCartByUser(user);
+	    for(int i=0; i<cartList.size(); i++) {
+	    	MenuOrder menuOrder = new MenuOrder();
+	    	menuOrder.setUsername(user.getName());
+	    	menuOrder.setQuantity(cartList.get(i).getQuantity());
+	    	menuOrder.setMenuId(cartList.get(i).getMenu());
+	    	menuOrder.setOrderNumber(orderNumber);
+	    	menuOrderService.saveOrder(menuOrder);
+	    	
+	    }
 
-	    user = userService.UserInfo(username);
-	    
-	    List<UserEntity> userList = new ArrayList<>();
-		userList.add(user);
-	    
-	    String userId = user.getId();
-
-	    Cart savedCart = cartService.findCartByUserId(userId);
-
-	    System.out.println("savedCart : " + savedCart);
-	    
-	    menuOrder.setQuantity(savedCart.getQuantity());
-	    menuOrder.setCart(savedCart);
-	    menuOrder.setMenu(savedCart.getMenu());
-	    
-	    System.out.println(savedCart.getQuantity());
-	    System.out.println(savedCart.getMenu());
-	    System.out.println(savedCart.getMenu().getId());
-	    
-	    menuOrderService.saveOrder(menuOrder);
-
-	    List<MenuOrder> menuOrderList = new ArrayList<>();
-	    menuOrderList.add(menuOrder);
-	    model.addAttribute("menuOrderList", menuOrderList);
-	    
-	    System.out.println("menuOrder : " + menuOrder);
-	    
 	    cartService.deleteCartByUser(user);
+
+	    return "pay/success";
+	}
+	
+	@GetMapping("/success2")
+	public String successs(HttpSession session) {
+	    String username = (String) session.getAttribute("username");
+	    String orderNumber = (String)session.getAttribute("orderNumber");
+	    UserEntity user = userService.UserInfo(username);
+	    String menuName = (String) session.getAttribute("menuName");
+	    Menu menuList = menuService.findByName(menuName);
+	   
+	    	MenuOrder menuOrder = new MenuOrder();
+	    	menuOrder.setUsername(user.getName());
+	    	menuOrder.setQuantity(1);
+	    	menuOrder.setMenuId(menuList);
+	    	menuOrder.setOrderNumber(orderNumber);
+	    	menuOrderService.saveOrder(menuOrder);
+	    	
+	   
 
 	    return "pay/success";
 	}
@@ -179,34 +192,6 @@ public class PayController {
 	}
 	
 
-	
-//	@RequestMapping("/success")
-//	public String success(
-//			MenuOrder menuOrder,
-//			Menu menu,
-//			UserEntity user,
-//			Cart cart,
-//			HttpSession session
-//			) {
-//		
-//		String username = (String)session.getAttribute("username");
-//		
-//		user = userService.UserInfo(username);
-//		
-////		menuOrder = MenuOrder.builder()			
-////				.cart(cart)
-////				.user(user)
-////				.menu(menu)
-////				.build();
-//		
-//		return "/pay/success";
-//	}
-	
-//	@GetMapping("/success")
-//	public String success() {
-//		return "/pay/success";
-//	}
-
 	@PostMapping("/success")
 	public String successs() {
 		return "/pay/success";
@@ -214,8 +199,9 @@ public class PayController {
 	
 	
 	@GetMapping("/fail")
-	public String fail() {
-		return "/pay/fail";
+	public String fail(RedirectAttributes rttr) {
+		rttr.addFlashAttribute("orderFail", "orderFail");
+		return "redirect:/index";
 	}
 	@PostMapping("/fail")
 	public String faill() {

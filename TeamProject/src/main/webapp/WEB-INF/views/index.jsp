@@ -61,25 +61,13 @@ ul, li {
    display: block;
 }
 
-#to-top {
-  width: 42px;
-  height: 42px;
-  background-color: #333;
-  color: #fff;
-  border: 2px solid #fff;
-  border-radius: 10px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 9;
+.swiper {
+	margin: 270px;
+	width: 1000px;
 }
 
-.swiper {
-	margin: 250px 100px;
+.font-cafe {
+	font-family: 'Roboto', sans-serif;
 }
  
 </style>
@@ -92,7 +80,7 @@ ul, li {
        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
        <meta name="description" content="" />
        <meta name="author" content="" />
-       <title>영화 카페</title>
+       <title>카페</title>
        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
        <link href="resources/css/styles.css" rel="stylesheet" />
        <link href="resources/css/btn.css" rel="stylesheet" />
@@ -101,14 +89,15 @@ ul, li {
 </head>
 
     <body class="sb-nav-fixed" style="background-color:#ffffff">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="margin: 30px;">
          <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="/">Cafe</a>
+            <b><a class="navbar-brand ps-3 font-cafe" href="/" style="margin: 2px 6px; margin-left: 800px; font-size: 50px;">TeampCafe</a></b>
         
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="#">
                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+
                    <div class="sb-sidenav-menu-heading"></div>
                    
                    <div>
@@ -118,12 +107,16 @@ ul, li {
 					  %>
                        <a class="nav-link" style="display: <%= displayStyle %>" id="orderList" href="/orderList">주문 리스트</a>
                    </div>
+
                    <c:choose>
                    <c:when test="${sessionScope.username==null}">
-                    <span style="color: white; font-size: 22px;" >로그인을 해주세요</span> 
+                    <span style="color: #41464b; font-size: 18px; margin-top: 6px;" >로그인을 해주세요</span>
                    </c:when>
                    <c:when test="${sessionScope.username!=null}">
-                    <span style="color: white; font-size: 22px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
+                    <span style="color: #41464b; font-size: 18px; margin-top: 6px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
+                    
+                    
+                   	
                    </c:when>
                    </c:choose>
                 <li class="nav-item dropdown">
@@ -133,15 +126,23 @@ ul, li {
                      <c:when test="${sessionScope.username==null}">
                         <li><a class="dropdown-item" href="/login">Login</a></li>
                         <li><a class="dropdown-item" href="/join">Join</a></li>
+                        <li><a class="dropdown-item" href="/adminLogin">AdminLogin</a></li>
                         </c:when>
-               		<c:otherwise>
-                  		<li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+
+               <c:otherwise>
+               
+               <li class="nav-item dropdown">
+                </li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                        <li><a class="dropdown-item" href="/MyCart">Cart</a></li>
+                        <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+                        <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
+                        <li><a class="dropdown-item" href="/MyOrder">구매내역</a></li>
+
                          </c:otherwise>
                     </c:choose>
                     </ul>
                 </li>
+                
             </ul>
                 </div>
             </form>
@@ -150,7 +151,7 @@ ul, li {
     
        <div id="layoutSidenav">
 
-		<div id="layoutSidenav_nav" style="margin-left: 50px">
+		<div id="layoutSidenav_nav" style="margin-left: 130px">
 			<ul class="menu">
 				<li class="menu-item2">
 		            <h2 class="menu-link2">MENU</h2>
@@ -191,28 +192,23 @@ ul, li {
 	       <div class="swiper">
 	      <div class="swiper-wrapper">
 	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
+	        <div class="swiper-slide"><img src="resources/person1.png" alt=""></div>
+	        <div class="swiper-slide"><img src="resources/person2.png" alt=""></div>
 	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/라일락블라썸티.jpg" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/캐모마일릴렉서.jpg" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/라일락블라썸티.jpg" alt=""></div>
+	        
 	      </div>
 	      <div class="swiper-button-prev"></div>
 	      <div class="swiper-button-next"></div>
 	    </div>
 		
 	    <div id="content" style="margin-top: 10px;">
+	     
 	          
 		 
 	   </div>
-	   
    </main>
-   
-   	<div id="to-top">
-		<div class="material-icons">top</div>
-	</div>
 
+       
 
 
 
@@ -256,40 +252,6 @@ slidesPerView: 1,
 
 </script>
 
-
-<script>
-$(function() { // 보이기 | 숨기기
-	$(window).scroll(function() {
-    if ($(this).scrollTop() > 250) { //250 넘으면 버튼이 보여짐니다. 
-      $('#to-top').fadeIn();
-    } else {
-      $('#to-top').fadeOut();
-    }
-  }); // 버튼 클릭시 
-  $("#to-top").click(function() { 
-  	$('html, body').animate({ scrollTop : 0 // 0 까지 animation 이동합니다. 
-  	}, 400); // 속도 400 
-  	return false; 
-  }); 
-});
-
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const orderList = document.getElementById('orderList');
-        const username = '<%= session.getAttribute("username") %>';
-        
-        if (username !== 'admin') {
-            orderList.style.display = 'none';
-        }
-        
-        orderList.addEventListener('click', function() {
-            location.href = 'orderList';
-        });
-    });
-    
-</script>
 
     </body>
 </html>

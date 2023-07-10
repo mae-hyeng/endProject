@@ -199,11 +199,7 @@ td {
  <body>
     <section class="cart">
         <div class="cart__information">
-            <ul>
-                <li>장바구니 상품은 최대 30일간 저장됩니다.</li>
-                <li>가격, 옵션 등 정보가 변경된 경우 주문이 불가할 수 있습니다.</li>
-                <li>오늘출발 상품은 판매자 설정 시점에 따라 오늘출발 여부가 변경될 수 있으니 주문 시 꼭 다시 확인해 주시기 바랍니다.</li>
-            </ul>
+
         </div>
         
         <div>
@@ -213,7 +209,6 @@ td {
 				<thead>
 				    <tr>
 				        <td colspan="2"></td>
-				        <td>이미지</td>
 				        <td>상품정보</td>
 				        <td colspan="2">수량</td>
 				        <td>가격</td>
@@ -224,10 +219,9 @@ td {
 				    <c:forEach items="${list2}" var="item">
 						<tr>
 						    <td colspan="2"><input type="checkbox" class="itemCheckbox" data-item-id="${item.id}"></td>
-						    <td><img style="width:auto" src="/resources/files/${item.menu.filename }"/></td>
-						    <td id="menuName" class="menuName">${item.menu.name}</td>
+						    <td id="orderDate" class="orderDate">${item.orderDate}</td>
 						    <td colspan="2" id="quantity" class="quantity">${item.quantity}</td>
-						    <td id="price" class="price">${item.menu.price*item.quantity}</td>
+						    <td id="price" class="price">item.quantity}</td>
 						</tr>
 
 				    </c:forEach>

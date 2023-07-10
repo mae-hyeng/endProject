@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file ="/resources/include/header.jsp" %>
-<div class="login-box">
-  <h2>Join</h2>
+
+
+<body class="join">
+<div class="login-box" style="margin-top: 100px;">
+  <h2>Join</h2><br>
   <form name="regForm" action="join" method="post">
     <div class="user-box">
       <input type="text" name="username"  required="true">
@@ -24,21 +27,20 @@
       <input type="tel" name="phone" required="true">
       <label>전화번호는 '-'를 빼고 입력하세요</label>
     </div>	
-    <div class="user-box">
-      <input type="text" name="email" required="true">
-      <label>이메일을 입력하세요</label>
-      </div>
-	<input type="button" value="메일발송" class="btn first" onclick=mailcheck()>
-
-	
+    
+      <input type="text" size="35" style="border: none" name="email" placeholder="이메일을 입력하세요" required="true">
+     
+      
+	<input type="button" style="border: none" value="메일발송"  onclick=mailcheck()><br><br>
 	<div class="user-box">
      <input type="text" name="email_check_number" maxlength="10" required="true">
       <label>메일로 발송된 인증번호 6자리를 입력해주세요</label>
-    </div>	
-     <div class="user-box">
-      <input type="text" name="address" required="true">
-      <label>주소를 입력하세요</label>
-    </div>		
+    </div>
+
+	<input type="text" size="35" style="border: none" id="address" name="address" placeholder="주소">
+	<input type="button" style="border: none" onclick="execDaumPostcode()" value="주소 검색"><br><br>
+	<div id="map" style="width:450px;height:200px;margin-top:10px;display:none"></div><br>
+	
 <div>
 <input type="button" value="회원가입" class="btn first" onclick="check()" style="margin-left: 55px">
 <input type="button" value="로그인" class="btn second" onclick="location.href='login'">
@@ -143,16 +145,57 @@
     }
 </script>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ba1fb1a9a4a8a0cbe70367c22e6bbf9a&libraries=services"></script>
 <script>
-   function injeong() {
-       if (regForm.email_check_number.value == sessionCode) {
-           alert("인증 성공");
-           // 인증 성공한 경우 처리할 로직 추가
-           // 회원가입 진행 등
-       } else {
-           alert("인증 실패");
-       }
-   }
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+
+    //지도를 미리 생성
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum.maps.services.Geocoder();
+    //마커를 미리 생성
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
+
+
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
+
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("address").value = addr;
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                    }
+                });
+            }
+        }).open();
+    }
 </script>
 
+
+
 <%@include file="/resources/include/footer.jsp" %>
+</body>

@@ -1,5 +1,8 @@
 package com.tp.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tp.entity.MenuOrder;
 import com.tp.entity.UserEntity;
 import com.tp.DTO.UserDTO;
 import com.tp.service.MailService;
+import com.tp.service.MenuOrderService;
+import com.tp.service.MenuService;
 import com.tp.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +35,12 @@ public class UserController {
 	
 	@Autowired
 	MailService mailService;
+	
+	@Autowired
+	MenuOrderService menuOrderService;
+	
+	@Autowired
+	MenuService menuService;
 	
 	
 	@GetMapping("/login")
@@ -299,7 +311,28 @@ public class UserController {
 		      }
 	}
 	
-		      
-	
-	
+	@RequestMapping("/MyOrder")
+	public String myorder(Model model,
+			HttpSession session) {
+		
+		String name = (String)session.getAttribute("name");
+		
+		System.out.println("name : " + name);
+		
+		List<MenuOrder> list = menuOrderService.findOrder(name);
+//		List<Object> orderList = new ArrayList<>();
+//		for(int i =0; i<list.size(); i++) {
+//			orderList = new ArrayList<>();
+//			orderList.add(list.get(i).getMenuId().getName());
+//			orderList.add(list.get(i).getMenuId().getPrice());
+//			
+//		}
+//		model.addAttribute("menuNamePrice",oderList);
+		model.addAttribute("menuOrderList", list);
+		
+		System.out.println("model List : "+list);
+		
+		
+		return "user/myorder";
+	}
 }

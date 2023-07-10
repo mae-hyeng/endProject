@@ -11,7 +11,7 @@
 	  display: flex;
 	}
 	.menu-item {
-	  background-color: gold;
+	  background-color: #fde3e9;
 	  flex-grow: 1;
 	  transition: 0.5s;
 	}
@@ -54,9 +54,9 @@
 	
 	
 	</style>
-	
+
 	</head>
-	
+
 	<body>
 		<div class="contents">
 			<center><font size="7">MENU</font></center>
@@ -116,37 +116,45 @@
 				    <button class="fixed-button" id="fixed-button" style="display: <%= displayStyle %>"
 				        onclick="menuRegister('<%= username %>')">+ 메뉴 추가</button>
 				</div>
-			
-			
+
+
 		</div>
-	
+
 	</body>
 
 	
-	<script>
+						
+						
+
+						
+						
+					
+					
+					
+
+<script>
+
+	/* 수량 증감, 감소 */
+
+    let plus = document.querySelector(".plus");
+	let minus = document.querySelector(".minus");
+	let result = document.querySelector("#result");
+	let totalcost = document.querySelector('.totalcost');
+	let i = 1;
+	plus.addEventListener("click", () => {
+		i++
+		result.textContent = i;
+	})
 	
-		/* 수량 증감, 감소 */
-	
-	    let plus = document.querySelector(".plus");
-		let minus = document.querySelector(".minus");
-		let result = document.querySelector("#result");
-		let totalcost = document.querySelector('.totalcost');
-		let i = 1;
-		plus.addEventListener("click", () => {
-			i++
+	minus.addEventListener("click", () => {
+		if(i>1) {
+			i--
 			result.textContent = i;
-		})
+		}
 		
-		minus.addEventListener("click", () => {
-			if(i>1) {
-				i--
-				result.textContent = i;
-			}
-			
-		})
-	</script>
-	
-	
+	})
+</script>
+
 <script>
     function menuRegister(username) {
         const fixed_button = document.getElementById('fixed-button');
@@ -160,5 +168,7 @@
         location.href = 'menuRegister';
     }
 </script>			
-	
-	<%@ include file="/resources/include/footer.jsp"%>
+
+					
+
+<%@ include file="/resources/include/footer.jsp"%>

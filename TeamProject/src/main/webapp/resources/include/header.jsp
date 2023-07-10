@@ -10,12 +10,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>서영이 카페</title>
+        <title>cafe</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="resources/css/styles.css" rel="stylesheet" />
         <link href="/resources/css/login.css" rel="stylesheet">
         
-        <style>
+<style>
 .myswal-class {
 	width:500px;
 	font-size:15px;
@@ -57,12 +57,18 @@
     z-index: 9999999
 }
 </style>
-         <style>
-        div.a{float:center; height:auto; width:auto; margin: 1px; border :1px ; text-align:center;}
 
-      </style>
+<style>
+	div.a{float:center; height:auto; width:auto; margin: 1px; border :1px ; text-align:center;}
+</style>
+
+<style>
+.font-cafe {
+	font-family: 'Roboto', sans-serif;
+}
+</style>
   	
-    </head>
+</head>
     
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>   
 <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
@@ -137,9 +143,9 @@ $(".video_modal_popup-closer").click(function() {
 </script>
 <!-- 상단 네비 -->
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="margin: 15px;margin-left: 91px;margin-right: 67px;">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="/">Seoyoung's cafe</a>
+            <b><a class="navbar-brand ps-3" href="/" style="margin: 2px 6px; font-size: 30px;">TeampCafe</a></b>
         
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -147,12 +153,17 @@ $(".video_modal_popup-closer").click(function() {
                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                    <c:choose>
                    <c:when test="${sessionScope.username==null}">
-                    <span style="color: white; font-size: 22px;" >로그인을 해주세요.</span>
+                    <span style="color: #41464b; font-size: 18px; margin-top: 6px;" >로그인을 해주세요</span>
                    </c:when>
                    <c:when test="${sessionScope.username!=null}">
-                    <span style="color: white; font-size: 22px;" >${sessionScope.username }</span>
+                    <span style="color: white; font-size: 18px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
+                    
+                    
                    </c:when>
                    </c:choose>
+                
+                   
+                   
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -160,12 +171,16 @@ $(".video_modal_popup-closer").click(function() {
                      <c:when test="${sessionScope.username==null}">
                         <li><a class="dropdown-item" href="/login">Login</a></li>
                         <li><a class="dropdown-item" href="/join">Join</a></li>
-                        <li><a class="dropdown-item" href="/adminLogin">Admin</a></li>
+                        <li><a class="dropdown-item" href="/adminLogin">AdminLogin</a></li>
                         </c:when>
-					<c:otherwise>
-						<li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+               <c:otherwise>
+               
+               <li class="nav-item dropdown">
+                </li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                        <li><a class="dropdown-item" href="/MyCart">Cart</a></li>
+                        <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+                        <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
+                        <li><a class="dropdown-item" href="/MyOrder">구매내역</a></li>
                          </c:otherwise>
                     </c:choose>
                     </ul>
@@ -174,53 +189,5 @@ $(".video_modal_popup-closer").click(function() {
                 </div>
             </form>
         </nav>
- 	<!-- 사이드 네비 -->
  	
- 	        <div id="layoutSidenav">
-           <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                        
-                            <div class="sb-sidenav-menu-heading">All</div>
-                            <a class="nav-link" href="/board">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                전체 메뉴
-                            </a>
-                            <div class="sb-sidenav-menu-heading">WRITE</div>
-                            <a class="nav-link" href="/register">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                메뉴 등록
-                            </a>
-                            <div class="sb-sidenav-menu-heading"> <c:choose>
-                			   <c:when test="${sessionScope.username!=null}">
-                   				 <span style="color: white; font-size: 15px;" >${sessionScope.username } [ ${sessionScope.name } ]</span>
-                  				 </c:when>
-                  				 </c:choose></div>
-                				 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                멤버
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                    		<c:choose>
-                                    		<c:when test="${sessionScope.username==null}">
-                                    		<a class="nav-link" href="adminLogin">로그인</a>
-                                    		</c:when>
-                                    		</c:choose>
-                                            <a class="nav-link" href="mypage">마이페이지 이동</a>
-                                            <a class="nav-link" href="update">내 정보변경</a>
-                                            <a class="nav-link" href="pwupdate">비밀번호 변경</a>
-                                            <a class="nav-link" href="logout">로그아웃</a>
-                                        </nav>
-                                	</nav>
-                           		 </div>
-        						</div>
-        					</div>
-        					</nav>
-        				</div>
-        			</div>
-        				
 	  

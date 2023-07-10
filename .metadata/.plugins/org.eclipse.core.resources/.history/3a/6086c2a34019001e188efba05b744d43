@@ -1,0 +1,66 @@
+package com.tp.service;
+import java.util.List;
+
+<<<<<<< HEAD
+import javax.transaction.Transactional;
+import org.apache.catalina.User;
+=======
+//
+//<<<<<<< HEAD
+>>>>>>> eaaa213807147908fa19c3386d02a34d31739ba9
+//import java.util.List;
+//
+import org.springframework.stereotype.Service;
+
+import com.tp.entity.Cart;
+<<<<<<< HEAD
+import com.tp.entity.UserEntity;
+=======
+>>>>>>> eaaa213807147908fa19c3386d02a34d31739ba9
+//
+//import com.tp.entity.Cart;
+//import com.tp.entity.MenuOrder;
+import com.tp.repository.CartRepository;
+
+import lombok.RequiredArgsConstructor;
+//import com.tp.repository.OrderRepository;
+//
+//import lombok.RequiredArgsConstructor;
+//
+@Service
+@RequiredArgsConstructor
+public class CartService {
+//	
+	private final CartRepository cartRepository;
+
+	@Transactional
+	public List<Cart> cartUsername(UserEntity user) {
+		return cartRepository.findByUserName(user);
+	}
+//	
+//	//전체 주문 조회
+	@Transactional
+	public List<Cart> cartAll() {
+		return cartRepository.findAll();
+	}
+//	
+//
+//	
+//	//전체 주문 조회
+//	public List<Cart> cartAll() {
+//		return cartRepository.findAll();
+//	}
+//	
+//	
+	public void cartSave(Cart cart) {
+		cartRepository.save(cart);
+	}
+
+	@Transactional
+	public void deleteCartMenu(List<Long> ids) {
+	    if (!ids.isEmpty()) {
+	        cartRepository.deleteByIdIn(ids);
+	    }
+	}
+
+}

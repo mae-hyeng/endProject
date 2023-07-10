@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>비밀번호찾기 결과</title>
+</head>
+<body>
+		<script>
+			if('OK' == '${result}'){
+				alert("메일이 발송되었습니다.")
+				location.href='login';
+			}else if('NO' == '${result}'){
+				alert("이름 또는 이메일을 다시확인해주세요.")
+				history.go(-1);
+			}
+		</script>
+</body>
+</html>
+=======
+<%@include file ="/resources/include/header.jsp" %>
+
+<div class="login-box">
+  <h2>아이디 찾기</h2>
+  <form name="regForm" action="IdFind" method="post">
+  	<div class="user-box">
+      <input type="text" name="name" required="true">
+      <label>이름을 입력하세요</label>
+    </div>
+    <div class="user-box">
+      <input type="email" name="email"  required="true">
+      <label>가입하신 이메일로 아이디를 보내드립니다. </label>
+ 	 </div>
+	<div>
+		<input type="button" value ="찾기" class="btn first" onclick=check()>
+	</div>
+  </form>
+</div>
+<script>
+function check(){
+	if(regForm.name.value ==''){
+        alert("이름을 입력하세요.")
+        return;
+     }else  if (regForm.email.value == '') {
+         alert("이메일을 입력하세요.");
+         return;
+     }else if (regForm.email.value.search("@") == -1 || regForm.email.value.search(".") == -1) {
+         alert("이메일 형식 오류입니다.");
+         return;
+     }else if(confirm("아이디를 찾으시겠습니까?")){
+         regForm.submit(); //자바스크립트의 submit()는 form태그 submit기능
+     }
+}
+</script>
+	<%@include file ="/resources/include/footer.jsp" %>
+>>>>>>> 9fd5f9ed6d21ffb59d636c6b97310f888266fd98

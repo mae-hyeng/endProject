@@ -209,8 +209,7 @@ table.cart__list td {
  <body>
     <section class="cart">
         
-        <center><font size="7">구매내역</font></center>  
-        <br><br>      
+        <center><font size="7">구매내역</font></center>     
         
         <c:set var="prevOrderNumber" value="" />
 
@@ -218,7 +217,7 @@ table.cart__list td {
     <c:choose>
         <c:when test="${menuOrderList.orderNumber ne prevOrderNumber}">
             <%-- 새로운 주문번호 --%>
-            <br><br>
+            <br><br><br>
             <span>주문번호: ${menuOrderList.orderNumber}</span>
         </c:when>
         <c:otherwise>
@@ -233,18 +232,18 @@ table.cart__list td {
     <table class="cart__list">
         <thead>
             <tr>
+            	<td>주문일자</td>
                 <td>상품이미지</td>
                 <td>상품명</td>
                 <td>수량</td>
-                <td>주문일자</td>
             </tr>
         </thead>
         <tbody>
             <tr>
+            	<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrderList.orderDate}" /></td>
                 <td><img style="width:auto" src="/resources/files/${menuOrderList.menuId.filename}"/></td>
                 <td id="menuName" class="menuName">${menuOrderList.menuId.name}</td>
                 <td id="quantity" class="quantity">${menuOrderList.quantity}</td>
-                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrderList.orderDate}" /></td>
             </tr>
         </tbody>
     </table>

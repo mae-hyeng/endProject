@@ -14,7 +14,7 @@
       <input type="password" name="password" required="true">
       <label>Password</label>
     </div>
-	<div style="margin-left: 35px;">
+	<div style="margin-left: 45px;">
 		<input type="button" style="margin: 20px;" value ="로그인" class="btn second" onclick=check()>
 		<input type="button" style="margin: 20px;" value ="회원가입" class="btn second" onclick="location.href='join'">
 		<input type="button" style="margin: 18px;" value ="ID 찾기" class="btn first" onclick="location.href='IdFind'">

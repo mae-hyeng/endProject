@@ -32,6 +32,8 @@ function check(){
          return;
      }else if(confirm("아이디를 찾으시겠습니까?")){
          regForm.submit(); //자바스크립트의 submit()는 form태그 submit기능
+         alert("메일이 발송되었습니다.");
+       
      }
 }
 </script>

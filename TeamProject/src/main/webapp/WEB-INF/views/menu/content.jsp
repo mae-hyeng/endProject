@@ -243,13 +243,15 @@ ul, li {
 				<a style="font-size: 20px">${menu.type}</a>
 				<br><br>		
 				<h1>${menu.name }</h1>
-				<br>
+				<br><br>
 					<c:if test="${not empty menu.filename }">
-						<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
-						<br>
+						<div style="display: flex;"><img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
+							<p style="margin-left: 30px; margin-top: 60px; margin-right: 200px;">${menu.content }</p>
+						</div>
+						
 					</c:if>
 					<br><br>
-					<p>${menu.content }</p>
+					
 					<br>
 					
 					<c:choose>

@@ -35,8 +35,7 @@
       <label>전화번호는 '-'를 빼고 입력하세요</label>
     </div>
     <div class="user-box">
-      <input type="text" name="email"  value="${user.getEmail()}" required="true">
-      <label>이메일을 입력하세요</label>
+      <input type="text" name="email"  value="${user.getEmail()}" readonly required="true">
     </div>
      <div class="user-box">
       <input type="text" name="address" value="${user.getAddress() }" required="true">

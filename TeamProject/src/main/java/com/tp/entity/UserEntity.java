@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Builder
-@NoArgsConstructor // 湲곕낯�깮�꽦�옄
+@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper=false)
 @Data

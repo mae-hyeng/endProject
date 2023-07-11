@@ -52,10 +52,7 @@
       </div>
       		<input type="button" class="btn2 third" value="주소 검색"  onclick="execDaumPostcode()">
       </div>
-			<div id="map" style="width:450px;height:200px;margin-top:10px;display:none"></div><br>
-
-
-	
+			<div id="map" style="width:450px;height:200px;margin-top:10px;display:none"></div><br>	
 <div>
 <input type="button" style="margin-left: 60px" value="로그인" class="btn first" onclick="location.href='login'">
 <input type="button" value="회원가입" class="btn second" onclick="check()">

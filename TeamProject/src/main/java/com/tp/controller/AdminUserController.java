@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.tp.entity.AdminUser;
 import com.tp.entity.MenuOrder;
-import com.tp.entity.UserEntity;
+import com.tp.service.AdminUserService;
 import com.tp.service.AdminUserService;
 import com.tp.service.MenuOrderService;
 

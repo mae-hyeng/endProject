@@ -373,7 +373,7 @@ function go2() {
       }else if(${sessionScope.listnum} == '2'){
          history.go(-2);
       }else if(${sessionScope.listnum} == '3'){   
-         history.go(-2);
+         history.go(-3);
       }
    }
 </script>

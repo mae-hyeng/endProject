@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@include file ="/resources/include/header.jsp" %>
 
-
 <div class="login-box" style="margin-top: 40px;">
   <h2>비밀번호 변경</h2><br>
   <form name="regForm" action="pwupdate2" method="post">
@@ -10,7 +9,6 @@
       <input type="text" name="username" required="true">
       <label>아이디을 입력하세요</label>
       </div>
-
       <div style="display: flex; align-items: center;">
       <div class="user-box" >
 	      <div>
@@ -20,8 +18,6 @@
       </div>
       		<input type="button" class="btn2 third" value="메일발송"  onclick=mailcheck()>
       </div>
-      
-     
 	
 	<div class="user-box">
      <input type="text" name="email_check_number" maxlength="10" required="true">

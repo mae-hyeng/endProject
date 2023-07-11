@@ -23,6 +23,7 @@
 		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
 		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\tjoeun\Desktop\06303-1.zip"/>
 			<item value="C:\Users\tjoeun\Desktop\06303.zip"/>
 			<item value="C:\Users\tjoeun\Desktop\06302.zip"/>
 			<item value="C:\Users\tjoeun\Desktop\0630.zip"/>

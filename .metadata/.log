@@ -10001,3 +10001,15 @@ java.util.concurrent.TimeoutException
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2023-07-10 19:42:34.753
 !MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.aGJYaCJG => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2023-07-11 11:03:46.917
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.JLMStUam
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2023-07-11 11:03:46.918
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.JLMStUam
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2023-07-11 11:03:46.918
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2023-07-11 11:03:46.919
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.JLMStUam => OK

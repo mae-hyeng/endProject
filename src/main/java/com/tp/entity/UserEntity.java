@@ -21,11 +21,13 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Builder
 @NoArgsConstructor // 기본생성자
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=false)
 @Data
 @Entity(name = "user")
 @Table(name = "user")

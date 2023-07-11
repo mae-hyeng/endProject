@@ -36,7 +36,7 @@ width: 100%;
 .login-box h2 {
   margin:rgb(0, 0, 0) 30px;
   padding: 0;
-  color: #555;
+  color: #65021999;
   text-align: center;
   font-size: 40px;
 }
@@ -230,8 +230,9 @@ width: 100%;
     text-align: center;
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
+    font-weight: 550;
     display :inline-block;
+    border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
 }
 
 
@@ -245,7 +246,7 @@ width: 100%;
     background: #fff1f1;
 }
 .first:hover {
-    box-shadow: 0 0 40px 40px #dddddd inset;
+    
 }
 
 .second {
@@ -254,6 +255,12 @@ width: 100%;
     transition: all 150ms ease-in-out;
 }
 .second:hover {
-    box-shadow: 0 0 10px 0 #dddddd inset, 0 0 10px 4px #ffffff;
+	
 }
 
+.third {
+    color: #555;
+    background: #fde3e9;
+    transition: all 150ms ease-in-out;
+    border: 1px solid #f4c6c6;
+}

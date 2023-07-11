@@ -35,7 +35,7 @@
 	      	<label>이메일을 입력하세요</label>
 	      </div>
       </div>
-      		<input type="button" class="btn2" value="메일발송"  onclick=mailcheck()>
+      		<input type="button" class="btn2 third" value="메일발송"  onclick=mailcheck()>
       </div>
     
 	<div class="user-box">
@@ -50,14 +50,14 @@
 	      	<label>주소</label>
 	      </div>
       </div>
-      		<input type="button" class="btn2" value="주소 검색"  onclick="execDaumPostcode()">
+      		<input type="button" class="btn2 third" value="주소 검색"  onclick="execDaumPostcode()">
       </div>
 			<div id="map" style="width:450px;height:200px;margin-top:10px;display:none"></div><br>
 
 
 	
 <div>
-<input type="button" style="margin-left: 55px" value="로그인" class="btn first" onclick="location.href='login'">
+<input type="button" style="margin-left: 60px" value="로그인" class="btn first" onclick="location.href='login'">
 <input type="button" value="회원가입" class="btn second" onclick="check()">
 </div>
   </form>

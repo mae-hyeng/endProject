@@ -18,7 +18,7 @@
 	      	<label>이메일을 입력하세요</label>
 	      </div>
       </div>
-      		<input type="button" class="btn2" value="메일발송"  onclick=mailcheck()>
+      		<input type="button" class="btn2 third" value="메일발송"  onclick=mailcheck()>
       </div>
       
      
@@ -36,7 +36,7 @@
       <label>새 비밀번호 확인</label>
 	</div>
 	<div>
-	<input type="button" style="margin-left: 40px;" value ="뒤로" class="btn first" onclick=goBack()>
+	<input type="button" style="margin-left: 53px;" value ="뒤로" class="btn first" onclick=goBack()>
     <input type="button" value="비밀번호변경" class="btn second" onclick=check()>
     </div>
 	</form>

@@ -6,7 +6,7 @@
 <head>
 <style>
 .menu {
-	margin-top: 150px;
+	margin-top: 50px;
 }
 
 .menu-item {
@@ -62,7 +62,7 @@ ul, li {
 }
 
 .swiper {
-	margin: 270px;
+	margin: 200px;
 	width: 1000px;
 }
 
@@ -88,8 +88,8 @@ ul, li {
        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
-    <body class="sb-nav-fixed" style="background-color:#ffffff">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="margin: 30px;">
+    <body style="background-color:#ffffff">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="margin: 40px;">
          <!-- Navbar Brand-->
             <b><a class="navbar-brand ps-3 font-cafe" href="/" style="margin: 2px 6px; margin-left: 800px; font-size: 50px;">TeampCafe</a></b>
         
@@ -97,17 +97,7 @@ ul, li {
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="#">
                    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-
-                   <div class="sb-sidenav-menu-heading"></div>
-                   
-                   <div>
-                   	  <%
-					    String username = (String) session.getAttribute("username");
-					    String displayStyle = (username != null && username.equals("admin")) ? "block" : "none";
-					  %>
-                       <a class="nav-link" style="display: <%= displayStyle %>" id="orderList" href="/orderList">주문 리스트</a>
-                   </div>
-
+                
                    <c:choose>
                    <c:when test="${sessionScope.username==null}">
                     <span style="color: #41464b; font-size: 18px; margin-top: 6px;" >로그인을 해주세요</span>
@@ -120,28 +110,34 @@ ul, li {
                    </c:when>
                    </c:choose>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <c:choose>
-                     <c:when test="${sessionScope.username==null}">
-                        <li><a class="dropdown-item" href="/login">Login</a></li>
-                        <li><a class="dropdown-item" href="/join">Join</a></li>
-                        <li><a class="dropdown-item" href="/adminLogin">AdminLogin</a></li>
-                        </c:when>
+				    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				        <i class="fas fa-user fa-fw"></i>
+				    </a>
+				    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+				        <c:choose>
+				            <c:when test="${sessionScope.username == null}">
+				                <li><a class="dropdown-item" href="/login">Login</a></li>
+				                <li><a class="dropdown-item" href="/join">Join</a></li>
+				                <li><a class="dropdown-item" href="/adminLogin">AdminLogin</a></li>
+				            </c:when>
+				            <c:otherwise>
+				                <c:choose>
+				                    <c:when test="${sessionScope.username == 'admin'}">
+				                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+				                        <li><a class="dropdown-item" href="/orderList">주문내역</a></li>
+				                    </c:when>
+				                    <c:otherwise>
+				                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+				                        <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
+				                        <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
+				                        <li><a class="dropdown-item" href="/MyOrder">구매내역</a></li>
+				                    </c:otherwise>
+				                </c:choose>
+				            </c:otherwise>
+				        </c:choose>
+				    </ul>
+				</li>
 
-               <c:otherwise>
-               
-               <li class="nav-item dropdown">
-                </li>
-                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                        <li><a class="dropdown-item" href="/mypage">Mypage</a></li>
-                        <li><a class="dropdown-item" href="/MyCart">장바구니</a></li>
-                        <li><a class="dropdown-item" href="/MyOrder">구매내역</a></li>
-
-                         </c:otherwise>
-                    </c:choose>
-                    </ul>
-                </li>
                 
             </ul>
                 </div>

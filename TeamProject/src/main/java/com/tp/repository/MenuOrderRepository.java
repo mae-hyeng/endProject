@@ -12,5 +12,4 @@ import com.tp.entity.UserEntity;
 public interface MenuOrderRepository extends JpaRepository<MenuOrder, Long> {
 
 	List<MenuOrder> findByUsernameOrderByOrderDateDesc(String username);
-
 }

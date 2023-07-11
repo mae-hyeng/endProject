@@ -1,7 +1,8 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/resources/include/h2.jsp"%>
 
 <%   if(session.getAttribute("username")==null){
    response.sendRedirect("/sessionover"); 
@@ -45,6 +46,7 @@ img {
   width: 80%;
   margin: auto;
   padding: 30px;
+  margin-top: 10px;
 }
 
 .cart ul {
@@ -53,7 +55,7 @@ img {
   margin-bottom: 50px;
   border: whitesmoke solid 1px;
   border-radius: 5px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 300;
 }
 
@@ -65,7 +67,7 @@ table {
   border-top: solid 1.5px black;
   border-collapse: collapse;
   width: 100%;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 thead {
@@ -74,7 +76,7 @@ thead {
 }
 
 tbody {
-  font-size: 12px;
+  font-size: 15px;
   text-align: center;
 }
 
@@ -181,12 +183,14 @@ td {
 .cart__bigorderbtn.right {
   background-color: gold;
   color: black;
-  border: none;
+  border: 1px lightgray solid;
 }
 
 .selectItem {
 	font-size: 14px;
 	margin-left: 33px;
+	display: flex;
+	align-items: center;
 }
 .deleteItem {
 	margin-left: 20px;
@@ -198,17 +202,15 @@ td {
 
  <body>
     <section class="cart">
-        <div class="cart__information">
-
-        </div>
         
-        <div>
-			
-		</div>
+        <center><font size="7">MyCart</font></center>  
+        <br><br>      
+        
 	        <table class="cart__list">
 				<thead>
 				    <tr>
 				        <td colspan="2"></td>
+				        <td>이미지</td>
 				        <td>상품정보</td>
 				        <td colspan="2">수량</td>
 				        <td>가격</td>
@@ -219,9 +221,10 @@ td {
 				    <c:forEach items="${list2}" var="item">
 						<tr>
 						    <td colspan="2"><input type="checkbox" class="itemCheckbox" data-item-id="${item.id}"></td>
-						    <td id="orderDate" class="orderDate">${item.orderDate}</td>
+						    <td><img style="width:auto" src="/resources/files/${item.menu.filename }"/></td>
+						    <td id="menuName" class="menuName">${item.menu.name}</td>
 						    <td colspan="2" id="quantity" class="quantity">${item.quantity}</td>
-						    <td id="price" class="price">item.quantity}</td>
+						    <td id="price" class="price">${item.menu.price*item.quantity}</td>
 						</tr>
 
 				    </c:forEach>
@@ -250,12 +253,13 @@ td {
         </table>
 				
 				<br>
-				<div style="display: flex">
+				<div style="display: flex; align-items: center;">
 				<div class="selectItem">
 				<input type="checkbox" id="selectAllCheckbox">
+				<label for="selectAllCheckbox" id="selectAllLabel" style="margin-left: 8px;">전체선택</label>
 	            </div>
 	            <div class="deleteItem">
-	            <button class="deleteCartButton">선택상품 삭제</button>
+	            <button class="deleteCartButton" style="background: #ffffff; border: 1px solid #000000; padding: 3px; border-radius: 5px; font-size: 14px;">선택상품 삭제</button>
 				</div>
 				</div>
         
@@ -270,7 +274,40 @@ td {
 </body>
 <script>
 function order() {
-	regForm.submit();
+	const checkedItems = document.querySelectorAll('.itemCheckbox:checked');
+    const uncheckedItems = document.querySelectorAll('.itemCheckbox:not(:checked)');
+    const selectedIds = Array.from(checkedItems).map(function(checkbox) {
+        return checkbox.dataset.itemId;
+    });
+    // 체크되지 않은 항목 삭제 처리
+    if (checkedItems.length > 0 && uncheckedItems.length > 0) {
+        const unselectedIds = Array.from(uncheckedItems).map(function(checkbox) {
+            return checkbox.dataset.itemId;
+        });
+        deleteUncheckCartMenu(unselectedIds)
+            .then(function() {
+                regForm.submit();
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
+    } else {
+        regForm.submit();
+    }
+    function deleteUncheckCartMenu(selectedIds) {
+        return fetch('/deleteCartMenu', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(selectedIds),
+        })
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('선택한 상품을 삭제하는 데 실패했습니다.');
+            }
+        });
+    }
 }
 </script>
 
@@ -385,5 +422,5 @@ for (var i = 0; i < checkboxes.length; i++) {
 </script>
 
 
-
+<%@ include file="/resources/include/footer.jsp"%>
 </html>

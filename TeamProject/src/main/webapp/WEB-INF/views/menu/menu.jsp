@@ -101,7 +101,7 @@ ul, li {
 								"width: 300px; height: auto;" src="/resources/files/${vo.filename }" />
 							</a>
 							<br>
-							<b><c:out value="${vo.name }" /></b>
+							<div style="text-align: center;"><b><c:out value="${vo.name }" /></b></div>
 							<br>
 						</div>
 					</c:if>
@@ -122,6 +122,15 @@ ul, li {
 
 </body>
 
+	
+						
+						
+
+						
+						
+					
+					
+					
 
 <script>
 

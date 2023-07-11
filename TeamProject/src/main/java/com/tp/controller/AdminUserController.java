@@ -83,18 +83,19 @@ public class AdminUserController {
 	        return "admin/noPermission";
 	    }
 
-	    List<Cart> list = cartService.cartAll();
-	    List<Cart> list2 = new ArrayList<>();
-	    
-//      List<MenuOrder> menuList = menuOrderService.allOrderList();
-//      List<MenuOrder> AllList = new ArrayList<>();
-	    
-	    for (int i = 0; i < list.size(); i++) {
-	        list2.add(list.get(i));
+//	    List<Cart> list = cartService.cartAll();
+//	    List<Cart> list2 = new ArrayList<>();
+	  
+	    List<MenuOrder> menuList = null;
+		menuList = menuOrderService.allOrderList();
+		List<MenuOrder> AllList = new ArrayList<>();
+      
+	    for (int i = 0; i < menuList.size(); i++) {
+	        AllList.add(menuList.get(i));
 	    }
+	    
 
-	    model.addAttribute("list2", list2);
-//	    System.out.println("model"+model);
+	    model.addAttribute("list", AllList);
 	    return "admin/orderList";
 	}
 

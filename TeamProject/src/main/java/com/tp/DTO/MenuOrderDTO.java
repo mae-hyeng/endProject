@@ -19,13 +19,12 @@ public class MenuOrderDTO {
 
 	private Long id;
 	private Timestamp orderDate;
-	private int quantity;
+	
 	
 	public static MenuOrder toMenuOrder(final MenuOrderDTO dto) {
 		return MenuOrder.builder()
 				.id(dto.getId())
 				.orderDate(dto.getOrderDate())
-				.quantity(dto.getQuantity())
 				.build();
 	}
 }

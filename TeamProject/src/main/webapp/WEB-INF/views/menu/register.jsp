@@ -37,7 +37,7 @@ div#px-6 {
 				<form class="menuRegister" name="menuRegister" method="POST" action="/menuSave"
 					enctype="multipart/form-data">
 					<div id="px-6">
-						<h2 class="mt-4" style="text-align: center;">게시글 작성</h2>
+						<h2 class="mt-4" style="text-align: center;">메뉴 등록</h2>
 						<ol class="breadcrumb mb-4">
 							<li class="breadcrumb-item active"></li>
 						</ol>

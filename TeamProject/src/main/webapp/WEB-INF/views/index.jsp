@@ -187,7 +187,7 @@ ul, li {
 	    <div class="container-fluid px-4" >
 	       <div class="swiper">
 	      <div class="swiper-wrapper">
-	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
+	        <div class="swiper-slide"><img src="resources/files/ed203f39-024d-43d2-b3bf-d1b5fd13af09_설이.jpg" alt=""></div>
 	        <div class="swiper-slide"><img src="resources/person1.png" alt=""></div>
 	        <div class="swiper-slide"><img src="resources/person2.png" alt=""></div>
 	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>

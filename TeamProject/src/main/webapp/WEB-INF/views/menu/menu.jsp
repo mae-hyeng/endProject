@@ -95,14 +95,14 @@ ul, li {
 			<div style="display: flex; flex-wrap: wrap;">
 				<c:forEach var="vo" items="${list}">
 					<c:if test="${not empty vo.filename }">
-						<div style="width: 300px; margin: 20px;">
+						<div style="width: 300px; margin: 20px; text-align: center;">
 							<a href="menuContent?id=${vo.id }">
 								<img style=
 								"width: 300px; height: auto;" src="/resources/files/${vo.filename }" />
 							</a>
-							<br>
-							<div style="text-align: center;"><b><c:out value="${vo.name }" /></b></div>
-							<br>
+							<br><br>
+							<b><c:out value="${vo.name }" /></b>
+							<br><br>
 						</div>
 					</c:if>
 				</c:forEach>

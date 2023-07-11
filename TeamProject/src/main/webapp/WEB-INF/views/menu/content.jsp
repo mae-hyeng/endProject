@@ -246,7 +246,7 @@ ul, li {
 				<br><br>
 					<c:if test="${not empty menu.filename }">
 						<div style="display: flex;"><img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
-							<p style="margin-left: 30px; margin-top: 60px; margin-right: 200px;">${menu.content }</p>
+							<p style="margin-left: 70px; margin-top: 60px; margin-right: 285px;">${menu.content }</p>
 						</div>
 						
 					</c:if>

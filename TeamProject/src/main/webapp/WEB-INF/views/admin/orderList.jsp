@@ -197,22 +197,21 @@ td {
 }
 
 table.cart__list td {
-        width: 20%;
+        width: 16.6%;
         text-align: center;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
-
 </style>
 
  <body>
     <section class="cart">
         
-        <center><font size="7">구매내역</font></center>     
+        <center><font size="7">주문내역</font></center>     
         <br><br>
-		
+		    
 		<table class="cart__list">
 		    <thead>
 		        <tr>
@@ -221,12 +220,13 @@ table.cart__list td {
 		            <td>상품이미지</td>
 		            <td>상품명</td>
 		            <td>수량</td>
+		            <td>주문자</td>
 		        </tr>
 		    </thead>
 		
 		    <tbody>
 		        <c:set var="prevOrderNumber" value="" />
-		        <c:forEach var="menuOrderList" items="${menuOrderList}">
+		        <c:forEach var="menuOrderList" items="${list}">
 		            <c:choose>
 		                <c:when test="${menuOrderList.orderNumber eq prevOrderNumber}">
 		                    <%-- 같은 주문번호 --%>
@@ -236,6 +236,7 @@ table.cart__list td {
 		                        <td><img style="width:auto" src="/resources/files/${menuOrderList.menuId.filename}" /></td>
 		                        <td id="menuName" class="menuName">${menuOrderList.menuId.name}</td>
 		                        <td id="quantity" class="quantity">${menuOrderList.quantity}</td>
+		                        <td>${menuOrderList.username}</td>
 		                    </tr>
 		                </c:when>
 		                <c:otherwise>
@@ -246,6 +247,7 @@ table.cart__list td {
 		                        <td><img style="width:auto" src="/resources/files/${menuOrderList.menuId.filename}" /></td>
 		                        <td id="menuName" class="menuName">${menuOrderList.menuId.name}</td>
 		                        <td id="quantity" class="quantity">${menuOrderList.quantity}</td>
+		                        <td>${menuOrderList.username}</td>
 		                    </tr>
 		                </c:otherwise>
 		            </c:choose>
@@ -254,6 +256,7 @@ table.cart__list td {
 		        </c:forEach>
 		    </tbody>
 		</table>
+
 
 
 

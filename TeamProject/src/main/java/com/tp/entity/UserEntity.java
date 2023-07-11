@@ -1,37 +1,29 @@
 package com.tp.entity;
 
-import java.sql.Timestamp;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Builder
-@NoArgsConstructor // 기본생성자
+@NoArgsConstructor // 湲곕낯�깮�꽦�옄
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=false)
 @Data
 @Entity(name = "user")
 @Table(name = "user")
 public class UserEntity extends BaseTimeEntity{
 
-	 @Id // 기본키(Primary key)
+	 @Id // 湲곕낯�궎(Primary key)
 	 @GeneratedValue(generator = "system-uuid")
 	 @GenericGenerator(name="system-uuid", strategy = "uuid")
 	 private String id;

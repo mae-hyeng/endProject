@@ -1,4 +1,4 @@
-package com.jpatest.test;
+package com.tp.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class TeamProjectApplicationTests {
 
 	@Test
-	void contextLoads() {
-	}
+    public void contextLoads() {
+    }
 
+	
 }

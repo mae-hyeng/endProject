@@ -29,7 +29,7 @@ String email =(String)session.getAttribute("email");
   <%-- <p>${param.menuOrderName}</p> --%>
   <p>${list2.id }</p>
   <p><%=name%>님의 주문</p>
-  <p>결제 금액: ${param.menuPrice }</p>
+  <p>결제 금액: ${param.PriceSum }${param.priceAll }</p>
  	
 
   <!-- 결제 방법 영역-->
@@ -42,7 +42,7 @@ String email =(String)session.getAttribute("email");
   const clientKey = 'test_ck_oeqRGgYO1r555edOqKprQnN2Eyaz' // 상점을 특정하는 키
   const customerKey ='<%=uuid%>' // 결제 고객을 특정하는 키
 
-  const amount = ${param.menuPrice } // 결제 금액
+  const amount = ${param.PriceSum }${param.priceAll } // 결제 금액
   
  
   /*결제위젯 영역 렌더링*/
@@ -58,7 +58,7 @@ String email =(String)session.getAttribute("email");
     paymentWidget.requestPayment({
       orderId: '<%=orderNumber%>',
       orderName: '<%=name%>님의 주문',
-      successUrl: 'http://localhost:8090/success2',
+      successUrl: 'http://localhost:8090/success',
       failUrl: 'http://localhost:8090/fail',
       customerEmail: '<%=email%>', 
       customerName: '<%=name%>'

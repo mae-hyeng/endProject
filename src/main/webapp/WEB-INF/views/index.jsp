@@ -92,7 +92,7 @@ ul, li {
        
        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
-
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <body class="sb-nav-fixed" style="background-color:#ffffff">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="margin: 30px;">
          <!-- Navbar Brand-->

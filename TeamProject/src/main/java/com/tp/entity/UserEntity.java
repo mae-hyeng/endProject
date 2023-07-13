@@ -29,7 +29,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper=false)
 @Data
-@EqualsAndHashCode(callSuper=false)
 @Entity(name = "user")
 @Table(name = "user")
 public class UserEntity extends BaseTimeEntity{

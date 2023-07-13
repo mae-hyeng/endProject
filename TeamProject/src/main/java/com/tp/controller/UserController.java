@@ -302,7 +302,6 @@ public class UserController {
 		UserEntity user= userService.UserInfo(username);
 		   try {
 		        String code =  mailService.sendEmail(email);
-		        System.out.println(code);
 		         return code;   
 		         
 		      } catch (Exception e) {
@@ -317,21 +316,9 @@ public class UserController {
 		
 		String name = (String)session.getAttribute("name");
 		
-		System.out.println("name : " + name);
-		
 		List<MenuOrder> list = menuOrderService.findOrder(name);
-//		List<Object> orderList = new ArrayList<>();
-//		for(int i =0; i<list.size(); i++) {
-//			orderList = new ArrayList<>();
-//			orderList.add(list.get(i).getMenuId().getName());
-//			orderList.add(list.get(i).getMenuId().getPrice());
-//			
-//		}
-//		model.addAttribute("menuNamePrice",oderList);
+
 		model.addAttribute("menuOrderList", list);
-		
-		System.out.println("model List : "+list);
-		
 		
 		return "user/myorder";
 	}

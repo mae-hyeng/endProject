@@ -187,10 +187,10 @@ ul, li {
 	    <div class="container-fluid px-4" >
 	       <div class="swiper">
 	      <div class="swiper-wrapper">
-	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/person1.png" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/person2.png" alt=""></div>
-	        <div class="swiper-slide"><img src="resources/sanrio.jpg" alt=""></div>
+	        <div class="swiper-slide"><img src="resources/초코.jpg" alt=""></div>
+	        <div class="swiper-slide"><img src="resources/하트.jpg" alt=""></div>
+	        <div class="swiper-slide"><img src="resources/곰.jpg" alt=""></div>
+	        <div class="swiper-slide"><img src="resources/아포가토.jpg" alt=""></div>
 	        
 	      </div>
 	      <div class="swiper-button-prev"></div>

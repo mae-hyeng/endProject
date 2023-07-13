@@ -21,12 +21,14 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Builder
 @NoArgsConstructor // 기본생성자
 @AllArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper=false)
 @Entity(name = "user")
 @Table(name = "user")
 public class UserEntity extends BaseTimeEntity{

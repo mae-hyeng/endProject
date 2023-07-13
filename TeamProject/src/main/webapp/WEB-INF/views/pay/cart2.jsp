@@ -43,7 +43,7 @@ String email =(String)session.getAttribute("email");
   const customerKey ='<%=uuid%>' // 결제 고객을 특정하는 키
 
   const amount = ${param.menuPrice } // 결제 금액
-  
+
  
   /*결제위젯 영역 렌더링*/
   const paymentWidget = PaymentWidget(clientKey, customerKey) // 회원 결제

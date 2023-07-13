@@ -42,7 +42,6 @@ public class CategoryController {
 		
 		list = menuService.categoryList(type);
 		model.addAttribute("list",list);
-		System.out.println(list);
 		
 		if(type.equals("JUICE & DRINK")) {
 			type = "juice";

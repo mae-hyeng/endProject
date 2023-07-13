@@ -23,12 +23,14 @@ public class MenuOrderService {
     
     @Transactional
     public List<MenuOrder> allOrderList(){
-    	return menuOrderRepository.findAll();
+    	return menuOrderRepository.findAllByOrderByOrderDateDesc();
     }
     
 
     public List<MenuOrder> findOrder(String username) {
     	return menuOrderRepository.findByUsernameOrderByOrderDateDesc(username);
     }
+    
+    
     
 }

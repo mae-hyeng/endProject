@@ -280,8 +280,9 @@ ul, li {
 								    <input type="button" style="background: #ffffff;" id="confirm" onclick="go()" value = "장바구니 담기">  
 								
 									<form name="regForm2" id="regForm2" action="cart2" method="post">
-										<input type="hidden" name="priceAll" id="priceAll" value="${menu.price}">
-										<input type="button" style="background: #ffffff; margin-left: 10px;" id="confirm" onclick="go2()" value = "바로 주문하기">
+										<input type="hidden" name="menuPrice" id="menuPrice" value="${menu.price}">
+										<input type="hidden" name="menuName" id="menuName" value="${menu.name}">
+										<input type="button" style="background: #ffffff;" id="confirm" onclick="go2()" value = "바로 주문하기">
 									</form>
 								</div>
 					       	</div>

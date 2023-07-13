@@ -50,20 +50,13 @@ public class CartController {
 			
 			list = cartService.cartAll();
 			List<Cart> list2 = new ArrayList<>();
-			
-			
-			
-			System.out.println("list : "+list);
-			
-			System.out.println(username);
-			
+
 			for(int i=0; i<list.size(); i++) {
 				if(username.equals(list.get(i).getUser().getUsername())) {
 					list2.add(list.get(i));
 					model.addAttribute("list2", list2);
 				}
-			}
-			System.out.println("List2 : " + list2);    
+			}  
 			
 		    return "menu/MyCart";
 		}

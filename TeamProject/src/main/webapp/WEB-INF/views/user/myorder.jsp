@@ -210,44 +210,51 @@ table.cart__list td {
     <section class="cart">
         
         <center><font size="7">구매내역</font></center>     
+        <br><br>
         
-        <c:set var="prevOrderNumber" value="" />
+		<c:set var="prevOrderNumber" value="" />
+		<table class="cart__list">
+		    <thead>
+		        <tr>
+		            <td>주문번호</td>
+		            <td>주문일자</td>
+		            <td>상품이미지</td>
+		            <td>상품명</td>
+		            <td>수량</td>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <c:forEach var="menuOrderList" items="${menuOrderList}">
+		            <c:choose>
+		                <c:when test="${menuOrderList.orderNumber ne prevOrderNumber}">
+		                    <%-- 새로운 주문번호 --%>
+		                    <%-- 출력되는 항목들은 <tbody>로 묶음 --%>
+		                    <%-- 이전 주문번호와 현재 주문번호 비교하여 변경 시 출력 --%>
+		                    <%-- 이전 주문번호 갱신 --%>
+		                    <c:set var="prevOrderNumber" value="${menuOrderList.orderNumber}" />
+		                    <%-- 새로운 주문번호에 해당하는 정보 출력 --%>
+		                    <tr>
+		                        <td rowspan="${menuOrderList.quantity}">${menuOrderList.orderNumber}</td>
+		                        <td ><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrderList.orderDate}" /></td>
+		                        <td><img style="width:auto" src="/resources/files/${menuOrderList.menuId.filename}"/></td>
+		                        <td id="menuName" class="menuName">${menuOrderList.menuId.name}</td>
+		                        <td id="quantity" class="quantity">${menuOrderList.quantity}</td>
+		                    </tr>
+		                </c:when>
+		                <c:otherwise>
+		                    <%-- 같은 주문번호 --%>
+		                    <tr>
+		                        <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrderList.orderDate}" /></td>
+		                        <td><img style="width:auto" src="/resources/files/${menuOrderList.menuId.filename}"/></td>
+		                        <td id="menuName" class="menuName">${menuOrderList.menuId.name}</td>
+		                        <td id="quantity" class="quantity">${menuOrderList.quantity}</td>
+		                    </tr>
+		                </c:otherwise>
+		            </c:choose>
+		        </c:forEach>
+		    </tbody>
+		</table>
 
-<c:forEach var="menuOrderList" items="${menuOrderList}">
-    <c:choose>
-        <c:when test="${menuOrderList.orderNumber ne prevOrderNumber}">
-            <%-- 새로운 주문번호 --%>
-            <br><br><br>
-            <span>주문번호: ${menuOrderList.orderNumber}</span>
-        </c:when>
-        <c:otherwise>
-            <%-- 같은 주문번호 --%>
-        </c:otherwise>
-    </c:choose>
-
-    <%-- 주문번호 업데이트 --%>
-    <c:set var="prevOrderNumber" value="${menuOrderList.orderNumber}" />
-
-    <%-- 항목 표시 --%>
-    <table class="cart__list">
-        <thead>
-            <tr>
-            	<td>주문일자</td>
-                <td>상품이미지</td>
-                <td>상품명</td>
-                <td>수량</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            	<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${menuOrderList.orderDate}" /></td>
-                <td><img style="width:auto" src="/resources/files/${menuOrderList.menuId.filename}"/></td>
-                <td id="menuName" class="menuName">${menuOrderList.menuId.name}</td>
-                <td id="quantity" class="quantity">${menuOrderList.quantity}</td>
-            </tr>
-        </tbody>
-    </table>
-</c:forEach>
 
 
 				

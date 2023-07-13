@@ -82,9 +82,6 @@ public class AdminUserController {
 	    if (username == null || !username.equals("admin")) {
 	        return "admin/noPermission";
 	    }
-
-//	    List<Cart> list = cartService.cartAll();
-//	    List<Cart> list2 = new ArrayList<>();
 	  
 	    List<MenuOrder> menuList = null;
 		menuList = menuOrderService.allOrderList();

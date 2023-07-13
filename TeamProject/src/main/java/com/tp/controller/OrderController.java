@@ -33,9 +33,7 @@ public class OrderController {
     public String myOrderPage(@RequestParam("id") Long id,Model model, HttpSession session){
         
 		Menu list = menuService.selectOne(id);
-		
-		System.out.println(list);
-		
+
 		model.addAttribute("orderList", list);
 		
 		return "board/content";

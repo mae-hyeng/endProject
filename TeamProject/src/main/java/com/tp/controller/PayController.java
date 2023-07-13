@@ -87,7 +87,7 @@ public class PayController {
 		        Date now = new Date();
 
 		        // 주문번호 형식을 위한 날짜 및 시간 포맷 지정
-		        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
 		        // 주문번호 생성을 위한 랜덤 숫자 생성
 		        Random random = new Random();
@@ -123,7 +123,7 @@ public class PayController {
 		        Date now = new Date();
 
 		        // 주문번호 형식을 위한 날짜 및 시간 포맷 지정
-		        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
 		        // 주문번호 생성을 위한 랜덤 숫자 생성
 		        Random random = new Random();

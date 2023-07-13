@@ -86,10 +86,16 @@ ul, li {
        <link href="resources/css/btn.css" rel="stylesheet" />
        
        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+       <link rel="shortcut icon" href="#">
 </head>
+<<<<<<< HEAD
 
     <body style="background-color:#ffffff">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="margin: 40px;">
+=======
+    <body class="sb-nav-fixed" style="background-color:#ffffff">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="margin: 30px;">
+>>>>>>> 661b732cca02a9ebce25734e3a001316e238d5c1
          <!-- Navbar Brand-->
             <b><a class="navbar-brand ps-3 font-cafe" href="/" style="margin: 2px 6px; margin-left: 800px; font-size: 50px;">TeampCafe</a></b>
         

@@ -27,6 +27,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor // 기본생성자
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper=false)
 @Data
 @EqualsAndHashCode(callSuper=false)
 @Entity(name = "user")

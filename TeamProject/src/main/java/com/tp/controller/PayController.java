@@ -1,20 +1,14 @@
 package com.tp.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
@@ -47,15 +41,6 @@ public class PayController {
 	
 	@GetMapping("/cart")
 	public String cartz(HttpSession session) {
-		String username = (String)session.getAttribute("username");
-		if(username == null) {
-			return "redirect:/sessionover";
-		}else
-		return "redirect:/index";
-	}
-	
-	@GetMapping("/cart2")
-	public String cart2(HttpSession session) {
 		String username = (String)session.getAttribute("username");
 		if(username == null) {
 			return "redirect:/sessionover";
@@ -109,7 +94,6 @@ public class PayController {
 	
 	@PostMapping("/cart2")
 	public String cart2(HttpSession session,
-			RedirectAttributes rttr,
 			@RequestParam("menuName") final String menuName, @RequestParam("menuPrice") final Integer menuPrice) {
 			String username=(String)session.getAttribute("username");
 			if(username!=null) {
@@ -136,8 +120,7 @@ public class PayController {
 				
 				return "/pay/cart2";
 			}else {
-				rttr.addFlashAttribute("order", "login");
-				return "redirect:/orderResult";
+				return "redirect:/sessionover";
 			}	
 		
 		

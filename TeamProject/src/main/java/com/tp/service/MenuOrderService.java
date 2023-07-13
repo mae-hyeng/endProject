@@ -28,7 +28,7 @@ public class MenuOrderService {
     
 
     public List<MenuOrder> findOrder(String username) {
-    	return menuOrderRepository.findByUsernameOrderByOrderDateDesc(username);
+    	return menuOrderRepository.findByUsername(username);
     }
     
     

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/resources/include/h2.jsp"%>
+<<<<<<< HEAD
 
 <%   if(session.getAttribute("username")==null){
    response.sendRedirect("/sessionover"); 
@@ -16,6 +17,9 @@ Integer quantity = (Integer)session.getAttribute("quantity");
 String name = (String)session.getAttribute("name");
 %>
 
+=======
+<head>
+>>>>>>> 661b732cca02a9ebce25734e3a001316e238d5c1
 <style>
 
 body {

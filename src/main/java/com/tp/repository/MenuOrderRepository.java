@@ -13,4 +13,6 @@ public interface MenuOrderRepository extends JpaRepository<MenuOrder, Long> {
 
 	List<MenuOrder> findByUsername(String username);
 
+	List<MenuOrder> findAllByOrderByOrderDateDesc();
+
 }

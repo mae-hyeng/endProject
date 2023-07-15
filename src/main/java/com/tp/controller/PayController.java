@@ -47,6 +47,17 @@ public class PayController {
 		}else
 		return "redirect:/index";
 	}
+<<<<<<< HEAD:src/main/java/com/tp/controller/PayController.java
+=======
+	@GetMapping("/cart2")
+	public String cart2(HttpSession session) {
+		String username = (String)session.getAttribute("username");
+		if(username == null) {
+			return "redirect:/sessionover";
+		}else
+		return "redirect:/index";
+	}
+>>>>>>> 6a3d613160a7ef9ff03e240843d10e8d77c0e93a:TeamProject/src/main/java/com/tp/controller/PayController.java
 
 	@PostMapping("/cart")
 	public String cart(HttpSession session,
@@ -147,6 +158,7 @@ public class PayController {
 
 	    return "pay/success";
 	}
+
 	
 	@GetMapping("/success2")
 	public String successs(HttpSession session) {
@@ -173,8 +185,6 @@ public class PayController {
 	public String nocart() {
 		return "/pay/nocart";
 	}
-	
-
 	@PostMapping("/success")
 	public String successs() {
 		return "/pay/success";

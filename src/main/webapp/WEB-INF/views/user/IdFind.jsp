@@ -3,7 +3,7 @@
 <%@include file ="/resources/include/header.jsp" %>
 
 <div class="login-box">
-  <h2>아이디 찾기</h2>
+  <h2>아이디 찾기</h2><br>
   <form name="regForm" action="IdFind" method="post">
   	<div class="user-box">
       <input type="text" name="name" required="true">
@@ -14,7 +14,8 @@
       <label>가입하신 이메일로 아이디를 보내드립니다. </label>
  	 </div>
 	<div>
-		<input type="button" value ="찾기" class="btn first" onclick=check()>
+		<input type="button" style="margin-left: 80px;" value ="뒤로" class="btn first" onclick=goBack()>
+		<input type="button" style="margin-left: 20px;" value ="찾기" class="btn second" onclick=check()>
 	</div>
   </form>
 </div>
@@ -31,7 +32,16 @@ function check(){
          return;
      }else if(confirm("아이디를 찾으시겠습니까?")){
          regForm.submit(); //자바스크립트의 submit()는 form태그 submit기능
+         alert("메일이 발송되었습니다.");
+       
      }
 }
 </script>
-	<%@include file ="/resources/include/footer.jsp" %>
+
+<script>
+function goBack() {
+  history.back();
+}
+</script>
+
+	<%@include file ="/resources/include/footer.jsp" %>	

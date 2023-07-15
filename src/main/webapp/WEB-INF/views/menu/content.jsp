@@ -17,8 +17,8 @@
 
 .min-width {
 	width: 1080px;
-	margin: 0 auto;
-	margin-top: 60px;
+	margin: 0 210px;
+	margin-top: 90px;
 	margin-bottom: 50px;
 }
 
@@ -161,7 +161,7 @@
 }
 
 .menu {
-	margin-top: 150px;
+	margin-top: 110px;
 }
 
 .menu-item {
@@ -201,7 +201,7 @@ ul, li {
 <body class="">
 	<div id="layoutSidenav">
 
-		<div id="layoutSidenav_nav" style="margin-left: 50px">
+		<div id="layoutSidenav_nav" style="margin-left: 70px">
 			<ul class="menu">
 		        <li class="menu-item">
 		            <a href="menu" class="menu-link">All</a>
@@ -243,50 +243,60 @@ ul, li {
 				<a style="font-size: 20px">${menu.type}</a>
 				<br><br>		
 				<h1>${menu.name }</h1>
-				<br>
+				<br><br>
 					<c:if test="${not empty menu.filename }">
-						<img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
-						<br>
+						<div style="display: flex;"><img style="width: 300px; height: auto;" src="/resources/files/${menu.filename }">
+							<p style="margin-left: 70px; margin-top: 60px; margin-right: 285px;">${menu.content }</p>
+						</div>
+						
 					</c:if>
-					<br>
-					<p>${menu.content }</p>
-					<br>
-					<hr>
-					<br>
-					<div class="num">
-					    <b><span style="font-size: 18px;">주문하기</span></b>
-					    <form name="regForm" id="regForm" action="drinkOrder" method="post">
-						    <div style="margin-left: 4px;" class="quantity" id="quantity"><br>
-						        <button style="border: none; border-radius: 10px;" class="minus" type="button">-</button>
-						        <span id="result">1</span>
-						        <button style="border: none; border-radius: 10px;" style="all: unset" class="plus" type="button">+</button>
-						        <br><br>
-						        <a style="font-size: 17px;">금액 : </a><span id ="price" style="font-size: 17px;">${menu.price }</span>원
-						        
-						    </div>
-
-						    <input type="hidden" id="menuId" name="id" value="${menu.id}">
-						    <input type="hidden" id="menuQuantity" name="quantity" value="1">
-						    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }><br>						    
-						    <input type="button" style="background: #ffffff;" id="confirm" onclick="go()" value = "장바구니 담기">  
-						</form>
-						<br>
-						<form name="regForm2" id="regForm2" action="cart2" method="post">
-							<input type="hidden" name="menuPrice" id="menuPrice" value="${menu.price}">
-							<input type="hidden" name="menuName" id="menuName" value="${menu.name}">
-							<input type="button" style="background: #ffffff;" id="confirm" onclick="go2()" value = "바로 주문하기">
-						</form>
-			       	</div>
-				
+					<br><br>
 					
-				<br>
-				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum();">
-                 <%
+					<br>
+					
+					<c:choose>
+						<c:when test="${sessionScope.username == 'admin'}">
+						</c:when>
+						<c:otherwise>
+							<hr>
+							<br>
+							<div class="num">
+							    <b><span style="font-size: 18px;">주문하기</span></b>
+							    <form name="regForm" id="regForm" action="drinkOrder" method="post">
+								    <div style="margin-left: 4px;" class="quantity" id="quantity"><br>
+								        <button style="border: none; border-radius: 10px;" class="minus" type="button">-</button>
+								        <span id="result">1</span>
+								        <button style="border: none; border-radius: 10px;" style="all: unset" class="plus" type="button">+</button>
+								        <br><br>
+								        <a style="font-size: 17px;">금액 : </a><span id ="price" style="font-size: 17px;">${menu.price }</span>원
+								    </div>
+		
+								    <input type="hidden" id="menuId" name="id" value="${menu.id}">
+								    <input type="hidden" id="menuQuantity" name="quantity" value="1">
+								    <input type="hidden" id="menuName" name ="menuName" value=${menu.name }><br>						    
+								</form>
+								
+								<div style="display: flex;">
+								    <input type="button" style="background: #ffffff;" id="confirm" onclick="go()" value = "장바구니 담기">  
+								
+									<form name="regForm2" id="regForm2" action="cart2" method="post">
+										<input type="hidden" name="priceAll" id="priceAll" value="${menu.price}">
+										<input type="button" style="background: #ffffff; margin-left: 10px;" id="confirm" onclick="go2()" value = "바로 주문하기">
+									</form>
+								</div>
+					       	</div>
+						</c:otherwise>
+					</c:choose>
+					
+				<br><br>
+				<div><input style="float:right; padding:6px 8px" type="button" class="list-btn" value="목록" onclick="listnum();"></div>
+				<div>
+  					 <%
 					    String username = (String) session.getAttribute("username");
 					    String displayStyle = (username != null && username.equals("admin")) ? "block" : "none";
 					  %>
-                <input style="float:right; margin-right:7px; padding:6px 8px" class="modi-btn" type="button" display: <%= displayStyle %> id="modibtn" value="수정" onclick="modi()">
-                </div>
+  					 <button style="float: right; margin-right: 7px; padding: 6px 8px; display: <%= displayStyle %>" class="modi-btn" id="modibtn" onclick="modi()">수정</button>
+				</div>
 				
 			</main>
 	
@@ -341,19 +351,18 @@ function go2() {
 </script>
 
 <script>
-function modi() {
-    document.addEventListener('DOMContentLoaded', function() {
-        const modibtn = document.getElementById('modi-btn');
-        const username = ${sessionScope.username};
-        if (username != 'admin') {
-            modibtn.style.display = 'none';
-        } else {
-            modibtn.style.display = 'block';
-        }
-    });
-    // 버튼 클릭 시 실행할 동작 추가
-    location.href='modifyMenu?id=${menu.id}';
-}
+        function modi() {
+            document.addEventListener('DOMContentLoaded', function() {
+                const modibtn = document.getElementById('modi-btn');
+                const username = ${sessionScope.username};
+                if (username != 'admin') {
+                    modibtn.style.display = 'none';
+                } else {
+                    modibtn.style.display = 'block';
+                }
+            });
+            // 버튼 클릭 시 실행할 동작 추가
+            location.href='modifyMenu?id=${menu.id}';}
 </script>
 
 <script>
@@ -364,7 +373,7 @@ function modi() {
       }else if(${sessionScope.listnum} == '2'){
          history.go(-2);
       }else if(${sessionScope.listnum} == '3'){   
-         history.go(-2);
+         history.go(-3);
       }
    }
 </script>

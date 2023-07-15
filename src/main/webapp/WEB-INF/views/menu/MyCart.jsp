@@ -1,7 +1,8 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/resources/include/h2.jsp"%>
 
 <%   if(session.getAttribute("username")==null){
    response.sendRedirect("/sessionover"); 
@@ -45,6 +46,7 @@ img {
   width: 80%;
   margin: auto;
   padding: 30px;
+  margin-top: 10px;
 }
 
 .cart ul {
@@ -53,7 +55,7 @@ img {
   margin-bottom: 50px;
   border: whitesmoke solid 1px;
   border-radius: 5px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 300;
 }
 
@@ -65,7 +67,7 @@ table {
   border-top: solid 1.5px black;
   border-collapse: collapse;
   width: 100%;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 thead {
@@ -74,7 +76,7 @@ thead {
 }
 
 tbody {
-  font-size: 12px;
+  font-size: 15px;
   text-align: center;
 }
 
@@ -181,12 +183,14 @@ td {
 .cart__bigorderbtn.right {
   background-color: gold;
   color: black;
-  border: none;
+  border: 1px lightgray solid;
 }
 
 .selectItem {
 	font-size: 14px;
 	margin-left: 33px;
+	display: flex;
+	align-items: center;
 }
 .deleteItem {
 	margin-left: 20px;
@@ -198,17 +202,10 @@ td {
 
  <body>
     <section class="cart">
-        <div class="cart__information">
-            <ul>
-                <li>장바구니 상품은 최대 30일간 저장됩니다.</li>
-                <li>가격, 옵션 등 정보가 변경된 경우 주문이 불가할 수 있습니다.</li>
-                <li>오늘출발 상품은 판매자 설정 시점에 따라 오늘출발 여부가 변경될 수 있으니 주문 시 꼭 다시 확인해 주시기 바랍니다.</li>
-            </ul>
-        </div>
         
-        <div>
-			
-		</div>
+        <center><font size="7">MyCart</font></center>  
+        <br><br>      
+        
 	        <table class="cart__list">
 				<thead>
 				    <tr>
@@ -256,12 +253,13 @@ td {
         </table>
 				
 				<br>
-				<div style="display: flex">
+				<div style="display: flex; align-items: center;">
 				<div class="selectItem">
 				<input type="checkbox" id="selectAllCheckbox">
+				<label for="selectAllCheckbox" id="selectAllLabel" style="margin-left: 8px;">전체선택</label>
 	            </div>
 	            <div class="deleteItem">
-	            <button class="deleteCartButton">선택상품 삭제</button>
+	            <button class="deleteCartButton" style="background: #ffffff; border: 1px solid #000000; padding: 3px; border-radius: 5px; font-size: 14px;">선택상품 삭제</button>
 				</div>
 				</div>
         
@@ -276,12 +274,11 @@ td {
 </body>
 <script>
 function order() {
-    const checkedItems = document.querySelectorAll('.itemCheckbox:checked');
+	const checkedItems = document.querySelectorAll('.itemCheckbox:checked');
     const uncheckedItems = document.querySelectorAll('.itemCheckbox:not(:checked)');
     const selectedIds = Array.from(checkedItems).map(function(checkbox) {
         return checkbox.dataset.itemId;
     });
-
     // 체크되지 않은 항목 삭제 처리
     if (checkedItems.length > 0 && uncheckedItems.length > 0) {
         const unselectedIds = Array.from(uncheckedItems).map(function(checkbox) {
@@ -297,7 +294,6 @@ function order() {
     } else {
         regForm.submit();
     }
-
     function deleteUncheckCartMenu(selectedIds) {
         return fetch('/deleteCartMenu', {
             method: 'POST',
@@ -426,5 +422,5 @@ for (var i = 0; i < checkboxes.length; i++) {
 </script>
 
 
-
+<%@ include file="/resources/include/footer.jsp"%>
 </html>

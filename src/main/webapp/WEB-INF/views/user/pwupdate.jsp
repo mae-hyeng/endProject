@@ -4,19 +4,19 @@
 
 
 <div class="login-box">
-  <h2>비밀번호 수정</h2>
-  <form name="regForm" action="pwupdate2" method="post">
+  <h2>비밀번호 수정</h2><br>
+  <form name="regForm" action="pwupdate" method="post">
     <div class="user-box">
       <input type="password" name="password"  required="true">
-      <label>8자 이상, 영문 대/소문자</label>
+      <label>새 비밀번호 <span style="font-size: 13px;">(8자 이상, 영문 대/소문자, 특수문자, 숫자 모두 포함)</span></label>
     </div>
     <div class="user-box">
       <input type="password" name="password_check" required="true">
-      <label>특수문자 숫자 모두 포함</label>
+      <label>새 비밀번호 확인</label>
 	</div>
 	<div>
-    <input type="button" value="비밀번호수정" class="btn first" onclick="check()">
-    <input type="button" value="마이페이지" class="btn second" onclick="location.href='mypage'">
+    <input type="button" value="마이페이지" class="btn first"  style="margin-left: 25px;" onclick="location.href='mypage'">
+    <input type="button" value="비밀번호수정" class="btn second" onclick="check()">
     </div>
 	</form>
 </div>

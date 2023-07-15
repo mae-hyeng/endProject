@@ -37,7 +37,7 @@ div#px-6 {
 				<form class="menuRegister" name="menuRegister" method="POST" action="/menuSave"
 					enctype="multipart/form-data">
 					<div id="px-6">
-						<h2 class="mt-4" style="text-align: center;">게시글 작성</h2>
+						<h2 class="mt-4" style="text-align: center;">메뉴 등록</h2>
 						<ol class="breadcrumb mb-4">
 							<li class="breadcrumb-item active"></li>
 						</ol>
@@ -74,15 +74,16 @@ div#px-6 {
 										<div class="text_box">
 											<textarea name="content" id="content"
 												placeholder="내용을 입력해주세요." class="text" style="resize: none;"
-												cols="150px;" rows="5px;" required></textarea>
+												cols="153px;" rows="5px;" required></textarea>
 											<div class="count">
 												<span>0</span>/500
 											</div>
 											<br>
 										</div>
 										<div class="button">
-													<input type="button" style="float: right" value="등록" onclick=register()> 
-													<input type="button" style="float: right" value="목록" onclick="history.go(-1); return false;">
+												<br> 
+													<input type="submit" style="float: right; margin: 5px;" value="등록"> 
+													<input type="button" style="float: right; margin: 5px;" value="목록" onclick="history.go(-1); return false;">
 										</div>
 									</div>
 								</div>

@@ -2,36 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@include file ="/resources/include/header.jsp" %>
 
-
-<div class="login-box">
-  <h2>이메일 인증 및 비밀번호 변경</h2>
+<div class="login-box" style="margin-top: 40px;">
+  <h2>비밀번호 변경</h2><br>
   <form name="regForm" action="pwupdate2" method="post">
    <div class="user-box">
       <input type="text" name="username" required="true">
       <label>아이디을 입력하세요</label>
       </div>
-   <div class="user-box">
-      <input type="email" name="email" required="true">
-      <label>이메일을 입력하세요</label>
+      <div style="display: flex; align-items: center;">
+      <div class="user-box" >
+	      <div>
+	      	<input type="text" name="email" required="true" style="width: 185%;">
+	      	<label>이메일을 입력하세요</label>
+	      </div>
       </div>
-	<input type="button" value="메일발송" class="btn first" onclick=mailcheck()>
-
+      		<input type="button" class="btn2 third" value="메일발송"  onclick=mailcheck()>
+      </div>
 	
 	<div class="user-box">
      <input type="text" name="email_check_number" maxlength="10" required="true">
-      <label>메일로 발송된 인증번호 6자리를 입력해주세요</label>
+      <label>메일로 발송된 인증번호 8자리를 입력해주세요</label>
     </div>	
     <div class="user-box">
       <input type="password" name="password"  required="true">
-      <label>8자 이상, 영문 대/소문자</label>
+      <label>새 비밀번호 <span style="font-size: 13px;">(8자 이상, 영문 대/소문자, 특수문자, 숫자 모두 포함)</span></label>
     </div>
     <div class="user-box">
       <input type="password" name="password_check" required="true">
-      <label>특수문자 숫자 모두 포함</label>
+      <label>새 비밀번호 확인</label>
 	</div>
 	<div>
-    <input type="button" value="비밀번호변경" class="btn first" onclick=check()>
-    <input type="button" value="마이페이지" class="btn second" onclick="location.href='mypage'">
+	<input type="button" style="margin-left: 53px;" value ="뒤로" class="btn first" onclick=goBack()>
+    <input type="button" value="비밀번호변경" class="btn second" onclick=check()>
     </div>
 	</form>
 </div>
@@ -134,6 +136,11 @@
         } 
     }
 
+</script>
+<script>
+function goBack() {
+  history.back();
+}
 </script>
    
    

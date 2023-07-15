@@ -1,10 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%@ include file="/resources/include/h2.jsp"%>
-
+<html>
 <script type="text/javascript">
 const route = window.location.pathname.replace('/','');
 </script>
+
 
 <%
 if (session.getAttribute("username") == null) {
@@ -12,72 +14,25 @@ if (session.getAttribute("username") == null) {
 }
 %>
 <style>
-body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 50px auto;
-	margin-top: 100px;
+div#px-6 {
+	width: 1200px;
+	height: 600px;
+	margin-left: 370px;
 }
 
 img {
 	width:30%;
 	height:30%;
 }
+
 </style>
 </head>
-<body class="sb-nav-fixed">
+<body>
 	<div id="layoutSidenav">
-		<div id="layoutSidenav_nav">
-			<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-				<div class="sb-sidenav-menu">
-					<div class="nav">
-						<div class="sb-sidenav-menu-heading">All</div>
-						<a class="nav-link" href="/menu">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 전체 메뉴
-						</a>
-						<div class="sb-sidenav-menu-heading">WRITE</div>
-						<a class="nav-link" href="/menuRegister">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 메뉴 등록
-						</a>
-
-						<div class="sb-sidenav-menu-heading">
-						<c:choose>
-							<c:when test="${sessionScope.username!=null}">
-								<span style="color: white; font-size: 15px;">${sessionScope.username }</span>
-							</c:when>
-						</c:choose>
-					</div>
-					<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-						<div class="sb-nav-link-icon">
-							<i class="fas fa-book-open"></i>
-						</div> 멤버
-						<div class="sb-sidenav-collapse-arrow">
-							<i class="fas fa-angle-down"></i>
-						</div>
-					</a>
-					<div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-						<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-							<nav class="sb-sidenav-menu-nested nav">
-								<c:choose>
-									<c:when test="${sessionScope.username==null}">
-										<a class="nav-link" href="adminLogin">로그인</a>
-									</c:when>
-								</c:choose>
-								<a class="nav-link" href="mypage">마이페이지 이동</a> <a class="nav-link" href="update">내 정보변경</a> <a class="nav-link" href="pwupdate">비밀번호 변경</a> <a class="nav-link" href="logout">로그아웃</a>
-							</nav>
-						</nav>
-					</div>
-					</div>
-				</div>
-			</nav>
-		</div>
-		<div id="layoutSidenav_content">
+		
+		<div id="layoutSidenav_content2">
 			<main>
+			<div id="px-6">
 				<h2 class="mt-4" style="text-align: center;">메뉴 수정</h2>
 				<ol class="breadcrumb mb-4">
 					<li class="breadcrumb-item active"></li>
@@ -188,17 +143,9 @@ img {
 </script>
 
 				</div>
-			</main>
-			<footer class="py-4 bg-light mt-auto">
-				<div class="container-fluid px-4">
-					<div class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2023</div>
-						<div>
-							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms &amp; Conditions</a>
-						</div>
-					</div>
 				</div>
-			</footer>
+			</main>
+			
 		</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
